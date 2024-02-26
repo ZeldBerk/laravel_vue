@@ -18,7 +18,7 @@ return new class extends Migration
             $table->decimal('cantidad');
             $table->string('unidad');
             $table->foreign('receta_id')->references('id')->on('recetas')->onDelete('cascade');
-            $table->foreign('ingrediente_id')->references('id')->on('ingrediente')->onDelete('cascade');
+            $table->foreign('ingrediente_id')->references('id')->on('ingredientes')->onDelete('cascade');
             $table->timestamps();
         });
     }
