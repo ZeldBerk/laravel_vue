@@ -17,7 +17,6 @@ return new class extends Migration
             $table->integer('receta_id');
             $table->string('contenido');
             $table->integer('puntuacion');
-            $table->dateTime('date');
             $table->timestamps();
         });
     }
