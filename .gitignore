@@ -18,4 +18,3 @@ package-lock.json
 composer.lock
 yarn.lock
 /storage/media-library/temp
-/laravel_vue-f4bf914e2ce61afef6697ae0d92988d0a76a2bd4
