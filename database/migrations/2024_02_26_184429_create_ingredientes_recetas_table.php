@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('ingredientes_recetas', function (Blueprint $table) {
             $table->id();
-            $table->integer('receta_id');
-            $table->integer('ingrediente_id');
+            $table->unsignedBigInteger('receta_id');
+            $table->unsignedBigInteger('ingrediente_id');
             $table->decimal('cantidad');
             $table->string('unidad');
+            $table->foreign('receta_id')->references('id')->on('recetas')->onDelete('cascade');
+            $table->foreign('ingrediente_id')->references('id')->on('ingrediente')->onDelete('cascade');
             $table->timestamps();
         });
     }

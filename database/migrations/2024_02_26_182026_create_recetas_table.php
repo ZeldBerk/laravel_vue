@@ -11,16 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comentarios', function (Blueprint $table) {
+        Schema::create('recetas', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
+            $table->string('descripcion');
+            $table->string('ruta_imagen')->nullable();
+            $table->integer('racciones');
+            $table->integer('tiempo_preparacion');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('receta_id');
+            $table->unsignedBigInteger('categoria_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('receta_id')->references('id')->on('recetas')->onDelete('cascade');
-            $table->string('contenido');
-            $table->integer('puntuacion');
+            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
             $table->timestamps();
-            
         });
     }
 
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comentarios');
+        Schema::dropIfExists('recetas');
     }
 };

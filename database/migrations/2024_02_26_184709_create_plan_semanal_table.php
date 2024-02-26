@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('plan_semanal', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->integer('receta_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('receta_id');
             $table->string('dia_semana');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('receta_id')->references('id')->on('recetas')->onDelete('cascade');
             $table->timestamps();
         });
     }
