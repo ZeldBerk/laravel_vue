@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\TaskController;
+use App\Http\Controllers\Api\ComentariosController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,8 @@ Route::post('tasks/', [TaskController::class, 'store']);
 Route::put('tasks/update/{id}', [TaskController::class, 'update']);
 Route::delete('tasks/{id}', [TaskController::class, 'destroy']);
 Route::get('tasks/{id}' , [TaskController::class, 'show']);
+
+Route::get('comentarios', [ComentariosController::class, 'index']);
 
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
