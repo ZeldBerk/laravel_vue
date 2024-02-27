@@ -8,8 +8,27 @@ use App\Models\comentarios;
 
 class ComentariosController extends Controller
 {
+    // Extrae todos los comentarios de todas las recetas
     public function index(){
         $comentarios = comentarios::all()->toArray();
         return $comentarios;
+    }
+
+    // Añade un comentario a la BBDD
+    public function store(Request $request){
+
+        // Validar campos obligatorios
+        $request->validate([
+            'user_id' => 'required',
+            'receta_id' => 'required',
+            'contenido' => 'required',
+            'puntuacion' => 'required',
+        ]);
+
+        // Guardamos la request en coment y creamos el comentario
+        $coment = $request->all();
+        $comentario = comentarios::create($coment);
+
+        return response()->json(['success' => true, 'data'=> $comentario]);
     }
 }
