@@ -46,6 +46,7 @@
                                 </div>
                             </div>
                             <router-link :to="{name: 'auth.forgot-password'}">{{ $t('forgot_password')}}</router-link>
+                            <router-link class="nav-link" to="/register"><p>¿No tienes cuenta? <span class="colorBlue">Crea una nueva ahora</span></p></router-link>
                         </form>
                     </div>
                 </div>
