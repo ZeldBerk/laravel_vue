@@ -24,14 +24,18 @@
                         </li>
                     </template>
                     <li v-if="user?.name" class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ user.name }}
+                        <a class="nav-link dropdown-toggle iconoNav" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <svg viewBox="-3.2 -3.2 22.40 22.40" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M8 7C9.65685 7 11 5.65685 11 4C11 2.34315 9.65685 1 8 1C6.34315 1 5 2.34315 5 4C5 5.65685 6.34315 7 8 7Z" fill="#030708"></path><path d="M14 12C14 10.3431 12.6569 9 11 9H5C3.34315 9 2 10.3431 2 12V15H14V12Z" fill="#030708"></path></g></svg>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><router-link class="dropdown-item" to="/admin">Admin</router-link></li>
-                            <li><router-link to="/admin/posts" class="dropdown-item">Post</router-link></li>
+                            <!-- Redireccionara a la pagina para que el usuario vea sus datos personales -->
+                            <li><router-link class="dropdown-item" to="/admin">Ver Perfil</router-link></li>
+                            <!-- Redireccionara a la pagina de plan semanal -->
+                            <li><router-link to="/admin/posts" class="dropdown-item">Plan Semanal</router-link></li>
+                            <!-- Redireccionara a la pagina de Favoritos del usuario -->
+                            <li><router-link to="/admin/posts" class="dropdown-item">Favoritos</router-link></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="javascript:void(0)" @click="logout">Logout</a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0)" @click="logout">Cerrar Sessión</a></li>
                         </ul>
                     </li>
                 </ul>

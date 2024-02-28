@@ -74,7 +74,7 @@ export default function useAuth() {
 
         await axios.post('/register', registerForm)
             .then(async response => {
-                // await store.dispatch('auth/getUser')
+                await store.dispatch('auth/getUser')
                 // await loginUser()
                 swal({
                     icon: 'success',
