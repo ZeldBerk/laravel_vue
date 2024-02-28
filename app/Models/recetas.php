@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class recetas extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'nombre',
+        'descripcion',
+        'ruta_imagen',
+        'racciones',
+        'tiempo_preparacion',
+        'user_id',
+        'categoria_id'
+    ];
 }

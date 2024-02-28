@@ -22,7 +22,7 @@ class ComentariosController extends Controller
             'user_id' => 'required',
             'receta_id' => 'required',
             'contenido' => 'required',
-            'puntuacion' => 'required',
+            'puntuacion' => 'required'
         ]);
 
         // Guardamos la request en coment y creamos el comentario
