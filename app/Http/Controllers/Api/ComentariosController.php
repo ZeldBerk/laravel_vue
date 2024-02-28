@@ -31,4 +31,15 @@ class ComentariosController extends Controller
 
         return response()->json(['success' => true, 'data'=> $comentario]);
     }
+
+
+    // Elimina el comentario por id
+    public function destroy($id){
+
+        $comentario = comentarios::find($id);
+
+        $comentario->delete();
+
+        return response()->json(['success' => true, 'data' => 'Comentario eliminado correctamente']);
+    }
 }
