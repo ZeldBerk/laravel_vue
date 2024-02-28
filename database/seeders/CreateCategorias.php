@@ -13,16 +13,26 @@ class CreateCategorias extends Seeder
      */
     public function run(): void
     {
-        $categoria1 = categorias::create([
-           'nombre' => 'Primeros' 
-        ]);
+        // $categoria1 = categorias::create([
+        //    'nombre' => 'Primeros' 
+        // ]);
 
-        $categoria2 = categorias::create([
-            'nombre' => 'Segundos'
-        ]);
+        // $categoria2 = categorias::create([
+        //     'nombre' => 'Segundos'
+        // ]);
 
-        $categoria3 = categorias::create([
-            'nombre' => 'Postres'
-        ]);
+        // $categoria3 = categorias::create([
+        //     'nombre' => 'Postres'
+        // ]);
+
+        $categorias = [
+            'Primeros',
+            'Segundos',
+            'Postres'
+        ];
+
+        foreach ($categorias as $categoria) {
+            categorias::create(['nombre' => $categoria]);
+        }
     }
 }
