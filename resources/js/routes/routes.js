@@ -12,7 +12,8 @@ const ExercisesCreate  = ()  => import('../views/admin/exercises/Create.vue');
 const ExercisesEdit  = ()  => import('../views/admin/exercises/Edit.vue');
 const TasksList  = ()  => import('../views/admin/tasks/index.vue');
 const TasksCreate  = ()  => import('../views/admin/tasks/create.vue');
-const TasksUpdate = () => import('../views/admin/tasks/update.vue')
+const TasksUpdate = () => import('../views/admin/tasks/update.vue');
+const RecetasList = () => import('../views/recetas/index.vue');
 
 
 function requireLogin(to, from, next) {
@@ -87,6 +88,19 @@ export default [
                 name: 'auth.reset-password',
                 component: () => import('../views/auth/passwords/Reset.vue'),
                 beforeEnter: guest,
+            },
+            {
+                name: 'recetas',
+                path: 'recetas',
+                meta: { breadCrumb: 'Recetas'},
+                children: [
+                    {
+                        name: 'recetas.index',
+                        path: '',
+                        component: RecetasList,
+                        meta: { breadCrumb: 'Listado de recetas' }
+                    }
+                ]
             },
         ]
     },
