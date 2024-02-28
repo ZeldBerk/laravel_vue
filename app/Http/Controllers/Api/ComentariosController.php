@@ -42,4 +42,13 @@ class ComentariosController extends Controller
 
         return response()->json(['success' => true, 'data' => 'Comentario eliminado correctamente']);
     }
+
+
+    // Devuelve el comentario mediante el id
+    public function show($id){
+
+        $comentario = comentarios::find($id);
+
+        return $comentario;
+    }
 }

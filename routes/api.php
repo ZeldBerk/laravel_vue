@@ -27,6 +27,7 @@ Route::get('tasks/{id}' , [TaskController::class, 'show']);
 Route::get('comentarios', [ComentariosController::class, 'index']);
 Route::post('comentarios/', [ComentariosController::class, 'store']);
 Route::delete('comentarios/{id}', [ComentariosController::class, 'destroy']);
+Route::get('comentarios/{id}', [ComentariosController::class, 'show']);
 
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
