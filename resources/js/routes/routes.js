@@ -14,6 +14,7 @@ const TasksList  = ()  => import('../views/admin/tasks/index.vue');
 const TasksCreate  = ()  => import('../views/admin/tasks/create.vue');
 const TasksUpdate = () => import('../views/admin/tasks/update.vue');
 const RecetasList = () => import('../views/recetas/index.vue');
+const RecetasCreate = () => import('../views/recetas/create.vue');
 
 
 function requireLogin(to, from, next) {
@@ -99,7 +100,13 @@ export default [
                         path: '',
                         component: RecetasList,
                         meta: { breadCrumb: 'Listado de recetas' }
-                    }
+                    },
+                    {
+                        name: 'recetas.create',
+                        path: 'create',
+                        component: RecetasCreate,
+                        meta: { breadCrumb: 'Crear recetas' }
+                    },
                 ]
             },
         ]
