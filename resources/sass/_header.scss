@@ -3,6 +3,10 @@
     height: 60px;
 }
 
+.icon:hover{
+    fill: #F59E0B;
+}
+
 .logoRoute{
     width: 70px;
     height: 70px;
@@ -10,4 +14,15 @@
 
 .logo{
     width: 100%;
+}
+
+.pageTitle{
+    max-width: 250px;
+}
+
+.title{
+    width: 100%;
+    margin-right: 10px;
+    font-size: 25px;
+    
 }

@@ -1,8 +1,8 @@
 <template>
     <div class="layout-topbar">
         <router-link to="/" class="navbar-brand logoRoute"><img class="logo" src="../../images/Logo.jpg"/></router-link>
-            <a class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            <a class="navbar-toggler pageTitle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon title">El Club de la Olla</span>
             </a>
 
         <button class="p-link layout-menu-button layout-topbar-button" @click="onMenuToggle()">

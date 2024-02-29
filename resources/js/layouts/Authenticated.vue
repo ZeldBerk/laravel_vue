@@ -1,8 +1,8 @@
 <template>
     <div class="layout-wrapper" :class="containerClass">
-        <app-topbar></app-topbar>
+        <AppTopbar></AppTopbar>
         <div class="layout-sidebar">
-            <app-sidebar></app-sidebar>
+            <AppSidebar></AppSidebar>
         </div>
         
         <div class="layout-main-container ">
@@ -26,7 +26,7 @@
                 <router-view></router-view>
                 </Suspense>
             </div>
-            <app-footer></app-footer>
+            
         </div>
         <!--app-config></app-config-->
         <div class="layout-mask"></div>
@@ -57,7 +57,6 @@ import { useRoute } from "vue-router";
 import Breadcrumb from 'primevue/breadcrumb';
 
 import AppTopbar from './AppTopbar.vue';
-import AppFooter from './AppFooter.vue';
 import AppSidebar from './AppSidebar.vue';
 //import AppConfig from './AppConfig.vue';
 import { useLayout } from '../composables/layout';

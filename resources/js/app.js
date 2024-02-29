@@ -117,9 +117,9 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import 'vue-select/dist/vue-select.css';
 
 import "primeflex/primeflex.css";
-import '../css/theme.css';
+//import '../css/theme.css';
 //import "primevue/resources/themes/lara-light-teal/theme.css";
-//import "primevue/resources/themes/viva-light/theme.css";
+import "primevue/resources/themes/aura-light-amber/theme.css";
 import "primeicons/primeicons.css";
 
 const app = createApp({
