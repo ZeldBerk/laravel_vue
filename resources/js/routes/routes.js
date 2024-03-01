@@ -205,9 +205,9 @@ export default [
                     }
                 ]
             },
-            {
-                path: '/user'
-            },
+            // {
+            //     path: '/user'
+            // },
         
             {
                 name: 'categories',
