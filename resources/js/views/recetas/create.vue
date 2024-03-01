@@ -61,10 +61,12 @@
 
 <script setup>
 import { ref, inject } from "vue";
+import { useRouter } from 'vue-router';
 import TextEditorComponent from "@/components/TextEditorComponent.vue";
 
 const receta = ref({});
 const swal = inject('$swal');
+const router = useRouter()
 
 function addReceta() {
 
@@ -73,6 +75,10 @@ function addReceta() {
             swal({
                 icon: 'success',
                 title: 'Receta añadida correctamente'
+            })
+            .then(() => {
+                // Redireccionar a la página después de cerrar la alerta
+                router.push({name: 'recetas.index'})
             });
         })
         .catch(error => {
