@@ -13,7 +13,7 @@ class recetas extends Model
         'nombre',
         'descripcion',
         'ruta_imagen',
-        'racciones',
+        'raciones',
         'tiempo_preparacion',
         'user_id',
         'categoria_id'

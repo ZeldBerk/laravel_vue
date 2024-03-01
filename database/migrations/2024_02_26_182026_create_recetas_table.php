@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('descripcion');
             $table->string('ruta_imagen')->nullable();
-            $table->integer('racciones');
+            $table->integer('raciones');
             $table->integer('tiempo_preparacion');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('categoria_id');

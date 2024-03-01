@@ -17,7 +17,7 @@ class CreateRecetas extends Seeder
             'nombre' => 'croquetas',
             'descripcion' => 'pideselas a la yaya',
             'ruta_imagen' => 'croquetas.png', 
-            'racciones' => 1,
+            'raciones' => 1,
             'tiempo_preparacion' => '120',
             'user_id' => 1,
             'categoria_id' => 1
@@ -27,7 +27,7 @@ class CreateRecetas extends Seeder
             'nombre' => 'Tarta queso',
             'descripcion' => 'en know eats',
             'ruta_imagen' => 'tartadequeso.png', 
-            'racciones' => 4,
+            'raciones' => 4,
             'tiempo_preparacion' => '200',
             'user_id' => 1,
             'categoria_id' => 3
@@ -37,7 +37,7 @@ class CreateRecetas extends Seeder
             'nombre' => 'pollo',
             'descripcion' => 'Filetear el pollo y a la plancha',
             'ruta_imagen' => 'pollo.png', 
-            'racciones' => 2,
+            'raciones' => 2,
             'tiempo_preparacion' => '10',
             'user_id' => 1,
             'categoria_id' => 2

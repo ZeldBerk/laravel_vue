@@ -31,8 +31,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-8">
-
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="receta_raciones" class="form-label">Raciones de la receta</label>
+                                    <input v-model="receta.raciones" id="receta_raciones" type="number" class="form-control">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>
