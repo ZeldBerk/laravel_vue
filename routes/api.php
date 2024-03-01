@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\ComentariosController;
 use App\Http\Controllers\Api\RecetasController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Api\FavoritosController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,11 @@ Route::post('recetas/', [RecetasController::class, 'store']);
 Route::put('recetas/update/{id}', [RecetasController::class, 'update']);
 Route::delete('recetas/{id}', [RecetasController::class, 'destroy']);
 Route::get('recetas/{id}' , [RecetasController::class, 'show']);
+
+// Rutas para las recetas Favoritas
+Route::get('favoritos/{id}', [FavoritosController::class, 'index']);
+Route::post('favoritos/', [FavoritosController::class, 'store']);
+Route::delete('favoritos/{id}', [FavoritosController::class, 'destroy']);
 
 
 Route::group(['middleware' => 'auth:sanctum'], function() {

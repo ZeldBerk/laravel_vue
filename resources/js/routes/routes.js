@@ -15,6 +15,7 @@ const TasksCreate  = ()  => import('../views/admin/tasks/create.vue');
 const TasksUpdate = () => import('../views/admin/tasks/update.vue');
 const RecetasList = () => import('../views/recetas/index.vue');
 const RecetasCreate = () => import('../views/recetas/create.vue');
+const FavoritosCreate = () => import('../views/auth/favoritos/index.vue');
 
 
 function requireLogin(to, from, next) {
@@ -203,6 +204,9 @@ export default [
                         }
                     }
                 ]
+            },
+            {
+                path: '/user'
             },
         
             {
