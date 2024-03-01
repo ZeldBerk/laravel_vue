@@ -10,7 +10,7 @@
             </form>
             </div>
             <div class="col-md-6 text-right">
-            <button class="btn btn-primary" @click="nuevaReceta">Añadir receta</button>
+            <router-link :to="{name: 'recetas.create'}" class="btn btn-primary">Añadir receta</router-link>
             </div>
         </div>
 
