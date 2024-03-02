@@ -106,7 +106,8 @@ export default [
                         name: 'recetas.create',
                         path: 'create',
                         component: RecetasCreate,
-                        meta: { breadCrumb: 'Crear recetas' }
+                        meta: { breadCrumb: 'Crear recetas' },
+                        beforeEnter: requireLogin
                     },
                 ]
             },
