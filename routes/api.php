@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\ComentariosController;
 use App\Http\Controllers\Api\RecetasController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\FavoritosController;
+use App\Http\Controllers\Api\CategoriasController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +45,8 @@ Route::get('favoritos/{id}', [FavoritosController::class, 'index']);
 Route::post('favoritos/', [FavoritosController::class, 'store']);
 Route::delete('favoritos/{id}', [FavoritosController::class, 'destroy']);
 
+// Rutas para las categorias
+Route::get('categorias', [CategoriasController::class, 'index']);
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::apiResource('users', UserController::class);
