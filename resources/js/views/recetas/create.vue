@@ -37,8 +37,8 @@
                             </div>
                             <!-- Categoria receta -->
                             <div class="mb-3">
-                                <label for="receta_categoria_id" class="form-label">Selecciona la categotia</label>
-                                <input v-model="receta.categoria_id" id="receta_categoria_id" type="number" min="1" max="3" class="form-control">
+                                <label for="receta_categoria_id" class="form-label">Selecciona la categoría</label>
+                                <select v-model="receta.categoria_id" id="receta_categoria_id" class="form-control"></select>
                             </div>
                             <!-- Imagen receta -->
                             <div class="mb-3">
@@ -60,13 +60,33 @@
 
 
 <script setup>
-import { ref, inject } from "vue";
+import { ref, inject , onMounted } from "vue";
 import { useRouter } from 'vue-router';
 import TextEditorComponent from "@/components/TextEditorComponent.vue";
 
+const categorias = ref();
 const receta = ref({});
 const swal = inject('$swal');
 const router = useRouter()
+
+onMounted(() => {
+  axios.get('/api/categorias')
+    .then(response => {
+        categorias.value = response.data;
+        // Agregar una opción vacía al principio
+        const emptyOption = document.createElement('option');
+        emptyOption.value = '';
+        emptyOption.textContent = '';
+        document.getElementById('receta_categoria_id').appendChild(emptyOption);
+
+        categorias.value.forEach(categoria => {
+            const option = document.createElement('option');
+            option.value = categoria.id;
+            option.textContent = categoria.nombre;
+            document.getElementById('receta_categoria_id').appendChild(option);
+        });
+    });
+});
 
 function addReceta() {
 
