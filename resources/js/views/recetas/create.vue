@@ -69,6 +69,7 @@ const receta = ref({});
 const swal = inject('$swal');
 const router = useRouter()
 
+// Carga de las categorias en el desplegable
 onMounted(() => {
   axios.get('/api/categorias')
     .then(response => {
@@ -88,6 +89,7 @@ onMounted(() => {
     });
 });
 
+// Añade la receta y muestra una alerta en funcion de la respuesta de la api
 function addReceta() {
 
     axios.post('/api/recetas', receta.value)
