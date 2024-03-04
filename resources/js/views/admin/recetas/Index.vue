@@ -6,10 +6,10 @@
                     <div class="d-flex justify-content-between pb-2 mb-2">
                         <h5 class="card-title">Todas las tareas</h5>
                         <div>
-                            <!-- <router-link :to="{name: 'recetasAdmin.Create'}" class="btn btn-success">Nueva Tarea</router-link> -->
+                            <router-link :to="{name: 'recetasAdmin.create'}" class="btn btn-success">Nueva Receta</router-link>
                         </div>
                     </div>
-                    {{ recetas }}
+
                     <table class="table table-hover table-sm">
                         <thead class="bg-dark text-light">
                             <tr>
@@ -28,10 +28,10 @@
                                 <td>{{receta.raciones}}</td>
                                 <td>{{receta.tiempo_preparacion}}</td>
                                 <th>{{receta.categoria_id }}</th>
-                                <!-- <td class="text-center">
-                                    <router-link :to="{name: 'tasks.update', params: {id:receta.id}}" class="btn btn-warning mr-1">Edit</router-link>
-                                    <button class="btn btn-danger" @click="deleteTask(receta.id, index)">Delete</button>
-                                </td> -->
+                                <td class="text-center">
+                                    <router-link :to="{name: 'recetasAdmin.update', params: {id:receta.id}}" class="btn btn-warning mr-1">Edit</router-link>
+                                    <button class="btn btn-danger" @click="deleteReceta(receta.id, index)">Delete</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -42,17 +42,49 @@
 </template>
 
 <script setup>
-    import axios from "axios";
-    import {ref, onMounted} from "vue";
+    import {ref, onMounted, inject} from "vue";
 
     const recetas = ref();
+    const swal = inject('$swal');
 
     onMounted(()=>{
-        axios.get('api/recetas')
+        axios.get('/api/recetas')
         .then(response =>{
             recetas.value = response.data;
-            console.log(response); 
         })
     });
+
+    const deleteReceta = (id, index) =>{
+
+        swal({
+            title: 'Quieres eliminar la receta?',
+            text: 'Esta acción no es reversible!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, eliminar',
+            confirmButtonColor: '#ef4444',
+            timer: 20000,
+            timerProgressBar: true,
+            reverseButtons: true
+        })
+        .then(result => {
+            if (result.isConfirmed) {
+                axios.delete('/api/recetas/'+id)
+                .then(response =>{
+                    recetas.value.splice(index, 1);
+                    swal({
+                        icon: 'success',
+                        title: 'Receta eliminada correctamente'
+                    });
+                })
+                .catch(error => {
+                    swal({
+                        icon: 'error',
+                        title: 'No se ha podido eliminar la receta'
+                    });
+                });
+            }
+        })
+    }
     
 </script>

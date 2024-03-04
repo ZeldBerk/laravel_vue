@@ -191,18 +191,18 @@ export default [
                         component: RecetasListAdmin,
                         meta: { breadCrumb: 'Listado recetas' }
                     },
-                    // {
-                    //     name: 'recetasAdmin.create',
-                    //     path: 'create',
-                    //     component: RecetasCreateAdmin,
-                    //     meta: { breadCrumb: 'Crear receta' }
-                    // },
-                    // {
-                    //     name: 'recetasAdmin.update',
-                    //     path: 'update/:id',
-                    //     component: RecetasUpdateAdmin,
-                    //     meta: { breadCrumb: 'Actualizar receta' }
-                    // }
+                    {
+                        name: 'recetasAdmin.create',
+                        path: 'create',
+                        component: RecetasCreateAdmin,
+                        meta: { breadCrumb: 'Crear receta' }
+                    },
+                    {
+                        name: 'recetasAdmin.update',
+                        path: 'update/:id',
+                        component: RecetasUpdateAdmin,
+                        meta: { breadCrumb: 'Actualizar receta' }
+                    }
                 ]
             },
             {
