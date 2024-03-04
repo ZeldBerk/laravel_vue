@@ -16,6 +16,9 @@ const TasksUpdate = () => import('../views/admin/tasks/update.vue');
 const RecetasList = () => import('../views/recetas/index.vue');
 const RecetasCreate = () => import('../views/recetas/create.vue');
 const FavoritosCreate = () => import('../views/auth/favoritos/index.vue');
+const RecetasListAdmin = () => import('../views/admin/recetas/Index.vue');
+const RecetasCreateAdmin = () => import('../views/admin/recetas/Create.vue');
+const RecetasUpdateAdmin = () => import('../views/admin/recetas/Update.vue');
 
 
 function requireLogin(to, from, next) {
@@ -175,6 +178,31 @@ export default [
                         component: TasksUpdate,
                         meta: { breadCrumb: 'Actualizar tareas' }
                     }
+                ]
+            },
+            {
+                name: 'recetasAdmin',
+                path: 'recetasAdmin',
+                meta: { breadCrumb: 'Recetas'},
+                children: [
+                    {
+                        name: 'recetasAdmin.index',
+                        path: '',
+                        component: RecetasListAdmin,
+                        meta: { breadCrumb: 'Listado recetas' }
+                    },
+                    // {
+                    //     name: 'recetasAdmin.create',
+                    //     path: 'create',
+                    //     component: RecetasCreateAdmin,
+                    //     meta: { breadCrumb: 'Crear receta' }
+                    // },
+                    // {
+                    //     name: 'recetasAdmin.update',
+                    //     path: 'update/:id',
+                    //     component: RecetasUpdateAdmin,
+                    //     meta: { breadCrumb: 'Actualizar receta' }
+                    // }
                 ]
             },
             {
