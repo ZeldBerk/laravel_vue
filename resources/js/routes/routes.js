@@ -15,7 +15,7 @@ const TasksCreate  = ()  => import('../views/admin/tasks/create.vue');
 const TasksUpdate = () => import('../views/admin/tasks/update.vue');
 const RecetasList = () => import('../views/recetas/index.vue');
 const RecetasCreate = () => import('../views/recetas/create.vue');
-const FavoritosCreate = () => import('../views/auth/favoritos/index.vue');
+const FavoritosList = () => import('../views/favoritos/index.vue');
 const RecetasListAdmin = () => import('../views/admin/recetas/Index.vue');
 const RecetasCreateAdmin = () => import('../views/admin/recetas/Create.vue');
 const RecetasUpdateAdmin = () => import('../views/admin/recetas/Update.vue');
@@ -123,7 +123,7 @@ export default [
         //     name: 'admin.index'
         // },
         beforeEnter: requireLogin,
-        meta: { breadCrumb: 'Dashboard' },
+        meta: { breadCrumb: 'Panel de Control' },
         children: [
             {
                 name: 'admin.index',
@@ -204,6 +204,13 @@ export default [
                     //     meta: { breadCrumb: 'Actualizar receta' }
                     // }
                 ]
+            },
+            {
+                name: 'Favoritos',
+                path: 'Favoritos',
+                meta: { breadCrumb: 'Tus recetas Favoritas'
+                },
+                component: FavoritosList
             },
             {
                 name: 'exercises',
