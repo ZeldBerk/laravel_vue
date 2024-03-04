@@ -71,7 +71,7 @@ const router = useRouter()
 
 // Carga de las categorias en el desplegable
 onMounted(() => {
-  axios.get('/api/categorias')
+    axios.get('/api/categorias')
     .then(response => {
         categorias.value = response.data;
         // Agregar una opción vacía al principio
