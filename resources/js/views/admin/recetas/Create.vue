@@ -45,11 +45,6 @@
                                 <label for="receta_ruta_imagen" class="form-label">Imagen</label>
                                 <input v-model="receta.ruta_imagen" id="receta_ruta_imagen" type="text" class="form-control">
                             </div>
-                            <!-- User receta -->
-                            <div class="mb-3">
-                                <label for="receta_user_id" class="form-label">User_id = 1</label>
-                                <input v-model="receta.user_id" id="receta_user_id" type="number" class="form-control">
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -68,6 +63,12 @@ const categorias = ref();
 const receta = ref({});
 const swal = inject('$swal');
 const router = useRouter()
+
+// Obtener id de usuario
+const data = localStorage.getItem("vuex");
+const user_id = JSON.parse(data).auth.user.id;
+
+receta.value.user_id = user_id;
 
 // Carga de las categorias en el desplegable
 onMounted(() => {
