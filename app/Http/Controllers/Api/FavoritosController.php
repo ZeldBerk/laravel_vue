@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Favoritos;
+use App\Models\recetas;
 use Illuminate\Http\Request;
 
 class FavoritosController extends Controller
@@ -12,13 +13,19 @@ class FavoritosController extends Controller
     public function index($user_id){
         $favoritos = Favoritos::where('user_id', $user_id)->get();
 
-        if ($favoritos->isEmpty()) {
-            // Puedes personalizar la respuesta si no se encuentran objetos
-            return response()->json(['mensaje' => 'No se encontraron objetos'], 404);
+        $recetas = [];
+        
+        foreach ($favoritos as $favorito) {
+          // Obtener la información de la receta
+          $receta = recetas::find($favorito->receta_id);
+        
+          // Agregar la receta al array de resultados
+          $recetas[] = $receta;
         }
-    
-        // Devuelve los objetos como respuesta
-        return response()->json($favoritos);
+        
+        // Devuelve las recetas como respuesta
+        return response()->json($recetas);
+        
     }
 
     public function store(Request $request){

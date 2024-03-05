@@ -1,40 +1,61 @@
 <template>
-  <div class="container">
-    <h1>Recetas Favoritas</h1>
-    <ul v-if="favoritos.length">
-      <li v-for="favorito in favoritos" :key="receta.id">
-        <a :href="`/recetas/${receta.id}`">{{ receta.nombre }}</a>
-      </li>
-    </ul>
-    <p v-else>No tienes recetas favoritas guardadas.</p>
+  <div class="receta-card">
+    <div class="receta-imagen">
+      <img :src="receta.ruta_imagen" alt="Imagen de la receta">
+    </div>
+    <div class="receta-info">
+      <h2>{{ receta.nombre }}</h2>
+      <p class="meta">
+        <span>{{ receta.raciones }} personas</span> - <span>{{ receta.tiempo_preparacion }} min</span>
+      </p>
+      <p class="descripcion">{{ receta.descripcion_corta }}</p>
+      <button class="boton-favorito" @click="toggleFavorito">
+        <i class="fas fa-heart" :class="{ 'activo': receta.favorito }"></i>
+      </button>
+    </div>
   </div>
 </template>
+
 
 <script>
 import axios from "axios";
 import { ref, onMounted } from "vue";
 
-const data = localStorage.getItem("vuex");
+export default {
+  setup() {
+    const data = localStorage.getItem("vuex");
+    let userId = null; 
 
-if (data) {
-  const userId = JSON.parse(data).auth.user.id;
-  console.log("ID del usuario:", userId);
-} else {
-  console.log("No hay usuario autenticado en el localStorage");
-}
+    if (data) {
+      try {
+        userId = JSON.parse(data).auth.user.id;
+        console.log("ID del usuario:", userId);
+      } catch (error) {
+        console.error("Error parsing localStorage data:", error);
+        
+      }
+    } else {
+      console.log("No hay usuario autenticado en el localStorage");
+    }
 
-const favoritos = ref();
+    const favoritos = ref([]);
 
-onMounted(()=>{
-  axios.get('api/favoritos/',{userId})
-  .then(response =>{
-    favoritos.value = response.data;
-  })
-})
+    onMounted(async () => {
+      if (userId) {
+        await axios.get(`/api/favoritos/${userId}`)
+        .then(response =>{
+          favoritos.value = response.data;  
+        });
+        
+        console.log(favoritos.value);
+      }
+    });
 
+    return { favoritos };
+  },
+};
 </script>
 
-<style scoped>
-  /* Opcional: agrega estilos personalizados para la lista de recetas favoritas */
-</style>
+
+
 
