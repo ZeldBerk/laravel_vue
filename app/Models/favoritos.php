@@ -14,4 +14,12 @@ class Favoritos extends Model
         'receta_id'
 
     ];
+
+    public function receta(){
+        return $this->belongsTo(recetas::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

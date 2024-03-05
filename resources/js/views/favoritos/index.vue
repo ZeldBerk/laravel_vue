@@ -1,56 +1,40 @@
 <template>
-    <div>
-      <h2>Recetas Favoritas</h2>
-      <ul>
-        <li v-for="receta in recetas" :key="receta.id">
-          {{ favoritos.nombre }}
-        </li>
-      </ul>
-    </div>
+  <div class="container">
+    <h1>Recetas Favoritas</h1>
+    <ul v-if="favoritos.length">
+      <li v-for="favorito in favoritos" :key="receta.id">
+        <a :href="`/recetas/${receta.id}`">{{ receta.nombre }}</a>
+      </li>
+    </ul>
+    <p v-else>No tienes recetas favoritas guardadas.</p>
+  </div>
+</template>
 
-    <div class="row mb-3">
-      <div class="col-md-6">
-        <form action="#">
-          <label for="filtro">Filtrar:</label>
-          <input type="text" id="filtro" name="filtro" class="form-control">
-        </form>
+<script>
+import axios from "axios";
+import { ref, onMounted } from "vue";
 
-        <div class="row">
-            <div class="col-md-4 mb-3" v-for="receta in recetas">
-            <div class="card">
-                <img :src="receta.imagen" class="card-img-top" alt="Imagen de la receta">
-                <div class="card-body">
-                <h5 class="card-title">{{ receta.nombre }}</h5>
-                <p class="card-text">{{ receta.descripcion }}</p>
-                </div>
-            </div>
-            </div>
-        </div>
-      </div>
-    </div>
-  </template>
-  
-  <script>
-    import axios from "axios";
-    import { ref, onMounted } from "vue";
+const data = localStorage.getItem("vuex");
 
-    const userId = 
+if (data) {
+  const userId = JSON.parse(data).auth.user.id;
+  console.log("ID del usuario:", userId);
+} else {
+  console.log("No hay usuario autenticado en el localStorage");
+}
 
-    const recetas = ref();
+const favoritos = ref();
 
-    onMounted(() => {
-        axios.get(`api/favoritos/${userId}`)
-            .then(response => {
-                recetas.value = response.data;
-            })
-            .catch(error => {
-                console.error("Error al obtener recetas favoritas:", error);
-            });
-    });
+onMounted(()=>{
+  axios.get('api/favoritos/',{userId})
+  .then(response =>{
+    favoritos.value = response.data;
+  })
+})
 
-  </script>
-  
-  <style scoped>
+</script>
 
-  </style>
-  
+<style scoped>
+  /* Opcional: agrega estilos personalizados para la lista de recetas favoritas */
+</style>
+
