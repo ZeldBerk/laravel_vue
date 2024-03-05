@@ -39,6 +39,7 @@ Route::post('recetas/', [RecetasController::class, 'store']);
 Route::put('recetas/update/{id}', [RecetasController::class, 'update']);
 Route::delete('recetas/{id}', [RecetasController::class, 'destroy']);
 Route::get('recetas/{id}' , [RecetasController::class, 'show']);
+Route::get('recetas/RU/{user_id}' , [RecetasController::class, 'showRU']);
 
 // Rutas para las recetas Favoritas
 Route::get('favoritos/{id}', [FavoritosController::class, 'index']);

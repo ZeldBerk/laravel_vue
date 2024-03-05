@@ -47,8 +47,12 @@
     const recetas = ref();
     const swal = inject('$swal');
 
+    // Obtener id de usuario
+    const data = localStorage.getItem("vuex");
+    const user_id = JSON.parse(data).auth.user.id;
+ 
     onMounted(()=>{
-        axios.get('/api/recetas')
+        axios.get('/api/recetas/RU/'+ user_id)
         .then(response =>{
             recetas.value = response.data;
         })

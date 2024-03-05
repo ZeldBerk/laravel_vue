@@ -75,4 +75,13 @@ class RecetasController extends Controller
 
         return $receta;
     }
+
+    // Devuelve las recetas asociadas a un id de usuario
+    public function showRU($user_id){
+
+        $recetas = recetas::where('user_id', $user_id)->get();
+
+        return $recetas;
+    }
+
 }
