@@ -46,7 +46,7 @@ class RecetasController extends Controller
             'nombre' => 'required',
             'descripcion' => 'required',
             'ruta_imagen' => 'required',
-            'racciones' => 'required',
+            'raciones' => 'required',
             'tiempo_preparacion' => 'required',
             'user_id' => 'required',
             'categoria_id' => 'required'

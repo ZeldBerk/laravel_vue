@@ -18,7 +18,7 @@
                                 <label for="receta_descripcion" class="form-label">Pasos de la receta</label>
                                 <TextEditorComponent v-model="receta.descripcion" />
                             </div>
-                            <button type="submit" class="btn btn-primary mt-4 mb-4">Añadir receta</button>
+                            <button type="submit" class="btn btn-primary mt-4 mb-4">Actualizar receta</button>
                         </div>
                     </div>
                 </div>
@@ -59,13 +59,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted, reactive } from "vue";
+import { ref, onMounted, reactive, inject } from "vue";
 import { useForm, useField} from "vee-validate";
 import { useRoute } from "vue-router";
 import { useRouter } from 'vue-router';
 import * as yup from 'yup';
 import { es } from 'yup-locales';
 import { setLocale } from 'yup';
+import TextEditorComponent from "@/components/TextEditorComponent.vue";
 
 const schema =  yup.object({
     nombre: yup.string().required().label('Nombre'),
@@ -74,6 +75,8 @@ const schema =  yup.object({
 const router = useRouter()
 const { validate, errors } = useForm({ validationSchema: schema })
 const route = useRoute()
+const swal = inject('$swal');
+const categorias = ref();
 
 setLocale(es);
 
@@ -81,6 +84,7 @@ const { value: nombre } = useField('nombre', null, { initialValue: '' });
 const { value: descripcion } = useField('descripcion', null, { initialValue: '' });
 const { value: ruta_imagen } = useField('ruta_imagen', null, { initialValue: '' });
 const { value: raciones } = useField('raciones', null, { initialValue: '' });
+const { value: tiempo_preparacion } = useField('tiempo_preparacion', null, { initialValue: ''});
 const { value: user_id } = useField('user_id', null, { initialValue: '' });
 const { value: categoria_id } = useField('categoria_id', null, { initialValue: '' });
 
@@ -89,17 +93,40 @@ const receta = reactive({
     descripcion,
     ruta_imagen,
     raciones,
+    tiempo_preparacion,
     user_id,
     categoria_id
 })
 
+// Carga de las categorias en el desplegable
 onMounted(() => {
-    axios.get('/api/recetas/' + RouteComponent.params.id)
+    axios.get('/api/categorias')
+    .then(response => {
+        categorias.value = response.data;
+        // Agregar una opción vacía al principio
+        const emptyOption = document.createElement('option');
+        emptyOption.value = '';
+        emptyOption.textContent = '';
+        document.getElementById('receta_categoria_id').appendChild(emptyOption);
+
+        categorias.value.forEach(categoria => {
+            const option = document.createElement('option');
+            option.value = categoria.id;
+            option.textContent = categoria.nombre;
+            document.getElementById('receta_categoria_id').appendChild(option);
+        });
+    });
+});
+
+// Mostrar el los datos actuales de la receta
+onMounted(() => {
+    axios.get('/api/recetas/' + route.params.id)
     .then(response => {
         receta.nombre = response.data.nombre;
         receta.descripcion = response.data.descripcion;
         receta.ruta_imagen = response.data.ruta_imagen;
-        receta.raciones = response.data.tiempo_preparacion;
+        receta.raciones = response.data.raciones;
+        receta.tiempo_preparacion = response.data.tiempo_preparacion;
         receta.user_id = response.data.user_id;
         receta.categoria_id = response.data.categoria_id;
     })
@@ -107,4 +134,31 @@ onMounted(() => {
         console.log(error);
     });
 })
+
+// Funcion para guardar los datos actiualizados de la receta
+console.log(route.params.id)
+function saveReceta() {
+    validate().then(form => {
+        console.log('validate');
+        if (form.valid){
+            console.log(receta)
+            axios.put('/api/recetas/update/'+route.params.id, receta)
+            .then(response => {
+                swal({
+                    icon: 'success',
+                    title: 'Receta actualizada correctamente'
+                })
+                .then(() => {
+                    router.push({name: 'recetasAdmin.index'})
+                });
+            })
+            .catch(error => {
+                swal({
+                    icon: 'error',
+                    title: 'No se ha podido actualizar la receta'
+                });
+            });
+        }
+    })
+}
 </script>
