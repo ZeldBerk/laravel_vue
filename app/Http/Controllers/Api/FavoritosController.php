@@ -28,18 +28,30 @@ class FavoritosController extends Controller
         
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+{
+    // Validación original
+    $request->validate([
+        'userId' => 'required',
+        'recetaId' => 'required',
+    ]);
 
-        $request->validate([
-            'user_id' => 'required',
-            'receta_id' => 'required'
-        ]);
+    // Validación adicional: comprobar si la receta ya es favorita
+    $existeFavorito = Favoritos::where('user_id', $request->userId)
+        ->where('receta_id', $request->recetaId)
+        ->exists();
 
-        $favorito = $request->all();
-        $fav = Favoritos::create($favorito);
-
-        return response()->json(['success' => true, 'data' => $fav]);
+    if ($existeFavorito) {
+        return response()->json(['success' => false, 'message' => 'La receta ya está en tus favoritos.']);
     }
+
+    // Si la receta no es favorita, se crea el nuevo registro
+    $favorito = $request->all();
+    $fav = Favoritos::create($favorito);
+
+    return response()->json(['success' => true, 'data' => $fav]);
+}
+
 
     public function destroy($id){
         $favorito = Favoritos::find($id);

@@ -1,19 +1,22 @@
 <template>
-  <div class="receta-card">
-    <div class="receta-imagen">
-      <img :src="receta.ruta_imagen" alt="Imagen de la receta">
-    </div>
-    <div class="receta-info">
-      <h2>{{ receta.nombre }}</h2>
-      <p class="meta">
-        <span>{{ receta.raciones }} personas</span> - <span>{{ receta.tiempo_preparacion }} min</span>
-      </p>
-      <p class="descripcion">{{ receta.descripcion_corta }}</p>
-      <button class="boton-favorito" @click="toggleFavorito">
-        <i class="fas fa-heart" :class="{ 'activo': receta.favorito }"></i>
-      </button>
+<div id="favoritos" class="container">
+  <h1>Mis recetas Favoritas</h1>
+
+  <div class="row">
+    <div class="col-md-4 mb-3" v-for="favorito in favoritos">
+      <div class="card">
+        <img class="card-img-top" alt="Imagen de la receta">
+        <div class="card-body">
+          <h5 class="card-title">{{ favorito.nombre }}</h5>
+          <p class="card-text">{{ favorito.descripcion }}</p>
+          <button class="btn" @click="eliminarFavoritos(favorito.id)">Eliminar</button>
+        </div>
+      </div>
+
     </div>
   </div>
+</div>
+
 </template>
 
 

@@ -21,7 +21,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ receta.nombre }}</h5>
                         <p class="card-text">{{ receta.descripcion }}</p>
-                        <button class="btn btn-sm btn-outline-primary" @click="anadirFavoritos(receta)">Añadir a favoritos</button>
+                        <button class="btn btn-sm btn-outline-primary" @click="anadirFavoritos(receta.id)">Añadir a favoritos</button>
                     </div>
                 </div>
             </div>
@@ -51,6 +51,35 @@ onMounted(() => {
 function detallesReceta(id) {
     router.push({ name: 'recetas.detalle', params: {id:id} });
 }
+
+
+    function anadirFavoritos(recetaId) {
+        const data = localStorage.getItem("vuex");
+        let userId = null; 
+
+    if (data) {
+      try {
+        userId = JSON.parse(data).auth.user.id;
+        console.log("ID del usuario:", userId);
+      } catch (error) {
+        console.error("Error parsing localStorage data:", error);
+        
+      }
+    } else {
+      console.log("No hay usuario autenticado en el localStorage");
+    }
+
+
+        axios.post('api/favoritos/',{
+            userId,
+            recetaId,
+        })
+        .then(response=>{
+            console.log(response.data);
+        });
+        
+    };
+
 </script>
 
 <style scoped>
