@@ -15,6 +15,7 @@ const TasksCreate  = ()  => import('../views/admin/tasks/create.vue');
 const TasksUpdate = () => import('../views/admin/tasks/update.vue');
 const RecetasList = () => import('../views/recetas/index.vue');
 const RecetasCreate = () => import('../views/recetas/create.vue');
+const RecetasDetalle = () => import('../views/recetas/detalle.vue');
 const FavoritosList = () => import('../views/favoritos/index.vue');
 const RecetasListAdmin = () => import('../views/admin/recetas/Index.vue');
 const RecetasCreateAdmin = () => import('../views/admin/recetas/Create.vue');
@@ -112,6 +113,12 @@ export default [
                         meta: { breadCrumb: 'Crear recetas' },
                         beforeEnter: requireLogin
                     },
+                    {
+                        name: 'recetas.detalle',
+                        path: 'detalle',
+                        component: RecetasDetalle,
+                        meta: { breadCrumb: 'Detalles recta'}
+                    }
                 ]
             },
         ]
