@@ -1,6 +1,6 @@
 <template>
-    <p>Toma geroma</p>
-    
+    <
+    {{ receta }}
 </template>
 
 <script setup>
@@ -8,11 +8,10 @@ import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute()
-// const receta = ref([]);
-id = route.params.id;
-console.log(id)
+const receta = ref([]);
+
 onMounted(() => {
-    axios.get('/api/recetas/' + id)
+    axios.get('/api/recetas/' + route.params.id)
     .then(response => {
         receta.value = response.data;
     })

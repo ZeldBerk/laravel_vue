@@ -115,7 +115,7 @@ export default [
                     },
                     {
                         name: 'recetas.detalle',
-                        path: 'detalle',
+                        path: 'detalle/:id',
                         component: RecetasDetalle,
                         meta: { breadCrumb: 'Detalles recta'}
                     }
