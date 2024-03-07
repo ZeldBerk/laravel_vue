@@ -11,7 +11,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class recetas extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
         'nombre',
