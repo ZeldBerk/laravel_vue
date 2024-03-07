@@ -21,7 +21,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ receta.nombre }}</h5>
                         <p class="card-text">{{ receta.descripcion }}</p>
-                        <button class="btn btn-sm btn-outline-primary" @click="anadirFavoritos(receta.id)">Añadir a favoritos</button>
+                        <button class="btn btn-sm btn-outline-primary" @click.stop="anadirFavoritos(receta.id)">Añadir a favoritos</button>
                     </div>
                 </div>
             </div>

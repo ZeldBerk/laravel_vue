@@ -1,6 +1,7 @@
 <template>
-    <
-    {{ receta }}
+    <div class="container">
+        
+    </div>
 </template>
 
 <script setup>
