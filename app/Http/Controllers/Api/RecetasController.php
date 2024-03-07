@@ -11,8 +11,13 @@ class RecetasController extends Controller
     // Extrae todas las recetas de la BBDD
     public function index(){
         
-        $recetas = recetas::all()->toArray();
-        return $recetas;
+        $orderColum = 'created_at';
+        $orderDirection = 'desc';
+
+        $recetas = recetas::with('media')
+            ->orderBy($orderColumn, $orderDirection);
+
+        return RecetasResource::collection($recetas);
     }
 
     // Añade una receta a la BBDD

@@ -43,7 +43,8 @@
                             <!-- Imagen receta -->
                             <div class="mb-3">
                                 <label for="receta_ruta_imagen" class="form-label">Imagen</label>
-                                <input v-model="receta.ruta_imagen" id="receta_ruta_imagen" type="text" class="form-control">
+                                <!-- <input v-model="receta.ruta_imagen" id="receta_ruta_imagen" type="text" class="form-control"> -->
+                                <DropeZone v-model="receta.thumbnail"/>
                             </div>
                         </div>
                     </div>
@@ -58,6 +59,7 @@
 import { ref, inject , onMounted } from "vue";
 import { useRouter } from 'vue-router';
 import TextEditorComponent from "@/components/TextEditorComponent.vue";
+import DropZone from "@/components/DropZone.vue";
 
 const categorias = ref();
 const receta = ref({});
