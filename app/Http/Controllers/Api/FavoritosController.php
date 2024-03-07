@@ -32,13 +32,13 @@ class FavoritosController extends Controller
 {
     // Validación original
     $request->validate([
-        'userId' => 'required',
-        'recetaId' => 'required',
+        'user_id' => 'required',
+        'receta_id' => 'required',
     ]);
 
     // Validación adicional: comprobar si la receta ya es favorita
-    $existeFavorito = Favoritos::where('user_id', $request->userId)
-        ->where('receta_id', $request->recetaId)
+    $existeFavorito = Favoritos::where('user_id', $request->user_id)
+        ->where('receta_id', $request->receta_id)
         ->exists();
 
     if ($existeFavorito) {
@@ -49,7 +49,7 @@ class FavoritosController extends Controller
     $favorito = $request->all();
     $fav = Favoritos::create($favorito);
 
-    return response()->json(['success' => true, 'data' => $fav]);
+    return response()->json(['success' => true, 'data' => 'La receta se ha añadido correctamente a Favoritos']);
 }
 
 
