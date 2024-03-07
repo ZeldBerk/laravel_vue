@@ -53,13 +53,22 @@ class FavoritosController extends Controller
 }
 
 
-    public function destroy(Request $request){
-        $favorito = Favoritos::where('user_id', $request->user_id)
-        ->where('receta_id', $request->receta_id)
-        ->first();
-
-        $favorito->delete();
-
-        return response()->json(['success' => true, 'data' => 'Receta eliminada de Favoritos']);
+public function destroy(Request $request, $receta_id) {
+    $userId = $request->user()->id;
+  
+    // Buscar el favorito específico del usuario
+    $favorito = Favoritos::where('receta_id', $receta_id)->where('user_id', $userId)->first();
+  
+    // Si no se encuentra el favorito, retornar error
+    if (!$favorito) {
+      return response()->json(['success' => false, 'error' => 'No se encontró la receta en favoritos'], 404);
     }
+  
+    // Eliminar el favorito
+    $favorito->delete();
+  
+    // Retornar mensaje de éxito
+    return response()->json(['success' => true, 'data' => 'Receta eliminada de Favoritos']);
+  }
+  
 }

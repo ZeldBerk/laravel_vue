@@ -36,7 +36,6 @@
 
 </template>
 
-
 <script>
 import axios from "axios";
 import { ref, onMounted } from "vue";
@@ -44,7 +43,7 @@ import { ref, onMounted } from "vue";
 export default {
   setup() {
     const data = localStorage.getItem("vuex");
-    let userId = null; 
+    let userId = null;
 
     if (data) {
       try {
@@ -52,7 +51,6 @@ export default {
         console.log("ID del usuario:", userId);
       } catch (error) {
         console.error("Error parsing localStorage data:", error);
-        
       }
     } else {
       console.log("No hay usuario autenticado en el localStorage");
@@ -63,42 +61,37 @@ export default {
     onMounted(async () => {
       if (userId) {
         await axios.get(`/api/favoritos/${userId}`)
-        .then(response =>{
-          favoritos.value = response.data;  
-        });
-        
-        console.log(favoritos.value);
+          .then(response => {
+            favoritos.value = response.data;
+          })
+          .catch(error => {
+            console.error("Error fetching favorites:", error);
+          });
       }
     });
 
-    return { favoritos };
+    function eliminarFavoritos(receta_id) {
+      if (!userId) {
+        console.error("No user ID found for removing favorites");
+        return;
+      }
 
-  },
-};
-
-async function eliminarFavoritos(receta_id){
-  const data = localStorage.getItem("vuex");
-    let userId = null;
-
-    if (data) {
-        try {
-            userId = JSON.parse(data).auth.user.id;
-            console.log("ID del usuario:", userId);
-        } catch (error) {
-            console.error("Error al analizar los datos del localStorage:", error);
-        }
-    } else {
-        console.log("No hay usuario autenticado en el localStorage");
+      axios.delete(`/api/favoritos/${receta_id}`, {
+        user_id: userId,
+      })
+        .then(response => {
+          console.log(response.data);
+          window.location.reload()
+          // Update favoritos list after successful deletion (implementation needed)
+        })
+        .catch(error => {
+          console.error("Error deleting favorite:", error);
+        });
     }
 
-    axios.delete('api/favoritos/', {
-        user_id: userId,
-        receta_id,
-    })
-        .then(response => {
-            console.log(response.data);
-        });
-}
+    return { favoritos, eliminarFavoritos };
+  },
+};
 </script>
 
 
