@@ -44,7 +44,7 @@ Route::get('recetas/RU/{user_id}' , [RecetasController::class, 'showRU']);
 // Rutas para las recetas Favoritas
 Route::get('favoritos/{id}', [FavoritosController::class, 'index']);
 Route::post('favoritos/', [FavoritosController::class, 'store']);
-Route::delete('favoritos/{id}', [FavoritosController::class, 'destroy']);
+Route::delete('favoritos/', [FavoritosController::class, 'destroy']);
 
 // Rutas para las categorias
 Route::get('categorias', [CategoriasController::class, 'index']);

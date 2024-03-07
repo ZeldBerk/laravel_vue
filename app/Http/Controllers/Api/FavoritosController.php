@@ -53,8 +53,10 @@ class FavoritosController extends Controller
 }
 
 
-    public function destroy($id){
-        $favorito = Favoritos::find($id);
+    public function destroy(Request $request){
+        $favorito = Favoritos::where('user_id', $request->user_id)
+        ->where('receta_id', $request->receta_id)
+        ->first();
 
         $favorito->delete();
 
