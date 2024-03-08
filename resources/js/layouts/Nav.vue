@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
         <div class="container">
             <router-link to="/" class="navbar-brand logoRoute"><img class="logo" src="../../images/Logo.jpg"/></router-link>
             <div class="pageTitle">
@@ -8,11 +8,12 @@
             <a class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </a>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse desplegableIdiomas" id="navbarSupportedContent">
                 <ul class="navbar-nav mt-2 mt-lg-0 me-auto mb-2 mb-lg-0">
                     <LocaleSwitcher />
                 </ul>
-                <ul class="navbar-nav mt-2 mt-lg-0 ms-auto">
+            </div>
+            <ul class="navbar-nav mt-2 mt-lg-0 ms-auto">
                         <li class="nav-item">
                             <router-link to="/" class="nav-link iconoNav" aria-current="page"><svg class="iconoHover" fill="#000000" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M27 18.039L16 9.501 5 18.039V14.56l11-8.54 11 8.538v3.481zm-2.75-.31v8.251h-5.5v-5.5h-5.5v5.5h-5.5v-8.25L16 11.543l8.25 6.186z"></path></g></svg></router-link>
                         </li>
@@ -36,13 +37,12 @@
                             <!-- Redireccionara a la pagina de plan semanal -->
                             <li><router-link to="/admin/posts" class="dropdown-item">Plan Semanal</router-link></li>
                             <!-- Redireccionara a la pagina de Favoritos del usuario -->
-                            <li><router-link to="/admin/posts" class="dropdown-item">Favoritos</router-link></li>
+                            <li><router-link to="/admin/favoritos" class="dropdown-item">Favoritos</router-link></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="javascript:void(0)" @click="logout">Cerrar Sessión</a></li>
                         </ul>
                     </li>
                 </ul>
-            </div>
         </div>
     </nav>
 </template>

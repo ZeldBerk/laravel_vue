@@ -75,16 +75,21 @@
     }
 
     .layout-topbar-menu {
-        margin: 0 0 0 auto;
+        margin-left: auto;
         padding: 0;
+        padding-right: 28px;
         list-style: none;
         display: flex;
-
-        .layout-topbar-button {
-            margin-left: 1rem;
+        
+        .iconoHover:hover{
+            fill: #F59E0B;
         }
+
     }
+
+    
 }
+
 
 @media (max-width: 991px) {
     .layout-topbar {
