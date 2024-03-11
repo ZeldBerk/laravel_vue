@@ -4,21 +4,16 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\recetas;
 use App\Http\Resources\RecetasResource;
+use App\Models\recetas;
 
 class RecetasController extends Controller
 {
     // Extrae todas las recetas de la BBDD
     public function index(){
         
-        $orderColumn = 'created_at';
-        $orderDirection = 'desc';
-
-        $recetas = recetas::with('media')
-            ->orderBy($orderColumn, $orderDirection);
-
-        return RecetasResource::collection($recetas);
+        $recetas = recetas::all()->toArray();
+        return $recetas;
     }
 
     // Añade una receta a la BBDD
