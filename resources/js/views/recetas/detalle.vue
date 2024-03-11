@@ -17,7 +17,7 @@
                                 <p>Creada: {{ formatedate(receta.created_at) }}</p>
                             </div>
                             <div class="col-2">
-                                <button type="submit" class="btn btn-primary">Comentarios</button>
+                                <router-link :to="{ name: 'comentarios.index', params: {id:receta.id} }" class="btn btn-primary">Comentarios</router-link>
                             </div>
                             <div class="col-3">
                                 <button type="submit" class="btn btn-primary">Añadir a plan semanal</button>
