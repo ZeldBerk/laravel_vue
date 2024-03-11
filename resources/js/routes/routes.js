@@ -2,6 +2,7 @@ import Cookies from 'js-cookie'
 import store from "../store";
 
 const AuthenticatedLayout = () => import('../layouts/Authenticated.vue')
+const AuthenticatedUser = () =>('../layouts/Usuarios.vue')
 const GuestLayout = ()  => import('../layouts/Guest.vue');
 
 const PostsIndex  = ()  => import('../views/admin/posts/Index.vue');
@@ -123,6 +124,20 @@ export default [
             },
         ]
     },
+    // {
+    //     path: '/usuario',
+    //     component: AuthenticatedUser,
+    //     beforeEnter: requireLogin,
+    //     meta: { breadCrumb: 'Panel de Control'},
+    //     children: [
+    //         {
+    //             name: 'recetasAdmin.index',
+    //             path: '',
+    //             component: RecetasListAdmin,
+    //             meta: { breadCrumb: 'Listado recetas' }
+    //         }
+    //     ]
+    // },
     {
         path: '/admin',
         component: AuthenticatedLayout,
