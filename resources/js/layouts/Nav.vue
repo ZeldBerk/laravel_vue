@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
             <router-link to="/" class="navbar-brand logoRoute"><img class="logo" src="../../images/Logo.jpg"/></router-link>
             <div class="pageTitle">
