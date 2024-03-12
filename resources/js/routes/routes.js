@@ -132,7 +132,8 @@ export default [
                         name: 'comentarios.index',
                         path: 'comentarios/:id',
                         component: ComentList,
-                        meta: { breadCrumb: 'Listado de comentarios de la receta' }
+                        meta: { breadCrumb: 'Listado de comentarios de la receta' },
+                        beforeEnter: requireLogin
                     },
                 ]
             },
