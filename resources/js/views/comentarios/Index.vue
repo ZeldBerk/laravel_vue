@@ -11,10 +11,10 @@
         </div>
 
         <div class="row">
-            <div class="col-md-4 mb-3" v-for="receta in recetas" :key="receta.id">
-                <div class="card cursor_pointer" @click="detallesReceta(receta.id)">
+            <div class="col-md-4 mb-3" v-for="comentario in comentarioSH">
+                <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">{{ Comentario.puntuacion }}</h5>
+                        <h5 class="card-title">{{ comentario.puntuacion }}</h5>
                         <p class="card-text">{{ comentario.contenido }}</p>
                     </div>
                 </div>
@@ -24,12 +24,14 @@
 </template>
 
 <script setup>
+import axios from "axios";
 import { ref, onMounted, inject } from "vue";
 import { useRoute } from "vue-router";
 
 const swal = inject('$swal');
-const comentario = ref([]);
-const route = useRoute()
+const comentarioSH = ref([]);
+const comentario = ref({});
+const route = useRoute();
 
 // Obtener id de usuario
 const data = localStorage.getItem("vuex");
@@ -38,8 +40,18 @@ const user_id = JSON.parse(data).auth.user.id;
 // Obtener id de la receta
 const receta_id = route.params.id;
 
+// Obtener todo los comentraios de la receta
+onMounted(() => {
+    axios.get('/api/comentarios/' + receta_id)
+    .then(response => {
+        comentarioSH.value = response.data;
+    })
+});
+
+// Guardar receta_id y user_id en comentario para hacer el insert
 comentario.value.user_id = user_id;
 comentario.value.receta_id = receta_id;
+console.log(comentario)
 
 function createComentario() {
     swal.fire({
@@ -47,11 +59,11 @@ function createComentario() {
         html: `
                 <div class="form-group">
                     <label for="puntuacion">Valoración:</label>
-                    <input v_model="comentario.puntuacion" type="number" id="puntuacion" class="form-control" min="1" max="5" required>
+                    <input type="number" id="puntuacion" class="form-control" min="1" max="5" required>
                 </div>
                 <div class="form-group">
                     <label for="contenido">Comentario:</label>
-                    <textarea v-model="comentario.contenido" id="contenido" class="form-control" rows="3" required></textarea>
+                    <textarea id="contenido" class="form-control" rows="3" required></textarea>
                 </div>
             `,
         showCancelButton: true,
@@ -62,6 +74,15 @@ function createComentario() {
         }
     }).then((result) => {
         if (result.isConfirmed) {
+            // Recojer valores del formulario de la alerta
+            const puntuacion = document.getElementById('puntuacion').value;
+            const contenido = document.getElementById('contenido').value;
+
+            // Guardar valores en comentario
+            comentario.value.puntuacion = puntuacion;
+            comentario.value.contenido = contenido;
+
+            // Insert del comentario 
             axios.post('/api/comentarios', comentario.value)
                 .then(response => {
                     swal({

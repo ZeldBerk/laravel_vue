@@ -4,7 +4,6 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Resources\RecetasResource;
 use App\Models\recetas;
 
 class RecetasController extends Controller

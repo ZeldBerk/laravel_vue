@@ -44,11 +44,11 @@ class ComentariosController extends Controller
     }
 
 
-    // Devuelve el comentario mediante el id
-    public function show($id){
+    // Devuelve el comentarios mediante el id de la receta
+    public function show($receta_id){
 
-        $comentario = comentarios::find($id);
+        $comentarios = comentarios::where('receta_id', $receta_id)->get();
 
-        return $comentario;
+        return $comentarios;
     }
 }
