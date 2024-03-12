@@ -28,8 +28,7 @@ class FavoritosController extends Controller
         
     }
 
-    public function store(Request $request)
-{
+    public function store(Request $request){
     // Validación original
     $request->validate([
         'user_id' => 'required',

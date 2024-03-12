@@ -245,7 +245,7 @@ export default [
             },
             {
                 name: 'Plan Semanal',
-                path: 'Plan Semanal',
+                path: 'PlanSemanal',
                 meta: { breadCrumb: 'Plan Semanal'},
                 component: PlanSemanal
             },
