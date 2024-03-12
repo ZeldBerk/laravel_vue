@@ -22,6 +22,7 @@ const RecetasListAdmin = () => import('../views/admin/recetas/Index.vue');
 const RecetasCreateAdmin = () => import('../views/admin/recetas/Create.vue');
 const RecetasUpdateAdmin = () => import('../views/admin/recetas/Update.vue');
 const ComentList = () => import('../views/comentarios/Index.vue');
+const PlanSemanal = () => import('../views/planSemanal/index.vue');
 
 
 function requireLogin(to, from, next) {
@@ -241,6 +242,12 @@ export default [
                         meta: { breadCrumb: 'Actualizar receta' }
                     }
                 ]
+            },
+            {
+                name: 'Plan Semanal',
+                path: 'Plan Semanal',
+                meta: { breadCrumb: 'Plan Semanal'},
+                component: PlanSemanal
             },
             {
                 name: 'Favoritos',
