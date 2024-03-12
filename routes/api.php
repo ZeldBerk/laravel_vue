@@ -13,10 +13,12 @@ use App\Http\Controllers\Api\RecetasController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\FavoritosController;
 use App\Http\Controllers\Api\CategoriasController;
+use App\Http\Controllers\api\PlanSemanalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Models\planSemanal;
 
 Route::post('forget-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('forget.password.post');
 Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.reset');
@@ -40,6 +42,11 @@ Route::put('recetas/update/{id}', [RecetasController::class, 'update']);
 Route::delete('recetas/{id}', [RecetasController::class, 'destroy']);
 Route::get('recetas/{id}' , [RecetasController::class, 'show']);
 Route::get('recetas/RU/{user_id}' , [RecetasController::class, 'showRU']);
+
+//Rutas para Plan Semanal
+Route::get('planSemanal/{id}', [PlanSemanalController::class, 'index']);
+Route::post('planSemanal/', [PlanSemanalController::class, 'store']);
+Route::delete('planSemanal/{id}', [PlanSemanalController::class, 'destroy']);
 
 // Rutas para las recetas Favoritas
 Route::get('favoritos/{id}', [FavoritosController::class, 'index']);

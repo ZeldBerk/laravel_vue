@@ -12,7 +12,8 @@ class planSemanal extends Model
     protected $fillable = [
         'user_id',
         'receta_id',
-        'dia_semana'
+        'dia_semana',
+        'momento_dia'
     ];
 
     public function receta(){

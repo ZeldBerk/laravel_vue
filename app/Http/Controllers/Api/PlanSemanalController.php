@@ -27,9 +27,27 @@ class PlanSemanalController extends Controller
         $request->validate([
             'user_id' => 'required',
             'receta_id' => 'required',
-            'dia_semana' => 'required'
+            'dia_semana' => 'required',
+            'momento_dia' => 'required'
         ]);
 
+        //Validacion extra para asegurar que una receta no puede estar en el mismo dia en el mismo momento del dia (comida o cena)
+        $existe = planSemanal::where('user_id', $request->user_id)->
+            where('receta_id', $request->receta_id)->
+            where('momento_dia', $request->momento_dia)->exists();
+            
+            if($existe){
+                return response()->json(['success' => false, 'message' => 'Esta receta ya esta añadida para este momento del dia']);
+            }
+
+            $recetaPlan = $request->all();
+            $receta = planSemanal::create($recetaPlan);
+
+            return response()->json(['success' => true, 'data' => 'La receta ha sido añadida correctamente a tu plan']);
+        
+    }
+
+    public function destroy(Request $request){
         
     }
 }
