@@ -43,15 +43,14 @@ const receta_id = route.params.id;
 // Obtener todo los comentraios de la receta
 onMounted(() => {
     axios.get('/api/comentarios/' + receta_id)
-    .then(response => {
-        comentarioSH.value = response.data;
-    })
+        .then(response => {
+            comentarioSH.value = response.data;
+        })
 });
 
 // Guardar receta_id y user_id en comentario para hacer el insert
 comentario.value.user_id = user_id;
 comentario.value.receta_id = receta_id;
-console.log(comentario)
 
 function createComentario() {
     swal.fire({
@@ -90,7 +89,7 @@ function createComentario() {
                         title: 'Receta añadida correctamente'
                     })
                         .then(() => {
-                            router.push({ name: 'comentarios.index' })
+                            window.location.reload();
                         });
                 })
                 .catch(error => {
