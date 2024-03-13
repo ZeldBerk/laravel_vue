@@ -110,3 +110,19 @@ a {
       display: none;
     }
   }
+
+  //Diseño tabla plan semanal
+  table{
+    text-align: center;
+  }
+  tr{
+  border-bottom: 1px solid black;
+}
+.separador{
+  border-right: 1px solid black;
+}
+.espacio{
+  max-width: 10px;
+}
+  
+  
