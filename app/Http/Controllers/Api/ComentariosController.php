@@ -47,7 +47,10 @@ class ComentariosController extends Controller
     // Devuelve el comentarios mediante el id de la receta
     public function show($receta_id){
 
-        $comentarios = comentarios::where('receta_id', $receta_id)->get();
+        $comentarios = comentarios::where('receta_id', $receta_id)
+        ->join('users','users.id', '=', 'comentarios.user_id')
+        ->select('comentarios.*', 'users.name')
+        ->get();
 
         return $comentarios;
     }
