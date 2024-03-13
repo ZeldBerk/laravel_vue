@@ -49,8 +49,10 @@
 
 <script setup>
 import axios from "axios";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, inject } from "vue";
 import { useRouter } from "vue-router";
+
+const swal = inject('$swal');
 const favoritosArray = ref([]);
 const recetas = ref([]);
 const router = useRouter();
@@ -91,21 +93,40 @@ function anadirFavoritos(receta_id) {
         console.log("No hay usuario autenticado en el localStorage");
     }
 
-    axios.post('api/favoritos/', {
-        user_id: userId,
-        receta_id,
-    })
+    if(userId){
+        axios.post('/api/favoritos/', {
+            user_id: userId,
+            receta_id,
+        })
         .then(response => {
             console.log(response.data);
-    responseStatus = response.data.success;
+            responseStatus = response.data.success;
 
-    if (!responseStatus) {
-      // Llamada a axios.destroy
-      axios.delete(`/api/favoritos/${receta_id}`, {
-        user_id: userId,
-      });
-    }
+            if (!responseStatus) {
+                // Llamada a axios.destroy
+                axios.delete(`/api/favoritos/${receta_id}`, {
+                    user_id: userId,
+                });
+            }
         });
+    }else{
+        
+        swal({
+            title: "Es necesario iniciar session antes de realizar esta accion",
+            icon: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Iniciar Session"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/login';
+                return;
+            };
+        });
+    }
+
+    
 }
 
 
