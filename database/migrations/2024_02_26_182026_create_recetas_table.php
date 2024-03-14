@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('descripcion');
-            $table->string('ruta_imagen')->nullable();
             $table->integer('raciones');
             $table->integer('tiempo_preparacion');
             $table->unsignedBigInteger('user_id');

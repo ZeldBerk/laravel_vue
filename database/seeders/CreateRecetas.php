@@ -16,7 +16,6 @@ class CreateRecetas extends Seeder
         $receta1 = recetas::create([
             'nombre' => 'croquetas',
             'descripcion' => 'pideselas a la yaya',
-            'ruta_imagen' => 'croquetas.png', 
             'raciones' => 1,
             'tiempo_preparacion' => '120',
             'user_id' => 1,
@@ -26,7 +25,6 @@ class CreateRecetas extends Seeder
         $receta1 = recetas::create([
             'nombre' => 'Tarta queso',
             'descripcion' => 'en know eats',
-            'ruta_imagen' => 'tartadequeso.png', 
             'raciones' => 4,
             'tiempo_preparacion' => '200',
             'user_id' => 1,
@@ -36,7 +34,6 @@ class CreateRecetas extends Seeder
         $receta1 = recetas::create([
             'nombre' => 'pollo',
             'descripcion' => 'Filetear el pollo y a la plancha',
-            'ruta_imagen' => 'pollo.png', 
             'raciones' => 2,
             'tiempo_preparacion' => '10',
             'user_id' => 1,
