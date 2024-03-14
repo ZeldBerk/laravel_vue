@@ -11,18 +11,17 @@ class RecetasController extends Controller
     // Extrae todas las recetas de la BBDD
     public function index(){
         
-        $recetas = recetas::all()->toArray();
+        $recetas = recetas::with('media')->get();
         return $recetas;
     }
 
     // Añade una receta a la BBDD
     public function store(Request $request){
-
         // Validar campos obligatorios
+        
         $request->validate([
             'nombre' => 'required',
             'descripcion' => 'required',
-            'ruta_imagen' => 'required',
             'raciones' => 'required',
             'tiempo_preparacion' => 'required',
             'user_id' => 'required',
@@ -31,6 +30,10 @@ class RecetasController extends Controller
 
         $contReceta = $request->all();
         $receta = recetas::create($contReceta);
+
+        if ($request->hasFile('thumbnail')) {
+            $receta->addMediaFromRequest('thumbnail')->preservingOriginal()->toMediaCollection('images-recetas');
+        }
 
         return response()->json(['success' => true, 'data' => $receta]);
     }
@@ -45,7 +48,6 @@ class RecetasController extends Controller
         $request->validate([
             'nombre' => 'required',
             'descripcion' => 'required',
-            'ruta_imagen' => 'required',
             'raciones' => 'required',
             'tiempo_preparacion' => 'required',
             'user_id' => 'required',
