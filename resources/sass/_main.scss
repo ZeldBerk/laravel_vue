@@ -31,6 +31,7 @@ a {
 .con-like {
     --red: rgb(255, 50, 50);
     position: relative;
+    display: inline-block;
     width: 25px;
     height: 25px;
   }
@@ -110,6 +111,34 @@ a {
       display: none;
     }
   }
+
+  //Diseño boton de añadir al plan semanal
+  .icon-link {
+    display: inline-block;
+    padding: 5px; /* Ajusta el padding según sea necesario */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.circle {
+    stroke: #F59E0B; /* Color inicial del círculo */
+    stroke-width: 1.5;
+}
+
+.cross {
+    stroke: #F59E0B; /* Color inicial de las líneas */
+    stroke-width: 1.5;
+    stroke-linecap: round;
+}
+
+/* Estilos al pasar el ratón por encima */
+.icon-link:hover .circle {
+    stroke: #FFC107; /* Cambia el color del círculo */
+}
+
+.icon-link:hover .cross {
+    stroke: #FFC107; /* Cambia el color de las líneas */
+}
+
 
   //Diseño tabla plan semanal
   table{
