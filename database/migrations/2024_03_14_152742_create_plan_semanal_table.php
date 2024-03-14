@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plan_semanal', function (Blueprint $table) {
+        Schema::create('plan_semanals', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('receta_id');
             $table->string('dia_semana');
-            $table->string('momento_dia'); //Para especificar si la receta es comida o cena
+            $table->string('momento_dia'); //Para especificar si la receta es almuerzo o cena
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('receta_id')->references('id')->on('recetas')->onDelete('cascade');
             $table->timestamps();
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plan_semanal');
+        Schema::dropIfExists('plan_semanals');
     }
 };
