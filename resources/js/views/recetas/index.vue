@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-4 mb-3" v-for="receta in recetas" :key="receta.id">
                 <div class="card cursor_pointer" @click="detallesReceta(receta.id)"> 
-                    <img :src="receta.imagen" class="card-img-top" alt="Imagen de la receta">
+                    <img :src="`${receta.media[0]?.original_url}`" alt=""/>
                     <div class="card-body">
                         <h5 class="card-title">{{ receta.nombre }}</h5>
                         <p class="card-text">{{ receta.descripcion }}</p>
