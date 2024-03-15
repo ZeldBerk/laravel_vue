@@ -113,24 +113,24 @@ function anadirFavoritos(receta_id) {
         console.log("No hay usuario autenticado en el localStorage");
     }
 
-    if(userId){
+    if (userId) {
         axios.post('/api/favoritos/', {
             user_id: userId,
             receta_id,
         })
-        .then(response => {
-            console.log(response.data);
-            responseStatus = response.data.success;
+            .then(response => {
+                console.log(response.data);
+                responseStatus = response.data.success;
 
-            if (!responseStatus) {
-                // Llamada a axios.destroy
-                axios.delete(`/api/favoritos/${receta_id}`, {
-                    user_id: userId,
-                });
-            }
-        });
-    }else{
-        
+                if (!responseStatus) {
+                    // Llamada a axios.destroy
+                    axios.delete(`/api/favoritos/${receta_id}`, {
+                        user_id: userId,
+                    });
+                }
+            });
+    } else {
+
         swal({
             title: "Es necesario iniciar session antes de realizar esta accion",
             icon: "info",
@@ -146,13 +146,13 @@ function anadirFavoritos(receta_id) {
         });
     }
 
-    
+
 }
 
 
 
 
-async function buscarFavoritos(){
+async function buscarFavoritos() {
     const data = localStorage.getItem("vuex");
     let userId = null;
 
@@ -169,20 +169,20 @@ async function buscarFavoritos(){
 
 
     axios.get(`/api/favoritos/${userId}`)
-    .then(response => {
-        // Extraer todos los ID
-        
-        for (const receta of response.data) {
-            favoritosArray.value.push(receta.id);
-        }
+        .then(response => {
+            // Extraer todos los ID
+
+            for (const receta of response.data) {
+                favoritosArray.value.push(receta.id);
+            }
 
 
-    })
+        })
 }
 
 function isFavorito(recetaId) {
 
-  return favoritosArray.value.some(fav => fav === recetaId);
+    return favoritosArray.value.some(fav => fav === recetaId);
 }
 
 </script>
@@ -192,6 +192,6 @@ function isFavorito(recetaId) {
 <style scoped>
 /* Añade estilo al cursor al pasar por encima de la carta */
 .cursor_pointer {
-  cursor: pointer;
+    cursor: pointer;
 }
 </style>
