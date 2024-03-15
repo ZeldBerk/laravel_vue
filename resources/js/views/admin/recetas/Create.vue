@@ -38,13 +38,12 @@
                             <!-- Categoria receta -->
                             <div class="mb-3">
                                 <label for="receta_categoria_id" class="form-label">Selecciona la categoría</label>
-                                <select v-model="receta.categoria_id" id="receta_categoria_id" class="form-control"></select>
+                                <Dropdown v-model="receta.categoria_id" :options="categorias" optionValue="id" optionLabel="nombre" placeholder="Selecciona la categoria" checkmark  class="w-100"/>
                             </div>
                             <!-- Imagen receta -->
                             <div class="mb-3">
                                 <label for="receta_ruta_imagen" class="form-label">Imagen</label>
-                                <!-- <input v-model="receta.ruta_imagen" id="receta_ruta_imagen" type="text" class="form-control"> -->
-                                <DropeZone v-model="receta.thumbnail"/>
+                                <DropZone v-model="receta.thumbnail"/>
                             </div>
                         </div>
                     </div>
@@ -77,25 +76,24 @@ onMounted(() => {
     axios.get('/api/categorias')
     .then(response => {
         categorias.value = response.data;
-        // Agregar una opción vacía al principio
-        const emptyOption = document.createElement('option');
-        emptyOption.value = '';
-        emptyOption.textContent = '';
-        document.getElementById('receta_categoria_id').appendChild(emptyOption);
-
-        categorias.value.forEach(categoria => {
-            const option = document.createElement('option');
-            option.value = categoria.id;
-            option.textContent = categoria.nombre;
-            document.getElementById('receta_categoria_id').appendChild(option);
-        });
     });
 });
 
-// Añade la receta y muestra una alerta en funcion de la respuesta de la api
+// Añade la receta y muestra una alerta en funcion de la respuesta de la api hacer formdata
 function addReceta() {
+    let r = receta.value;
+    let serializedReceta = new FormData()
+    for (let item in r) {
+        if(r.hasOwnProperty(item)){
+            serializedReceta.append(item, r[item])
+        }
+    }
 
-    axios.post('/api/recetas', receta.value)
+    axios.post('/api/recetas', serializedReceta, {
+        headers: {
+            "content-type": "multipart/form-data"
+        }
+    })
         .then(response => {
             swal({
                 icon: 'success',
@@ -103,7 +101,7 @@ function addReceta() {
             })
             .then(() => {
                 // Redireccionar a la página después de cerrar la alerta
-                router.push({name: 'recetasAdmin.index'})
+                //router.push({name: 'recetas.index'})
             });
         })
         .catch(error => {
