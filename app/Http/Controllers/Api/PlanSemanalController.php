@@ -10,18 +10,15 @@ use Illuminate\Http\Request;
 class PlanSemanalController extends Controller
 {
     public function index($user_id){
-        $recetasSemana = planSemanal::where('user_id', $user_id)->get();
-
-        $plan = [];
-
-        foreach($recetasSemana as $receta){
-            $receta = recetas::find($receta->receta_id);
-
-            $plan[] = $receta;
-        }
+        $plan = planSemanal::with('receta')
+            ->where('user_id', $user_id)
+            ->get();
 
         return response()->json($plan);
     }
+
+
+
 
     public function store(Request $request){
         $request->validate([
@@ -34,6 +31,7 @@ class PlanSemanalController extends Controller
         //Validacion extra para asegurar que una receta no puede estar en el mismo dia en el mismo momento del dia (comida o cena)
         $existe = planSemanal::where('user_id', $request->user_id)->
             where('receta_id', $request->receta_id)->
+            where('dia_semana', $request->dia_semana)->
             where('momento_dia', $request->momento_dia)->exists();
             
             if($existe){
