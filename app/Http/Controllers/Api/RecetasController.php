@@ -73,7 +73,7 @@ class RecetasController extends Controller
     // Devuelve una receta mediante id
     public function show($id){
 
-        $receta = recetas::find($id);
+        $receta = recetas::with('media')->find($id);
 
         return $receta;
     }
@@ -81,7 +81,7 @@ class RecetasController extends Controller
     // Devuelve las recetas asociadas a un id de usuario
     public function showRU($user_id){
 
-        $recetas = recetas::where('user_id', $user_id)->get();
+        $recetas = recetas::where('user_id', $user_id)->with('media')->get();
 
         return $recetas;
     }

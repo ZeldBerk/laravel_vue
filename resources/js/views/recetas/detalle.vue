@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <img src="receta.ruta_imagen" alt="imagen de la receta">
+                    <img :src="`${receta.media[0]?.original_url}`" alt=""/>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-2">
@@ -46,6 +46,7 @@ const receta = ref([]);
 onMounted(() => {
     axios.get('/api/recetas/' + route.params.id)
     .then(response => {
+        console.log(response.data)
         receta.value = response.data;
     })
 });
