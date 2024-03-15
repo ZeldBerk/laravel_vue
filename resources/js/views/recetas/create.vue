@@ -36,14 +36,9 @@
                                 <input v-model="receta.tiempo_preparacion" id="receta_tiempo_preparacion" type="number" min="1" class="form-control">
                             </div>
                             <!-- Categoria receta -->
-                            {{ receta}}
-
                             <div class="mb-3">
-                                {{ categorias }}
                                 <label for="receta_categoria_id" class="form-label">Selecciona la categoría</label>
-                                <Dropdown v-model="receta.categoria_id" :options="categorias" optionValue="id" optionLabel="nombre" placeholder="Select a City" checkmark  class="w-100"/>
-
-                                <select v-model="receta.categoria_id" id="receta_categoria_id" class="form-control"></select>
+                                <Dropdown v-model="receta.categoria_id" :options="categorias" optionValue="id" optionLabel="nombre" placeholder="Selecciona la categoria" checkmark  class="w-100"/>
                             </div>
                             <!-- Imagen receta -->
                             <div class="mb-3">
