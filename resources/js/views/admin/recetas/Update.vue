@@ -28,27 +28,26 @@
                             <!-- Raciones receta -->
                             <div class="mb-3">
                                 <label for="receta_raciones" class="form-label">Raciones</label>
-                                <input v-model="receta.raciones" id="receta_raciones" type="number" min="1" class="form-control">
+                                <input v-model="receta.raciones" id="receta_raciones" type="number" min="1"
+                                    class="form-control">
                             </div>
                             <!-- Tiempo receta -->
                             <div class="mb-3">
                                 <label for="receta_tiempo_preparacion" class="form-label">Tiempo de preparación</label>
-                                <input v-model="receta.tiempo_preparacion" id="receta_tiempo_preparacion" type="number" min="1" class="form-control">
+                                <input v-model="receta.tiempo_preparacion" id="receta_tiempo_preparacion" type="number"
+                                    min="1" class="form-control">
                             </div>
                             <!-- Categoria receta -->
                             <div class="mb-3">
                                 <label for="receta_categoria_id" class="form-label">Selecciona la categoría</label>
-                                <select v-model="receta.categoria_id" id="receta_categoria_id" class="form-control"></select>
+                                <Dropdown v-model="receta.categoria_id" id="receta_categoria_id" :options="categorias" optionValue="id"
+                                    optionLabel="nombre" placeholder="Selecciona la categoria" checkmark
+                                    class="w-100" />
                             </div>
                             <!-- Imagen receta -->
                             <div class="mb-3">
-                                <label for="receta_ruta_imagen" class="form-label">Imagen</label>
-                                <input v-model="receta.ruta_imagen" id="receta_ruta_imagen" type="text" class="form-control">
-                            </div>
-                            <!-- User receta -->
-                            <div class="mb-3">
-                                <label for="receta_user_id" class="form-label">User_id = 1</label>
-                                <input v-model="receta.user_id" id="receta_user_id" type="number" class="form-control">
+                                <label for="imagen" class="form-label">Imagen</label>
+                                <DropZone v-model="receta.thumbnail" id="imagen"/>
                             </div>
                         </div>
                     </div>
@@ -60,15 +59,16 @@
 
 <script setup>
 import { ref, onMounted, reactive, inject } from "vue";
-import { useForm, useField} from "vee-validate";
+import { useForm, useField } from "vee-validate";
 import { useRoute } from "vue-router";
 import { useRouter } from 'vue-router';
 import * as yup from 'yup';
 import { es } from 'yup-locales';
 import { setLocale } from 'yup';
+import DropZone from "@/components/DropZone.vue";
 import TextEditorComponent from "@/components/TextEditorComponent.vue";
 
-const schema =  yup.object({
+const schema = yup.object({
     nombre: yup.string().required().label('Nombre'),
 })
 
@@ -82,16 +82,14 @@ setLocale(es);
 
 const { value: nombre } = useField('nombre', null, { initialValue: '' });
 const { value: descripcion } = useField('descripcion', null, { initialValue: '' });
-const { value: ruta_imagen } = useField('ruta_imagen', null, { initialValue: '' });
 const { value: raciones } = useField('raciones', null, { initialValue: '' });
-const { value: tiempo_preparacion } = useField('tiempo_preparacion', null, { initialValue: ''});
+const { value: tiempo_preparacion } = useField('tiempo_preparacion', null, { initialValue: '' });
 const { value: user_id } = useField('user_id', null, { initialValue: '' });
 const { value: categoria_id } = useField('categoria_id', null, { initialValue: '' });
 
 const receta = reactive({
     nombre,
     descripcion,
-    ruta_imagen,
     raciones,
     tiempo_preparacion,
     user_id,
@@ -101,63 +99,62 @@ const receta = reactive({
 // Carga de las categorias en el desplegable
 onMounted(() => {
     axios.get('/api/categorias')
-    .then(response => {
-        categorias.value = response.data;
-        // Agregar una opción vacía al principio
-        const emptyOption = document.createElement('option');
-        emptyOption.value = '';
-        emptyOption.textContent = '';
-        document.getElementById('receta_categoria_id').appendChild(emptyOption);
-
-        categorias.value.forEach(categoria => {
-            const option = document.createElement('option');
-            option.value = categoria.id;
-            option.textContent = categoria.nombre;
-            document.getElementById('receta_categoria_id').appendChild(option);
+        .then(response => {
+            categorias.value = response.data;
         });
-    });
 });
 
 // Mostrar el los datos actuales de la receta
 onMounted(() => {
     axios.get('/api/recetas/' + route.params.id)
-    .then(response => {
-        receta.nombre = response.data.nombre;
-        receta.descripcion = response.data.descripcion;
-        receta.ruta_imagen = response.data.ruta_imagen;
-        receta.raciones = response.data.raciones;
-        receta.tiempo_preparacion = response.data.tiempo_preparacion;
-        receta.user_id = response.data.user_id;
-        receta.categoria_id = response.data.categoria_id;
-    })
-    .catch(function(error) {
-        console.log(error);
-    });
+        .then(response => {
+            receta.nombre = response.data.nombre;
+            receta.descripcion = response.data.descripcion;
+            receta.raciones = response.data.raciones;
+            receta.tiempo_preparacion = response.data.tiempo_preparacion;
+            receta.user_id = response.data.user_id;
+            receta.categoria_id = response.data.categoria_id;
+            receta.thumbnail = response.data.media[0].original_url;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 })
 
-// Funcion para guardar los datos actiualizados de la receta
-console.log(route.params.id)
+
 function saveReceta() {
     validate().then(form => {
         console.log('validate');
-        if (form.valid){
+        if (form.valid) {
             console.log(receta)
-            axios.put('/api/recetas/update/'+route.params.id, receta)
-            .then(response => {
-                swal({
-                    icon: 'success',
-                    title: 'Receta actualizada correctamente'
-                })
-                .then(() => {
-                    router.push({name: 'recetasAdmin.index'})
-                });
+            let r = receta.value;
+            let serializedReceta = new FormData()
+            for (let item in r) {
+                if (r.hasOwnProperty(item)) {
+                    serializedReceta.append(item, r[item])
+                }
+            }
+
+            axios.put('/api/recetas/update/' + route.params.id, serializedReceta, {
+                headers: {
+                    "content-type": "multipart/form-data"
+                }
             })
-            .catch(error => {
-                swal({
-                    icon: 'error',
-                    title: 'No se ha podido actualizar la receta'
+                .then(response => {
+                    swal({
+                        icon: 'success',
+                        title: 'Receta actualizada correctamente'
+                    })
+                        .then(() => {
+                            router.push({ name: 'recetasAdmin.index' })
+                        });
+                })
+                .catch(error => {
+                    swal({
+                        icon: 'error',
+                        title: 'No se ha podido actualizar la receta'
+                    });
                 });
-            });
         }
     })
 }

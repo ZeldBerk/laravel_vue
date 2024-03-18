@@ -57,6 +57,11 @@ class RecetasController extends Controller
         $contToUpdate = $request->all();
         $receta->update($contToUpdate);
 
+        if($request->hasFile('thumbnail')) {
+            $receta->media()->delete();
+            $receta->addMediaFromRequest('thumbnail')->preservingOriginal()->toMediaCollection('images-recetas');
+        }
+
         return response()->json(['success' => true, 'data' => $receta]);
     }
 
