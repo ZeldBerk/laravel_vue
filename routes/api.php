@@ -14,6 +14,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\FavoritosController;
 use App\Http\Controllers\Api\CategoriasController;
 use App\Http\Controllers\api\PlanSemanalController;
+use App\Http\Controllers\api\IngredientesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,6 +43,12 @@ Route::put('recetas/update/{id}', [RecetasController::class, 'update']);
 Route::delete('recetas/{id}', [RecetasController::class, 'destroy']);
 Route::get('recetas/{id}' , [RecetasController::class, 'show']);
 Route::get('recetas/RU/{user_id}' , [RecetasController::class, 'showRU']);
+
+// Rutas para los ingredientes
+Route::get('ingredientes', [IngredientesController::class], 'index');
+Route::post('ingredientes/', [IngredientesController::class], 'store');
+Route::put('ingredientes/update/{id}', [IngredientesController::class], 'update');
+Route::delete('ingredientes/{id}', [IngredientesController::class], 'destroy');
 
 //Rutas para Plan Semanal
 Route::get('planSemanal/{id}', [PlanSemanalController::class, 'index']);
