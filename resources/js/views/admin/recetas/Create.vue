@@ -101,7 +101,7 @@ function addReceta() {
             })
             .then(() => {
                 // Redireccionar a la página después de cerrar la alerta
-                //router.push({name: 'recetas.index'})
+                router.push({name: 'recetasAdmin.index'})
             });
         })
         .catch(error => {
