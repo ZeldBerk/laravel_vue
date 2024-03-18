@@ -185,6 +185,76 @@ function isFavorito(recetaId) {
     return favoritosArray.value.some(fav => fav === recetaId);
 }
 
+function anadirPlanSemanal(receta_id) {
+    swal({
+        title: "Añadir receta al plan semanal",
+        html: `
+            <label for="dia_semana">Día de la semana:</label>
+            <select id="dia_semana" class="swal2-select" required>
+                <option value="">Seleccionar día</option>
+                <option value="Lunes">Lunes</option>
+                <option value="Martes">Martes</option>
+                <option value="Miércoles">Miércoles</option>
+                <option value="Jueves">Jueves</option>
+                <option value="Viernes">Viernes</option>
+                <option value="Sábado">Sábado</option>
+                <option value="Domingo">Domingo</option>
+            </select>
+            <label for="momento_dia">Momento del día:</label>
+            <select id="momento_dia" class="swal2-select" required>
+                <option value="">Seleccionar momento</option>
+                <option value="Almuerzo">Almuerzo</option>
+                <option value="Cena">Cena</option>
+            </select>
+        `,
+        focusConfirm: false,
+        preConfirm: () => {
+            const dia_semana = swal.getPopup().querySelector('#dia_semana').value;
+            const momento_dia = swal.getPopup().querySelector('#momento_dia').value;
+            const data = localStorage.getItem("vuex");
+            let userId = null;
+
+            if (data) {
+                try {
+                    userId = JSON.parse(data).auth.user.id;
+                    console.log("ID del usuario:", userId);
+                } catch (error) {
+                    console.error("Error al analizar los datos del localStorage:", error);
+                }
+            } else {
+                console.log("No hay usuario autenticado en el localStorage");
+            }
+
+            if (!dia_semana || !momento_dia) {
+                swal.showValidationMessage(`Por favor, seleccione el día de la semana y el momento del día.`);
+            } else {
+                // Realizar la llamada al endpoint con los datos
+                axios.post('/api/planSemanal/', {
+                    user_id: userId,
+                    receta_id,
+                    dia_semana,
+                    momento_dia
+                })
+                .then(response => {
+                    console.log(response.data);
+                    swal.fire({
+                        title: 'Receta añadida al plan semanal',
+                        icon: 'success'
+                    });
+                })
+                .catch(error => {
+                    console.error("Error al añadir receta al plan semanal:", error);
+                    swal.fire({
+                        title: 'Error',
+                        text: 'Ocurrió un error al añadir la receta al plan semanal',
+                        icon: 'error'
+                    });
+                });
+            }
+        }
+    });
+}
+
 </script>
 
 
