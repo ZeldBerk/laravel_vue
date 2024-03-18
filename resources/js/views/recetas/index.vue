@@ -236,11 +236,18 @@ function anadirPlanSemanal(receta_id) {
                     momento_dia
                 })
                 .then(response => {
-                    console.log(response.data);
-                    swal.fire({
-                        title: 'Receta añadida al plan semanal',
-                        icon: 'success'
-                    });
+                    if (response.data.success) {
+                        swal.fire({
+                            title: 'Receta añadida al plan semanal',
+                            icon: 'success'
+                        });
+                    } else {
+                        swal.fire({
+                            title: 'Error al añadir receta',
+                            text: response.data.message, // Puedes mostrar el mensaje de error proporcionado por el servidor
+                            icon: 'warning'
+                        });
+                    }
                 })
                 .catch(error => {
                     console.error("Error al añadir receta al plan semanal:", error);

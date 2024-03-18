@@ -154,6 +154,21 @@ a {
   max-width: 10px;
 }
 
+.nombreDias{
+  width: 80px;
+}
+
+.icon-container:hover svg {
+  cursor: pointer;
+  fill: red;
+  stroke: red;
+}
+
+.icon-eye:hover svg{
+  cursor: pointer;
+  stroke: #FFC107;
+}
+
 //Diseño boton ver recetas
   
   

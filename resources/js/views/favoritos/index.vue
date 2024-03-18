@@ -82,7 +82,6 @@ export default {
         .then(response => {
           console.log(response.data);
           window.location.reload()
-          // Update favoritos list after successful deletion (implementation needed)
         })
         .catch(error => {
           console.error("Error deleting favorite:", error);
