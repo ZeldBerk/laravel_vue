@@ -45,10 +45,10 @@ Route::get('recetas/{id}' , [RecetasController::class, 'show']);
 Route::get('recetas/RU/{user_id}' , [RecetasController::class, 'showRU']);
 
 // Rutas para los ingredientes
-Route::get('ingredientes', [IngredientesController::class], 'index');
-Route::post('ingredientes/', [IngredientesController::class], 'store');
-Route::put('ingredientes/update/{id}', [IngredientesController::class], 'update');
-Route::delete('ingredientes/{id}', [IngredientesController::class], 'destroy');
+Route::get('ingredientes', [IngredientesController::class, 'index']);
+Route::post('ingredientes/', [IngredientesController::class, 'store']);
+Route::put('ingredientes/update/{id}', [IngredientesController::class, 'update']);
+Route::delete('ingredientes/{id}', [IngredientesController::class, 'destroy']);
 
 //Rutas para Plan Semanal
 Route::get('planSemanal/{id}', [PlanSemanalController::class, 'index']);
