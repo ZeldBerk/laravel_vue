@@ -3,7 +3,6 @@
         <div class="d-flex justify-content-between pb-2 mb-2">
             <h5 class="card-title">Añade una nueva receta</h5>
         </div>
-        {{ receta }}
         <form @submit.prevent="saveReceta">
             <div class="row my-5">
                 <div class="col-md-8">
@@ -150,7 +149,7 @@ function saveReceta() {
                         title: 'Receta actualizada correctamente'
                     })
                         .then(() => {
-                            //router.push({ name: 'recetasAdmin.index' })
+                            router.push({ name: 'recetasAdmin.index' })
                         });
                 })
                 .catch(error => {

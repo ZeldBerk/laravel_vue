@@ -41,7 +41,7 @@ import { ref, onMounted, onBeforeMount } from "vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute()
-const receta = ref({media:[]});
+const receta = ref({});
 
 onBeforeMount(() => {
     axios.get('/api/recetas/' + route.params.id)
