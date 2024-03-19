@@ -20,32 +20,43 @@ class PlanSemanalController extends Controller
 
 
 
-    public function store(Request $request)
-{
-    $request->validate([
-        'user_id' => 'required',
-        'receta_id' => 'required',
-        'dia_semana' => 'required',
-        'momento_dia' => 'required'
-    ]);
+    public function store(Request $request){
 
-    // Validacion extra para asegurar que una receta no puede estar en el mismo dia y momento del dia (comida o cena)
-    $existe = PlanSemanal::where('user_id', $request->user_id)
-        ->where('dia_semana', $request->dia_semana)
-        ->where('momento_dia', $request->momento_dia)
-        ->where('receta_id', $request->receta_id)
-        ->limit(3)
-        ->exists();
+        $request->validate([
+            'user_id' => 'required',
+            'receta_id' => 'required',
+            'dia_semana' => 'required',
+            'momento_dia' => 'required'
+        ]);
 
-    if ($existe) {
-        return response()->json(['success' => false, 'message' => 'Ya existen tres recetas con el mismo día, momento del día o receta']);
+        // Validar si existen más de tres recetas en el mismo día y momento del día
+        $numeroRecetas = PlanSemanal::where('user_id', $request->user_id)
+            ->where('dia_semana', $request->dia_semana)
+            ->where('momento_dia', $request->momento_dia)
+            ->count();
+
+        if ($numeroRecetas >= 3) {
+            return response()->json(['success' => false, 'message' => 'Ya existen tres recetas con el mismo día y momento del día']);
+        }
+
+        // Validar si la receta ya está asignada para el mismo día y momento del día
+        $existeReceta = PlanSemanal::where('user_id', $request->user_id)
+            ->where('dia_semana', $request->dia_semana)
+            ->where('momento_dia', $request->momento_dia)
+            ->where('receta_id', $request->receta_id)
+            ->exists();
+
+        if ($existeReceta) {
+            return response()->json(['success' => false, 'message' => 'La receta ya está asignada para el mismo día y momento del día']);
+        }
+
+        // Si pasa todas las validaciones, crear el plan semanal
+        $recetaPlan = $request->all();
+        $receta = PlanSemanal::create($recetaPlan);
+
+        return response()->json(['success' => true, 'data' => 'La receta ha sido añadida correctamente a tu plan']);
     }
 
-    $recetaPlan = $request->all();
-    $receta = PlanSemanal::create($recetaPlan);
-
-    return response()->json(['success' => true, 'data' => 'La receta ha sido añadida correctamente a tu plan']);
-}
 
 
     public function destroy(Request $request, $id){
