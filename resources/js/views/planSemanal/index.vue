@@ -1,9 +1,6 @@
 <template>
   <h1>Plan Semanal</h1>
   <div class="container card">
-    <div class="col-md-6 text-right">
-      <RouterLink class="btn btn-primary" :to="{ name: 'recetas.index' }">Ver mas recetas</RouterLink>
-    </div>
     <table>
       <tr>
         <th class="separador espacio"></th>
@@ -17,7 +14,7 @@
           <div class="contenedorRecetas">
             <template v-for="receta in filtrarRecetas(dia, 'Almuerzo')" :key="receta.id">
               <div class="recetaPlan row">
-                <span class="col-8">{{ receta.nombre }}</span>
+                <span class="col-8">{{ receta.receta.nombre }}</span>
                 <div class="col-2">
                   <span class="icon-eye" @click.stop="detallesReceta(receta.receta_id)">
                     <svg width="35px" height="35px" viewBox="-2.4 -2.4 28.80 28.80" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -30,8 +27,8 @@
                     </svg>
                   </span>
                 </div>
-                <div class="col-2 ">
-                  <span class="icon-container" @click.stop="deleteRecetadelPlan(id)">
+                <div class="col-2">
+                  <span class="icon-container" @click.stop="deleteRecetadelPlan(receta.id)">
                     <svg width="30px" height="30px" fill="#F59E0B" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="#F59E0B">
                       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                       <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -49,7 +46,7 @@
           <div class="contenedorRecetas">
             <template v-for="receta in filtrarRecetas(dia, 'Cena')" :key="receta.id">
               <div class="recetaPlan row">
-                <span class="col-8">{{ receta.nombre }}</span>
+                <span class="col-8">{{ receta.receta.nombre }}</span>
                 <div class="col-2">
                   <span class="icon-eye" @click.stop="detallesReceta(receta.receta_id)">
                     <svg width="35px" height="35px" viewBox="-2.4 -2.4 28.80 28.80" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -63,7 +60,7 @@
                   </span>
                 </div>
                 <div class="col-2">
-                  <span class="icon-container" @click.stop="deleteRecetadelPlan(id)">
+                  <span class="icon-container" @click.stop="deleteRecetadelPlan(receta.id)">
                     <svg width="30px" height="30px" fill="#F59E0B" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="#F59E0B">
                       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                       <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -79,6 +76,9 @@
         </td>
       </tr>
     </table>
+    <div class="mt-3 text-right">
+      <RouterLink class="btn btn-primary" :to="{ name: 'recetas.index' }">Ver mas recetas</RouterLink>
+    </div>
   </div>
 </template>
 
@@ -134,16 +134,17 @@ export default {
     }
 
     function filtrarRecetas(dia, momentoDia) {
+      
       return planSemanal.value
-        .filter((item) => item.dia_semana === dia && item.momento_dia === momentoDia)
-        .map((item) => item.receta);
+        .filter((item) => item.dia_semana === dia && item.momento_dia === momentoDia);
+        
     }
 
-    function detallesReceta(id) {
-      router.push({ name: 'recetas.detalle', params: { id } });
+    function detallesReceta(receta_id) {
+      router.push({ name: 'recetas.detalle', params: { id: receta_id } });
     }
 
-    function deleteRecetadelPlan(receta_id){
+    function deleteRecetadelPlan(id) {
       const data = localStorage.getItem("vuex");
       let userId = null;
       
@@ -163,15 +164,14 @@ export default {
         return;
       }
 
-      console.log(receta_id);
+      console.log(id);
 
-      axios.delete(`/api/planSemanal/${receta_id}`, {
+      axios.delete(`/api/planSemanal/${id}`, {
         user_id: userId,
       })
         .then(response => {
           console.log(response.data);
-          // window.location.reload()
-          
+          window.location.reload()
         })
         .catch(error => {
           console.error("Error deleting favorite:", error);
