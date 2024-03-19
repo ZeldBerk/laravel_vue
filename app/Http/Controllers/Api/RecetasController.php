@@ -41,7 +41,7 @@ class RecetasController extends Controller
     // Actualiza una receta
     public function update($id, Request $request){
         
-        // Obtener receta a actualizar
+            // Obtener receta a actualizar
         $receta = recetas::find($id);
 
         // Validar campos obligatorios

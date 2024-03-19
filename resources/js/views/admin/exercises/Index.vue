@@ -44,7 +44,7 @@
                     </Column>
                     <Column field="image" header="Image">
                         <template #body="slotProps">
-                            <img :src="`${slotProps.data.original_image}`" :alt="slotProps.data.original_image"
+                            <img :src="`${slotProps.data.original_image}`"   :alt="slotProps.data.original_image"
                                 class="shadow-4 image-table" />
                         </template>
                     </Column>

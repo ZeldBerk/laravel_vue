@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <img :src="`${receta.media[0]?.original_url}`" alt=""/>
+                    <img :src="receta?.media[0]?.original_url" alt=""/>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-2">
@@ -37,13 +37,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onBeforeMount } from "vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute()
-const receta = ref([]);
+const receta = ref({media:[]});
 
-onMounted(() => {
+onBeforeMount(() => {
     axios.get('/api/recetas/' + route.params.id)
     .then(response => {
         console.log(response.data)

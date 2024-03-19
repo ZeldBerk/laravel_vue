@@ -3,6 +3,7 @@
         <div class="d-flex justify-content-between pb-2 mb-2">
             <h5 class="card-title">Añade una nueva receta</h5>
         </div>
+        {{ receta }}
         <form @submit.prevent="saveReceta">
             <div class="row my-5">
                 <div class="col-md-8">
@@ -40,14 +41,14 @@
                             <!-- Categoria receta -->
                             <div class="mb-3">
                                 <label for="receta_categoria_id" class="form-label">Selecciona la categoría</label>
-                                <Dropdown v-model="receta.categoria_id" id="receta_categoria_id" :options="categorias" optionValue="id"
-                                    optionLabel="nombre" placeholder="Selecciona la categoria" checkmark
-                                    class="w-100" />
+                                <Dropdown v-model="receta.categoria_id" id="receta_categoria_id" :options="categorias"
+                                    optionValue="id" optionLabel="nombre" placeholder="Selecciona la categoria"
+                                    checkmark class="w-100" />
                             </div>
                             <!-- Imagen receta -->
                             <div class="mb-3">
                                 <label for="imagen" class="form-label">Imagen</label>
-                                <DropZone v-model="receta.thumbnail" id="imagen"/>
+                                <DropZone v-model="receta.thumbnail" id="imagen" />
                             </div>
                         </div>
                     </div>
@@ -123,19 +124,22 @@ onMounted(() => {
 
 
 function saveReceta() {
+
+
+
     validate().then(form => {
         console.log('validate');
         if (form.valid) {
             console.log(receta)
-            let r = receta.value;
-            let serializedReceta = new FormData()
-            for (let item in r) {
-                if (r.hasOwnProperty(item)) {
-                    serializedReceta.append(item, r[item])
+
+            let serialized = new FormData()
+            for (let item in receta) {
+                if (receta.hasOwnProperty(item)) {
+                    serialized.append(item, receta[item])
                 }
             }
 
-            axios.put('/api/recetas/update/' + route.params.id, serializedReceta, {
+            axios.post('/api/recetas/update/' + route.params.id, serialized, {
                 headers: {
                     "content-type": "multipart/form-data"
                 }
@@ -146,7 +150,7 @@ function saveReceta() {
                         title: 'Receta actualizada correctamente'
                     })
                         .then(() => {
-                            router.push({ name: 'recetasAdmin.index' })
+                            //router.push({ name: 'recetasAdmin.index' })
                         });
                 })
                 .catch(error => {
@@ -155,6 +159,8 @@ function saveReceta() {
                         title: 'No se ha podido actualizar la receta'
                     });
                 });
+
+
         }
     })
 }
