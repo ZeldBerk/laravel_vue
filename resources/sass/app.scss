@@ -1,5 +1,8 @@
 // Fonts
-@import url('https://fonts.bunny.net/css?family=Nunito');
+@font-face {
+    font-family: Montserrat;
+    src: url('../../public/fonts/Montserrat-Regular.otf');
+}
 
 // Variables
 //@import 'variables';
@@ -14,8 +17,8 @@ html {
 }
 
 body {
-    background-color: #f0f2fc !important;
-    font-family: var(--font-family);
+    background-color: #F1F1EA !important;
+    font-family: Montserrat;
     font-weight: normal;
     background: var(--surface-ground);
     color: var(--text-color);

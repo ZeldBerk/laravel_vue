@@ -2,7 +2,7 @@
     <div class="layout-topbar">
         <router-link to="/" class="navbar-brand logoRoute"><img class="logo" src="../../images/Logo.jpg"/></router-link>
             <a class="navbar-toggler pageTitle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon title">El Club de la Olla</span>
+                <h1 class="navbar-toggler-icon">El Club de la Olla</h1>
             </a>
 
         <button class="p-link layout-menu-button layout-topbar-button" @click="onMenuToggle()">
