@@ -162,7 +162,7 @@ function createComentario() {
         confirmButtonText: 'Enviar',
         customClass: {
             confirmButton: 'btn btn-success',
-            cancelButton: 'btn btn-default'
+            cancelButton: 'btn btn-danger'
         }
     }).then((result) => {
         if (result.isConfirmed) {

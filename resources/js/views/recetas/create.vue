@@ -16,9 +16,12 @@
                             <!-- Ingredientes -->
                             <div class="mb-3">
                                 <label for="">Ingredientes</label>
-                                <Dropdown :options="ingredientes" optionValue="id" optionLabel="nombre"
-                                    placeholder="Selecciona los ingredientes" checkmark filter class="w-100" />
+                                <Dropdown v-model="ingredientes_receta.ingrediente_id" :options="ingredientes"
+                                    optionValue="id" optionLabel="nombre" placeholder="Selecciona los ingredientes"
+                                    checkmark filter class="w-100"
+                                    @change="ingrediente_selection(ingredientes_receta.ingrediente_id)" />
                             </div>
+                            {{ ingredientes_receta }}
                             <!-- Contenido receta -->
                             <div class="mb-3">
                                 <label for="receta_descripcion" class="form-label">Pasos de la receta</label>
@@ -72,8 +75,10 @@ import DropZone from "@/components/DropZone.vue";
 import axios from "axios";
 
 const categorias = ref();
+const ingredeinte = ref({});
 const ingredientes = ref();
 const ingredientes_receta = ref({});
+const ingredientes_receta_final = ref();
 const receta = ref({});
 const swal = inject('$swal');
 const router = useRouter()
@@ -85,20 +90,72 @@ const user_id = JSON.parse(data).auth.user.id;
 receta.value.user_id = user_id;
 
 // Carga de las categorias en el desplegable
-onMounted(() => {
+function chargeCategorias() {
     axios.get('/api/categorias')
         .then(response => {
             categorias.value = response.data;
         });
+}
+onMounted(() => {
+    chargeCategorias();
+    chargeIngredientes();
 });
 
 // Carga de los ingredientes en el desplegable
-onMounted(() => {
+function chargeIngredientes() {
     axios.get('/api/ingredientes')
         .then(response => {
             ingredientes.value = response.data;
         });
-});
+}
+
+
+// Maneja los ingredientes que se añaden a la receta
+function ingrediente_selection(id_selection) {
+    if (id_selection === 0) {
+        swal({
+            title: 'Añadir Ingrediente',
+            text: 'Introduce el nombre del nuevo ingrediente:',
+            html: `
+            <label class="form-label">Introduce el nuevo ingrediente:</label>
+            <input id="nombre_ingrediente" type="text" class="form-control placeholder="Nombre del ingrediente">
+            `,
+            showCancelButton: true,
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Añadir',
+            customeClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Recojemos el valor que el usuario quiere añadi
+                const nombre_ingrediente = document.getElementById('nombre_ingrediente').value;
+
+                // Guardamos el valor en ingredeinte
+                ingredeinte.value.nombre = nombre_ingrediente;
+
+                // Insert del ingredeiente
+                axios.post('/api/ingredientes', ingredeinte.value)
+                    .then(response => {
+                        swal({
+                            icon: 'success',
+                            title: 'Ingrediente añadido correctamente'
+                        })
+                            .then(() => {
+                                chargeIngredientes();
+                            });
+                    })
+                    .catch(error => {
+                        swal({
+                            icon: 'error',
+                            title: 'No se ha añadido el ingrediente'
+                        });
+                    });
+            }
+        });
+    }
+}
 
 // Añade la receta y muestra una alerta en funcion de la respuesta de la api hacer formdata
 function addReceta() {
