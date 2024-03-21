@@ -160,9 +160,14 @@ function createComentario() {
             `,
         showCancelButton: true,
         confirmButtonText: 'Enviar',
-        customClass: {
-            confirmButton: 'btn btn-success',
-            cancelButton: 'btn btn-danger'
+        didOpen: () => {
+            // Aplicar clases de Bootstrap a los botones de la alerta
+            const confirmButton = document.querySelector('.swal2-confirm');
+            const cancelButton = document.querySelector('.swal2-cancel');
+            confirmButton.classList.add('btn', 'btn-success');
+            cancelButton.classList.add('btn', 'btn-danger');
+            confirmButton.classList.remove('swal2-styled');
+            cancelButton.classList.remove('swal2-styled');
         }
     }).then((result) => {
         if (result.isConfirmed) {
@@ -196,37 +201,43 @@ function createComentario() {
 }
 </script>
 <style>
-.rating:not(:checked) > input {
-  position: absolute;
-  appearance: none;
+.btn-success {
+    margin-right: 5px;
+}
+.rating:not(:checked)>input {
+    position: absolute;
+    appearance: none;
 }
 
-.rating:not(:checked) > label {
-  float: right;
-  cursor: pointer;
-  font-size: 30px;
-  fill: #666;
+.rating:not(:checked)>label {
+    float: right;
+    cursor: pointer;
+    font-size: 30px;
+    fill: #666;
 }
 
-.rating:not(:checked) > label > svg {
-  fill: #666; /* Set default color for SVG */
-  transition: fill 0.3s ease; /* Add a transition effect */
+.rating:not(:checked)>label>svg {
+    fill: #666;
+    /* Set default color for SVG */
+    transition: fill 0.3s ease;
+    /* Add a transition effect */
 }
 
-.rating > input:checked + label:hover,
-.rating > input:checked + label:hover ~ label,
-.rating > input:checked ~ label:hover,
-.rating > input:checked ~ label:hover ~ label,
-.rating > label:hover ~ input:checked ~ label {
-  fill: #F59E0B;
+.rating>input:checked+label:hover,
+.rating>input:checked+label:hover~label,
+.rating>input:checked~label:hover,
+.rating>input:checked~label:hover~label,
+.rating>label:hover~input:checked~label {
+    fill: #F59E0B;
 }
 
-.rating:not(:checked) > label:hover,
-.rating:not(:checked) > label:hover ~ label {
-  fill: #F59E0B;
+.rating:not(:checked)>label:hover,
+.rating:not(:checked)>label:hover~label {
+    fill: #F59E0B;
 }
 
-.rating > input:checked ~ label > svg {
-  fill: #F59E0B; /* Set color for selected stars */
+.rating>input:checked~label>svg {
+    fill: #F59E0B;
+    /* Set color for selected stars */
 }
 </style>

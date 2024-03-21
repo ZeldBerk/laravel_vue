@@ -123,9 +123,14 @@ function ingrediente_selection(id_selection) {
             showCancelButton: true,
             cancelButtonText: 'Cancelar',
             confirmButtonText: 'Añadir',
-            customeClass: {
-                confirmButton: 'btn btn-success',
-                cancelButton: 'btn btn-danger'
+            didOpen: () => {
+                // Aplicar clases de Bootstrap a los botones de la alerta
+                const confirmButton = document.querySelector('.swal2-confirm');
+                const cancelButton = document.querySelector('.swal2-cancel');
+                confirmButton.classList.add('btn', 'btn-success');
+                cancelButton.classList.add('btn', 'btn-danger');
+                confirmButton.classList.remove('swal2-styled');
+                cancelButton.classList.remove('swal2-styled');
             }
         }).then((result) => {
             if (result.isConfirmed) {
@@ -191,3 +196,8 @@ function addReceta() {
 }
 
 </script>
+<style>
+.btn-success{
+    margin-right: 5px;
+}
+</style>
