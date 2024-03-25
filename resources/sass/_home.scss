@@ -1,0 +1,61 @@
+.contenedorHOME {
+    margin: auto;
+    width: 1140px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(100%);
+    /* Cambiar el color de las flechas a negro */
+}
+
+/* Estilos para el círculo detrás de las flechas */
+.carousel-control-prev::before,
+.carousel-control-next::before {
+    content: "";
+    /* Agregar un elemento antes del botón */
+    position: absolute;
+    width: 40px;
+    /* Ancho del círculo */
+    height: 40px;
+    /* Alto del círculo */
+    border-radius: 50%;
+    /* Hacer el elemento redondo */
+    background-color: rgba(255, 255, 255);
+    /* Color blanco con opacidad */
+    top: calc(50% - 20px);
+    /* Posicionar en el centro vertical */
+    left: calc(50% - 0px);
+    /* Posicionar en el centro horizontal */
+    z-index: -1;
+    /* Situar detrás del botón */
+    transform: translateX(-50%);
+    /* Ajustar horizontalmente al centro */
+}
+
+.BotonCarrousel {
+    position: absolute;
+    top: 330px; /* Ajusta la distancia desde la parte superior */
+    left: 50%; /* Centra horizontalmente */
+    transform: translateX(-50%); /* Centra horizontalmente */
+    z-index: 1; /* Asegura que el botón esté encima de los indicadores */
+    width: 212px; /* Ancho del botón */
+    height: 45px; /* Alto del botón */
+    border-radius: 10px; /* Esquinas redondas al 10% */
+    background-color: #F59E0B; /* Color del botón */
+    border: none; /* Sin borde */
+    color: white;
+    font-size: 20px;
+}
+
+.BotonCarrousel:hover{
+    background-color: #b4760a;
+}
+
+
+.marginsDelCarrousel{
+    margin-top: 55px;
+    margin-bottom: 80px;
+}
+
+
