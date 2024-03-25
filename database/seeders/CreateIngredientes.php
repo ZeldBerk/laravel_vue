@@ -13,6 +13,10 @@ class CreateIngredientes extends Seeder
      */
     public function run(): void
     {
+        $adding = ingrediente::create([
+            'nombre' => 'Añadir ingrediente...'
+        ]);
+        
         $Harina = ingrediente::create([
            'nombre' => 'Harina'
         ]);
