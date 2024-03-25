@@ -16,6 +16,11 @@
                             <!-- Ingredientes -->
                             <div class="mb-3">
                                 <label for="">Ingredientes</label>
+                                <!-- Configuracion de ingredientes -->
+                                <div class="row ingredientes">
+                                    
+                                </div>
+                                <!-- Selector de ingredeientes -->
                                 <Dropdown v-model="ingredientes_receta.ingrediente_id" :options="ingredientes"
                                     optionValue="id" optionLabel="nombre" placeholder="Selecciona los ingredientes"
                                     checkmark filter class="w-100"
@@ -75,10 +80,9 @@ import DropZone from "@/components/DropZone.vue";
 import axios from "axios";
 
 const categorias = ref();
-const ingredeinte = ref({});
-const ingredientes = ref();
+const ingredeinte = ref({}); // Añadir ingredeinte
+const ingredientes = ref(); // Ingredeintes del desplegable 
 const ingredientes_receta = ref({});
-const ingredientes_receta_final = ref();
 const receta = ref({});
 const swal = inject('$swal');
 const router = useRouter()
@@ -112,7 +116,7 @@ function chargeIngredientes() {
 
 // Maneja los ingredientes que se añaden a la receta
 function ingrediente_selection(id_selection) {
-    if (id_selection === 0) {
+    if (id_selection === 1) {
         swal({
             title: 'Añadir Ingrediente',
             text: 'Introduce el nombre del nuevo ingrediente:',
@@ -159,10 +163,58 @@ function ingrediente_selection(id_selection) {
                     });
             }
         });
+    } else {
+        // Aquí manejamos la selección de un ingrediente existente
+
+        // Encontrar el ingrediente seleccionado en la lista de ingredientes
+        const selectedIngredient = ingredientes.value.find(ingrediente => ingrediente.id === id_selection);
+
+        // Insertar el nombre del ingrediente en el contenedor
+        const ingredientContainer = document.querySelector('.ingredientes');
+        
+
+        // Crear un contenedor flex para el nombre y los inputs de cantidad y unidad de medida
+        const flexContainer = document.createElement('div');
+        flexContainer.setAttribute('class', 'col-6 d-flex align-items-center'); // Alinea los elementos verticalmente
+
+        // Insertar el nombre del ingrediente en el contenedor flex
+        const nombreElement = document.createElement('p');
+        nombreElement.textContent = selectedIngredient.nombre;
+        flexContainer.appendChild(nombreElement);
+
+        // Crear inputs para la cantidad y la unidad de medida
+        const cantidadInput = document.createElement('input');
+        cantidadInput.setAttribute('type', 'number');
+        cantidadInput.setAttribute('min', '1');
+        cantidadInput.setAttribute('class', 'form-control ml-2'); // Margen izquierdo para separar del nombre
+        cantidadInput.setAttribute('placeholder', 'Cantidad');
+        cantidadInput.addEventListener('input', event => {
+            ingredientes_receta.value.cantidad = event.target.value;
+        });
+
+        const unidadSelect = document.createElement('select');
+        unidadSelect.setAttribute('class', 'form-select ml-2'); // Margen izquierdo para separar del input de cantidad
+        unidadSelect.innerHTML = `
+            <option value="">Selecciona la unidad</option>
+            <option value="gramos">Gramos</option>
+            <option value="mililitros">Mililitros</option>
+            <option value="unidades">Unidades</option>
+            <!-- Agrega más opciones según tus necesidades -->
+        `;
+        unidadSelect.addEventListener('change', event => {
+            ingredientes_receta.value.unidad = event.target.value;
+        });
+
+        // Insertar los inputs en el contenedor flex
+        flexContainer.appendChild(cantidadInput);
+        flexContainer.appendChild(unidadSelect);
+
+        // Insertar el contenedor flex en el contenedor principal
+        ingredientContainer.appendChild(flexContainer);
     }
 }
 
-// Añade la receta y muestra una alerta en funcion de la respuesta de la api hacer formdata
+// Añade la receta y muestra una alerta en funcion de la respuesta de la api
 function addReceta() {
     let r = receta.value;
     let serializedReceta = new FormData()
@@ -197,7 +249,15 @@ function addReceta() {
 
 </script>
 <style>
-.btn-success{
+.btn-success {
     margin-right: 5px;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.align-items-center {
+    align-items: center;
 }
 </style>
