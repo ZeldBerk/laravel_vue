@@ -44,6 +44,37 @@
         </div>
 
 
+        <div class="button-container">
+            <div class="button-wrapper">
+                <a href="#" class="button">
+                    <img src="../../../images/sopa-de-pasta.jpg" alt="Botón 1">
+                </a>
+                <div class="button-text">
+                    <span>¡Empieza con buen sabor!</span>
+                    <span>Para abrir mesa</span>
+                </div>
+            </div>
+            <div class="button-wrapper">
+                <a href="#" class="button">
+                    <img src="../../../images/Pollo.png" alt="Botón 2">
+                </a>
+                <div class="button-text">
+                    <span>¡Continua disfrutando!</span>
+                    <span>Segundos platos</span>
+                </div>
+            </div>
+            <div class="button-wrapper">
+                <a href="#" class="button">
+                    <img src="../../../images/dolci_freddi_maggio.jpg" alt="Botón 3">
+                </a>
+                <div class="button-text">
+                    <span>¡Final feliz!</span>
+                    <span>Postres dulzones</span>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 </template>
 

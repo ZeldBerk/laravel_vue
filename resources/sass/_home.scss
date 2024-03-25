@@ -1,7 +1,8 @@
 .contenedorHOME {
     margin: auto;
-    width: 1140px;
+    max-width: 1140px;
 }
+
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
@@ -57,5 +58,47 @@
     margin-top: 55px;
     margin-bottom: 80px;
 }
+
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 1080px;
+    margin: auto;
+}
+
+.button-wrapper {
+    text-align: center;
+}
+
+.button {
+    position: relative;
+    display: inline-block;
+}
+
+.button img {
+    width: 290px;
+    height: 290px;
+    border-radius: 40px;
+}
+
+.button-text {
+    text-align: center; /* Para centrar el texto */
+}
+
+.button-text span {
+    display: block; /* Para que cada línea esté en una línea separada */
+}
+
+.button-text span:first-child {
+    font-weight: bold; /* Para hacer el primer span en negrita */
+    font-size: 24px;
+}
+
+.button-text span:nth-child(2) {
+    margin-top: 5px; /* Espacio entre el primer y segundo span */
+    font-size: 24px;
+}
+
 
 
