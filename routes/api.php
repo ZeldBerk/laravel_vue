@@ -38,6 +38,7 @@ Route::get('comentarios/{id}', [ComentariosController::class, 'show']);
 
 // Rutas para las recetas
 Route::get('recetas', [RecetasController::class, 'index']);
+Route::get('ultimasRecetas', [RecetasController::class, 'ultimasRecetas']);
 Route::post('recetas/', [RecetasController::class, 'store']);
 Route::post('recetas/update/{id}', [RecetasController::class, 'update']);
 Route::delete('recetas/{id}', [RecetasController::class, 'destroy']);

@@ -15,6 +15,13 @@ class RecetasController extends Controller
         return $recetas;
     }
 
+
+    public function ultimasRecetas(){
+        $recetas = recetas::with('media')->orderBy('created_at', 'desc')->take(4)->get();
+
+        return $recetas;
+    }
+
     // Añade una receta a la BBDD
     public function store(Request $request){
         // Validar campos obligatorios

@@ -7,7 +7,6 @@
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
     filter: invert(100%);
-    /* Cambiar el color de las flechas a negro */
 }
 
 /* Estilos para el círculo detrás de las flechas */
@@ -25,26 +24,21 @@
     transform: translateX(-50%);
 }
 
-/* Estilos adicionales para mantener la apariencia original */
 
 
 .carousel-control-prev,
 .carousel-control-next {
     z-index: 2;
-    /* Asegura que las flechas de control estén encima del carrusel */
 }
 
 @media (max-width: 768px) {
     .BotonCarrousel {
         width: 100%;
-        /* Ajusta el ancho del botón del carrusel en dispositivos pequeños */
         margin-top: 10px;
-        /* Ajusta el margen superior del botón del carrusel en dispositivos pequeños */
     }
 
     .button-wrapper {
         margin-bottom: 20px;
-        /* Ajusta el margen inferior de los botones en dispositivos pequeños */
     }
 }
 
@@ -98,12 +92,10 @@
 
 .button-text {
     text-align: center;
-
 }
 
 .button-text span {
     display: block;
-
 }
 
 .primeraLinea {
@@ -125,7 +117,8 @@
     margin: auto;
     text-align: center;
 }
-.containerLetras span{
+
+.containerLetras span {
     display: block;
 }
 
@@ -135,54 +128,69 @@
     font-family: WindSong;
 }
 
-.SegundoTexto{
+.SegundoTexto {
     font-weight: bold;
     font-size: 20px;
 }
 
-.TercerTexto{
+.TercerTexto {
     font-size: 12px;
 }
 
-
-
-.containerRecetasAbuela{
+.containerRecetasAbuela {
     align-items: center;
 }
 
-.recetasAbuela{
+.recetasAbuela {
     max-width: 280px;
     height: 700px;
 }
 
-
 .imagenAbuela {
-    width: 100%; /* Ancho del contenedor */
+    width: 100%;
     height: 500px;
     background-image: url('../images/awelarecetaSINAWELA.png');
-    background-position: center; /* Centra la imagen */
-    background-repeat: no-repeat; /* Evita que la imagen se repita */
-    display: flex; /* Para alinear el contenido verticalmente */
-    justify-content: center; /* Para alinear el contenido horizontalmente */
-    align-items: center; /* Para alinear el contenido verticalmente */
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.imagenAbuela:hover{
-    width: 100%; /* Ancho del contenedor */
+.imagenAbuela:hover {
+    width: 100%;
     height: 720px;
     background-image: url('../images/awelareceta.png');
-    background-position: center; /* Centra la imagen */
-    background-repeat: no-repeat; /* Evita que la imagen se repita */
-    display: flex; /* Para alinear el contenido verticalmente */
-    justify-content: center; /* Para alinear el contenido horizontalmente */
-    align-items: center; /* Para alinear el contenido verticalmente */
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
+.imagenAbuela {
+    position: relative;
+}
+
+.imgReceta {
+    display: block;
+    width: 100%;
+    height: auto;
+}
 
 .imagenAbuelaTexto {
-    width: 100%; /* Ancho del contenedor */
-    height: 720px;
-    display: flex; /* Para alinear el contenido verticalmente */
-    justify-content: center; /* Para alinear el contenido horizontalmente */
-    align-items: center; /* Para alinear el contenido verticalmente */
+    margin-top: 50px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px;
+}
+
+.imagenAbuelaTexto:hover {
+    margin-top: 130px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px;
 }
