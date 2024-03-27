@@ -18,7 +18,7 @@
                                 <label for="">Ingredientes</label>
                                 <!-- Configuracion de ingredientes -->
                                 <div class="row ingredientes">
-                                    
+
                                 </div>
                                 <!-- Selector de ingredeientes -->
                                 <Dropdown v-model="ingredientes_receta.ingrediente_id" :options="ingredientes"
@@ -26,7 +26,7 @@
                                     checkmark filter class="w-100"
                                     @change="ingrediente_selection(ingredientes_receta.ingrediente_id)" />
                             </div>
-                            {{ ingredientes_receta }}
+                            {{ ingredientesSeleccionados }}
                             <!-- Contenido receta -->
                             <div class="mb-3">
                                 <label for="receta_descripcion" class="form-label">Pasos de la receta</label>
@@ -86,6 +86,9 @@ const ingredientes_receta = ref({});
 const receta = ref({});
 const swal = inject('$swal');
 const router = useRouter()
+
+// Definir un objeto para almacenar las propiedades de cada ingrediente seleccionado
+const ingredientesSeleccionados = ref([]);
 
 // Obtener id de usuario
 const data = localStorage.getItem("vuex");
@@ -164,14 +167,31 @@ function ingrediente_selection(id_selection) {
             }
         });
     } else {
-        // Aquí manejamos la selección de un ingrediente existente
+        // Crear un objeto para almacenar las propiedades del ingrediente seleccionado
+        const nuevoIngrediente = { id: id_selection, cantidad: '', unidad: '' };
+
+        // Verificar si el ingrediente ya ha sido seleccionado previamente
+        const ingredienteExistenteIndex = ingredientesSeleccionados.value.findIndex(ingrediente => ingrediente.id === id_selection);
+
+        if (ingredienteExistenteIndex === -1) {
+            // Si el ingrediente no ha sido seleccionado previamente, agregarlo a la lista
+            ingredientesSeleccionados.value.push(nuevoIngrediente);
+        } else {
+            // Si el ingrediente ya ha sido seleccionado, no hacer nada
+            // Si el ingrediente ya ha sido seleccionado, mostrar una alerta
+            swal({
+                icon: 'warning',
+                title: 'Ingrediente ya seleccionado',
+                text: 'Este ingrediente ya ha sido añadido a la receta.'
+            });
+            return;
+        }
+
+        // Insertar el nuevo ingrediente en la lista de ingredientes seleccionados
+        const ingredientContainer = document.querySelector('.ingredientes');
 
         // Encontrar el ingrediente seleccionado en la lista de ingredientes
         const selectedIngredient = ingredientes.value.find(ingrediente => ingrediente.id === id_selection);
-
-        // Insertar el nombre del ingrediente en el contenedor
-        const ingredientContainer = document.querySelector('.ingredientes');
-        
 
         // Crear un contenedor flex para el nombre y los inputs de cantidad y unidad de medida
         const flexContainer = document.createElement('div');
@@ -181,6 +201,7 @@ function ingrediente_selection(id_selection) {
         const nombreElement = document.createElement('p');
         nombreElement.textContent = selectedIngredient.nombre;
         flexContainer.appendChild(nombreElement);
+        nombreElement.setAttribute('class', 'nombreIng');
 
         // Crear inputs para la cantidad y la unidad de medida
         const cantidadInput = document.createElement('input');
@@ -189,20 +210,37 @@ function ingrediente_selection(id_selection) {
         cantidadInput.setAttribute('class', 'form-control ml-2'); // Margen izquierdo para separar del nombre
         cantidadInput.setAttribute('placeholder', 'Cantidad');
         cantidadInput.addEventListener('input', event => {
-            ingredientes_receta.value.cantidad = event.target.value;
+            nuevoIngrediente.cantidad = event.target.value;
         });
 
         const unidadSelect = document.createElement('select');
         unidadSelect.setAttribute('class', 'form-select ml-2'); // Margen izquierdo para separar del input de cantidad
-        unidadSelect.innerHTML = `
-            <option value="">Selecciona la unidad</option>
-            <option value="gramos">Gramos</option>
-            <option value="mililitros">Mililitros</option>
-            <option value="unidades">Unidades</option>
-            <!-- Agrega más opciones según tus necesidades -->
-        `;
+        // Opción predeterminada para simular un placeholder
+        const defaultOption = document.createElement('option');
+        defaultOption.text = 'Unidad medida';
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+
+        // Opciones de unidades
+        const options = [
+            { value: 'g', text: 'Gramos' },
+            { value: 'kg', text: 'Kilos' },
+            { value: 'ml', text: 'Mililitros' },
+            { value: 'L', text: 'Litros' },
+            { value: 'unidades', text: 'Unidades' }
+        ];
+
+        // Agregar la opción predeterminada seguida de las opciones de unidades
+        unidadSelect.appendChild(defaultOption);
+        options.forEach(option => {
+            const optionElement = document.createElement('option');
+            optionElement.value = option.value;
+            optionElement.text = option.text;
+            unidadSelect.appendChild(optionElement);
+        });
+
         unidadSelect.addEventListener('change', event => {
-            ingredientes_receta.value.unidad = event.target.value;
+            nuevoIngrediente.unidad = event.target.value;
         });
 
         // Insertar los inputs en el contenedor flex
@@ -216,6 +254,7 @@ function ingrediente_selection(id_selection) {
 
 // Añade la receta y muestra una alerta en funcion de la respuesta de la api
 function addReceta() {
+    console.log(receta.value);
     let r = receta.value;
     let serializedReceta = new FormData()
     for (let item in r) {
@@ -236,7 +275,14 @@ function addReceta() {
             })
                 .then(() => {
                     // Redireccionar a la página después de cerrar la alerta
-                    router.push({ name: 'recetas.index' })
+                    // router.push({ name: 'recetas.index' })
+                    axios.post('api/ingredientesReceta/', ingredientesSeleccionados)
+                        .then(response => {
+                            console.log(response)
+                        })
+                        .catch(error => {
+                            console.error('Error al insertar ingredientes:', error);
+                        });
                 });
         })
         .catch(error => {
@@ -259,5 +305,9 @@ function addReceta() {
 
 .align-items-center {
     align-items: center;
+}
+
+.nombreIng {
+    margin-bottom: 0px;
 }
 </style>
