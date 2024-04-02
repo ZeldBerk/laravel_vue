@@ -1,14 +1,13 @@
 <template>
     <div class="layout-topbar">
-        <router-link to="/" class="navbar-brand logoRoute">
-            <svg xmlns="http://www.w3.org/2000/svg" width="100"
-                height="100" viewBox="0 0 100 100">
+        <router-link to="/" class="navbar-brand logoRoute m-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
                 <image href="../../images/ElClubDeLaOllaSVG.svg" width="70" height="70" />
-            </svg></router-link>
+            </svg>
+        </router-link>
         <a class="navbar-toggler pageTitle" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation">
-            <h1 class="navbar-toggler-icon">El Club de la Olla</h1>
         </a>
 
         <button class="p-link layout-menu-button layout-topbar-button" @click="onMenuToggle()">
