@@ -50,7 +50,7 @@ Route::get('ingredientes', [IngredientesController::class, 'index']);
 Route::post('ingredientes/', [IngredientesController::class, 'store']);
 Route::put('ingredientes/update/{id}', [IngredientesController::class, 'update']);
 Route::delete('ingredientes/{id}', [IngredientesController::class, 'destroy']);
-Route::post('ingredientesReceta/', [IngredientesController::class, 'storeInReceta']);
+Route::post('ingredientes/receta/{id_receta}', [IngredientesController::class, 'storeInReceta']);
 
 //Rutas para Plan Semanal
 Route::get('planSemanal/{id}', [PlanSemanalController::class, 'index']);

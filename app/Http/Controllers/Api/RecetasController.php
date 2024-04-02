@@ -42,7 +42,7 @@ class RecetasController extends Controller
             $receta->addMediaFromRequest('thumbnail')->preservingOriginal()->toMediaCollection('images-recetas');
         }
 
-        return response()->json(['success' => true, 'data' => $receta]);
+        return response()->json(['success' => true, 'data' => $receta, 'id' => $receta->id]);
     }
 
     // Actualiza una receta

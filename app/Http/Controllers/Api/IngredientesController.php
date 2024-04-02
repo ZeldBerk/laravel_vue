@@ -60,22 +60,18 @@ class IngredientesController extends Controller
     // Recibe un array de ongredeientes e inserta los ingredeientes relacionados con la receta
     public function storeInReceta(Request $request){
         
-        $ingredientes = $request->all();
+        // Validar campos obligatorios
+        $request->validate([
+            'receta_id' => 'required',
+            'ingrediente_id' => 'required',
+            'cantidad' => 'required',
+            'unidad' => 'required'
+        ]);
 
-        // Iterar sibre cada ingrediente y guardar el registro en la tabla
-        foreach ($ingredientes as $ingrediente) {
-            $ingrediente->validate([
-                'receta_id' => 'required',
-                'ingrediente_id' => 'required',
-                'cantidad' => 'required',
-                'unidad' => 'required'
-            ]);
+        $ingrediente = $request->all();
+        $ingredienteReceta = ingredientes_recetas::create($ingrediente);
 
-            // Creamos el registro
-            $ingredienteStored = ingredientes_recetas::create($ingrediente);
-        }
-
-        return response()->json(['success' => true, 'data' => 'Ingredeientes receta guardados correctamente']);
+        return response()->json(['success' => true, 'data' => $ingredienteReceta]);
     }
 
 }

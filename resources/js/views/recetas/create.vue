@@ -86,6 +86,7 @@ const ingredientes_receta = ref({});
 const receta = ref({});
 const swal = inject('$swal');
 const router = useRouter()
+let receta_id = 0;
 
 // Definir un objeto para almacenar las propiedades de cada ingrediente seleccionado
 const ingredientesSeleccionados = ref([]);
@@ -254,7 +255,6 @@ function ingrediente_selection(id_selection) {
 
 // Añade la receta y muestra una alerta en funcion de la respuesta de la api
 function addReceta() {
-    console.log(receta.value);
     let r = receta.value;
     let serializedReceta = new FormData()
     for (let item in r) {
@@ -269,6 +269,8 @@ function addReceta() {
         }
     })
         .then(response => {
+            // Acceder al ID de la receta recién creada
+            receta_id = response.data.id;
             swal({
                 icon: 'success',
                 title: 'Receta añadida correctamente'
@@ -276,13 +278,22 @@ function addReceta() {
                 .then(() => {
                     // Redireccionar a la página después de cerrar la alerta
                     // router.push({ name: 'recetas.index' })
-                    axios.post('api/ingredientesReceta/', ingredientesSeleccionados)
+                    ingredientesSeleccionados.value.forEach(ingrediente => {
+                        const ingrediente_receta = {
+                            receta_id: receta_id,
+                            ingrediente_id: ingrediente.id,
+                            cantidad: ingrediente.cantidad,
+                            unidad: ingrediente.unidad
+                        };
+                        console.log(ingrediente_receta.value);
+                        axios.post('api/ingredientes/receta/', ingrediente_receta)
                         .then(response => {
                             console.log(response)
                         })
                         .catch(error => {
                             console.error('Error al insertar ingredientes:', error);
                         });
+                    });
                 });
         })
         .catch(error => {
