@@ -14,7 +14,6 @@ import AppMenuItem from './AppMenuItem.vue';
 import {useAbility} from '@casl/vue'
 const {can} = useAbility();
 
-const vela = "pepe";
 
 
 const model = ref([
@@ -25,16 +24,15 @@ const model = ref([
     {
         label: 'Usuarios',
         items: [
-            { label: 'Users', icon: 'pi pi-fw pi-id-card', to: '/admin/users', permision: 'user-list' },
+            { label: 'Usuarios', icon: 'pi pi-fw pi-id-card', to: '/admin/users', permision: 'user-list' },
             { label: 'Roles', icon: 'pi pi-fw pi-check-square', to: '/admin/roles', permision:'role-list' },
             { label: 'Permisos', icon: 'pi pi-fw pi-bookmark', to: '/admin/permissions', permision:'permission-list' }
         ]
     },
     {
-        label: 'Ejercicios',
+        label: 'Recetas',
         items: [
-            { label: 'Ejercicios', icon: 'pi pi-fw pi-id-card', to: '/admin/exercises', permision: 'exercise-list' },
-            { label: 'Categorias', icon: 'pi pi-fw pi-id-card', to: '/admin/categories', permision: 'category-list' }
+            { label: 'Recetas', icon: 'pi pi-fw pi-id-card', to: '/admin/recetasAdmin', permision: 'exercise-list' }
         ]
     },
     {
