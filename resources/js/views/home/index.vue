@@ -1,21 +1,9 @@
 <template>
-    <div class="container contenedorHOME">
+    <div class="contenedorHOME">
         <div id="carouselExampleIndicators" class="carousel slide marginsDelCarrousel" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
-                    aria-label="Slide 4"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"
-                    aria-label="Slide 5"></button>
-            </div>
-            <div class="d-flex justify-content-center mb-3">
-                <button class="BotonCarrousel">Recetario</button>
-            </div>
+            
+            
+
             <div class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="10000">
                     <img src="../../../images/carrousel.png" class="d-block w-100" alt="...">
@@ -43,7 +31,27 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
+            <div class="BotonCarrouselContainer">
+                <RouterLink :to="{ name: 'recetas.index' }" class="BotonCarrousel d-flex justify-content-center">
+                    <span class="mt-2">Recetario</span>
+                </RouterLink>
+            </div>
+
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                    aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"
+                    aria-label="Slide 5"></button>
+            </div>
         </div>
+
+
 
         <div class="row justify-content-center marginCuadradoPulsables">
             <div class="col-md-4">
@@ -98,12 +106,10 @@
         </div>
         <div class="containerRecetasAbuela row">
             <div class="recetasAbuela col-6 col-md-3" v-for="receta in ultimasRecetas">
-                <div class="imagenAbuela">
+                <div class="imagenAbuela" @click.stop="detallesReceta(receta.id)">
                     <div class="imagenAbuelaTexto">
-                        <img :src="`${receta.media[0]?.original_url}`" class="imgReceta">
-                        <!-- Texto sobre la imagen -->
-                        <div class="texto">{{ receta.nombre }}</div>
-                        <!-- Botón sobre la imagen -->
+                        <img :src="`${receta.media[0]?.original_url}`" class="imgReceta mb-2">
+                        <div class="texto mb-2">{{ receta.nombre }}</div>
                         <div class="con-like " @click.stop="anadirFavoritos(receta.id)">
                             <input class="like like-{{ receta.id }}" type="checkbox" title="like"
                                 :checked="isFavorito(receta.id)">
@@ -138,10 +144,13 @@
 
 <script setup>
 import axios from 'axios';
-import { ref, onMounted } from "vue";
+import { ref, onMounted, inject } from "vue";
+import { useRouter } from 'vue-router';
 
 const ultimasRecetas = ref([]);
 const favoritosArray = ref([]);
+const swal = inject('$swal');
+const router = useRouter();
 
 onMounted(() => {
     obtenerUltimasRecetas();
@@ -208,6 +217,10 @@ function anadirFavoritos(receta_id) {
     }
 
 
+}
+
+function detallesReceta(id) {
+    router.push({ name: 'recetas.detalle', params: { id } });
 }
 
 

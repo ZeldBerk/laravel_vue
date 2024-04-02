@@ -24,7 +24,29 @@
     transform: translateX(-50%);
 }
 
+.BotonCarrouselContainer {
+    position: absolute;
+    bottom: 10px; /* Ajusta según sea necesario */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2; /* Ajusta según sea necesario */
+}
 
+.BotonCarrousel {
+    width: 212px; /* Ajusta el ancho para dispositivos más pequeños */
+    height: 45px;
+    border-radius: 10px;
+    background-color: #F59E0B;
+    border: none;
+    color: white;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+
+.BotonCarrousel:hover {
+    background-color: #b4760a;
+}
 
 .carousel-control-prev,
 .carousel-control-next {
@@ -33,33 +55,27 @@
 
 @media (max-width: 768px) {
     .BotonCarrousel {
-        width: 100%;
-        margin-top: 10px;
+        width: 150px; 
+        font-size: 16px; 
+        position: relative; 
+        left: 50%; /* Coloca el botón en la mitad del carrusel */
+        transform: translateX(-50%); /* Centra el botón horizontalmente */
     }
 
+    .BotonCarrousel:hover {
+        background-color: #b4760a;
+    }
+
+    .BotonCarrouselContainer {
+        width: 100%; /* Ajusta al 100% en dispositivos más pequeños */
+        bottom: 10px; /* Ajusta según sea necesario */
+    }
     .button-wrapper {
         margin-bottom: 20px;
     }
 }
 
-.BotonCarrousel {
-    position: absolute;
-    top: 330px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-    width: 212px;
-    height: 45px;
-    border-radius: 10px;
-    background-color: #F59E0B;
-    border: none;
-    color: white;
-    font-size: 20px;
-}
 
-.BotonCarrousel:hover {
-    background-color: #b4760a;
-}
 
 
 .marginsDelCarrousel {
@@ -112,6 +128,10 @@
     margin-bottom: 50px;
 }
 
+.button-wrapper:hover .button img {
+    filter: brightness(80%); /* Reducir el brillo al 80% cuando se pasa el ratón por encima */
+}
+
 .containerLetras {
     max-width: 560px;
     margin: auto;
@@ -155,6 +175,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .imagenAbuela:hover {
@@ -166,11 +187,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-}
-
-.imagenAbuela {
     position: relative;
+
 }
 
 .imgReceta {
@@ -187,8 +205,8 @@
     padding: 30px;
 }
 
-.imagenAbuelaTexto:hover {
-    margin-top: 130px;
+.imagenAbuela:hover .imagenAbuelaTexto {
+    margin-top: 140px;
     bottom: 0;
     left: 0;
     width: 100%;
