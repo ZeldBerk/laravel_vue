@@ -262,7 +262,7 @@ function addReceta() {
             serializedReceta.append(item, r[item])
         }
     }
-
+    
     axios.post('/api/recetas', serializedReceta, {
         headers: {
             "content-type": "multipart/form-data"
@@ -276,19 +276,20 @@ function addReceta() {
                 title: 'Receta añadida correctamente'
             })
                 .then(() => {
-                    // Redireccionar a la página después de cerrar la alerta
-                    // router.push({ name: 'recetas.index' })
+                    
                     ingredientesSeleccionados.value.forEach(ingrediente => {
-                        const ingrediente_receta = {
-                            receta_id: receta_id,
-                            ingrediente_id: ingrediente.id,
-                            cantidad: ingrediente.cantidad,
-                            unidad: ingrediente.unidad
-                        };
-                        console.log(ingrediente_receta.value);
-                        axios.post('api/ingredientes/receta/', ingrediente_receta)
+                        const ingrediente_receta = ref({});
+
+                        ingrediente_receta.value.receta_id = receta_id;
+                        ingrediente_receta.value.ingrediente_id = ingrediente.id;
+                        ingrediente_receta.value.cantidad = ingrediente.cantidad;
+                        ingrediente_receta.value.unidad = ingrediente.unidad;
+                        
+                        console.log(ingrediente_receta);
+                        axios.post('/api/ingredientes/receta/', ingrediente_receta.value)
                         .then(response => {
-                            console.log(response)
+                            // Redireccionar a la página después de cerrar la alerta
+                            router.push({ name: 'recetas.index' })
                         })
                         .catch(error => {
                             console.error('Error al insertar ingredientes:', error);
