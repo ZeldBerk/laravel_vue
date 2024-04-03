@@ -57,7 +57,7 @@ class IngredientesController extends Controller
     }
 
 
-    // Recibe un array de ongredeientes e inserta los ingredeientes relacionados con la receta
+    // Recibe un ingrediente con el id de receta al que va asignado y generea el registro
     public function storeInReceta(Request $request){
         
         // Validar campos obligatorios
@@ -72,6 +72,15 @@ class IngredientesController extends Controller
         $ingredienteReceta = ingredientes_recetas::create($ingrediente);
 
         return response()->json(['success' => true, 'data' => $ingredienteReceta]);
+    }
+
+    // Obtiene todos los ingredientes de una receta
+    public function show($id){
+
+        $ingredientes = ingredientes_recetas::where('receta_id', $id)
+        ->get();
+
+        return $ingredientes;
     }
 
 }
