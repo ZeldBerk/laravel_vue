@@ -5,9 +5,11 @@
 }
 
 @font-face {
-    font-family: WindSong;
-    src: url('../../public/fonts/Windsong.ttf');
+    font-family: GreatVibes;
+    src: url('../../public/fonts/GreatVibes-Regular.ttf');
 }
+
+
 
 // Variables
 //@import 'variables';
@@ -22,7 +24,7 @@ html {
 }
 
 body {
-    background-color: #F1F1EA !important;
+    background-color: #FFFFFF !important;
     font-family: Montserrat;
     font-weight: normal;
     background: var(--surface-ground);

@@ -1,10 +1,9 @@
 <template>
-    <div class="contenedorHOME">
-        <div id="carouselExampleIndicators" class="carousel slide marginsDelCarrousel" data-bs-ride="carousel">
-            
-            
+    <div id="carouselExampleIndicators" class="carousel slide marginsDelCarrousel mt-0 contendorCarrousel"
+        data-bs-ride="carousel">
 
-            <div class="carousel-inner">
+        <div class="carousel-inner ">
+            <div class="filtroContenedor">
                 <div class="carousel-item active" data-bs-interval="10000">
                     <img src="../../../images/carrousel.png" class="d-block w-100" alt="...">
                 </div>
@@ -21,37 +20,43 @@
                     <img src="../../../images/carruselopcional2.png" class="d-block w-100" alt="...">
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-            <div class="BotonCarrouselContainer">
-                <RouterLink :to="{ name: 'recetas.index' }" class="BotonCarrousel d-flex justify-content-center">
-                    <span class="mt-2">Recetario</span>
-                </RouterLink>
-            </div>
 
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
-                    aria-label="Slide 4"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"
-                    aria-label="Slide 5"></button>
+            <div class="carousel-caption fixed-caption">
+                <span class="colorLetra">¡Bienvenido al Club de la Olla!</span>
             </div>
         </div>
 
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+        <div class="BotonCarrouselContainer">
+            <RouterLink :to="{ name: 'recetas.index' }" class="BotonCarrousel d-flex justify-content-center">
+                <span class="mt-2">Recetario</span>
+            </RouterLink>
+        </div>
 
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                aria-label="Slide 4"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"
+                aria-label="Slide 5"></button>
+        </div>
+    </div>
+
+    <div class="contenedorHOME">
 
         <div class="row justify-content-center marginCuadradoPulsables">
             <div class="col-md-4">
