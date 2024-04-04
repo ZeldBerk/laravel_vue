@@ -127,7 +127,6 @@
 .button img {
     width: 290px;
     height: 290px;
-    border-radius: 40px;
 }
 
 .button-text {
@@ -181,8 +180,13 @@
     font-size: 12px;
 }
 
-.containerRecetasAbuela {
-    align-items: center;
+.containerRecetasAbuelaBG {
+    margin-top: 30px;
+    background-color: #F9F9F9;
+}
+
+.alinearRecetas{
+    justify-content: center;
 }
 
 .recetasAbuela {
@@ -192,7 +196,7 @@
 
 .imagenAbuela {
     width: 100%;
-    height: 500px;
+    height: 600px;
     background-image: url('../images/awelarecetaSINAWELA.png');
     background-position: center;
     background-repeat: no-repeat;
@@ -200,6 +204,8 @@
     justify-content: center;
     align-items: center;
     position: relative;
+    transition: height 0.5s ease; 
+    transform-origin: bottom;
 }
 
 .imagenAbuela:hover {

@@ -109,8 +109,10 @@
                 </div>
             </div>
         </div>
-        <div class="containerRecetasAbuela row">
-            <div class="recetasAbuela col-6 col-md-3" v-for="receta in ultimasRecetas">
+    </div>
+    <div class="containerRecetasAbuelaBG">
+        <div class="alinearRecetas row">
+            <div class="recetasAbuela col-12 col-md-3" v-for="receta in ultimasRecetas">
                 <div class="imagenAbuela" @click.stop="detallesReceta(receta.id)">
                     <div class="imagenAbuelaTexto">
                         <img :src="`${receta.media[0]?.original_url}`" class="imgReceta mb-2">
@@ -143,8 +145,9 @@
                 </div>
             </div>
         </div>
-
     </div>
+
+
 </template>
 
 <script setup>
