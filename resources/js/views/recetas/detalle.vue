@@ -25,10 +25,12 @@
                         </div>
                         <h5>Ingredientes:</h5>
                         <div class="row">
-                            <!-- Contenedor para ingredietes -->
+                            <div class="col-md-6" v-for="ingrediente in ingredientes">
+                                <p>- {{ formatCantidad(ingrediente.cantidad) }} {{ ingrediente.unidad }} de {{ ingrediente.nombre }}</p>
+                            </div>
                         </div>
                         <h5>Pasos pra realizar la receta</h5>
-                        <p>{{ receta.descripcion }}</p>
+                        {{ receta.descripcion }}
                     </div>
                 </div>
             </div>
@@ -37,17 +39,24 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeMount } from "vue";
+import axios from "axios";
+import { ref, onBeforeMount } from "vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute()
 const receta = ref({});
+const ingredientes = ref({});
 
 onBeforeMount(() => {
     axios.get('/api/recetas/' + route.params.id)
     .then(response => {
         console.log(response.data)
         receta.value = response.data;
+    })
+    axios.get('/api/ingredientes/receta/' + route.params.id)
+    .then(response => {
+        console.log(response.data);
+        ingredientes.value = response.data;
     })
 });
 
@@ -64,5 +73,20 @@ function formatedate(fechaISO){
 
     // Devolver la fecha en formato dd-mm-aaaa
     return `${dia}-${mes}-${año}`;
+}
+
+
+// Filtro para formatear la cantidad
+function formatCantidad(cantidad) {
+    const entero = Math.floor(cantidad);
+    const decimal = cantidad - entero;
+
+    // Si no hay parte decimal, solo mostrar el número entero
+    if (decimal === 0) {
+        return entero;
+    } else {
+        // Si hay parte decimal, formatear con coma en lugar de punto
+        return cantidad.toLocaleString('es', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace('.', ',');
+    }
 }
 </script>

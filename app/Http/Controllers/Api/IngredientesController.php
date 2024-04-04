@@ -78,6 +78,8 @@ class IngredientesController extends Controller
     public function show($id){
 
         $ingredientes = ingredientes_recetas::where('receta_id', $id)
+        ->join('ingredientes', 'ingredientes.id', '=', 'ingredientes_recetas.ingrediente_id')
+        ->select('ingredientes_recetas.*', 'ingredientes.nombre')
         ->get();
 
         return $ingredientes;
