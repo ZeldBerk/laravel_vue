@@ -1,6 +1,5 @@
 <template>
-    <div id="carouselExampleIndicators" class="carousel slide marginsDelCarrousel mt-0 contendorCarrousel"
-        data-bs-ride="carousel">
+    <div id="carouselExampleIndicators" class="carousel slide marginsDelCarrousel mt-0" data-bs-ride="carousel">
 
         <div class="carousel-inner ">
             <div class="filtroContenedor">
@@ -59,7 +58,7 @@
     <div class="contenedorHOME">
 
         <div class="row justify-content-center marginCuadradoPulsables">
-            <div class="col-md-4">
+            <div class="col-md-4 TamañoCuadradoPulsable">
                 <div class="button-wrapper">
                     <a href="#" class="button">
                         <img src="../../../images/sopa-de-pasta.jpg" alt="Botón 1">
@@ -70,7 +69,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 TamañoCuadradoPulsable">
                 <div class="button-wrapper">
                     <a href="#" class="button">
                         <img src="../../../images/Pollo.jpg" alt="Botón 2">
@@ -81,7 +80,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 TamañoCuadradoPulsable">
                 <div class="button-wrapper">
                     <a href="#" class="button">
                         <img src="../../../images/dolci_freddi_maggio.jpg" alt="Botón 3">
@@ -94,8 +93,8 @@
             </div>
         </div>
 
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+        <div class="row justify-content-center mb-4">
+            <div class="col-md-10">
                 <div class="containerLetras">
                     <span class="LetrasAzules">Sumérgete en el arte de la gastronomía en nuestro rincón
                         culinario.</span>
@@ -111,40 +110,43 @@
         </div>
     </div>
     <div class="containerRecetasAbuelaBG">
-        <div class="alinearRecetas row">
-            <div class="recetasAbuela col-12 col-md-3" v-for="receta in ultimasRecetas">
-                <div class="imagenAbuela" @click.stop="detallesReceta(receta.id)">
-                    <div class="imagenAbuelaTexto">
-                        <img :src="`${receta.media[0]?.original_url}`" class="imgReceta mb-2">
-                        <div class="tituloReceta mb-2">{{ receta.nombre }}</div>
-                        <div class="con-like " @click.stop="anadirFavoritos(receta.id)">
-                            <input class="like like-{{ receta.id }}" type="checkbox" title="like"
-                                :checked="isFavorito(receta.id)">
-                            <div class="checkmark">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="outline" viewBox="0 0 24 24">
-                                    <path
-                                        d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
-                                    </path>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="filled" viewBox="0 0 24 24">
-                                    <path
-                                        d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
-                                    </path>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" class="celebrate">
-                                    <polygon class="poly" points="10,10 20,20"></polygon>
-                                    <polygon class="poly" points="10,50 20,50"></polygon>
-                                    <polygon class="poly" points="20,80 30,70"></polygon>
-                                    <polygon class="poly" points="90,10 80,20"></polygon>
-                                    <polygon class="poly" points="90,50 80,50"></polygon>
-                                    <polygon class="poly" points="80,80 70,70"></polygon>
-                                </svg>
+        <div class="contenedorHOME">
+            <div class="alinearRecetas row">
+                <div class="recetasAbuela col-12 col-md-3" v-for="receta in ultimasRecetas">
+                    <div class="imagenAbuela" @click.stop="detallesReceta(receta.id)">
+                        <div class="imagenAbuelaTexto">
+                            <img :src="`${receta.media[0]?.original_url}`" class="imgReceta mb-2">
+                            <div class="tituloReceta mb-2">{{ receta.nombre }}</div>
+                            <div class="con-like " @click.stop="anadirFavoritos(receta.id)">
+                                <input class="like like-{{ receta.id }}" type="checkbox" title="like"
+                                    :checked="isFavorito(receta.id)">
+                                <div class="checkmark">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="outline" viewBox="0 0 24 24">
+                                        <path
+                                            d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                                        </path>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="filled" viewBox="0 0 24 24">
+                                        <path
+                                            d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                                        </path>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" class="celebrate">
+                                        <polygon class="poly" points="10,10 20,20"></polygon>
+                                        <polygon class="poly" points="10,50 20,50"></polygon>
+                                        <polygon class="poly" points="20,80 30,70"></polygon>
+                                        <polygon class="poly" points="90,10 80,20"></polygon>
+                                        <polygon class="poly" points="90,50 80,50"></polygon>
+                                        <polygon class="poly" points="80,80 70,70"></polygon>
+                                    </svg>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 
 

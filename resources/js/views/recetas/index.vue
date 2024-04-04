@@ -16,7 +16,7 @@
 
         <div class="row">
             <div class="col-md-4 mb-3" v-for="receta in recetas" :key="receta.id">
-                <div class="card border-0 cursor_pointer" @click.stop="detallesReceta(receta.id)">
+                <div class="bordeRecetas card cursor_pointer" @click.stop="detallesReceta(receta.id)">
                     <div class="position-relative">
                         <div class="position-absolute top-0 end-0 p-2">
                             <div @click.stop="anadirPlanSemanal(receta.id)">
