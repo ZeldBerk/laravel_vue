@@ -1,5 +1,5 @@
 <template>
-    <div class="layout-wrapper" :class="containerClass">
+    <div class="layout-wrapper colorFondo" :class="containerClass">
         <app-topbar></app-topbar>
         <div class="layout-sidebar">
             <app-sidebar></app-sidebar>
