@@ -44,7 +44,7 @@
                             <h5 class="card-title">{{ receta.nombre }}</h5>
                             <p class="texto">{{ receta.descripcion }}</p>
                             <div class="d-flex justify-content-end">
-                                <div class="con-like " @click.stop="anadirFavoritos(receta.id)">
+                                <div class="con-like mt-auto" @click.stop="anadirFavoritos(receta.id)">
                                     <input class="like like-{{ receta.id }}" type="checkbox" title="like"
                                         :checked="isFavorito(receta.id)">
                                     <div class="checkmark">

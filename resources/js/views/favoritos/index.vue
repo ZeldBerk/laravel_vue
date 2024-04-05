@@ -4,11 +4,11 @@
 
     <div class="row">
       <div class="col-md-4 mb-3" v-for="favorito in favoritos">
-        <div class="card">
+        <div class="card bordeRecetas" @click.stop="detallesReceta(favorito.id)">
           <img :src="favorito?.media[0]?.original_url" alt="" />
           <div class="card-body">
             <h5 class="card-title">{{ favorito.nombre }}</h5>
-            <p class="card-text">{{ favorito.descripcion }}</p>
+            <p class="texto card-text">{{ favorito.descripcion }}</p>
             <div class="con-like">
               <input class="like" type="checkbox" title="like" checked @click="eliminarFavoritos(favorito.id)">
               <div class="checkmark">
@@ -43,16 +43,18 @@
 <script setup>
 import axios from "axios";
 import { ref, onBeforeMount } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 // Obtener id de usuario
 const data = localStorage.getItem("vuex");
 let userId = JSON.parse(data).auth.user.id;
-console.log("1");
+
 
 const favoritos = ref({});
-console.log("2");
+
 onBeforeMount(() => {
-  console.log("3");
 
   axios.get('/api/favoritos/' + userId)
     .then(response => {
@@ -77,5 +79,9 @@ function eliminarFavoritos(receta_id) {
     .catch(error => {
       console.error("Error deleting favorite:", error);
     });
+}
+
+function detallesReceta(id) {
+    router.push({ name: 'recetas.detalle', params: { id } });
 }
 </script>
