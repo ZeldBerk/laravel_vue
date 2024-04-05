@@ -17,7 +17,7 @@ class FavoritosController extends Controller
         
         foreach ($favoritos as $favorito) {
           // Obtener la información de la receta
-          $receta = recetas::find($favorito->receta_id);
+          $receta = recetas::with('media')->find($favorito->receta_id);
         
           // Agregar la receta al array de resultados
           $recetas[] = $receta;
