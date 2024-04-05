@@ -2,4 +2,16 @@
     border-color: #582D2C !important;
     border-width: 2px;
     border-radius: 0px;
+    height: 443px;
+}
+
+.texto {
+    width: 300px; /* Ajusta el ancho según tus necesidades */
+    height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Muestra solo tres líneas de texto */
+    -webkit-box-orient: vertical;
+    white-space: normal;
 }
