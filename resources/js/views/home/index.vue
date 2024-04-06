@@ -119,7 +119,7 @@
                             <div class="imagenAbuelaTexto">
                                 <img :src="`${receta.media[0]?.original_url}`" class="imgReceta mb-2">
                                 <div class="tituloReceta mb-2">{{ receta.nombre }}</div>
-                                <div class="con-like " @click.stop="anadirFavoritos(receta.id)">
+                                <div class="con-like marginCorazon" @click.stop="anadirFavoritos(receta.id)">
                                     <input class="like like-{{ receta.id }}" type="checkbox" title="like"
                                         :checked="isFavorito(receta.id)">
                                     <div class="checkmark">

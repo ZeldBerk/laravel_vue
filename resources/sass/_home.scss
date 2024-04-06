@@ -182,6 +182,7 @@
 
 .containerRecetasAbuelaBG {
     margin-top: 30px;
+    padding-top: 50px;
     background-color: #F9F9F9;
 }
 
@@ -192,12 +193,12 @@
 
 .recetasAbuela {
     max-width: 360px;
-    height: 700px;
+    height: 600px;
 }
 
 .imagenAbuela {
     width: 100%;
-    height: 450px;
+    height: 323px;
     background-image: url('../images/awelarecetaSINAWELA.png');
     background-position: center;
     background-repeat: no-repeat;
@@ -211,7 +212,7 @@
 
 .imagenAbuela:hover {
     width: 100%;
-    height: 720px;
+    height: 573px;
     background-image: url('../images/awelareceta.png');
     background-position: center;
     background-repeat: no-repeat;
@@ -224,28 +225,31 @@
 
 .imgReceta {
     display: block;
-    width: 207px;
-    height: 134px;
+    width: 233px;
+    height: 140px;
+    margin-left: 1px;
 }
 
 .imagenAbuelaTexto {
-    margin-top: 50px;
-    bottom: 0;
-    left: 5px;
+    margin-bottom: 13px;
     max-width: 280px;
-    padding: 30px;
+    height: 294px;
 }
 
 .imagenAbuela:hover .imagenAbuelaTexto {
-    margin-top: 140px;
-    bottom: 0;
-    left: 0;
+    margin-top: 265px;
     max-width: 280px;
-    padding: 30px;
+    margin-right: 3px;
 }
 
 .tituloReceta{
+    margin: auto;
     font-size: 24px;
     font-weight: bold;
-    width: 200px;
+    max-width: 200px;
+    height: 72px;
+}
+
+.marginCorazon{
+    margin-left: 16px;
 }
