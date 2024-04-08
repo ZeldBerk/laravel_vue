@@ -124,23 +124,23 @@ a {
 }
 
 .circle {
-    stroke: #F59E0B; /* Color inicial del círculo */
+    stroke: #DDCAD0; /* Color inicial del círculo */
     stroke-width: 1.5;
 }
 
 .cross {
-    stroke: #F59E0B; /* Color inicial de las líneas */
+    stroke: #DDCAD0; /* Color inicial de las líneas */
     stroke-width: 1.5;
     stroke-linecap: round;
 }
 
 /* Estilos al pasar el ratón por encima */
 .icon-link:hover .circle {
-    stroke: #D26900; /* Cambia el color del círculo */
+    stroke: #F59E0B; /* Cambia el color del círculo */
 }
 
 .icon-link:hover .cross {
-    stroke: #D26900; /* Cambia el color de las líneas */
+    stroke: #F59E0B; /* Cambia el color de las líneas */
 }
 
 

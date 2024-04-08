@@ -1,9 +1,46 @@
-.bordeRecetas{
-    border-color: #582D2C !important;
-    border-width: 2px;
-    border-radius: 0px;
-    height: 443px;
+//Borde de las Cards
+.cardBorderIMG{
+    height: 440px;
+    background-image: url(../images/bordeAbuelaRecetas.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
+
+.contenidoCard{
+    margin-bottom: 20px;
+    width: 365px;
+    height: 393px;
+}
+
+.cardImageDIV{
+    margin-left: 2px;
+    width: 367px;
+    height: 240px;
+
+}
+
+.cardImage{
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+
+.cuerpoCarta{
+    margin-top: 5px;
+}
+
+.tituloCard{
+    font-size: 24px;  
+    font-weight: bold;
+    height: 60px;
+}
+
 
 .texto {
     width: 300px; /* Ajusta el ancho según tus necesidades */
@@ -14,4 +51,99 @@
     -webkit-line-clamp: 3; /* Muestra solo tres líneas de texto */
     -webkit-box-orient: vertical;
     white-space: normal;
+    color: grey;
 }
+
+
+//Codigo diseño boton like
+
+.mi-con-like {
+    --mi-red: rgb(255, 50, 50);
+    --mi-default-background: #DDCAD0; /* Color de fondo predeterminado */
+    --mi-default-border: #DDCAD0; /* Color de borde predeterminado */
+    position: relative;
+    width: 25px;
+    height: 25px;
+  }
+  
+  .mi-con-like .mi-like {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 20;
+    cursor: pointer;
+  }
+  
+  .mi-con-like .mi-checkmark {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .mi-con-like .mi-outline,
+  .mi-con-like .mi-filled {
+    fill: white; /* Relleno blanco por defecto */
+    stroke: var(--mi-default-border); /* Borde del icono por defecto */
+    position: absolute;
+  }
+  
+  .mi-con-like .mi-filled {
+    animation: mi-kfr-filled 0.5s;
+    display: none;
+  }
+  
+  .mi-con-like .mi-celebrate {
+    position: absolute;
+    animation: mi-kfr-celebrate 0.5s;
+    animation-fill-mode: forwards;
+    display: none;
+  }
+  
+  .mi-con-like .mi-poly {
+    stroke: var(--mi-default-border); /* Color del borde del icono por defecto */
+    fill: var(--mi-default-background); /* Color de fondo del icono por defecto */
+  }
+  
+  .mi-con-like .mi-like:checked ~ .mi-checkmark .mi-filled {
+    display: block;
+    fill: var(--mi-red); /* Cambia el relleno a blanco cuando el botón es seleccionado */
+    stroke: var(--mi-red);
+  }
+  
+  .mi-con-like .mi-like:checked ~ .mi-checkmark .mi-poly {
+    fill: var(--mi-red); /* Cambia el color de fondo cuando el botón es seleccionado */
+    stroke: var(--mi-red); /* Cambia el color del borde cuando el botón es seleccionado */
+  }
+  
+  
+  @keyframes mi-kfr-filled {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+  
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+  
+  @keyframes mi-kfr-celebrate {
+    0% {
+      transform: scale(0);
+    }
+  
+    50% {
+      opacity: 0.8;
+    }
+  
+    100% {
+      transform: scale(1.2);
+      opacity: 0;
+      display: none;
+    }
+  }
+  

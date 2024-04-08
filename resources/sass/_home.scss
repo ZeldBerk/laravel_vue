@@ -248,6 +248,8 @@
     font-weight: bold;
     max-width: 200px;
     height: 72px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .marginCorazon{

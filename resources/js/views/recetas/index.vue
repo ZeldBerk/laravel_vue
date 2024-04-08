@@ -17,60 +17,74 @@
 
             <div class="row">
                 <div class="col-md-4 mb-3" v-for="receta in recetas" :key="receta.id">
-                    <div class="bordeRecetas card cursor_pointer" @click.stop="detallesReceta(receta.id)">
-                        <div class="position-relative">
-                            <div class="position-absolute top-0 end-0 p-2">
-                                <div @click.stop="anadirPlanSemanal(receta.id)">
-                                    <a class="icon-link">
-                                        <svg width="35px" height="35px" viewBox="-2.4 -2.4 28.80 28.80" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg" stroke="#F59E0B">
-                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                            </g>
-                                            <g id="SVGRepo_iconCarrier">
-                                                <circle cx="12" cy="12" r="10" class="circle"></circle>
-                                                <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15" class="cross">
+                    <div class="cursor_pointer cardBorderIMG" @click.stop="detallesReceta(receta.id)">
+                        <div class="contenidoCard">
+                            <div class="cardImageDIV position-relative">
+                                <div class="position-absolute top-0 end-0 pr-2 pt-2">
+                                    <div class="mi-con-like" @click.stop="anadirFavoritos(receta.id)">
+                                        <input class="mi-like" type="checkbox" title="like"
+                                            :checked="isFavorito(receta.id)">
+                                        <div class="mi-checkmark">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mi-outline"
+                                                viewBox="0 0 24 24">
+                                                <path
+                                                    d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
                                                 </path>
-                                            </g>
-                                        </svg>
-                                    </a>
+                                            </svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mi-filled"
+                                                viewBox="0 0 24 24">
+                                                <path
+                                                    d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                                                </path>
+                                            </svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100"
+                                                class="mi-celebrate">
+                                                <polygon class="mi-poly" points="10,10 20,20"></polygon>
+                                                <polygon class="mi-poly" points="10,50 20,50"></polygon>
+                                                <polygon class="mi-poly" points="20,80 30,70"></polygon>
+                                                <polygon class="mi-poly" points="90,10 80,20"></polygon>
+                                                <polygon class="mi-poly" points="90,50 80,50"></polygon>
+                                                <polygon class="mi-poly" points="80,80 70,70"></polygon>
+                                            </svg>
+                                        </div>
+                                    </div>
+
 
                                 </div>
-                            </div>
-                            <img :src="`${receta.media[0]?.original_url}`" class="card-img-top" alt="">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ receta.nombre }}</h5>
-                            <p class="texto">{{ receta.descripcion }}</p>
-                            <div class="d-flex justify-content-end">
-                                <div class="con-like mt-auto" @click.stop="anadirFavoritos(receta.id)">
-                                    <input class="like like-{{ receta.id }}" type="checkbox" title="like"
-                                        :checked="isFavorito(receta.id)">
-                                    <div class="checkmark">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="outline" viewBox="0 0 24 24">
-                                            <path
-                                                d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
-                                            </path>
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="filled" viewBox="0 0 24 24">
-                                            <path
-                                                d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
-                                            </path>
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100"
-                                            class="celebrate">
-                                            <polygon class="poly" points="10,10 20,20"></polygon>
-                                            <polygon class="poly" points="10,50 20,50"></polygon>
-                                            <polygon class="poly" points="20,80 30,70"></polygon>
-                                            <polygon class="poly" points="90,10 80,20"></polygon>
-                                            <polygon class="poly" points="90,50 80,50"></polygon>
-                                            <polygon class="poly" points="80,80 70,70"></polygon>
-                                        </svg>
-                                    </div>
+                                <div class="cardImage"
+                                    :style="{ 'background-image': `url(${receta.media[0]?.original_url})` }">
                                 </div>
                             </div>
+                            <div class="cuerpoCarta">
+                                <div class="row ml-2 align-items-center">
+                                    <h5 class="col-10 tituloCard">{{ receta.nombre }}</h5>
+
+                                    <div class="col-2 mb-4" @click.stop="anadirPlanSemanal(receta.id)">
+                                        <a class="icon-link">
+                                            <svg width="35px" height="35px" viewBox="-2.4 -2.4 28.80 28.80" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" stroke="#F59E0B">
+                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                </g>
+                                                <g id="SVGRepo_iconCarrier">
+                                                    <circle cx="12" cy="12" r="10" class="circle"></circle>
+                                                    <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15"
+                                                        class="cross">
+                                                    </path>
+                                                </g>
+                                            </svg>
+                                        </a>
+
+                                    </div>
+
+
+                                </div>
+                                <p class="texto ml-2">{{ receta.descripcion }}</p>
+
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
