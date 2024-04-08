@@ -25,7 +25,7 @@
                         </div>
                         <h5>Ingredientes:</h5>
                         <div class="row">
-                            <div class="col-md-6" v-for="ingrediente in ingredientes">
+                            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" v-for="ingrediente in ingredientes">
                                 <p>- {{ formatCantidad(ingrediente.cantidad) }} {{ ingrediente.unidad }} de {{ ingrediente.nombre }}</p>
                             </div>
                         </div>
