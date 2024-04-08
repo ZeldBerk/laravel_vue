@@ -29,7 +29,7 @@
                             <!-- Contenido receta -->
                             <div class="mb-3">
                                 <label for="receta_descripcion" class="form-label">Pasos de la receta</label>
-                                <textarea v-model="receta.descripcion" class="form-control" style="height: 200px;"></textarea>
+                                <TextEditorComponent v-model="receta.descripcion" />
                             </div>
                             <button type="submit" class="btn btn-primary mt-4 mb-4">Añadir receta</button>
                         </div>

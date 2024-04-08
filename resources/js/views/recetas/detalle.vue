@@ -29,8 +29,8 @@
                                 <p>- {{ formatCantidad(ingrediente.cantidad) }} {{ ingrediente.unidad }} de {{ ingrediente.nombre }}</p>
                             </div>
                         </div>
-                        <h5>Pasos pra realizar la receta</h5>
-                        {{ receta.descripcion }}
+                        <h5>Pasos de la receta:</h5>
+                        <TextEditorComponent :readOnly="true" v-model="receta.descripcion" />
                     </div>
                 </div>
             </div>
@@ -42,6 +42,7 @@
 import axios from "axios";
 import { ref, onBeforeMount } from "vue";
 import { useRoute } from "vue-router";
+import TextEditorComponent from "@/components/TextEditorComponent.vue";
 
 const route = useRoute()
 const receta = ref({});
