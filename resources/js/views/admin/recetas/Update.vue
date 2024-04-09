@@ -1,7 +1,7 @@
 <template>
     <div id="recetas" class="container">
         <div class="d-flex justify-content-between pb-2 mb-2">
-            <h5 class="card-title">Añade una nueva receta</h5>
+            <h5 class="card-title">Actualizar receta</h5>
         </div>
         <form @submit.prevent="saveReceta">
             <div class="row my-5">
@@ -12,6 +12,12 @@
                             <div class="mb-3">
                                 <label for="receta_nombre" class="form-label">Nombre de la receta:</label>
                                 <input v-model="receta.nombre" id="receta_nombre" type="text" class="form-control">
+                            </div>
+                            <!-- Descripcion corta -->
+                            <div class="mb-3">
+                                <label class="form-label">Descripcion corta (máximo 80 caracteres)</label>
+                                <input id="descripcion_corta" v-model.trim="receta.descripcion_corta" type="text" class="form-control"
+                                    @input="limitarLongitud">
                             </div>
                             <!-- Contenido receta -->
                             <div class="mb-3">
@@ -81,6 +87,7 @@ const categorias = ref();
 setLocale(es);
 
 const { value: nombre } = useField('nombre', null, { initialValue: '' });
+const { value: descripcion_corta } = useField('descripcion_corta', null, {initialValue: ''});
 const { value: descripcion } = useField('descripcion', null, { initialValue: '' });
 const { value: raciones } = useField('raciones', null, { initialValue: '' });
 const { value: tiempo_preparacion } = useField('tiempo_preparacion', null, { initialValue: '' });
@@ -89,6 +96,7 @@ const { value: categoria_id } = useField('categoria_id', null, { initialValue: '
 
 const receta = reactive({
     nombre,
+    descripcion_corta,
     descripcion,
     raciones,
     tiempo_preparacion,
@@ -109,6 +117,7 @@ onMounted(() => {
     axios.get('/api/recetas/' + route.params.id)
         .then(response => {
             receta.nombre = response.data.nombre;
+            receta.descripcion_corta = response.data.descripcion_corta;
             receta.descripcion = response.data.descripcion;
             receta.raciones = response.data.raciones;
             receta.tiempo_preparacion = response.data.tiempo_preparacion;
@@ -161,4 +170,35 @@ function saveReceta() {
         }
     })
 }
+
+// Método para limitar la longitud del texto
+function limitarLongitud() {
+    const maxLength = 80; // Longitud máxima permitida
+    const spacesCount = (receta.value.descripcion_corta.match(/ /g) || []).length; // Contar espacios en blanco
+    const currentLength = receta.value.descripcion_corta.length + spacesCount; // Longitud actual del texto incluyendo los espacios
+
+    // Verificar si la longitud actual supera la máxima permitida
+    if (currentLength > maxLength) {
+        // Recortar el texto para que no exceda la longitud máxima
+        receta.value.descripcion_corta = receta.value.descripcion_corta.slice(0, maxLength - spacesCount);
+    }
+}
 </script>
+
+<style>
+.btn-success {
+    margin-right: 5px;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.nombreIng {
+    margin-bottom: 0px;
+}
+</style>
