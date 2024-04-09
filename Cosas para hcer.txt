@@ -9,3 +9,4 @@
 - Barra lateral usuarios(perimisos)
 - Datos user
 - Mejorar alertas
+- Añadir seeder de imagenes
