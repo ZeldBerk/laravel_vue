@@ -12,3 +12,4 @@
 - Añadir seeder de imagenes
 - Editar el update y el insert (descripcion corta e ingredeintes)
 - Crear la lista de la compra enter de principio a fin.
+- Gestion recetas segun usuario (admin o no admin)
