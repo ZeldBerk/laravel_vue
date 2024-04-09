@@ -104,7 +104,7 @@ onMounted(() => {
         });
 });
 
-// Mostrar el los datos actuales de la receta
+// Mostrar los datos actuales de la receta
 onMounted(() => {
     axios.get('/api/recetas/' + route.params.id)
         .then(response => {
@@ -123,8 +123,6 @@ onMounted(() => {
 
 
 function saveReceta() {
-
-
 
     validate().then(form => {
         console.log('validate');

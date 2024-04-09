@@ -28,8 +28,9 @@
                             </div>
                             <!-- Descripcion corta -->
                             <div class="mb-3">
-                                <label class="form-label">Descripcion</label>
-                                <input v-model="receta.descripcion_corta" type="text" class="form-control"></input>
+                                <label class="form-label">Descripcion corta (máximo 80 caracteres)</label>
+                                <input v-model.trim="receta.descripcion_corta" type="text" class="form-control"
+                                    @input="limitarLongitud">
                             </div>
                             <!-- Contenido receta -->
                             <div class="mb-3">
@@ -266,7 +267,7 @@ function addReceta() {
             serializedReceta.append(item, r[item])
         }
     }
-    
+
     axios.post('/api/recetas', serializedReceta, {
         headers: {
             "content-type": "multipart/form-data"
@@ -280,7 +281,7 @@ function addReceta() {
                 title: 'Receta añadida correctamente'
             })
                 .then(() => {
-                    
+
                     ingredientesSeleccionados.value.forEach(ingrediente => {
                         const ingrediente_receta = ref({});
 
@@ -288,16 +289,16 @@ function addReceta() {
                         ingrediente_receta.value.ingrediente_id = ingrediente.id;
                         ingrediente_receta.value.cantidad = ingrediente.cantidad;
                         ingrediente_receta.value.unidad = ingrediente.unidad;
-                        
+
                         console.log(ingrediente_receta);
                         axios.post('/api/ingredientes/receta/', ingrediente_receta.value)
-                        .then(response => {
-                            // Redireccionar a la página después de cerrar la alerta
-                            router.push({ name: 'recetas.index' })
-                        })
-                        .catch(error => {
-                            console.error('Error al insertar ingredientes:', error);
-                        });
+                            .then(response => {
+                                // Redireccionar a la página después de cerrar la alerta
+                                router.push({ name: 'recetas.index' })
+                            })
+                            .catch(error => {
+                                console.error('Error al insertar ingredientes:', error);
+                            });
                     });
                 });
         })
@@ -307,6 +308,19 @@ function addReceta() {
                 title: 'No se ha añadido la receta'
             });
         });
+}
+
+// Método para limitar la longitud del texto
+function limitarLongitud() {
+    const maxLength = 80; // Longitud máxima permitida
+    const spacesCount = (receta.value.descripcion_corta.match(/ /g) || []).length; // Contar espacios en blanco
+    const currentLength = receta.value.descripcion_corta.length + spacesCount; // Longitud actual del texto incluyendo los espacios
+
+    // Verificar si la longitud actual supera la máxima permitida
+    if (currentLength > maxLength) {
+        // Recortar el texto para que no exceda la longitud máxima
+        receta.value.descripcion_corta = receta.value.descripcion_corta.slice(0, maxLength - spacesCount);
+    }
 }
 
 </script>
