@@ -1,9 +1,6 @@
 <template>
-    <div class="layout-wrapper" :class="containerClass">
+    <div class="layout-wrapper layout-static-inactive">
         <AppTopbar></AppTopbar>
-        <div class="layout-sidebar">
-            <AppSidebar></AppSidebar>
-        </div>
         
         <div class="layout-main-container ">
             <Breadcrumb :home="home" :model="crumbs" class="mb-2">

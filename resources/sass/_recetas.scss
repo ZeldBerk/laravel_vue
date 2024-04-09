@@ -43,12 +43,12 @@
 
 
 .texto {
-    width: 300px; /* Ajusta el ancho según tus necesidades */
+    width: 300px;
     height: 50px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 3; /* Muestra solo tres líneas de texto */
+    -webkit-line-clamp: 3; 
     -webkit-box-orient: vertical;
     white-space: normal;
     color: grey;
@@ -59,8 +59,8 @@
 
 .mi-con-like {
     --mi-red: rgb(255, 50, 50);
-    --mi-default-background: #DDCAD0; /* Color de fondo predeterminado */
-    --mi-default-border: #DDCAD0; /* Color de borde predeterminado */
+    --mi-default-background: #DDCAD0;
+    --mi-default-border: #DDCAD0; 
     position: relative;
     width: 25px;
     height: 25px;
@@ -85,8 +85,8 @@
   
   .mi-con-like .mi-outline,
   .mi-con-like .mi-filled {
-    fill: white; /* Relleno blanco por defecto */
-    stroke: var(--mi-default-border); /* Borde del icono por defecto */
+    fill: white; 
+    stroke: var(--mi-default-border);
     position: absolute;
   }
   
@@ -103,19 +103,20 @@
   }
   
   .mi-con-like .mi-poly {
-    stroke: var(--mi-default-border); /* Color del borde del icono por defecto */
-    fill: var(--mi-default-background); /* Color de fondo del icono por defecto */
+    stroke: var(--mi-default-border); 
+    fill: var(--mi-default-background); 
   }
   
   .mi-con-like .mi-like:checked ~ .mi-checkmark .mi-filled {
     display: block;
-    fill: var(--mi-red); /* Cambia el relleno a blanco cuando el botón es seleccionado */
+    fill: var(--mi-red); 
     stroke: var(--mi-red);
   }
   
   .mi-con-like .mi-like:checked ~ .mi-checkmark .mi-poly {
-    fill: var(--mi-red); /* Cambia el color de fondo cuando el botón es seleccionado */
-    stroke: var(--mi-red); /* Cambia el color del borde cuando el botón es seleccionado */
+    fill: var(--mi-red); 
+    
+    stroke: var(--mi-red); 
   }
   
   
