@@ -15,6 +15,7 @@ class CreateRecetas extends Seeder
     {
         $receta1 = recetas::create([
             'nombre' => 'Croquetas de Jamón',
+            'descripcion_corta' => 'Deliciosas croquetas de jamón, crujientes por fuera y cremosas por dentro.',
             'descripcion' => 'Ponemos en una sartén honda la mantequilla fundida y la harina para preparar la bechamel
             Cocinamos la harina con la mantequilla y añadimos poco a poco la leche caliente
             Salpimentamos la bechamel y le añadimos nuez moscada recién rallada
@@ -32,6 +33,7 @@ class CreateRecetas extends Seeder
 
         $receta1 = recetas::create([
             'nombre' => 'Tarta de Queso',
+            'descripcion_corta' => 'Una tentadora tarta de queso cremosa y llena de sabor, ¡irresistible!',
             'descripcion' => 'Precalentamos el horno a 200 ºC, ponemos en un bol el queso crema y añadimos los huevos de uno en uno
             Removemos e integramos la mezcla
             Añadimos el azúcar e integramos
@@ -50,6 +52,7 @@ class CreateRecetas extends Seeder
 
         $receta1 = recetas::create([
             'nombre' => 'Pollo al Horno',
+            'descripcion_corta' => 'Pollo jugoso y aromático, acompañado de patatas doradas y sabrosas.',
             'descripcion' => 'Pelamos, lavamos y cortamos en rodajas las patatas
             Las salpimentamos, las ponemos sobre una bandeja de horno engrasada y añadimos la cebolla y los ajos
             Salpimentamos las piezas de pollo
@@ -64,6 +67,7 @@ class CreateRecetas extends Seeder
 
         $receta1 = recetas::create([
             'nombre' => 'Torrijas',
+            'descripcion_corta' => 'Dulces y suaves torrijas, un postre tradicional que deleitará tu paladar.',
             'descripcion' => 'Hervimos la leche con la canela y la corteza de limón
             La dejamos enfriar por completo en una fuente
             Retiramos la canela y la piel de limón

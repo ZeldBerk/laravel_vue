@@ -1,6 +1,7 @@
 <template>
     <div class="container">
-        <h1>{{ receta.nombre }}</h1>
+        <h2>{{ receta.nombre }}</h2>
+        <h4>{{ receta.descripcion_corta }}</h4>
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -30,7 +31,7 @@
                             </div>
                         </div>
                         <h5>Pasos de la receta:</h5>
-                        <TextEditorComponent :readOnly="true" v-model="receta.descripcion" />
+                        <TextEditorComponent :readOnly="true" v-model="receta.descripcion" class="border-less" />
                     </div>
                 </div>
             </div>
@@ -91,3 +92,11 @@ function formatCantidad(cantidad) {
     }
 }
 </script>
+
+<style>
+
+.ck {
+    border: 0 !important;
+}
+
+</style>

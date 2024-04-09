@@ -15,7 +15,7 @@
                             </div>
                             <!-- Ingredientes -->
                             <div class="mb-3">
-                                <label for="">Ingredientes</label>
+                                <label class="form-label">Ingredientes</label>
                                 <!-- Configuracion de ingredientes -->
                                 <div class="row ingredientes">
 
@@ -26,9 +26,14 @@
                                     checkmark filter class="w-100"
                                     @change="ingrediente_selection(ingredientes_receta.ingrediente_id)" />
                             </div>
+                            <!-- Descripcion corta -->
+                            <div class="mb-3">
+                                <label class="form-label">Descripcion</label>
+                                <input v-model="receta.descripcion_corta" type="text" class="form-control"></input>
+                            </div>
                             <!-- Contenido receta -->
                             <div class="mb-3">
-                                <label for="receta_descripcion" class="form-label">Pasos de la receta</label>
+                                <label class="form-label">Pasos de la receta</label>
                                 <TextEditorComponent v-model="receta.descripcion" />
                             </div>
                             <button type="submit" class="btn btn-primary mt-4 mb-4">Añadir receta</button>

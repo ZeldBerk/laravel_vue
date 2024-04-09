@@ -80,7 +80,7 @@
 
 
                                 </div>
-                                <p class="texto ml-2">{{ receta.descripcion }}</p>
+                                <p class="texto ml-2">{{ receta.descripcion_corta }}</p>
 
                             </div>
                         </div>

@@ -28,6 +28,7 @@ class RecetasController extends Controller
         
         $request->validate([
             'nombre' => 'required',
+            'descripcion_corta' => 'required',
             'descripcion' => 'required',
             'raciones' => 'required',
             'tiempo_preparacion' => 'required',
@@ -54,6 +55,7 @@ class RecetasController extends Controller
         // Validar campos obligatorios
         $request->validate([
             'nombre' => 'required',
+            'descripcion_corta' => 'required',
             'descripcion' => 'required',
             'raciones' => 'required',
             'tiempo_preparacion' => 'required',

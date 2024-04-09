@@ -15,6 +15,7 @@ class recetas extends Model implements HasMedia
 
     protected $fillable = [
         'nombre',
+        'descripcion_corta',
         'descripcion',
         'raciones',
         'tiempo_preparacion',

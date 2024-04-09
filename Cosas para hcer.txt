@@ -1,0 +1,11 @@
+- Arreglar comentarios
+- Añadir rating de primevue a comentarios
+- Añadir descripcion a las recetas
+- Editar botones azules y demas
+- Filtro receta y categorias des de la home
+- Filtro reseñas
+- Colores formularios(inputs y demas)
+- Diseño plan semanal(repasar)
+- Barra lateral usuarios(perimisos)
+- Datos user
+- Mejorar alertas
