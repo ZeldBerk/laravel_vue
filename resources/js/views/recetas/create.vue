@@ -13,6 +13,12 @@
                                 <label for="receta_nombre" class="form-label">Nombre de la receta</label>
                                 <input v-model="receta.nombre" id="receta_nombre" type="text" class="form-control">
                             </div>
+                            <!-- Descripcion corta -->
+                            <div class="mb-3">
+                                <label class="form-label">Descripcion corta (máximo 80 caracteres)</label>
+                                <input v-model.trim="receta.descripcion_corta" type="text" class="form-control"
+                                    @input="limitarLongitud">
+                            </div>
                             <!-- Ingredientes -->
                             <div class="mb-3">
                                 <label class="form-label">Ingredientes</label>
@@ -25,12 +31,6 @@
                                     optionValue="id" optionLabel="nombre" placeholder="Selecciona los ingredientes"
                                     checkmark filter class="w-100"
                                     @change="ingrediente_selection(ingredientes_receta.ingrediente_id)" />
-                            </div>
-                            <!-- Descripcion corta -->
-                            <div class="mb-3">
-                                <label class="form-label">Descripcion corta (máximo 80 caracteres)</label>
-                                <input v-model.trim="receta.descripcion_corta" type="text" class="form-control"
-                                    @input="limitarLongitud">
                             </div>
                             <!-- Contenido receta -->
                             <div class="mb-3">
@@ -102,6 +102,11 @@ const user_id = JSON.parse(data).auth.user.id;
 
 receta.value.user_id = user_id;
 
+onMounted(() => {
+    chargeCategorias();
+    chargeIngredientes();
+});
+
 // Carga de las categorias en el desplegable
 function chargeCategorias() {
     axios.get('/api/categorias')
@@ -109,10 +114,6 @@ function chargeCategorias() {
             categorias.value = response.data;
         });
 }
-onMounted(() => {
-    chargeCategorias();
-    chargeIngredientes();
-});
 
 // Carga de los ingredientes en el desplegable
 function chargeIngredientes() {
