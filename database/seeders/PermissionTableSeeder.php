@@ -28,20 +28,22 @@ class PermissionTableSeeder extends Seeder
             'user-create',
             'user-edit',
             'user-delete',
-            'post-list',
-            'post-create',
-            'post-edit',
-            'post-all',
-            'post-delete',
-            'exercise-list',
-            'exercise-create',
-            'exercise-edit',
-            'exercise-all',
-            'exercise-delete',
-            'category-list',
-            'category-create',
-            'category-edit',
-            'category-delete'
+            'comentario-list',
+            'comentario-create',
+            'comentario-edit',
+            'comentario-all',
+            'comentario-delete',
+            'recetas-list',
+            'recetas-create',
+            'recetas-edit',
+            'recetas-all',
+            'recetas-delete',
+            'ingredientes-list',
+            'ingredientes-create',
+            'ingredientes-edit',
+            'ingredientes-all',
+            'ingredientes-delete'
+            
         ];
 
         foreach ($permissions as $permission) {

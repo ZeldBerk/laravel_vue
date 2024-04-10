@@ -36,15 +36,14 @@ class CreateAdminUserSeeder extends Seeder
         $role = Role::create(['name' => 'admin']);
         $role2 = Role::create(['name' => 'user']);
         $permissions = [
-            'post-list',
-            'post-create',
-            'post-edit',
-            'post-delete',
-            'post-list',
-            'exercise-create',
-            'exercise-edit',
-            'exercise-all',
-            'exercise-delete'
+            'comentario-list',
+            'comentario-create',
+            'comentario-edit',
+            'comentario-delete',
+            'recetas-create',
+            'recetas-edit',
+            'recetas-all',
+            'recetas-delete'
         ];
         $role2->syncPermissions($permissions);
         Category::create(['name' => 'Vue.js']);
