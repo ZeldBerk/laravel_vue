@@ -16,8 +16,36 @@
                             <!-- Descripcion corta -->
                             <div class="mb-3">
                                 <label class="form-label">Descripcion corta (máximo 80 caracteres)</label>
-                                <input id="descripcion_corta" v-model.trim="receta.descripcion_corta" type="text" class="form-control"
-                                    @input="limitarLongitud">
+                                <input id="descripcion_corta" v-model.trim="receta.descripcion_corta" type="text"
+                                    class="form-control" @input="limitarLongitud">
+                            </div>
+                            <!-- Ingredientes -->
+                            <div class="mb-3">
+                                <label class="form-label">Ingredientes</label>
+                                <div class="row ingredientes">
+                                    <!-- Iterar sobre los ingredientes de la receta -->
+                                    <div v-for="(ingrediente, index) in ingredientes_receta" :key="index"
+                                        class="col-6 d-flex align-items-center">
+                                        <!-- Mostrar nombre del ingrediente -->
+                                        <p class="nombreIng">{{ ingrediente.nombre }}</p>
+                                        <!-- Campo de entrada para cantidad -->
+                                        <input v-model="ingrediente.cantidad" type="number" min="1"
+                                            class="form-control ml-2" placeholder="Cantidad">
+                                        <!-- Campo de selección para unidad de medida -->
+                                        <select v-model="ingrediente.unidad" class="form-select ml-2">
+                                            <option value="g">Gramos</option>
+                                            <option value="kg">Kilos</option>
+                                            <option value="ml">Mililitros</option>
+                                            <option value="L">Litros</option>
+                                            <option value="unidades">Unidades</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Selector de ingredeientes -->
+                                <Dropdown v-model="ingredeientes_nuevos.ingrediente_id" :options="ingredientes"
+                                    optionValue="id" optionLabel="nombre" placeholder="Selecciona los ingredientes"
+                                    checkmark filter class="w-100"
+                                    @change="ingrediente_selection(ingredeientes_nuevos.ingrediente_id)" />
                             </div>
                             <!-- Contenido receta -->
                             <div class="mb-3">
@@ -64,7 +92,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, reactive, inject } from "vue";
+import { ref, onMounted, reactive, inject, onBeforeMount } from "vue";
 import { useForm, useField } from "vee-validate";
 import { useRoute } from "vue-router";
 import { useRouter } from 'vue-router';
@@ -83,11 +111,15 @@ const { validate, errors } = useForm({ validationSchema: schema })
 const route = useRoute()
 const swal = inject('$swal');
 const categorias = ref();
+const ingredientes_receta = ref();
+const ingredeientes_nuevos = ref({});// Ingrediente para pasar a la funcion ingrediente_selection
+const ingredientes = ref(); // Ingredeintes del desplegable 
+const ingredientesSeleccionados = ref([]); // Objeto para almacenar las propiedades de cada ingrediente seleccionado
 
 setLocale(es);
 
 const { value: nombre } = useField('nombre', null, { initialValue: '' });
-const { value: descripcion_corta } = useField('descripcion_corta', null, {initialValue: ''});
+const { value: descripcion_corta } = useField('descripcion_corta', null, { initialValue: '' });
 const { value: descripcion } = useField('descripcion', null, { initialValue: '' });
 const { value: raciones } = useField('raciones', null, { initialValue: '' });
 const { value: tiempo_preparacion } = useField('tiempo_preparacion', null, { initialValue: '' });
@@ -130,21 +162,172 @@ onMounted(() => {
         });
 })
 
+// Carga de los ingredientes asociados a la receta
+onBeforeMount(() => {
+    axios.get('/api/ingredientes/receta/' + route.params.id)
+        .then(response => {
+            ingredientes_receta.value = response.data;
+            console.log(ingredientes_receta);
+        })
+});
 
+// Cargar todos los ingredientes
+onMounted(() => {
+    axios.get('/api/ingredientes')
+        .then(response => {
+            ingredientes.value = response.data;
+        });
+});
+
+
+// Maneja los ingredientes que se añaden a la receta
+function ingrediente_selection(id_selection) {
+    if (id_selection === 1) {
+        swal({
+            title: 'Añadir Ingrediente',
+            text: 'Introduce el nombre del nuevo ingrediente:',
+            html: `
+            <label class="form-label">Introduce el nuevo ingrediente:</label>
+            <input id="nombre_ingrediente" type="text" class="form-control placeholder="Nombre del ingrediente">
+            `,
+            showCancelButton: true,
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Añadir',
+            didOpen: () => {
+                // Aplicar clases de Bootstrap a los botones de la alerta
+                const confirmButton = document.querySelector('.swal2-confirm');
+                const cancelButton = document.querySelector('.swal2-cancel');
+                confirmButton.classList.add('btn', 'btn-success');
+                cancelButton.classList.add('btn', 'btn-danger');
+                confirmButton.classList.remove('swal2-styled');
+                cancelButton.classList.remove('swal2-styled');
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Recojemos el valor que el usuario quiere añadi
+                const nombre_ingrediente = document.getElementById('nombre_ingrediente').value;
+
+                // Guardamos el valor en ingredeinte
+                ingredeinte.value.nombre = nombre_ingrediente;
+
+                // Insert del ingredeiente
+                axios.post('/api/ingredientes', ingredeinte.value)
+                    .then(response => {
+                        swal({
+                            icon: 'success',
+                            title: 'Ingrediente añadido correctamente'
+                        })
+                            .then(() => {
+                                chargeIngredientes();
+                            });
+                    })
+                    .catch(error => {
+                        swal({
+                            icon: 'error',
+                            title: 'No se ha añadido el ingrediente'
+                        });
+                    });
+            }
+        });
+    } else {
+        // Crear un objeto para almacenar las propiedades del ingrediente seleccionado
+        const nuevoIngrediente = { id: id_selection, cantidad: '', unidad: '' };
+
+        // Verificar si el ingrediente ya ha sido seleccionado previamente
+        const ingredienteExistenteIndex = ingredientesSeleccionados.value.findIndex(ingrediente => ingrediente.id === id_selection);
+
+        if (ingredienteExistenteIndex === -1) {
+            // Si el ingrediente no ha sido seleccionado previamente, agregarlo a la lista
+            ingredientesSeleccionados.value.push(nuevoIngrediente);
+        } else {
+            // Si el ingrediente ya ha sido seleccionado, no hacer nada
+            // Si el ingrediente ya ha sido seleccionado, mostrar una alerta
+            swal({
+                icon: 'warning',
+                title: 'Ingrediente ya seleccionado',
+                text: 'Este ingrediente ya ha sido añadido a la receta.'
+            });
+            return;
+        }
+
+        // Insertar el nuevo ingrediente en la lista de ingredientes seleccionados
+        const ingredientContainer = document.querySelector('.ingredientes');
+
+        // Encontrar el ingrediente seleccionado en la lista de ingredientes
+        const selectedIngredient = ingredientes.value.find(ingrediente => ingrediente.id === id_selection);
+
+        // Crear un contenedor flex para el nombre y los inputs de cantidad y unidad de medida
+        const flexContainer = document.createElement('div');
+        flexContainer.setAttribute('class', 'col-6 d-flex align-items-center'); // Alinea los elementos verticalmente
+
+        // Insertar el nombre del ingrediente en el contenedor flex
+        const nombreElement = document.createElement('p');
+        nombreElement.textContent = selectedIngredient.nombre;
+        flexContainer.appendChild(nombreElement);
+        nombreElement.setAttribute('class', 'nombreIng');
+
+        // Crear inputs para la cantidad y la unidad de medida
+        const cantidadInput = document.createElement('input');
+        cantidadInput.setAttribute('type', 'number');
+        cantidadInput.setAttribute('min', '1');
+        cantidadInput.setAttribute('class', 'form-control ml-2'); // Margen izquierdo para separar del nombre
+        cantidadInput.setAttribute('placeholder', 'Cantidad');
+        cantidadInput.addEventListener('input', event => {
+            nuevoIngrediente.cantidad = event.target.value;
+        });
+
+        const unidadSelect = document.createElement('select');
+        unidadSelect.setAttribute('class', 'form-select ml-2'); // Margen izquierdo para separar del input de cantidad
+        // Opción predeterminada para simular un placeholder
+        const defaultOption = document.createElement('option');
+        defaultOption.text = 'Unidad medida';
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+
+        // Opciones de unidades
+        const options = [
+            { value: 'g', text: 'Gramos' },
+            { value: 'kg', text: 'Kilos' },
+            { value: 'ml', text: 'Mililitros' },
+            { value: 'L', text: 'Litros' },
+            { value: 'unidades', text: 'Unidades' }
+        ];
+
+        // Agregar la opción predeterminada seguida de las opciones de unidades
+        unidadSelect.appendChild(defaultOption);
+        options.forEach(option => {
+            const optionElement = document.createElement('option');
+            optionElement.value = option.value;
+            optionElement.text = option.text;
+            unidadSelect.appendChild(optionElement);
+        });
+
+        unidadSelect.addEventListener('change', event => {
+            nuevoIngrediente.unidad = event.target.value;
+        });
+
+        // Insertar los inputs en el contenedor flex
+        flexContainer.appendChild(cantidadInput);
+        flexContainer.appendChild(unidadSelect);
+
+        // Insertar el contenedor flex en el contenedor principal
+        ingredientContainer.appendChild(flexContainer);
+    }
+}
+
+
+// Método para guardar los cambios en la receta y los ingredientes modificados
 function saveReceta() {
-
     validate().then(form => {
-        console.log('validate');
         if (form.valid) {
-            console.log(receta)
-
-            let serialized = new FormData()
+            let serialized = new FormData();
             for (let item in receta) {
                 if (receta.hasOwnProperty(item)) {
-                    serialized.append(item, receta[item])
+                    serialized.append(item, receta[item]);
                 }
             }
 
+            // Actualizar la receta
             axios.post('/api/recetas/update/' + route.params.id, serialized, {
                 headers: {
                     "content-type": "multipart/form-data"
@@ -156,7 +339,18 @@ function saveReceta() {
                         title: 'Receta actualizada correctamente'
                     })
                         .then(() => {
-                            router.push({ name: 'recetasAdmin.index' })
+                            // Guardar los cambios en los ingredientes modificados
+                            ingredientes_receta.value.forEach(ingrediente => {
+                                axios.post('/api/ingredientes/receta/update/' + ingrediente.id, ingrediente)
+                                    .then(response => {
+                                        console.log('Ingrediente actualizado:', response.data);
+                                    })
+                                    .catch(error => {
+                                        console.error('Error al actualizar ingrediente:', error);
+                                    });
+                            });
+
+                            router.push({ name: 'recetasAdmin.index' });
                         });
                 })
                 .catch(error => {
@@ -165,10 +359,8 @@ function saveReceta() {
                         title: 'No se ha podido actualizar la receta'
                     });
                 });
-
-
         }
-    })
+    });
 }
 
 // Método para limitar la longitud del texto

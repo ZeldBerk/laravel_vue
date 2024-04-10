@@ -1,15 +1,15 @@
 - Arreglar comentarios
 - Añadir rating de primevue a comentarios
-- Añadir descripcion a las recetas
+- Añadir admin de comentarios
 - Editar botones azules y demas
 - Filtro receta y categorias des de la home
 - Filtro reseñas
 - Colores formularios(inputs y demas)
 - Diseño plan semanal(repasar)
-- Barra lateral usuarios(perimisos)
 - Datos user
 - Mejorar alertas
 - Añadir seeder de imagenes
 - Editar el update y el insert (descripcion corta e ingredeintes)
 - Crear la lista de la compra enter de principio a fin.
 - Gestion recetas segun usuario (admin o no admin)
+- ESTUDIAR EL YUP DEL UPDATE(IMPORTANTE)
