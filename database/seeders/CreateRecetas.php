@@ -30,8 +30,10 @@ class CreateRecetas extends Seeder
             'user_id' => 1,
             'categoria_id' => 1
         ]);
+        $receta1->addMedia(public_path('imagesSeeder/Croquetas.jpeg'))->preservingOriginal()->toMediaCollection('photo');
+        
 
-        $receta1 = recetas::create([
+        $receta2 = recetas::create([
             'nombre' => 'Tarta de Queso',
             'descripcion_corta' => 'Una tentadora tarta de queso cremosa y llena de sabor, ¡irresistible!',
             'descripcion' => 'Precalentamos el horno a 200 ºC, ponemos en un bol el queso crema y añadimos los huevos de uno en uno
@@ -49,8 +51,9 @@ class CreateRecetas extends Seeder
             'user_id' => 1,
             'categoria_id' => 3
         ]);
+        $receta2->addMedia(public_path('imagesSeeder/tartaQueso.jpeg'))->preservingOriginal()->toMediaCollection('photo');
 
-        $receta1 = recetas::create([
+        $receta3 = recetas::create([
             'nombre' => 'Pollo al Horno',
             'descripcion_corta' => 'Pollo jugoso y aromático, acompañado de patatas doradas y sabrosas.',
             'descripcion' => 'Pelamos, lavamos y cortamos en rodajas las patatas
@@ -64,8 +67,9 @@ class CreateRecetas extends Seeder
             'user_id' => 1,
             'categoria_id' => 2
         ]);
+        $receta3->addMedia(public_path('imagesSeeder/pollo.jpeg'))->preservingOriginal()->toMediaCollection('photo');
 
-        $receta1 = recetas::create([
+        $receta4 = recetas::create([
             'nombre' => 'Torrijas',
             'descripcion_corta' => 'Dulces y suaves torrijas, un postre tradicional que deleitará tu paladar.',
             'descripcion' => 'Hervimos la leche con la canela y la corteza de limón
@@ -83,5 +87,7 @@ class CreateRecetas extends Seeder
             'user_id' => 1,
             'categoria_id' => 3
         ]);
+        $receta4->addMedia(public_path('imagesSeeder/torrijas.jpeg'))->preservingOriginal()->toMediaCollection('photo');
+
     }
 }
