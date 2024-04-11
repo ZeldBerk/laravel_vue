@@ -17,8 +17,10 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionTableSeeder::class);
         $this->call(CreateAdminUserSeeder::class);
         $this->call(CreateCategorias::class);
-        $this->call(CreateIngredientes::class);
         $this->call(CreateRecetas::class);
+        $this->call(CreateIngredientes::class);
+        $this->call(IngredientesRecetas::class);
+        
 
 //        $this->call(RoleSeeder::class);
         // \App\Models\User::factory(10)->create();

@@ -13,24 +13,40 @@ class CreateIngredientes extends Seeder
      */
     public function run(): void
     {
+
         $adding = ingrediente::create([
             'nombre' => 'Añadir ingrediente...'
         ]);
+
+        $ingredientes = [
+            'Harina',
+            'Azúcar',
+            'Huevos',
+            'Leche',
+            'Jamón Serrano',
+            'Sal',
+            'Aceite de Oliva',
+            'Pan rallado',
+            'Mantequilla',
+            'Nuez moscada',
+            'Pan',
+            'Canela en rama',
+            'Ralladura de Limon',
+            'Canela',
+            'Queso crema',
+            'Nata',
+            'Patatas',
+            'Pimienta Negra',
+            'Cebolla',
+            'Diente de ajo',
+            'Pollo',
+            'Vino blanco',
+            'Rama de Romero'
+        ];
         
-        $Harina = ingrediente::create([
-           'nombre' => 'Harina'
-        ]);
-
-        $azucar = ingrediente::create([
-            'nombre' => 'Azúcar'
-        ]);
-
-        $huevos = ingrediente::create([
-            'nombre' => 'Huevos'
-        ]);
-
-        $leche = ingrediente::create([
-            'nombre' => 'Leche'
-        ]);
+        foreach ($ingredientes as $ingrediente){
+            ingrediente::create(['nombre' => $ingrediente]);
+        }
+      
     }
 }
