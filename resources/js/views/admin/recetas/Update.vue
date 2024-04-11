@@ -341,16 +341,20 @@ function saveReceta() {
                         .then(() => {
                             // Guardar los cambios en los ingredientes modificados
                             ingredientes_receta.value.forEach(ingrediente => {
-                                axios.post('/api/ingredientes/receta/update/' + ingrediente.id, ingrediente)
+                                axios.put('/api/ingredientes/receta/update/' + ingrediente.id, ingrediente)
                                     .then(response => {
-                                        console.log('Ingrediente actualizado:', response.data);
+                                        if (ingredientesSeleccionados){
+                                            console.log('ingredientes nuevos')
+                                        }else{
+                                            console.log('no ingredientes')
+                                        }
                                     })
                                     .catch(error => {
                                         console.error('Error al actualizar ingrediente:', error);
                                     });
                             });
 
-                            router.push({ name: 'recetasAdmin.index' });
+                            // router.push({ name: 'recetasAdmin.index' });
                         });
                 })
                 .catch(error => {

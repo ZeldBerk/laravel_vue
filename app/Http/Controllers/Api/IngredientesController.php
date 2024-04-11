@@ -64,8 +64,6 @@ class IngredientesController extends Controller
         $request->validate([
             'receta_id' => 'required',
             'ingrediente_id' => 'required',
-            'cantidad' => 'required',
-            'unidad' => 'required'
         ]);
 
         $ingrediente = $request->all();
@@ -85,4 +83,19 @@ class IngredientesController extends Controller
         return $ingredientes;
     }
 
+    // Actualizar los ingredientes de la receta 
+    public function updateIngReceta($id, Request $request){
+
+        $ingrediente_receta = ingredientes_recetas::find($id);
+
+        $request->validate([
+            'receta_id' => 'required',
+            'ingrediente_id' => 'required',
+        ]);
+
+        $dataToUpdate = $request->all();
+        $ingrediente_receta->update($dataToUpdate);
+
+        return response()->json(['success' => true, 'data' => $ingrediente_receta]);
+    }
 }
