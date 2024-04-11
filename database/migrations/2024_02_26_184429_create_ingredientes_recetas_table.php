@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('receta_id');
             $table->unsignedBigInteger('ingrediente_id');
-            $table->decimal('cantidad');
-            $table->string('unidad');
+            $table->decimal('cantidad')->nullable();
+            $table->string('unidad')->nullable();
             $table->foreign('receta_id')->references('id')->on('recetas')->onDelete('cascade');
             $table->foreign('ingrediente_id')->references('id')->on('ingredientes')->onDelete('cascade');
             $table->timestamps();
