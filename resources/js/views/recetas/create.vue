@@ -184,7 +184,6 @@ function ingrediente_selection(id_selection) {
             // Si el ingrediente no ha sido seleccionado previamente, agregarlo a la lista
             ingredientesSeleccionados.value.push(nuevoIngrediente);
         } else {
-            // Si el ingrediente ya ha sido seleccionado, no hacer nada
             // Si el ingrediente ya ha sido seleccionado, mostrar una alerta
             swal({
                 icon: 'warning',
@@ -261,6 +260,26 @@ function ingrediente_selection(id_selection) {
 
 // Añade la receta y muestra una alerta en funcion de la respuesta de la api
 function addReceta() {
+    let alertShown = false; // Verificar si se ha mostrado la alerta
+
+    ingredientesSeleccionados.value.forEach(ingrediente => {
+        // Verificar si se ha ingresado una cantidad y no hay unidad
+        if (ingrediente.cantidad && !ingrediente.unidad) {
+            swal({
+                icon: 'warning',
+                title: 'Unidad requerida',
+                text: 'Por favor, selecciona una unidad de medida para el ingrediente.'
+            });
+            alertShown = true; // Establecer en verdadero si se muestra la alerta
+            return; // Detener la ejecución del bucle
+        }
+    });
+
+    if (alertShown) {
+        return; // Si se muestra la alerta, detener la ejecución del código
+    }
+
+    
     let r = receta.value;
     let serializedReceta = new FormData()
     for (let item in r) {
@@ -268,7 +287,6 @@ function addReceta() {
             serializedReceta.append(item, r[item])
         }
     }
-
     axios.post('/api/recetas', serializedReceta, {
         headers: {
             "content-type": "multipart/form-data"

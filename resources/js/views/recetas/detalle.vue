@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <img :src="receta?.media[0]?.original_url" alt=""/>
+                    <img :src="receta?.media[0]?.original_url" alt="" />
                     <div class="card-body">
                         <div class="row">
                             <div class="col-2">
@@ -18,7 +18,8 @@
                                 <p>Creada: {{ formatedate(receta.created_at) }}</p>
                             </div>
                             <div class="col-2">
-                                <router-link :to="{ name: 'comentarios.index', params: {id:receta.id} }" class="btn btn-primary">Comentarios</router-link>
+                                <router-link :to="{ name: 'comentarios.index', params: { id: receta.id } }"
+                                    class="btn btn-primary">Comentarios</router-link>
                             </div>
                             <div class="col-3">
                                 <button type="submit" class="btn btn-primary">Añadir a plan semanal</button>
@@ -27,7 +28,12 @@
                         <h5>Ingredientes:</h5>
                         <div class="row">
                             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" v-for="ingrediente in ingredientes">
-                                <p>- {{ formatCantidad(ingrediente.cantidad) }} {{ ingrediente.unidad }} de {{ ingrediente.nombre }}</p>
+                                <div v-if="ingrediente.cantidad">
+                                    <p>- {{ formatCantidad(ingrediente.cantidad) }} {{ ingrediente.unidad }} de {{ ingrediente.nombre }}</p>
+                                </div>
+                                <div v-else>
+                                    <p>- {{ ingrediente.nombre }}</p>
+                                </div>
                             </div>
                         </div>
                         <h5>Pasos de la receta:</h5>
@@ -51,20 +57,20 @@ const ingredientes = ref({});
 
 onBeforeMount(() => {
     axios.get('/api/recetas/' + route.params.id)
-    .then(response => {
-        console.log(response.data)
-        receta.value = response.data;
-    })
+        .then(response => {
+            console.log(response.data)
+            receta.value = response.data;
+        })
     axios.get('/api/ingredientes/receta/' + route.params.id)
-    .then(response => {
-        console.log(response.data);
-        ingredientes.value = response.data;
-    })
+        .then(response => {
+            console.log(response.data);
+            ingredientes.value = response.data;
+        })
 });
 
 
 // Funcion para formatera la fecha
-function formatedate(fechaISO){
+function formatedate(fechaISO) {
     // Convertir la fecha a un objeto Date
     const fecha = new Date(fechaISO);
 
@@ -94,9 +100,7 @@ function formatCantidad(cantidad) {
 </script>
 
 <style>
-
 .ck {
     border: 0 !important;
 }
-
 </style>

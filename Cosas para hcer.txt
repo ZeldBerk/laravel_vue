@@ -14,3 +14,4 @@
 - ESTUDIAR EL YUP DEL UPDATE(IMPORTANTE)
 - Seeders ingredientes recetas predeterminadas
 - Boton eleiminar ingredientes + eliminar ingredientes al eliminar receta
+- Solucnionar borede text Editor component
