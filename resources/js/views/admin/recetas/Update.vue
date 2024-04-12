@@ -92,15 +92,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted, reactive, inject, onBeforeMount } from "vue";
+import { ref, onMounted, reactive, inject } from "vue";
 import { useForm, useField } from "vee-validate";
 import { useRoute } from "vue-router";
 import { useRouter } from 'vue-router';
 import * as yup from 'yup';
-import { es } from 'yup-locales';
-import { setLocale } from 'yup';
 import DropZone from "@/components/DropZone.vue";
 import TextEditorComponent from "@/components/TextEditorComponent.vue";
+import axios from "axios";
 
 const schema = yup.object({
     nombre: yup.string().required().label('Nombre'),
@@ -115,8 +114,6 @@ const ingredientes_receta = ref();
 const ingredeientes_nuevos = ref({});// Ingrediente para pasar a la funcion ingrediente_selection
 const ingredientes = ref(); // Ingredeintes del desplegable 
 const ingredientesSeleccionados = ref([]); // Objeto para almacenar las propiedades de cada ingrediente seleccionado
-
-setLocale(es);
 
 const { value: nombre } = useField('nombre', null, { initialValue: '' });
 const { value: descripcion_corta } = useField('descripcion_corta', null, { initialValue: '' });
@@ -163,7 +160,7 @@ onMounted(() => {
 })
 
 // Carga de los ingredientes asociados a la receta
-onBeforeMount(() => {
+onMounted(() => {
     axios.get('/api/ingredientes/receta/' + route.params.id)
         .then(response => {
             ingredientes_receta.value = response.data;
@@ -343,17 +340,34 @@ function saveReceta() {
                             ingredientes_receta.value.forEach(ingrediente => {
                                 axios.put('/api/ingredientes/receta/update/' + ingrediente.id, ingrediente)
                                     .then(response => {
-                                        if (ingredientesSeleccionados){
-                                            console.log('ingredientes nuevos')
-                                        }else{
-                                            console.log('no ingredientes')
-                                        }
+                                        console.log(response.data)
                                     })
                                     .catch(error => {
                                         console.error('Error al actualizar ingrediente:', error);
                                     });
                             });
 
+                            // Comprobamos si hay ingredientes nuevos añadidos y los guardamos
+                            if (ingredientesSeleccionados) {
+                                ingredientesSeleccionados.value.forEach(ingrediente => {
+                                    const ingrediente_receta = ref({});
+
+                                    ingrediente_receta.value.receta_id = receta_id;
+                                    ingrediente_receta.value.ingrediente_id = ingrediente.id;
+                                    ingrediente_receta.value.cantidad = ingrediente.cantidad;
+                                    ingrediente_receta.value.unidad = ingrediente.unidad;
+
+                                    console.log(ingrediente_receta);
+                                    axios.post('/api/ingredientes/receta/', ingrediente_receta.value)
+                                        .then(response => {
+                                            // Redireccionar a la página después de cerrar la alerta
+                                            router.push({ name: 'recetasAdmin.index' })
+                                        })
+                                        .catch(error => {
+                                            console.error('Error al insertar ingredientes:', error);
+                                        });
+                                });
+                            }
                             // router.push({ name: 'recetasAdmin.index' });
                         });
                 })
@@ -377,6 +391,20 @@ function limitarLongitud() {
     if (currentLength > maxLength) {
         // Recortar el texto para que no exceda la longitud máxima
         receta.value.descripcion_corta = receta.value.descripcion_corta.slice(0, maxLength - spacesCount);
+    }
+}
+
+// Filtro para formatear la cantidad
+function formatCantidad(cantidad) {
+    const entero = Math.floor(cantidad);
+    const decimal = cantidad - entero;
+
+    // Si no hay parte decimal, solo mostrar el número entero
+    if (decimal === 0) {
+        return entero;
+    } else {
+        // Si hay parte decimal, formatear con coma en lugar de punto
+        return cantidad.toLocaleString('es', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace('.', ',');
     }
 }
 </script>
