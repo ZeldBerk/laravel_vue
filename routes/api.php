@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\FavoritosController;
 use App\Http\Controllers\Api\CategoriasController;
 use App\Http\Controllers\api\PlanSemanalController;
 use App\Http\Controllers\api\IngredientesController;
+use App\Http\Controllers\api\listaCompraController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -63,6 +64,10 @@ Route::delete('planSemanal/{id}', [PlanSemanalController::class, 'destroy']);
 Route::get('favoritos/{id}', [FavoritosController::class, 'index']);
 Route::post('favoritos/', [FavoritosController::class, 'store']);
 Route::delete('favoritos/{id}', [FavoritosController::class, 'destroy']);
+
+//rutas para la lista de la compra
+Route::get('/listaCompra/{userId}/{formato}', [listaCompraController::class, 'listaCompra']);
+
 
 // Rutas para las categorias
 Route::get('categorias', [CategoriasController::class, 'index']);

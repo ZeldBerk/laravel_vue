@@ -23,6 +23,7 @@ const RecetasCreateAdmin = () => import('../views/admin/recetas/Create.vue');
 const RecetasUpdateAdmin = () => import('../views/admin/recetas/Update.vue');
 const ComentList = () => import('../views/comentarios/Index.vue');
 const PlanSemanal = () => import('../views/planSemanal/index.vue');
+const ListaCompra = () => import('../views/listaCompra/index.vue');
 
 
 function requireLogin(to, from, next) {
@@ -248,6 +249,12 @@ export default [
                 path: 'PlanSemanal',
                 meta: { breadCrumb: 'Plan Semanal'},
                 component: PlanSemanal
+            },
+            {
+                name: 'Lista de la Compra',
+                path: 'ListaCompra',
+                meta: { breadCrumb: 'Lista de la Compra'},
+                component: ListaCompra
             },
             {
                 name: 'Favoritos',
