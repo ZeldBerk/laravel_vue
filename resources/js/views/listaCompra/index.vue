@@ -1,39 +1,43 @@
 <template>
+    <h2>Lista de la compra</h2>
+    <div class="formato-selector" >
+        <label for="formato">Formato:</label>
+        <select id="formato" v-model="formato" @change="cargarListaCompra">
+            <option value="semana">Semana</option>
+            <option value="dia">Día</option>
+        </select>
+    </div>
     <div class="lista-compra">
-        <h2>Lista de la compra</h2>
-        <div class="formato-selector">
-            <label for="formato">Formato:</label>
-            <select id="formato" v-model="formato" @change="cargarListaCompra">
-                <option value="semana">Semana</option>
-                <option value="dia">Día</option>
-            </select>
-        </div>
+
         <div v-if="listaCompra" class="lista">
             <template v-if="formato === 'semana'">
-                <div v-for="(ingredientes, dia) in listaCompra" :key="dia">
+                <div v-for="(ingredientes, dia) in listaCompra" :key="dia" class="lista-dia-semana">
                     <ul>
                         <li v-for="ingrediente in ingredientes" :key="ingrediente.nombre">
-                            <div v-if="ingrediente.cantidad !== null && ingrediente.unidad !== null">
-                                {{ ingrediente.cantidad }} {{ ingrediente.unidad }} de {{ ingrediente.nombre }}
+                            <div v-if="ingrediente.cantidad !== null && ingrediente.unidad !== null" class="ingrediente">
+                                <span>- {{ ingrediente.cantidad }} {{ ingrediente.unidad }} de {{ ingrediente.nombre
+                                    }}</span>
                             </div>
-                            <div v-else>
-                                {{ ingrediente.nombre }}
+                            <div v-else class="ingrediente">
+                                <span>- {{ ingrediente.nombre }}</span>
                             </div>
                         </li>
                     </ul>
                 </div>
             </template>
-            <template v-else-if="formato === 'dia'">
-                <div v-for="(ingredientes, dia) in listaCompra" :key="dia">
+            <template v-else-if="formato === 'dia'"> 
+                <div class="columnas">
+                <div v-for="(ingredientes, dia) in listaCompra" :key="dia" class="lista-dia">
                     <h3>{{ dia }}</h3>
-                    <div class="columnas">
+                   
                         <ul>
                             <li v-for="ingrediente in ingredientes" :key="ingrediente.nombre">
-                                <div v-if="ingrediente.cantidad !== null && ingrediente.unidad !== null">
-                                    {{ ingrediente.cantidad }} {{ ingrediente.unidad }} de {{ ingrediente.nombre }}
+                                <div v-if="ingrediente.cantidad !== null && ingrediente.unidad !== null" class="ingrediente">
+                                    <span>- {{ ingrediente.cantidad }} {{ ingrediente.unidad }} de {{ ingrediente.nombre
+                                        }}</span>
                                 </div>
-                                <div v-else>
-                                    {{ ingrediente.nombre }}
+                                <div v-else class="ingrediente">
+                                    <span>- {{ ingrediente.nombre }}</span>
                                 </div>
                             </li>
                         </ul>
@@ -72,36 +76,48 @@ function cargarListaCompra() {
 
 <style scoped>
 .lista-compra {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 20px;
-
-}
-
-.formato-selector {
-    margin-bottom: 20px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .lista {
-    margin-top: 20px;
+  margin-top: 20px;
+}
+
+.lista-dia-semana {
+  margin-bottom: 20px;
+}
+
+.lista h3 {
+  margin-bottom: 10px;
 }
 
 .lista ul {
-    list-style-type: none;
-    padding-left: 0;
+  list-style-type: none;
+  padding-left: 0;
 }
 
 .lista li {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
+}
+
+.ingrediente {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.ingrediente span {
+  font-size: 16px;
 }
 
 .columnas {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.columnas ul {
-    flex: 1;
-    margin-right: 20px;
+.columnas .lista-dia {
+  flex: 1;
+  margin-right: 20px;
 }
 </style>

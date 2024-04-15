@@ -13,7 +13,6 @@ class listaCompraController extends Controller
     {
         $recetasSemanales = PlanSemanal::where('user_id', $userId)->get();
 
-
         $listaCompra = [];
 
         foreach ($recetasSemanales as $receta) {
@@ -44,7 +43,21 @@ class listaCompraController extends Controller
                         'unidad' => $ingrediente->unidad,
                     ];
                 }
+
                 $listaCompra[$diaSemana][$ingrediente->nombre]['cantidad'] += $ingrediente->cantidad;
+            }
+        }
+
+        // Convertir unidades si es necesario
+        foreach ($listaCompra as &$diaCompra) {
+            foreach ($diaCompra as &$ingrediente) {
+                if ($ingrediente['unidad'] === 'g' && $ingrediente['cantidad'] > 1000) {
+                    $ingrediente['cantidad'] = round($ingrediente['cantidad'] / 1000, 2);
+                    $ingrediente['unidad'] = 'Kg';
+                } elseif ($ingrediente['unidad'] === 'ml' && $ingrediente['cantidad'] > 1000) {
+                    $ingrediente['cantidad'] = round($ingrediente['cantidad'] / 1000, 2);
+                    $ingrediente['unidad'] = 'L';
+                }
             }
         }
 
