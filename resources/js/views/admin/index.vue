@@ -22,7 +22,7 @@
             </div>
         
         
-            <router-link :to="{}"  class="col-4">
+            <router-link :to="{name: 'ListadelaCompra'}"  class="col-4">
                 <div class="card align-content-center d-flex justify-content-center align-items-center">
                     <svg width="95px" height="95px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#F59E0B"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M11 6L21 6.00072M11 12L21 12.0007M11 18L21 18.0007M3 11.9444L4.53846 13.5L8 10M3 5.94444L4.53846 7.5L8 4M4.5 18H4.51M5 18C5 18.2761 4.77614 18.5 4.5 18.5C4.22386 18.5 4 18.2761 4 18C4 17.7239 4.22386 17.5 4.5 17.5C4.77614 17.5 5 17.7239 5 18Z" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
                     <span>LISTA DE LA COMPRA</span>
@@ -35,7 +35,7 @@
                 </div>
             </router-link>
 
-            <router-link :to="{}" class="col-4">
+            <router-link :to="{ name: 'ListadelaCompra' }" class="col-4">
                 <div class="card align-content-center d-flex justify-content-center align-items-center">
                     <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="95px" height="95px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve" fill="#F59E0B" stroke="#F59E0B"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path fill-rule="evenodd" clip-rule="evenodd" fill="#F59E0B" d="M48,12H4c-2.211,0-4,1.789-4,4v28c0,2.211,1.789,4,4,4h8v12 c0,1.617,0.973,3.078,2.469,3.695C14.965,63.902,15.484,64,16,64c1.039,0,2.062-0.406,2.828-1.172L33.656,48H48 c2.211,0,4-1.789,4-4V16C52,13.789,50.211,12,48,12z"></path> <path fill-rule="evenodd" clip-rule="evenodd" fill="#F59E0B" d="M60,0H16c-2.211,0-4,1.789-4,4v4h40c2.211,0,4,1.789,4,4v24h4 c2.211,0,4-1.789,4-4V4C64,1.789,62.211,0,60,0z"></path> </g> </g></svg>                    <span>COMENTARIOS</span>
                 </div>

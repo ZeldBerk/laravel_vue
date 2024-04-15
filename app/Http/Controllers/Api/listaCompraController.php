@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class listaCompraController extends Controller
 {
-    public function listaCompra(Request $request, int $userId, string $formato)
+    public function listaCompra(int $userId, string $formato)
     {
         $recetasSemanales = PlanSemanal::where('user_id', $userId)->get();
 
