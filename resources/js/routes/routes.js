@@ -251,7 +251,7 @@ export default [
                 component: PlanSemanal
             },
             {
-                name: 'Lista de la Compra',
+                name: 'ListadelaCompra',
                 path: 'ListaCompra',
                 meta: { breadCrumb: 'Lista de la Compra'},
                 component: ListaCompra
