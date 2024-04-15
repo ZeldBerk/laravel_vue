@@ -13,4 +13,3 @@
 - ESTUDIAR EL YUP DEL UPDATE y el promise (IMPORTANTE)
 - Boton eleiminar ingredientes + eliminar ingredientes al eliminar receta
 - Solucnionar borede text Editor component
-- añadir alerta de carga a los formularios

@@ -258,75 +258,80 @@ function ingrediente_selection(id_selection) {
     }
 }
 
-// Añade la receta y muestra una alerta en funcion de la respuesta de la api
+// Añade la receta y muestra una alerta en función de la respuesta de la API
 function addReceta() {
-    let alertShown = false; // Verificar si se ha mostrado la alerta
 
-    ingredientesSeleccionados.value.forEach(ingrediente => {
-        // Verificar si se ha ingresado una cantidad y no hay unidad
-        if (ingrediente.cantidad && !ingrediente.unidad) {
-            swal({
-                icon: 'warning',
-                title: 'Unidad requerida',
-                text: 'Por favor, selecciona una unidad de medida para el ingrediente.'
-            });
-            alertShown = true; // Establecer en verdadero si se muestra la alerta
-            return; // Detener la ejecución del bucle
-        }
-    });
-
-    if (alertShown) {
-        return; // Si se muestra la alerta, detener la ejecución del código
+swal({
+    title: 'Procesando...',
+    text: 'Por favor, espera un momento.',
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    showConfirmButton: false,
+    showCancelButton: false,
+    showCloseButton: false,
+    onBeforeOpen: () => {
+        swal.showLoading();
     }
+});
 
-    
-    let r = receta.value;
-    let serializedReceta = new FormData()
-    for (let item in r) {
-        if (r.hasOwnProperty(item)) {
-            serializedReceta.append(item, r[item])
-        }
+let r = receta.value;
+let serializedReceta = new FormData()
+for (let item in r) {
+    if (r.hasOwnProperty(item)) {
+        serializedReceta.append(item, r[item])
     }
-    axios.post('/api/recetas', serializedReceta, {
-        headers: {
-            "content-type": "multipart/form-data"
-        }
-    })
-        .then(response => {
-            // Acceder al ID de la receta recién creada
-            receta_id = response.data.id;
-            swal({
-                icon: 'success',
-                title: 'Receta añadida correctamente'
-            })
-                .then(() => {
+}
 
-                    ingredientesSeleccionados.value.forEach(ingrediente => {
-                        const ingrediente_receta = ref({});
+axios.post('/api/recetas', serializedReceta, {
+    headers: {
+        "content-type": "multipart/form-data"
+    }
+})
+    .then(response => {
+        // Acceder al ID de la receta recién creada
+        const receta_id = response.data.id;
+        let ingredientPromises = [];
 
-                        ingrediente_receta.value.receta_id = receta_id;
-                        ingrediente_receta.value.ingrediente_id = ingrediente.id;
-                        ingrediente_receta.value.cantidad = ingrediente.cantidad;
-                        ingrediente_receta.value.unidad = ingrediente.unidad;
+        ingredientesSeleccionados.value.forEach(ingrediente => {
+            const ingrediente_receta = ref({});
 
-                        console.log(ingrediente_receta);
-                        axios.post('/api/ingredientes/receta/', ingrediente_receta.value)
-                            .then(response => {
-                                // Redireccionar a la página después de cerrar la alerta
-                                router.push({ name: 'recetas.index' })
-                            })
-                            .catch(error => {
-                                console.error('Error al insertar ingredientes:', error);
-                            });
-                    });
-                });
-        })
-        .catch(error => {
-            swal({
-                icon: 'error',
-                title: 'No se ha añadido la receta'
-            });
+            ingrediente_receta.value.receta_id = receta_id;
+            ingrediente_receta.value.ingrediente_id = ingrediente.id;
+            ingrediente_receta.value.cantidad = ingrediente.cantidad;
+            ingrediente_receta.value.unidad = ingrediente.unidad;
+
+            console.log(ingrediente_receta);
+            ingredientPromises.push(
+                axios.post('/api/ingredientes/receta/', ingrediente_receta.value)
+            );
         });
+
+        // Esperar a que todas las promesas se resuelvan
+        return Promise.all(ingredientPromises);
+    })
+    .then(() => {
+        // Cerrar la alerta de carga
+        swal.close();
+
+        // Mostrar la alerta de éxito
+        swal({
+            icon: 'success',
+            title: 'Receta añadida correctamente'
+        })
+            .then(() => {
+                // Redireccionar a la página después de cerrar la alerta
+                router.push({ name: 'recetas.index' });
+            });
+    })
+    .catch(error => {
+        // Cerrar la alerta de carga
+        swal.close();
+        
+        swal({
+            icon: 'error',
+            title: 'No se ha añadido la receta'
+        });
+    });
 }
 
 // Método para limitar la longitud del texto
