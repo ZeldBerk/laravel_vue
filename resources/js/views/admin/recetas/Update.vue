@@ -315,6 +315,19 @@ function ingrediente_selection(id_selection) {
 
 // Método para guardar los cambios en la receta y los ingredientes modificados
 function saveReceta() {
+    swal({
+        title: 'Procesando...',
+        text: 'Por favor, espera un momento.',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        showCancelButton: false,
+        showCloseButton: false,
+        onBeforeOpen: () => {
+            swal.showLoading();
+        }
+    });
+
     validate().then(form => {
         if (form.valid) {
             let serialized = new FormData();
@@ -331,47 +344,53 @@ function saveReceta() {
                 }
             })
                 .then(response => {
+                    // Crear un array de promesas para actualizar los ingredientes
+                    let ingredientPromises = [];
+
+                    ingredientes_receta.value.forEach(ingrediente => {
+                        ingredientPromises.push(
+                            axios.put('/api/ingredientes/receta/update/' + ingrediente.id, ingrediente)
+                        );
+                    });
+
+                    // Comprobar si hay ingredientes nuevos añadidos y guardarlos
+                    if (ingredientesSeleccionados) {
+                        ingredientesSeleccionados.value.forEach(ingrediente => {
+                            const ingrediente_receta = ref({});
+
+                            ingrediente_receta.value.receta_id = route.params.id;
+                            ingrediente_receta.value.ingrediente_id = ingrediente.id;
+                            ingrediente_receta.value.cantidad = ingrediente.cantidad;
+                            ingrediente_receta.value.unidad = ingrediente.unidad;
+
+                            ingredientPromises.push(
+                                axios.post('/api/ingredientes/receta/', ingrediente_receta.value)
+                            );
+                        });
+                    }
+
+                    // Esperar a que todas las promesas se resuelvan
+                    return Promise.all(ingredientPromises);
+                })
+                .then(() => {
+                    // Cerrar la alerta de carga
+                    swal.close();
+
+                    // Mostrar la alerta de éxito
                     swal({
                         icon: 'success',
                         title: 'Receta actualizada correctamente'
                     })
                         .then(() => {
-                            // Guardar los cambios en los ingredientes modificados
-                            ingredientes_receta.value.forEach(ingrediente => {
-                                axios.put('/api/ingredientes/receta/update/' + ingrediente.id, ingrediente)
-                                    .then(response => {
-                                        console.log(response.data)
-                                    })
-                                    .catch(error => {
-                                        console.error('Error al actualizar ingrediente:', error);
-                                    });
-                            });
-
-                            // Comprobamos si hay ingredientes nuevos añadidos y los guardamos
-                            if (ingredientesSeleccionados) {
-                                ingredientesSeleccionados.value.forEach(ingrediente => {
-                                    const ingrediente_receta = ref({});
-
-                                    ingrediente_receta.value.receta_id = receta_id;
-                                    ingrediente_receta.value.ingrediente_id = ingrediente.id;
-                                    ingrediente_receta.value.cantidad = ingrediente.cantidad;
-                                    ingrediente_receta.value.unidad = ingrediente.unidad;
-
-                                    console.log(ingrediente_receta);
-                                    axios.post('/api/ingredientes/receta/', ingrediente_receta.value)
-                                        .then(response => {
-                                            // Redireccionar a la página después de cerrar la alerta
-                                            router.push({ name: 'recetasAdmin.index' })
-                                        })
-                                        .catch(error => {
-                                            console.error('Error al insertar ingredientes:', error);
-                                        });
-                                });
-                            }
-                            // router.push({ name: 'recetasAdmin.index' });
+                            // Redireccionar a la página después de cerrar la alerta
+                            router.push({ name: 'recetasAdmin.index' });
                         });
                 })
                 .catch(error => {
+                    // Cerrar la alerta de carga
+                    swal.close();
+
+                    // Mostrar la alerta de error
                     swal({
                         icon: 'error',
                         title: 'No se ha podido actualizar la receta'
