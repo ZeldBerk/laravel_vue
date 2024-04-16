@@ -16,32 +16,47 @@ class listaCompraController extends Controller
         $listaCompra = [];
 
         foreach ($recetasSemanales as $receta) {
-            // Verificar si la fecha de elaboración está definida
-            if ($receta->fecha_elaboracion) {
-                $diaReceta = $receta->fecha_elaboracion->format('Y-m-d');
-                $ingredientesReceta = ingredientes_recetas::where('receta_id', $receta->receta_id)
-                    ->join('ingredientes', 'ingredientes_recetas.ingrediente_id', '=', 'ingredientes.id')
-                    ->select('ingredientes.nombre', 'ingredientes_recetas.cantidad', 'ingredientes_recetas.unidad')
-                    ->get();
+            // Verificar si el formato es diario o semanal
+            if ($formato === 'semana') {
+                // Si es semanal, no necesitamos el día de la semana
+                $diaSemana = null;
+            } else {
+                // Si es diario, extraemos el día de la semana
+                $diaSemana = $receta->dia_semana;
+            }
 
-                foreach ($ingredientesReceta as $ingrediente) {
-                    if ($formato == 'dia') {
-                        if (!isset($listaCompra[$diaReceta][$ingrediente->nombre])) {
-                            $listaCompra[$diaReceta][$ingrediente->nombre] = [
-                                'cantidad' => 0,
-                                'unidad' => $ingrediente->unidad,
-                            ];
-                        }
-                        $listaCompra[$diaReceta][$ingrediente->nombre]['cantidad'] += $ingrediente->cantidad;
-                    } else {
-                        if (!isset($listaCompra[$ingrediente->nombre])) {
-                            $listaCompra[$ingrediente->nombre] = [
-                                'cantidad' => 0,
-                                'unidad' => $ingrediente->unidad,
-                            ];
-                        }
-                        $listaCompra[$ingrediente->nombre]['cantidad'] += $ingrediente->cantidad;
-                    }
+            // Extraer el ID de receta
+            $recetaId = $receta->receta_id;
+
+            // Buscar los ingredientes correspondientes a la receta en la base de datos
+            $ingredientesReceta = ingredientes_recetas::where('receta_id', $recetaId)
+                ->join('ingredientes', 'ingredientes_recetas.ingrediente_id', '=', 'ingredientes.id')
+                ->select('ingredientes.nombre', 'ingredientes_recetas.cantidad', 'ingredientes_recetas.unidad')
+                ->get();
+
+            // Agregar los ingredientes a la lista de compras
+            foreach ($ingredientesReceta as $ingrediente) {
+                if (!isset($listaCompra[$diaSemana][$ingrediente->nombre])) {
+                    $listaCompra[$diaSemana][$ingrediente->nombre] = [
+                        'nombre' => $ingrediente->nombre,
+                        'cantidad' => 0,
+                        'unidad' => $ingrediente->unidad,
+                    ];
+                }
+
+                $listaCompra[$diaSemana][$ingrediente->nombre]['cantidad'] += $ingrediente->cantidad;
+            }
+        }
+
+        // Convertir unidades si es necesario
+        foreach ($listaCompra as &$diaCompra) {
+            foreach ($diaCompra as &$ingrediente) {
+                if ($ingrediente['unidad'] === 'g' && $ingrediente['cantidad'] > 1000) {
+                    $ingrediente['cantidad'] = round($ingrediente['cantidad'] / 1000, 2);
+                    $ingrediente['unidad'] = 'Kg';
+                } elseif ($ingrediente['unidad'] === 'ml' && $ingrediente['cantidad'] > 1000) {
+                    $ingrediente['cantidad'] = round($ingrediente['cantidad'] / 1000, 2);
+                    $ingrediente['unidad'] = 'L';
                 }
             }
         }
