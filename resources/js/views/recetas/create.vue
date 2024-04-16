@@ -91,7 +91,6 @@ const ingredientes_receta = ref({});
 const receta = ref({});
 const swal = inject('$swal');
 const router = useRouter()
-let receta_id = 0;
 
 // Definir un objeto para almacenar las propiedades de cada ingrediente seleccionado
 const ingredientesSeleccionados = ref([]);

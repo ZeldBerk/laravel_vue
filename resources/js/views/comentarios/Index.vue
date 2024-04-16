@@ -9,7 +9,7 @@
                 <button class="btn btn-success" @click="createComentario()">Dejar comentario</button>
             </div>
         </div>
-
+        <!-- <Rating v-model="comentario.value.puntuacion" :cancel="false" :stars="5" /> -->
         <div class="row">
             <div class="col-md-4 mb-3" v-for="comentario in comentarioSH">
                 <div class="card">
@@ -59,6 +59,7 @@
 import axios from "axios";
 import { ref, onMounted, inject } from "vue";
 import { useRoute } from "vue-router";
+import Rating from 'primevue/rating'; // Importa el componente Rating de PrimeVue
 
 const swal = inject('$swal');
 const comentarioSH = ref([]);
@@ -77,7 +78,7 @@ onMounted(() => {
     axios.get('/api/comentarios/' + receta_id)
         .then(response => {
             comentarioSH.value = response.data;
-        })
+        });
 });
 
 // Guardar receta_id y user_id en comentario para hacer el insert
@@ -85,79 +86,20 @@ comentario.value.user_id = user_id;
 comentario.value.receta_id = receta_id;
 
 function createComentario() {
+    let ratingValue = 1;
+
     swal.fire({
         title: 'Deja tu comentario',
         html: `
-                <div class="form-group">
-                    <label for="puntuacion">Valoración:</label>
-                    <div class="rating">
-                        <input type="radio" id="star5" name="rate" value="5" />
-                        <label for="star5" title="text"
-                            ><svg
-                            viewBox="0 0 576 512"
-                            height="1em"
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="star-solid"
-                            >
-                            <path
-                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                            ></path></svg
-                        ></label>
-                        <input type="radio" id="star4" name="rate" value="4" />
-                        <label for="star4" title="text"
-                            ><svg
-                            viewBox="0 0 576 512"
-                            height="1em"
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="star-solid"
-                            >
-                            <path
-                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                            ></path></svg
-                        ></label>
-                        <input checked="" type="radio" id="star3" name="rate" value="3" />
-                        <label for="star3" title="text"
-                            ><svg
-                            viewBox="0 0 576 512"
-                            height="1em"
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="star-solid"
-                            >
-                            <path
-                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                            ></path></svg
-                        ></label>
-                        <input type="radio" id="star2" name="rate" value="2" />
-                        <label for="star2" title="text"
-                            ><svg
-                            viewBox="0 0 576 512"
-                            height="1em"
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="star-solid"
-                            >
-                            <path
-                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                            ></path></svg
-                        ></label>
-                        <input type="radio" id="star1" name="rate" value="1" />
-                        <label for="star1" title="text"
-                            ><svg
-                            viewBox="0 0 576 512"
-                            height="1em"
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="star-solid"
-                            >
-                            <path
-                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                            ></path></svg
-                        ></label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="contenido">Comentario:</label>
-                    <textarea id="contenido" class="form-control" rows="3" required></textarea>
-                </div>
-            `,
+            <div class="form-group">
+                <label for="puntuacion">Valoración:</label>
+                <Rating v-model="ratingValue" :stars="5" @input="value => ratingValue = value"/>
+            </div>
+            <div class="form-group">
+                <label for="contenido">Comentario:</label>
+                <textarea id="contenido" class="form-control" rows="3" required></textarea>
+            </div>
+        `,
         showCancelButton: true,
         confirmButtonText: 'Enviar',
         didOpen: () => {
@@ -175,8 +117,7 @@ function createComentario() {
             const puntuacion = document.getElementById('puntuacion').value;
             const contenido = document.getElementById('contenido').value;
 
-            // Guardar valores en comentario
-            comentario.value.puntuacion = puntuacion;
+            comentario.value.puntuacion = ratingValue;
             comentario.value.contenido = contenido;
 
             // Insert del comentario 
@@ -185,10 +126,9 @@ function createComentario() {
                     swal({
                         icon: 'success',
                         title: 'Receta añadida correctamente'
-                    })
-                        .then(() => {
-                            window.location.reload();
-                        });
+                    }).then(() => {
+                        window.location.reload();
+                    });
                 })
                 .catch(error => {
                     swal({
@@ -204,6 +144,7 @@ function createComentario() {
 .btn-success {
     margin-right: 5px;
 }
+
 .rating:not(:checked)>input {
     position: absolute;
     appearance: none;
