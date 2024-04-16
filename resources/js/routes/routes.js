@@ -24,6 +24,7 @@ const RecetasUpdateAdmin = () => import('../views/admin/recetas/Update.vue');
 const ComentList = () => import('../views/comentarios/Index.vue');
 const PlanSemanal = () => import('../views/planSemanal/index.vue');
 const ListaCompra = () => import('../views/listaCompra/index.vue');
+const ComentListAdmin = () => import('../views/admin/comentarios/Index.vue');
 
 
 function requireLogin(to, from, next) {
