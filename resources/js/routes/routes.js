@@ -245,6 +245,19 @@ export default [
                 ]
             },
             {
+                name: 'comentAdmin',
+                path: 'comentAdmin',
+                meta: { breadCrumb: 'Comentarios' },
+                children: [
+                    {
+                        name: 'comentAdmin.index',
+                        path: '',
+                        component: ComentListAdmin,
+                        meta: { breadCrumb: 'Listado recetas' }
+                    },
+                ]
+            },
+            {
                 name: 'Plan Semanal',
                 path: 'PlanSemanal',
                 meta: { breadCrumb: 'Plan Semanal'},
