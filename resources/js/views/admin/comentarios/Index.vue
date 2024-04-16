@@ -6,7 +6,8 @@
                     <div class="d-flex justify-content-between pb-2 mb-2">
                         <h5 class="card-title">Todos los comentarios</h5>
                         <div>
-                            <router-link :to="{name: 'recetasAdmin.create'}" class="btn btn-success">Nuevo Comentario</router-link>
+                            <router-link :to="{ name: 'recetasAdmin.create' }" class="btn btn-success">Nuevo
+                                Comentario</router-link>
                         </div>
                     </div>
 
@@ -22,17 +23,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(comentario, index) in comentarios">
-                                {{ comentario }}
-                                <!-- <td class="text-center">{{receta.id}}</td>
-                                <td>{{receta.nombre}}</td>
-                                <td>{{receta.raciones}}</td>
-                                <td>{{receta.tiempo_preparacion}}</td>
-                                <th>{{receta.categoria_id }}</th>
+                            <tr v-for="(comentario, index) in comentList">
+                                <td class="text-center">{{comentario.id}}</td>
+                                <td>{{comentario.name}}</td>
+                                <td>{{comentario.nombre}}</td>
+                                <td>{{comentario.contenido}}</td>
+                                <td>{{comentario.puntuacion }}</td>
                                 <td class="text-center">
-                                    <router-link :to="{name: 'recetasAdmin.update', params: {id:receta.id}}" class="btn btn-warning mr-1">Edit</router-link>
-                                    <button class="btn btn-danger" @click="deleteReceta(receta.id, index)">Delete</button>
-                                </td> -->
+                                    <router-link :to="{name: 'recetasAdmin.update', params: {id:comentario.id}}" class="btn btn-warning mr-1">Edit</router-link>
+                                    <button class="btn btn-danger" @click="deleteReceta(comentario.id, index)">Delete</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -43,7 +43,16 @@
 </template>
 
 <script setup>
-    import {ref, onMounted, inject} from "vue";
+import { ref, onMounted, inject } from "vue";
 
-    
+const swal = inject('$swal');
+const comentList = ref([]);
+
+// Obtener todo los comentraios de la receta
+onMounted(() => {
+    axios.get('/api/comentarios')
+        .then(response => {
+            comentList.value = response.data;
+        });
+});
 </script>

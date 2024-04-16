@@ -8,9 +8,14 @@ use App\Models\comentarios;
 
 class ComentariosController extends Controller
 {
-    // Extrae todos los comentarios de todas las recetas
+    // Extrae todos los comentarios de todas las recetas con 
+    // el nombre de usuario nombre de la receta
     public function index(){
-        $comentarios = comentarios::all()->toArray();
+        $comentarios = comentarios::join('users', 'users.id', '=', 'comentarios.user_id')
+        ->join('recetas', 'recetas.id', '=', 'comentarios.receta_id')
+        ->select('comentarios.*', 'users.name', 'recetas.nombre')
+        ->get();
+
         return $comentarios;
     }
 
