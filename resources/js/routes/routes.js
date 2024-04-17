@@ -25,6 +25,7 @@ const ComentList = () => import('../views/comentarios/Index.vue');
 const PlanSemanal = () => import('../views/planSemanal/index.vue');
 const ListaCompra = () => import('../views/listaCompra/index.vue');
 const ComentListAdmin = () => import('../views/admin/comentarios/Index.vue');
+const comentAdminUpdate = () => import('../views/admin/comentarios/Update.vue');
 
 
 function requireLogin(to, from, next) {
@@ -256,6 +257,12 @@ export default [
                         component: ComentListAdmin,
                         meta: { breadCrumb: 'Listado recetas' }
                     },
+                    {
+                        name: 'comentAdmin.update',
+                        path: 'update/:id',
+                        component: comentAdminUpdate,
+                        meta: { breadCrumb: 'Actualizar comentarios'}
+                    }
                 ]
             },
             {
