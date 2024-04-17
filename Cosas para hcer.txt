@@ -8,7 +8,6 @@
 - Diseño plan semanal(repasar)
 - Datos user
 - Mejorar alertas
-- Crear la lista de la compra enter de principio a fin.
 - Gestion recetas segun usuario (admin o no admin)
 - ESTUDIAR EL YUP DEL UPDATE y el promise (IMPORTANTE)
 - Boton eleiminar ingredientes + eliminar ingredientes al eliminar receta

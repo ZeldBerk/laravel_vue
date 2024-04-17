@@ -15,13 +15,24 @@ class listaCompraController extends Controller
 
         $listaCompra = [];
 
+        // Definir el orden de los días de la semana
+        $ordenDias = [
+            'Lunes' => 1,
+            'Martes' => 2,
+            'Miércoles' => 3,
+            'Jueves' => 4,
+            'Viernes' => 5,
+            'Sábado' => 6,
+            'Domingo' => 7,
+        ];
+
         foreach ($recetasSemanales as $receta) {
             // Verificar si el formato es diario o semanal
             if ($formato === 'semana') {
                 // Si es semanal, no necesitamos el día de la semana
                 $diaSemana = null;
             } else {
-                // Si es diario, extraemos el día de la semana
+                // Si es diario, extraemos el día de la semana y lo ordenamos
                 $diaSemana = $receta->dia_semana;
             }
 
@@ -43,10 +54,17 @@ class listaCompraController extends Controller
                         'unidad' => $ingrediente->unidad,
                     ];
                 }
-
                 $listaCompra[$diaSemana][$ingrediente->nombre]['cantidad'] += $ingrediente->cantidad;
             }
         }
+
+        // Ordenar el resultado por el orden de los días de la semana
+        if ($formato === 'dia') {
+            uksort($listaCompra, function ($a, $b) use ($ordenDias) {
+                return $ordenDias[$a] - $ordenDias[$b];
+            });
+        }
+
 
         // Convertir unidades si es necesario
         foreach ($listaCompra as &$diaCompra) {

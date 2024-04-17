@@ -396,6 +396,7 @@ export default [
             {
                 name: 'users.index',
                 path: 'users',
+                can: 'user-list',
                 component: () => import('../views/admin/users/Index.vue'),
                 meta: { breadCrumb: 'Users' }
             },
@@ -403,6 +404,7 @@ export default [
                 name: 'users.create',
                 path: 'users/create',
                 component: () => import('../views/admin/users/Create.vue'),
+                
                 meta: { breadCrumb: 'Add New' }
             },
             {

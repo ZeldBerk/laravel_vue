@@ -1,49 +1,58 @@
 <template>
-    <h2>Lista de la compra</h2>
-    <div class="formato-selector" >
-        <label for="formato">Formato:</label>
-        <select id="formato" v-model="formato" @change="cargarListaCompra">
-            <option value="semana">Semana</option>
-            <option value="dia">Día</option>
-        </select>
-    </div>
     <div class="lista-compra">
+        <h2>Lista de la compra</h2>
 
-        <div v-if="listaCompra" class="lista">
-            <template v-if="formato === 'semana'">
-                <div v-for="(ingredientes, dia) in listaCompra" :key="dia" class="lista-dia-semana">
-                    <ul>
-                        <li v-for="ingrediente in ingredientes" :key="ingrediente.nombre">
-                            <div v-if="ingrediente.cantidad !== null && ingrediente.unidad !== null" class="ingrediente">
-                                <span>- {{ ingrediente.cantidad }} {{ ingrediente.unidad }} de {{ ingrediente.nombre
-                                    }}</span>
-                            </div>
-                            <div v-else class="ingrediente">
-                                <span>- {{ ingrediente.nombre }}</span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </template>
-            <template v-else-if="formato === 'dia'"> 
-                <div class="columnas">
-                <div v-for="(ingredientes, dia) in listaCompra" :key="dia" class="lista-dia">
+        <div class="formato-selector">
+            <label for="formato">Formato:</label>
+            <select id="formato" v-model="formato" @change="cargarListaCompra">
+                <option value="semana">Semana</option>
+                <option value="dia">Día</option>
+            </select>
+            
+        </div>
+
+        <div v-if="listaCompra && formato === 'semana'">
+            <div class="lista-semana">
+                <div v-for="(ingredientes, dia) in listaCompra" :key="dia" class="tarjeta-dia col-lg-3 col-md-6 col-sm-12">
                     <h3>{{ dia }}</h3>
-                   
-                        <ul>
-                            <li v-for="ingrediente in ingredientes" :key="ingrediente.nombre">
-                                <div v-if="ingrediente.cantidad !== null && ingrediente.unidad !== null" class="ingrediente">
-                                    <span>- {{ ingrediente.cantidad }} {{ ingrediente.unidad }} de {{ ingrediente.nombre
-                                        }}</span>
-                                </div>
-                                <div v-else class="ingrediente">
-                                    <span>- {{ ingrediente.nombre }}</span>
-                                </div>
-                            </li>
-                        </ul>
+                    <div class="lista-ingredientes row">
+                        <div class="col-lg-3 col-md-2" v-for="ingrediente in ingredientes" :key="ingrediente.nombre">
+                            <ul class="ingrediente">
+                                <li v-if="ingrediente.cantidad !== null && ingrediente.unidad !== null" class="nombre">
+                                    {{ ingrediente.cantidad }} {{ ingrediente.unidad }} de {{ ingrediente.nombre }}
+                                </li>
+                                <li v-else class="nombre">
+                                    {{ ingrediente.nombre }}
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </template>
+            </div>
+        </div>
+
+        <div class="lista">
+            <div v-if="listaCompra && formato === 'dia'">
+                <div class="row">
+                    <div v-for="(ingredientes, dia) in listaCompra" :key="dia" class="col-md-12 col-lg-6">
+                        <div class="lista-dia-columna">
+                            <h3>{{ dia }}</h3>
+                            <div class="lista-ingredientes">
+                                <div v-for="ingrediente in ingredientes" :key="ingrediente.nombre">
+                                    <ul class="ingrediente">
+                                        <li v-if="ingrediente.cantidad !== null && ingrediente.unidad !== null" class="nombre">
+                                            {{ ingrediente.cantidad }} {{ ingrediente.unidad }} de {{ ingrediente.nombre }}
+                                        </li>
+                                        <li v-else class="nombre">
+                                            {{ ingrediente.nombre }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -53,9 +62,7 @@ import { ref, onMounted } from 'vue';
 import axios from 'axios';
 
 const data = localStorage.getItem("vuex");
-let userId = null;
-userId = JSON.parse(data).auth.user.id;
-
+const userId = JSON.parse(data).auth.user.id;
 
 const formato = ref('semana');
 const listaCompra = ref(null);
@@ -68,7 +75,6 @@ function cargarListaCompra() {
     axios
         .get(`/api/listaCompra/${userId}/${formato.value}`)
         .then((response) => {
-            console.log(response)
             listaCompra.value = response.data;
         });
 }
@@ -76,48 +82,96 @@ function cargarListaCompra() {
 
 <style scoped>
 .lista-compra {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 20px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f8f8;
+}
+
+.formato-selector {
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 .lista {
-  margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
-.lista-dia-semana {
-  margin-bottom: 20px;
+.row {
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.lista h3 {
-  margin-bottom: 10px;
+.col-md-12 {
+    flex: 1;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.lista ul {
-  list-style-type: none;
-  padding-left: 0;
+.col-lg-6 {
+    flex: 1;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.lista li {
-  margin-bottom: 5px;
+.lista-semana {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tarjeta-dia {
+    flex: 1;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.lista-dia h3 {
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.lista-ingredientes {
+    list-style: none;
+    padding: 0;
+}
+
+.lista-ingredientes li {
+    margin-bottom: 10px;
 }
 
 .ingrediente {
-  padding: 10px;
-  border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
 }
 
-.ingrediente span {
-  font-size: 16px;
+.nombre {
+    margin-right: 1
 }
 
-.columnas {
-  display: flex;
-  flex-wrap: wrap;
+/* Media queries para diseño responsive */
+@media (max-width: 992px) {
+    .tarjeta-dia {
+        max-width: calc(50% - 20px); /* 50% para 2 columnas en pantallas medianas */
+    }
 }
 
-.columnas .lista-dia {
-  flex: 1;
-  margin-right: 20px;
+@media (max-width: 576px) {
+    .tarjeta-dia {
+        max-width: 100%; /* Mostrar en una sola columna en pantallas pequeñas */
+    }
 }
 </style>
