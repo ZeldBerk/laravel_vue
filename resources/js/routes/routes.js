@@ -143,20 +143,6 @@ export default [
             },
         ]
     },
-    // {
-    //     path: '/usuario',
-    //     component: AuthenticatedUser,
-    //     beforeEnter: requireLogin,
-    //     meta: { breadCrumb: 'Panel de Control'},
-    //     children: [
-    //         {
-    //             name: 'recetasAdmin.index',
-    //             path: '',
-    //             component: RecetasListAdmin,
-    //             meta: { breadCrumb: 'Listado recetas' }
-    //         }
-    //     ]
-    // },
     {
         path: '/admin',
         component: AuthenticatedLayout,

@@ -2,24 +2,24 @@
 
     <div class="contenedorPerfil">
         <div class="row">
-            <div class="col-4">
-                <a href="/admin/favoritos" class="card align-content-center d-flex justify-content-center align-items-center">
+            <router-link :to="{name: 'Favoritos' }" class="col-4">
+                <div class="card align-content-center d-flex justify-content-center align-items-center">
                     <svg width="95px" height="95px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4.45067 13.9082L11.4033 20.4395C11.6428 20.6644 11.7625 20.7769 11.9037 20.8046C11.9673 20.8171 12.0327 20.8171 12.0963 20.8046C12.2375 20.7769 12.3572 20.6644 12.5967 20.4395L19.5493 13.9082C21.5055 12.0706 21.743 9.0466 20.0978 6.92607L19.7885 6.52734C17.8203 3.99058 13.8696 4.41601 12.4867 7.31365C12.2913 7.72296 11.7087 7.72296 11.5133 7.31365C10.1304 4.41601 6.17972 3.99058 4.21154 6.52735L3.90219 6.92607C2.25695 9.0466 2.4945 12.0706 4.45067 13.9082Z" fill="#F59E0B" stroke="#F59E0B" stroke-width="0.00024000000000000003"></path> </g></svg>
                     <span>FAVORITOS</span>
-                </a>
-            </div>
-            <div class="col-4">
-                <a href="/admin/profile" class="card align-content-center d-flex justify-content-center align-items-center">
+                </div>
+            </router-link>
+            <router-link :to="{name: 'profile.index' }" class="col-4">
+                <div class="card align-content-center d-flex justify-content-center align-items-center">
                     <svg width="95px" height="95px" fill="#F59E0B" viewBox="-3.2 -3.2 22.40 22.40" xmlns="http://www.w3.org/2000/svg"><g data-v-cb331fff="" id="SVGRepo_bgCarrier" stroke-width="0"></g><g data-v-cb331fff="" id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g data-v-cb331fff="" id="SVGRepo_iconCarrier"><path data-v-cb331fff="" d="M8 7C9.65685 7 11 5.65685 11 4C11 2.34315 9.65685 1 8 1C6.34315 1 5 2.34315 5 4C5 5.65685 6.34315 7 8 7Z" fill="#F59E0B"></path><path data-v-cb331fff="" d="M14 12C14 10.3431 12.6569 9 11 9H5C3.34315 9 2 10.3431 2 12V15H14V12Z" fill="#F59E0B"></path></g></svg>
                     <span>DATOS PERSONALES</span>
-                </a>
-            </div>
-            <div class="col-4">
-                <a href="/admin/PlanSemanal" class="card align-content-center d-flex justify-content-center align-items-center">
+                </div>
+            </router-link>
+            <router-link :to="{name: 'Plan Semanal'}" class="col-4">
+                <div class="card align-content-center d-flex justify-content-center align-items-center">
                     <svg fill="#F59E0B" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="95px" height="95px" viewBox="0 0 612 612" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M153,114.75h1.592c15.845,0,28.688-12.842,28.688-28.688V76.5V28.688C183.28,12.842,170.437,0,154.592,0H153 c-15.845,0-28.688,12.842-28.688,28.688V76.5v9.562C124.312,101.908,137.155,114.75,153,114.75z"></path> <path d="M449.438,114.75h1.592c15.846,0,28.688-12.842,28.688-28.688V76.5V28.688C479.717,12.842,466.875,0,451.029,0h-1.592 c-15.845,0-28.688,12.842-28.688,28.688V76.5v9.562C420.75,101.908,433.593,114.75,449.438,114.75z"></path> <path d="M535.5,76.5h-27.096v9.562c0,31.638-25.737,57.375-57.375,57.375h-1.592c-31.638,0-57.375-25.737-57.375-57.375V76.5 H211.967v9.562c0,31.638-25.738,57.375-57.375,57.375H153c-31.638,0-57.375-25.737-57.375-57.375V76.5H76.5 C34.253,76.5,0,110.753,0,153v382.5C0,577.747,34.253,612,76.5,612h459c42.247,0,76.5-34.253,76.5-76.5V153 C612,110.753,577.747,76.5,535.5,76.5z M573.75,535.5c0,21.104-17.146,38.25-38.25,38.25h-459c-21.085,0-38.25-17.146-38.25-38.25 v-306h535.5V535.5z"></path> <circle cx="153" cy="325.125" r="47.019"></circle> <circle cx="306" cy="325.125" r="47.019"></circle> <circle cx="459" cy="325.125" r="47.019"></circle> <circle cx="153" cy="478.125" r="47.019"></circle> <circle cx="306" cy="478.125" r="47.019"></circle> <circle cx="459" cy="478.125" r="47.019"></circle> </g> </g> </g></svg>
                     <span>PLAN SEMANAL</span>
-                </a>
-            </div>
+                </div>
+            </router-link>
         
         
             <router-link :to="{name: 'ListadelaCompra'}"  class="col-4">
