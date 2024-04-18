@@ -21,7 +21,7 @@ class ComentariosController extends Controller
 
     // Añade un comentario a la BBDD
     public function store(Request $request){
-
+        return $request;
         // Validar campos obligatorios
         $request->validate([
             'user_id' => 'required',
@@ -35,6 +35,27 @@ class ComentariosController extends Controller
         $comentario = comentarios::create($coment);
 
         return response()->json(['success' => true, 'data'=> $comentario]);
+    }
+
+
+    // Actualiza un comentario mediante su id
+    public function update($id, Request $request){
+            
+        // Obtener receta a actualizar
+        $comentario = comentarios::find($id);
+
+        // Validar campos obligatorios
+        $request->validate([
+            'user_id' => 'required',
+            'receta_id' => 'required',
+            'contenido' => 'required',
+            'puntuacion' => 'required'
+        ]);
+
+        $contToUpdate = $request->all();
+        $comentario->update($contToUpdate);
+
+        return response()->json(['success' => true, 'data' => $comentario]);
     }
 
 

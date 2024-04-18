@@ -3,7 +3,7 @@
         <div class="d-flex justify-content-between pb-2 mb-2">
             <h5 class="card-title">Actualizar Comentario</h5>
         </div>
-        <form @submit.prevent="actualizarComentario">
+        <form @submit.prevent="saveComent">
             <div class="row my-5">
                 <div class="col-md-8">
                     <div class="card border-0 shadow-sm">
@@ -30,60 +30,70 @@
 
 
 <script setup>
-import { ref, onMounted, inject } from "vue";
+import { ref, onMounted, inject, reactive } from "vue";
+import { useForm, useField } from "vee-validate";
 import { useRoute } from "vue-router";
+import { useRouter } from 'vue-router';
+import * as yup from 'yup';
 import Rating from 'primevue/rating'; // Importa el componente Rating de PrimeVue
 import TextEditorComponent from "@/components/TextEditorComponent.vue";
-import * as yup from 'yup';
-import { reactive } from "vue";
 import axios from "axios";
 
 const schema = yup.object({
-    nombre: yup.string().required().label('Nombre'),
-})
+    contenido: yup.string().required().label('Contenido'),
+    puntuacion: yup.number().required().label('Puntuación'),
+});
 
 const { validate, errors } = useForm({ validationSchema: schema })
 const swal = inject('$swal');
 const route = useRoute();
+const router = useRouter()
 
-const { value: puntuacion } = useField('puntuacion', null, { initialValue: '' });
+const { value: user_id } = useField('user_id', null, { initialValue: '' });
+const { value: receta_id } = useField('receta_id', null, { initialValue: '' });
 const { value: contenido } = useField('contenido', null, { initialValue: '' });
+const { value: puntuacion } = useField('puntuacion', null, { initialValue: 0 });
 
 const comentario = reactive({
-    puntuacion,
-    contenido
+    user_id,
+    receta_id,
+    contenido,
+    puntuacion
 })
 
 // Obtener todo los comentraios de la receta
 onMounted(() => {
     axios.get('/api/comentario/' + route.params.id)
         .then(response => {
-            comentario.puntuacion = response.data.puntuacion;
+            comentario.user_id = response.data.user_id;
+            comentario.receta_id = response.data.receta_id;
             comentario.contenido = response.data.contenido;
+            comentario.puntuacion = response.data.puntuacion;
         });
 });
 
 // Guarda los cambios del comentario
 function saveComent() {
-    swal({
-        title: 'Procesando...',
-        text: 'Por favor, espera un momento.',
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-        showConfirmButton: false,
-        showCancelButton: false,
-        showCloseButton: false,
-        onBeforeOpen: () => {
-            swal.showLoading();
-        }
-    });
-
+    // swal({
+    //     title: 'Procesando...',
+    //     text: 'Por favor, espera un momento.',
+    //     allowOutsideClick: false,
+    //     allowEscapeKey: false,
+    //     showConfirmButton: false,
+    //     showCancelButton: false,
+    //     showCloseButton: false,
+    //     onBeforeOpen: () => {
+    //         swal.showLoading();
+    //     }
+    // });
     validate().then(form => {
+        console.log("depuesde de validate y antes del if valid")
         if (form.valid) {
+            console.log("despues del if valid y antes del axios")
             axios.put('/api/comentario/update/' + route.params.id, comentario)
                 .then(response => {
                     // Cerrar la alerta de carga
-                    swal.close();
+                    // swal.close();
 
                     // Mostrar la alerta de éxito
                     swal({
@@ -97,7 +107,7 @@ function saveComent() {
                 })
                 .catch(error => {
                     // Cerrar la alerta de carga
-                    swal.close();
+                    // swal.close();
 
                     // Mostrar la alerta de error
                     swal({
@@ -106,6 +116,6 @@ function saveComent() {
                     });
                 })
         }
-    })
+    });
 }
 </script>
