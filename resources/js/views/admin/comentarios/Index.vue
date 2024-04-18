@@ -15,10 +15,10 @@
                         <thead class="bg-dark text-light">
                             <tr>
                                 <th width="50" class="text-center">#</th>
-                                <th>Nombre</th>
-                                <th>Raciones</th>
-                                <th>Tiempo de preparación</th>
-                                <th>Categoria</th>
+                                <th>Usuario</th>
+                                <th>Receta</th>
+                                <th>Comentario</th>
+                                <th>Valoración</th>
                                 <th class="text-center" width="200">Acciones</th>
                             </tr>
                         </thead>
@@ -30,7 +30,7 @@
                                 <td>{{comentario.contenido}}</td>
                                 <td>{{comentario.puntuacion }}</td>
                                 <td class="text-center">
-                                    <router-link :to="{name: 'recetasAdmin.update', params: {id:comentario.id}}" class="btn btn-warning mr-1">Edit</router-link>
+                                    <router-link :to="{name: 'comentAdmin.update', params: {id:comentario.id}}" class="btn btn-warning mr-1">Edit</router-link>
                                     <button class="btn btn-danger" @click="deleteReceta(comentario.id, index)">Delete</button>
                                 </td>
                             </tr>

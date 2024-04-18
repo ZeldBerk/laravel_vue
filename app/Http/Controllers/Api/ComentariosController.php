@@ -49,7 +49,7 @@ class ComentariosController extends Controller
     }
 
 
-    // Devuelve el comentarios mediante el id de la receta
+    // Devuelve los comentarios mediante el id de la receta
     public function show($receta_id){
 
         $comentarios = comentarios::where('receta_id', $receta_id)
@@ -58,5 +58,14 @@ class ComentariosController extends Controller
         ->get();
 
         return $comentarios;
+    }
+
+
+    // Devuelve el comentario a partir del id
+    public function find($id){
+
+        $comentario = comentarios::find($id);
+
+        return $comentario;
     }
 }
