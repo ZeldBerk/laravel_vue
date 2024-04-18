@@ -36,12 +36,12 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <!-- Redireccionara a la pagina para que el usuario vea sus datos personales -->
-                    <li><router-link class="dropdown-item" to="/admin">Ver Perfil</router-link></li>
+                    <li><router-link class="dropdown-item" to="/user">Ver Perfil</router-link></li>
                     <!-- Redireccionara a la pagina de plan semanal -->
-                    <li><router-link to="/admin/planSemanal" class="dropdown-item">Plan Semanal</router-link>
+                    <li><router-link to="/user/planSemanal" class="dropdown-item">Plan Semanal</router-link>
                     </li>
                     <!-- Redireccionara a la pagina de Favoritos del usuario -->
-                    <li><router-link to="/admin/favoritos" class="dropdown-item">Favoritos</router-link></li>
+                    <li><router-link to="/user/favoritos" class="dropdown-item">Favoritos</router-link></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>

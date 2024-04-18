@@ -2,17 +2,17 @@ import Cookies from 'js-cookie'
 import store from "../store";
 
 const AuthenticatedLayout = () => import('../layouts/Authenticated.vue')
-const AuthenticatedUser = () =>('../layouts/Usuarios.vue')
-const GuestLayout = ()  => import('../layouts/Guest.vue');
+const AuthenticatedUser = () => ('../layouts/Usuarios.vue')
+const GuestLayout = () => import('../layouts/Guest.vue');
 
-const PostsIndex  = ()  => import('../views/admin/posts/Index.vue');
-const PostsCreate  = ()  => import('../views/admin/posts/Create.vue');
-const PostsEdit  = ()  => import('../views/admin/posts/Edit.vue');
-const ExercisesIndex  = ()  => import('../views/admin/exercises/Index.vue');
-const ExercisesCreate  = ()  => import('../views/admin/exercises/Create.vue');
-const ExercisesEdit  = ()  => import('../views/admin/exercises/Edit.vue');
-const TasksList  = ()  => import('../views/admin/tasks/index.vue');
-const TasksCreate  = ()  => import('../views/admin/tasks/create.vue');
+const PostsIndex = () => import('../views/admin/posts/Index.vue');
+const PostsCreate = () => import('../views/admin/posts/Create.vue');
+const PostsEdit = () => import('../views/admin/posts/Edit.vue');
+const ExercisesIndex = () => import('../views/admin/exercises/Index.vue');
+const ExercisesCreate = () => import('../views/admin/exercises/Create.vue');
+const ExercisesEdit = () => import('../views/admin/exercises/Edit.vue');
+const TasksList = () => import('../views/admin/tasks/index.vue');
+const TasksCreate = () => import('../views/admin/tasks/create.vue');
 const TasksUpdate = () => import('../views/admin/tasks/update.vue');
 const RecetasList = () => import('../views/recetas/index.vue');
 const RecetasCreate = () => import('../views/recetas/create.vue');
@@ -56,7 +56,7 @@ export default [
         // redirect: { name: 'login' },
         component: GuestLayout,
         children: [
-           
+
             {
                 path: '/',
                 name: 'home',
@@ -104,7 +104,7 @@ export default [
             {
                 name: 'recetas',
                 path: 'recetas',
-                meta: { breadCrumb: 'Recetas'},
+                meta: { breadCrumb: 'Recetas' },
                 children: [
                     {
                         name: 'recetas.index',
@@ -123,14 +123,14 @@ export default [
                         name: 'recetas.detalle',
                         path: 'detalle/:id',
                         component: RecetasDetalle,
-                        meta: { breadCrumb: 'Detalles recta'}
+                        meta: { breadCrumb: 'Detalles recta' }
                     }
                 ]
             },
             {
                 name: 'comentarios',
                 path: 'comentarios',
-                meta: { breadCrumb: 'comentarios'},
+                meta: { breadCrumb: 'comentarios' },
                 children: [
                     {
                         name: 'comentarios.index',
@@ -144,13 +144,10 @@ export default [
         ]
     },
     {
-        path: '/admin',
+        path: '/user',
         component: AuthenticatedLayout,
-        // redirect: {
-        //     name: 'admin.index'
-        // },
         beforeEnter: requireLogin,
-        meta: { breadCrumb: 'Panel de Control' },
+        meta: { breadCrumb: 'Pandel de Control' },
         children: [
             {
                 name: 'admin.index',
@@ -165,52 +162,9 @@ export default [
                 meta: { breadCrumb: 'Profile' }
             },
             {
-                name: 'posts.index',
-                path: 'posts',
-                component: PostsIndex,
-                meta: { breadCrumb: 'Posts' }
-            },
-            {
-                name: 'posts.create',
-                path: 'posts/create',
-                component: PostsCreate,
-                meta: { breadCrumb: 'Add new post' }
-            },
-            {
-                name: 'posts.edit',
-                path: 'posts/edit/:id',
-                component: PostsEdit,
-                meta: { breadCrumb: 'Edit post' }
-            },
-            {
-                name: 'tasks',
-                path: 'tasks',
-                meta: { breadCrumb: 'Tareas'},
-                children: [
-                    {
-                        name: 'tasks.index',
-                        path: '',
-                        component: TasksList,
-                        meta: { breadCrumb: 'Listado tareas' }
-                    },
-                    {
-                        name: 'tasks.create',
-                        path: 'create',
-                        component: TasksCreate,
-                        meta: { breadCrumb: 'Crear tareas' }
-                    },
-                    {
-                        name: 'tasks.update',
-                        path: 'update/:id',
-                        component: TasksUpdate,
-                        meta: { breadCrumb: 'Actualizar tareas' }
-                    }
-                ]
-            },
-            {
                 name: 'recetasAdmin',
                 path: 'recetasAdmin',
-                meta: { breadCrumb: 'Recetas'},
+                meta: { breadCrumb: 'Recetas' },
                 children: [
                     {
                         name: 'recetasAdmin.index',
@@ -247,33 +201,90 @@ export default [
                         name: 'comentAdmin.update',
                         path: 'update/:id',
                         component: comentAdminUpdate,
-                        meta: { breadCrumb: 'Actualizar comentarios'}
+                        meta: { breadCrumb: 'Actualizar comentarios' }
                     }
                 ]
             },
             {
                 name: 'Plan Semanal',
                 path: 'PlanSemanal',
-                meta: { breadCrumb: 'Plan Semanal'},
+                meta: { breadCrumb: 'Plan Semanal' },
                 component: PlanSemanal
             },
             {
                 name: 'ListadelaCompra',
                 path: 'ListaCompra',
-                meta: { breadCrumb: 'Lista de la Compra'},
+                meta: { breadCrumb: 'Lista de la Compra' },
                 component: ListaCompra
             },
             {
                 name: 'Favoritos',
                 path: 'Favoritos',
-                meta: { breadCrumb: 'Tus recetas Favoritas'
+                meta: {
+                    breadCrumb: 'Tus recetas Favoritas'
                 },
                 component: FavoritosList
             },
+        ]
+    },
+    {
+        path: '/admin',
+        component: AuthenticatedLayout,
+        // redirect: {
+        //     name: 'admin.index'
+        // },
+        //beforeEnter: requireLogin,
+        meta: { breadCrumb: 'Panel de Control' },
+        children: [
+
+            {
+                name: 'posts.index',
+                path: 'posts',
+                component: PostsIndex,
+                meta: { breadCrumb: 'Posts' }
+            },
+            {
+                name: 'posts.create',
+                path: 'posts/create',
+                component: PostsCreate,
+                meta: { breadCrumb: 'Add new post' }
+            },
+            {
+                name: 'posts.edit',
+                path: 'posts/edit/:id',
+                component: PostsEdit,
+                meta: { breadCrumb: 'Edit post' }
+            },
+            {
+                name: 'tasks',
+                path: 'tasks',
+                meta: { breadCrumb: 'Tareas' },
+                children: [
+                    {
+                        name: 'tasks.index',
+                        path: '',
+                        component: TasksList,
+                        meta: { breadCrumb: 'Listado tareas' }
+                    },
+                    {
+                        name: 'tasks.create',
+                        path: 'create',
+                        component: TasksCreate,
+                        meta: { breadCrumb: 'Crear tareas' }
+                    },
+                    {
+                        name: 'tasks.update',
+                        path: 'update/:id',
+                        component: TasksUpdate,
+                        meta: { breadCrumb: 'Actualizar tareas' }
+                    }
+                ]
+            },
+
             {
                 name: 'exercises',
                 path: 'exercises',
-                meta: { breadCrumb: 'Exercises'},
+                meta: { breadCrumb: 'Exercises' },
                 children: [
                     {
                         name: 'exercises.index',
@@ -285,8 +296,10 @@ export default [
                         name: 'exercises.create',
                         path: 'create',
                         component: ExercisesCreate,
-                        meta: { breadCrumb: 'Add new exercise' ,
-                        linked: false, }
+                        meta: {
+                            breadCrumb: 'Add new exercise',
+                            linked: false,
+                        }
                     },
                     {
                         name: 'exercises.edit',
@@ -302,11 +315,11 @@ export default [
             // {
             //     path: '/user'
             // },
-        
+
             {
                 name: 'categories',
                 path: 'categories',
-                meta: { breadCrumb: 'Categories'},
+                meta: { breadCrumb: 'Categories' },
                 children: [
                     {
                         name: 'categories.index',
@@ -318,9 +331,9 @@ export default [
                         name: 'categories.create',
                         path: 'create',
                         component: () => import('../views/admin/categories/Create.vue'),
-                        meta: { 
-                            breadCrumb: 'Add new category' ,
-                            linked: false, 
+                        meta: {
+                            breadCrumb: 'Add new category',
+                            linked: false,
                         }
                     },
                     {
@@ -338,7 +351,7 @@ export default [
             {
                 name: 'permissions',
                 path: 'permissions',
-                meta: { breadCrumb: 'Permisos'},
+                meta: { breadCrumb: 'Permisos' },
                 children: [
                     {
                         name: 'permissions.index',
@@ -350,16 +363,16 @@ export default [
                         name: 'permissions.create',
                         path: 'create',
                         component: () => import('../views/admin/permissions/Create.vue'),
-                        meta: { 
+                        meta: {
                             breadCrumb: 'Create Permission',
-                            linked: false,  
+                            linked: false,
                         }
                     },
                     {
                         name: 'permissions.edit',
                         path: 'edit/:id',
                         component: () => import('../views/admin/permissions/Edit.vue'),
-                        meta: { 
+                        meta: {
                             breadCrumb: 'Permission Edit',
                             linked: false,
                         }
@@ -397,7 +410,7 @@ export default [
                 name: 'users.create',
                 path: 'users/create',
                 component: () => import('../views/admin/users/Create.vue'),
-                
+
                 meta: { breadCrumb: 'Add New' }
             },
             {
