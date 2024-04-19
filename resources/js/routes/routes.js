@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie'
 import store from "../store";
+import axios from 'axios';
 
 const AuthenticatedLayout = () => import('../layouts/Authenticated.vue')
 const AuthenticatedUser = () => ('../layouts/Usuarios.vue')
@@ -49,6 +50,24 @@ function guest(to, from, next) {
     } else {
         next()
     }
+}
+
+function rolAdmin(to, from, next){
+    axios.get('/api/user/rol', {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token')
+        }
+    }).then(response => {
+        let rol = response.data.rol;
+        if(rol.includes('admin')){
+            next();
+        }else{
+            next('/');
+        }
+    }).catch(error => {
+        console.error('Error al obtener los roles: ', error);
+        next('/');
+    })
 }
 
 export default [
@@ -240,7 +259,7 @@ export default [
         // redirect: {
         //     name: 'admin.index'
         // },
-        //beforeEnter: requireLogin,
+        beforeEnter: rolAdmin,
         meta: { breadCrumb: 'Panel de Control' },
         children: [
 
