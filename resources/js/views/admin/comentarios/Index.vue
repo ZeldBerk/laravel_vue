@@ -6,7 +6,7 @@
                     <div class="d-flex justify-content-between pb-2 mb-2">
                         <h5 class="card-title">Todos los comentarios</h5>
                         <div>
-                            <router-link :to="{ name: 'recetasAdmin.create' }" class="btn btn-success">Nuevo
+                            <router-link :to="{ name: 'comentAdmin.create' }" class="btn btn-success">Nuevo
                                 Comentario</router-link>
                         </div>
                     </div>

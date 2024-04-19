@@ -16,8 +16,8 @@
                             <!-- Texto del Comentario -->
                             <div class="mb-3">
                                 <label for="comentario_texto" class="form-label">Texto del Comentario</label>
-                                <TextEditorComponent v-model="comentario.contenido" id="comentario_texto"
-                                    class="form-control" rows="4"></TextEditorComponent>
+                                <textarea v-model="comentario.contenido" id="comentario_texto"
+                                    class="form-control" rows="4"></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary mt-4 mb-4">Actualizar Comentario</button>
                         </div>
@@ -36,7 +36,6 @@ import { useRoute } from "vue-router";
 import { useRouter } from 'vue-router';
 import * as yup from 'yup';
 import Rating from 'primevue/rating'; // Importa el componente Rating de PrimeVue
-import TextEditorComponent from "@/components/TextEditorComponent.vue";
 import axios from "axios";
 
 const schema = yup.object({
