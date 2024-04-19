@@ -174,7 +174,7 @@ export default [
         path: '/user',
         component: AuthenticatedLayout,
         beforeEnter: requireLogin,
-        meta: { breadCrumb: 'Pandel de Control' },
+        meta: { breadCrumb: 'Panel de Control' },
         children: [
             {
                 name: 'admin.index',
@@ -186,7 +186,7 @@ export default [
                 name: 'profile.index',
                 path: 'profile',
                 component: () => import('../views/admin/profile/index.vue'),
-                meta: { breadCrumb: 'Profile' }
+                meta: { breadCrumb: 'Perfil' }
             },
             {
                 name: 'recetasAdmin',
