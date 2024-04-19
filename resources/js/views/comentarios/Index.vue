@@ -6,7 +6,7 @@
                 <p>Filtro de los comentarios</p>
             </div>
             <div class="col-md-6 text-right">
-                <button class="btn btn-success" @click="createComentario()">Dejar comentario</button>
+                <router-link :to="{ name: 'comentarios.create' }" class="btn btn-success">Dejar Comentario</router-link>
             </div>
         </div>
         <!-- <Rating v-model="comentario.value.puntuacion" :cancel="false" :stars="5" /> -->

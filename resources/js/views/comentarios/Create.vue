@@ -11,13 +11,13 @@
                             <!-- Valoración -->
                             <div class="mb-3">
                                 <label for="comentario_valoracion" class="form-label">Valoración</label>
-                                <Rating  :cancel="false" />
+                                <Rating v-model="comentario.puntuacion" :cancel="false" />
                             </div>
                             <!-- Texto del Comentario -->
                             <div class="mb-3">
                                 <label for="comentario_texto" class="form-label">Texto del Comentario</label>
-                                <TextEditorComponent  id="comentario_texto"
-                                    class="form-control" rows="4"></TextEditorComponent>
+                                <textarea  v-model="comentario.contenido" id="comentario_texto"
+                                    class="form-control" rows="4"></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary mt-4 mb-4">Actualizar Comentario</button>
                         </div>
@@ -27,3 +27,13 @@
         </form>
     </div>
 </template>
+
+<script setup>
+import { ref, inject } from "vue";
+import { useRouter } from 'vue-router';
+import Rating from 'primevue/rating'; // Importa el componente Rating de PrimeVue
+
+const comentario = ref({})
+const swal = inject('$swal');
+const router = useRouter()
+</script>

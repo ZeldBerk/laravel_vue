@@ -26,7 +26,7 @@ const ComentList = () => import('../views/comentarios/Index.vue');
 const PlanSemanal = () => import('../views/planSemanal/index.vue');
 const ListaCompra = () => import('../views/listaCompra/index.vue');
 const ComentListAdmin = () => import('../views/admin/comentarios/Index.vue');
-const ComentCreateAdmin = () => import('../views/admin/comentarios/Create.vue');
+const ComentCreate = () => import('../views/comentarios/Create.vue');
 const comentAdminUpdate = () => import('../views/admin/comentarios/Update.vue');
 
 
@@ -159,6 +159,12 @@ export default [
                         meta: { breadCrumb: 'Listado de comentarios de la receta' },
                         beforeEnter: requireLogin
                     },
+                    {
+                        name: 'comentarios.create',
+                        path: 'create',
+                        component: ComentCreate,
+                        meta: { breadCrumb: 'Crear comentarios' }
+                    },
                 ]
             },
         ]
@@ -216,12 +222,6 @@ export default [
                         path: '',
                         component: ComentListAdmin,
                         meta: { breadCrumb: 'Listado comentarios' }
-                    },
-                    {
-                        name: 'comentAdmin.create',
-                        path: 'create',
-                        component: ComentCreateAdmin,
-                        meta: { breadCrumb: 'Crear comentarios' }
                     },
                     {
                         name: 'comentAdmin.update',
