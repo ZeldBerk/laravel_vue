@@ -6,9 +6,14 @@
 - Filtro reseñas
 - Colores formularios(inputs y demas)
 - Diseño plan semanal(repasar)
-- Datos user
 - Mejorar alertas
 - Gestion recetas segun usuario (admin o no admin)
 - ESTUDIAR EL YUP DEL UPDATE y el promise (IMPORTANTE)
 - Boton eleiminar ingredientes + eliminar ingredientes al eliminar receta
 - Solucnionar borede text Editor component
+
+
+
+
+
+- Forgot Password (Requisito Opcional).
