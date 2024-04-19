@@ -6,7 +6,8 @@
                 <p>Filtro de los comentarios</p>
             </div>
             <div class="col-md-6 text-right">
-                <router-link :to="{ name: 'comentarios.create' }" class="btn btn-success">Dejar Comentario</router-link>
+                {{ receta_id }}
+                <router-link :to="{ name: 'comentarios.create', params: {id: 2}}" class="btn btn-success">Dejar Comentario</router-link>
             </div>
         </div>
         <!-- <Rating v-model="comentario.value.puntuacion" :cancel="false" :stars="5" /> -->
@@ -57,18 +58,13 @@
 
 <script setup>
 import axios from "axios";
-import { ref, onMounted, inject } from "vue";
+import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
+import { useRouter } from 'vue-router';
 import Rating from 'primevue/rating'; // Importa el componente Rating de PrimeVue
 
-const swal = inject('$swal');
 const comentarioSH = ref([]);
-const comentario = ref({});
 const route = useRoute();
-
-// Obtener id de usuario
-const data = localStorage.getItem("vuex");
-const user_id = JSON.parse(data).auth.user.id;
 
 // Obtener id de la receta
 const receta_id = route.params.id;
@@ -81,104 +77,4 @@ onMounted(() => {
         });
 });
 
-// Guardar receta_id y user_id en comentario para hacer el insert
-comentario.value.user_id = user_id;
-comentario.value.receta_id = receta_id;
-
-function createComentario() {
-    let ratingValue = 1;
-
-    swal.fire({
-        title: 'Deja tu comentario',
-        html: `
-            <div class="form-group">
-                <label for="puntuacion">Valoración:</label>
-                <Rating v-model="ratingValue" :stars="5" @input="value => ratingValue = value"/>
-            </div>
-            <div class="form-group">
-                <label for="contenido">Comentario:</label>
-                <textarea id="contenido" class="form-control" rows="3" required></textarea>
-            </div>
-        `,
-        showCancelButton: true,
-        confirmButtonText: 'Enviar',
-        didOpen: () => {
-            // Aplicar clases de Bootstrap a los botones de la alerta
-            const confirmButton = document.querySelector('.swal2-confirm');
-            const cancelButton = document.querySelector('.swal2-cancel');
-            confirmButton.classList.add('btn', 'btn-success');
-            cancelButton.classList.add('btn', 'btn-danger');
-            confirmButton.classList.remove('swal2-styled');
-            cancelButton.classList.remove('swal2-styled');
-        }
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Recojer valores del formulario de la alerta
-            const puntuacion = document.getElementById('puntuacion').value;
-            const contenido = document.getElementById('contenido').value;
-
-            comentario.value.puntuacion = ratingValue;
-            comentario.value.contenido = contenido;
-
-            // Insert del comentario 
-            axios.post('/api/comentarios', comentario.value)
-                .then(response => {
-                    swal({
-                        icon: 'success',
-                        title: 'Receta añadida correctamente'
-                    }).then(() => {
-                        window.location.reload();
-                    });
-                })
-                .catch(error => {
-                    swal({
-                        icon: 'error',
-                        title: 'No se ha podido añadir el comentario'
-                    });
-                });
-        }
-    });
-}
 </script>
-<style>
-.btn-success {
-    margin-right: 5px;
-}
-
-.rating:not(:checked)>input {
-    position: absolute;
-    appearance: none;
-}
-
-.rating:not(:checked)>label {
-    float: right;
-    cursor: pointer;
-    font-size: 30px;
-    fill: #666;
-}
-
-.rating:not(:checked)>label>svg {
-    fill: #666;
-    /* Set default color for SVG */
-    transition: fill 0.3s ease;
-    /* Add a transition effect */
-}
-
-.rating>input:checked+label:hover,
-.rating>input:checked+label:hover~label,
-.rating>input:checked~label:hover,
-.rating>input:checked~label:hover~label,
-.rating>label:hover~input:checked~label {
-    fill: #F59E0B;
-}
-
-.rating:not(:checked)>label:hover,
-.rating:not(:checked)>label:hover~label {
-    fill: #F59E0B;
-}
-
-.rating>input:checked~label>svg {
-    fill: #F59E0B;
-    /* Set color for selected stars */
-}
-</style>

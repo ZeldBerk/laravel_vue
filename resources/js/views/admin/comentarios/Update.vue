@@ -46,7 +46,7 @@ const schema = yup.object({
 const { validate, errors } = useForm({ validationSchema: schema })
 const swal = inject('$swal');
 const route = useRoute();
-const router = useRouter()
+const router = useRouter();
 
 const { value: user_id } = useField('user_id', null, { initialValue: '' });
 const { value: receta_id } = useField('receta_id', null, { initialValue: '' });

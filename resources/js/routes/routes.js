@@ -162,7 +162,7 @@ export default [
                     },
                     {
                         name: 'comentarios.create',
-                        path: 'create',
+                        path: 'create/:id',
                         component: ComentCreate,
                         meta: { breadCrumb: 'Crear comentarios' }
                     },
