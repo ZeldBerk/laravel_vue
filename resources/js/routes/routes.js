@@ -53,12 +53,13 @@ function guest(to, from, next) {
 }
 
 function rolAdmin(to, from, next){
-    axios.get('/api/user/rol', {
+    axios.get('/api/user/roles', {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
         }
     }).then(response => {
-        let rol = response.data.rol;
+        let rol = response.data.roles;
+        console.log(response);
         if(rol.includes('admin')){
             next();
         }else{

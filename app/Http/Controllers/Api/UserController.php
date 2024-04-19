@@ -6,10 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
-use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -119,5 +120,17 @@ class UserController extends Controller
         $user->delete();
 
         return response()->noContent();
+    }
+
+
+    //Funcion para obtener los roles del usuario
+    public function usuarioRoles(Request $request){
+        //Guardamos el usuario autenticado
+        $user = $request->user();
+
+        //Obtenemos roles
+        $rol = $user->getRoleNames();
+
+        return response()->json(['roles' => $rol]);
     }
 }
