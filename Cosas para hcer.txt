@@ -1,6 +1,5 @@
 - Arreglar comentarios
 - Añadir rating de primevue a comentarios
-- Añadir admin de comentarios
 - Editar botones azules y demas
 - Filtro receta y categorias des de la home
 - Filtro reseñas
