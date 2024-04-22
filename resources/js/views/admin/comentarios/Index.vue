@@ -20,14 +20,16 @@
                         </thead>
                         <tbody>
                             <tr v-for="(comentario, index) in comentList">
-                                <td class="text-center">{{comentario.id}}</td>
-                                <td>{{comentario.name}}</td>
-                                <td>{{comentario.nombre}}</td>
-                                <td>{{comentario.contenido}}</td>
-                                <td>{{comentario.puntuacion }}</td>
+                                <td class="text-center">{{ comentario.id }}</td>
+                                <td>{{ comentario.name }}</td>
+                                <td>{{ comentario.nombre }}</td>
+                                <td>{{ comentario.contenido }}</td>
+                                <td>{{ comentario.puntuacion }}</td>
                                 <td class="text-center">
-                                    <router-link :to="{name: 'comentAdmin.update', params: {id:comentario.id}}" class="btn btn-warning mr-1">Edit</router-link>
-                                    <button class="btn btn-danger" @click="deleteReceta(comentario.id, index)">Delete</button>
+                                    <router-link :to="{ name: 'comentAdmin.update', params: { id: comentario.id } }"
+                                        class="btn btn-warning mr-1">Edit</router-link>
+                                    <button class="btn btn-danger"
+                                        @click="deleteComent(comentario.id, index)">Delete</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -51,4 +53,37 @@ onMounted(() => {
             comentList.value = response.data;
         });
 });
+
+const deleteComent = (id, index) => {
+
+    swal({
+        title: 'Quieres eliminar el comentario?',
+        text: 'Esta acción no es reversible!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar',
+        confirmButtonColor: '#ef4444',
+        timer: 20000,
+        timerProgressBar: true,
+        reverseButtons: true
+    })
+        .then(result => {
+            if (result.isConfirmed) {
+                axios.delete('/api/comentarios/' + id)
+                    .then(response => {
+                        comentList.value.splice(index, 1);
+                        swal({
+                            icon: 'success',
+                            title: 'Comentario eliminada correctamente'
+                        });
+                    })
+                    .catch(error => {
+                        swal({
+                            icon: 'error',
+                            title: 'No se ha podido eliminar el comentario'
+                        });
+                    });
+            }
+        })
+}
 </script>
