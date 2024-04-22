@@ -4,7 +4,6 @@
             <h5 class="card-title">Nuevo Comentario</h5>
         </div>
         <div class="row">
-            
             <div class="col-8">
                 <form @submit.prevent="saveComent">
                     <div class="card border-0 shadow-sm">
@@ -20,7 +19,7 @@
                                 <textarea v-model="comentario.contenido" id="comentario_texto" class="form-control"
                                     rows="4"></textarea>
                             </div>
-                            <!-- <button type="submit" class="btn btn-primary mt-4 mb-4">Guardar Comentario</button> -->
+                            <button type="submit" class="btn btn-primary mt-4 mb-4">Guardar Comentario</button>
                         </div>
                     </div>
                 </form>
@@ -51,6 +50,7 @@ import { ref, onBeforeMount, inject } from "vue";
 import { useRoute } from "vue-router";
 import { useRouter } from 'vue-router';
 import Rating from 'primevue/rating'; // Importa el componente Rating de PrimeVue
+import axios from "axios";
 
 const comentario = ref({});
 const receta = ref({});
@@ -58,7 +58,10 @@ const swal = inject('$swal');
 const route = useRoute();
 const router = useRouter();
 
-console.log(route.params.id)
+// Obtener id de usuario
+const data = localStorage.getItem("vuex");
+const user_id = JSON.parse(data).auth.user.id;
+
 onBeforeMount(() => {
     axios.get('/api/recetas/' + route.params.id)
         .then(response => {
@@ -67,4 +70,29 @@ onBeforeMount(() => {
         })
 });
 
+
+// Guarda el comentario 
+function saveComent() {
+    comentario.value.user_id = user_id;
+    comentario.value.receta_id = route.params.id;
+
+    // Insert del ingredeiente
+    axios.post('/api/comentarios/', comentario.value)
+        .then(response => {
+            swal({
+                icon: 'success',
+                title: 'Ingrediente añadido correctamente'
+            })
+                .then(() => {
+                    // Redireccionar a la página después de cerrar la alerta
+                    router.push({ name: 'comentarios.index', params: { id: receta.id } });
+                });
+        })
+        .catch(error => {
+            swal({
+                icon: 'error',
+                title: 'No se ha añadido el ingrediente'
+            });
+        });
+}
 </script>

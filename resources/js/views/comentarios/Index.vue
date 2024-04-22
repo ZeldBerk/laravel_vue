@@ -6,8 +6,7 @@
                 <p>Filtro de los comentarios</p>
             </div>
             <div class="col-md-6 text-right">
-                {{ receta_id }}
-                <router-link :to="{ name: 'comentarios.create', params: {id: 2}}" class="btn btn-success">Dejar Comentario</router-link>
+                <router-link :to="{ name: 'comentarios.create', params: {id: receta_id}}" class="btn btn-success">Dejar Comentario</router-link>
             </div>
         </div>
         <!-- <Rating v-model="comentario.value.puntuacion" :cancel="false" :stars="5" /> -->
@@ -60,7 +59,6 @@
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
-import { useRouter } from 'vue-router';
 import Rating from 'primevue/rating'; // Importa el componente Rating de PrimeVue
 
 const comentarioSH = ref([]);

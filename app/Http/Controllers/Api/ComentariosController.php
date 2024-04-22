@@ -21,7 +21,7 @@ class ComentariosController extends Controller
 
     // Añade un comentario a la BBDD
     public function store(Request $request){
-        return $request;
+        
         // Validar campos obligatorios
         $request->validate([
             'user_id' => 'required',
