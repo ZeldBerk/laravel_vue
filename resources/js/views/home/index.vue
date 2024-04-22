@@ -61,9 +61,9 @@
             <div class="row justify-content-center marginCuadradoPulsables">
                 <div class="col-md-4 TamañoCuadradoPulsable">
                     <div class="button-wrapper">
-                        <a href="#" class="button">
+                        <router-link :to="{name: 'recetas.index'}" class="button" @click="StorageID('1')">
                             <img src="../../../images/sopa-de-pasta.jpg" alt="Botón 1">
-                        </a>
+                        </router-link>
                         <div class="button-text">
                             <span class="primeraLinea">¡Empieza con buen sabor!</span>
                             <span class="segundaLinea">Para abrir mesa</span>
@@ -72,9 +72,9 @@
                 </div>
                 <div class="col-md-4 TamañoCuadradoPulsable">
                     <div class="button-wrapper">
-                        <a href="#" class="button">
+                        <router-link :to="{name: 'recetas.index'}" class="button" @click="StorageID('2')">
                             <img src="../../../images/Pollo.jpg" alt="Botón 2">
-                        </a>
+                        </router-link>
                         <div class="button-text">
                             <span class="primeraLinea">¡Continua disfrutando!</span>
                             <span class="segundaLinea">Segundos platos</span>
@@ -83,9 +83,9 @@
                 </div>
                 <div class="col-md-4 TamañoCuadradoPulsable">
                     <div class="button-wrapper">
-                        <a href="#" class="button">
+                        <router-link :to="{name: 'recetas.index'}" class="button" @click="StorageID('3')">
                             <img src="../../../images/dolci_freddi_maggio.jpg" alt="Botón 3">
-                        </a>
+                        </router-link>
                         <div class="button-text">
                             <span class="primeraLinea">¡Final feliz!</span>
                             <span class="segundaLinea">Postres dulzones</span>
@@ -180,6 +180,10 @@ async function obtenerUltimasRecetas() {
         }).catch(error => {
             console.error("Error fetching favorites:", error);
         });
+}
+
+function StorageID(categoria_id){
+    localStorage.setItem('categoria_id', categoria_id);
 }
 
 function anadirFavoritos(receta_id) {

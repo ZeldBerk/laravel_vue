@@ -115,16 +115,27 @@ watch(filtro, (newValue, oldValue) => {
 
 async function obtenerRecetas(filtro = '') {
     try {
-        const response = await axios.get('/api/recetas', {
-            params: {
-                filtro: filtro
-            }
-        });
+        let url = '/api/recetas';
+        const categoriaId = localStorage.getItem('categoria_id');
+        console.log(categoriaId);
+
+        // Si hay una categoría almacenada, incluir su ID en la URL
+        if (categoriaId) {
+            url += `?categoria=${categoriaId}`;
+        } else if (filtro) {
+            url += `?filtro=${filtro}`;
+        }
+
+        const response = await axios.get(url);
         recetas.value = response.data;
+
+        localStorage.removeItem('categoria_id');
+
     } catch (error) {
         console.error("Error al obtener recetas:", error);
     }
 }
+
 
 
 

@@ -8,22 +8,33 @@ use App\Models\recetas;
 
 class RecetasController extends Controller
 {
-    // Extrae todas las recetas de la BBDD
-    public function index(Request $request) {
-        $query = recetas::query();
-    
-        // Verificar si se proporciona un filtro y aplicarlo si es así
-        if ($request->has('filtro')) {
-            $filtro = $request->input('filtro');
-            $query->where('nombre', 'like', '%' . $filtro . '%');
-        }
-    
-        // Obtener las recetas según la consulta construida
-        $recetas = $query->with('media')->get();
-        
-        return $recetas;
+
+    public function index(Request $request)
+{
+    $filtro = $request->input('filtro');
+    $id_categoria = $request->input('categoria');
+
+    $query = recetas::with('media');
+
+    // Aplicar filtro si se proporciona
+    if ($filtro) {
+        $query->where('nombre', 'like', '%' . $filtro . '%');
     }
+
+    // Aplicar filtro por categoría si se proporciona
+    if ($id_categoria) {
+        $query->where('categoria_id', $id_categoria);
+    }
+
+    $recetas = $query->get();
+
+    return $recetas;
+}
+
     
+    public function detalleRecetas(){
+        
+    }
 
 
     public function ultimasRecetas()

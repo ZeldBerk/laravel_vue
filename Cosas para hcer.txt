@@ -1,6 +1,5 @@
 ------------ Obligatorio ------------
 - Editar botones azules y demas
-- Filtro categorias des de la home
 - Filtro reseñas
 - Colores formularios(inputs y demas)
 - Diseño plan semanal(repasar)
