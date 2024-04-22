@@ -9,23 +9,35 @@ use App\Models\recetas;
 class RecetasController extends Controller
 {
     // Extrae todas las recetas de la BBDD
-    public function index(){
+    public function index(Request $request) {
+        $query = recetas::query();
+    
+        // Verificar si se proporciona un filtro y aplicarlo si es así
+        if ($request->has('filtro')) {
+            $filtro = $request->input('filtro');
+            $query->where('nombre', 'like', '%' . $filtro . '%');
+        }
+    
+        // Obtener las recetas según la consulta construida
+        $recetas = $query->with('media')->get();
         
-        $recetas = recetas::with('media')->get();
         return $recetas;
     }
+    
 
 
-    public function ultimasRecetas(){
+    public function ultimasRecetas()
+    {
         $recetas = recetas::with('media')->orderBy('created_at', 'desc')->take(4)->get();
 
         return $recetas;
     }
 
     // Añade una receta a la BBDD
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         // Validar campos obligatorios
-        
+
         $request->validate([
             'nombre' => 'required',
             'descripcion_corta' => 'required',
@@ -47,9 +59,10 @@ class RecetasController extends Controller
     }
 
     // Actualiza una receta
-    public function update($id, Request $request){
-        
-            // Obtener receta a actualizar
+    public function update($id, Request $request)
+    {
+
+        // Obtener receta a actualizar
         $receta = recetas::find($id);
 
         // Validar campos obligatorios
@@ -66,7 +79,7 @@ class RecetasController extends Controller
         $contToUpdate = $request->all();
         $receta->update($contToUpdate);
 
-        if($request->hasFile('thumbnail')) {
+        if ($request->hasFile('thumbnail')) {
             $receta->media()->delete();
             $receta->addMediaFromRequest('thumbnail')->preservingOriginal()->toMediaCollection('images-recetas');
         }
@@ -75,7 +88,8 @@ class RecetasController extends Controller
     }
 
     // Elimina la receta mediante id
-    public function destroy($id){
+    public function destroy($id)
+    {
 
         $receta = recetas::find($id);
 
@@ -85,7 +99,8 @@ class RecetasController extends Controller
     }
 
     // Devuelve una receta mediante id
-    public function show($id){
+    public function show($id)
+    {
 
         $receta = recetas::with('media')->find($id);
 
@@ -93,11 +108,11 @@ class RecetasController extends Controller
     }
 
     // Devuelve las recetas asociadas a un id de usuario
-    public function showRU($user_id){
+    public function showRU($user_id)
+    {
 
         $recetas = recetas::where('user_id', $user_id)->with('media')->get();
 
         return $recetas;
     }
-
 }

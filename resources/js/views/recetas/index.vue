@@ -7,7 +7,7 @@
                 <div class="col-md-6">
                     <form action="#">
                         <label for="filtro">Filtrar:</label>
-                        <input type="text" id="filtro" name="filtro" class="form-control">
+                        <input type="text" id="filtro" name="filtro" class="form-control" v-model="filtro">
                     </form>
                 </div>
                 <div class="col-md-6 text-right">
@@ -95,27 +95,37 @@
 
 <script setup>
 import axios from "axios";
-import { ref, onMounted, inject } from "vue";
+import { ref, onMounted, inject, watch } from "vue";
 import { useRouter } from "vue-router";
 
 const swal = inject('$swal');
 const favoritosArray = ref([]);
 const recetas = ref([]);
 const router = useRouter();
+const filtro = ref('');
 
 onMounted(() => {
     obtenerRecetas();
     buscarFavoritos();
 });
 
-async function obtenerRecetas() {
+watch(filtro, (newValue, oldValue) => {
+    obtenerRecetas(newValue);
+})
+
+async function obtenerRecetas(filtro = '') {
     try {
-        const response = await axios.get('api/recetas');
+        const response = await axios.get('/api/recetas', {
+            params: {
+                filtro: filtro
+            }
+        });
         recetas.value = response.data;
     } catch (error) {
         console.error("Error al obtener recetas:", error);
     }
 }
+
 
 
 

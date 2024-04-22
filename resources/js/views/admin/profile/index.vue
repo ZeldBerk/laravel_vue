@@ -33,7 +33,7 @@
                     <label for="password" class="form-label">Contraseña</label>
                     <input type="password" v-model="profile.password" class="form-control" id="password">
                     <div class="text-danger mt-1">
-                        {{ errors.password }}
+                        {{ 'Rellena esta campo para actualizar tu contraseña' }}
                     </div>
                     <div class="text-danger mt-1">
                         <div v-for="message in validationErrors?.password">
