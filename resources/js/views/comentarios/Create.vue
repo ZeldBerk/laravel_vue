@@ -1,10 +1,10 @@
 <template>
     <div id="actualizar-comentario" class="container">
-        <div class="d-flex justify-content-between pb-2 mb-2">
+        <div class="d-flex justify-content-between pb-2 mb-2 mt-5">
             <h5 class="card-title">Nuevo Comentario</h5>
         </div>
         <div class="row">
-            <div class="col-8">
+            <div class="col-md-12 col-lg-8 mt-5">
                 <form @submit.prevent="saveComent">
                     <div class="card border-0 shadow-sm">
                         <div class="card-body">
@@ -16,7 +16,7 @@
                             <!-- Texto del Comentario -->
                             <div class="mb-3">
                                 <label for="comentario_texto" class="form-label">Texto del Comentario</label>
-                                <textarea v-model="comentario.contenido" id="comentario_texto" class="form-control"
+                                <textarea v-model="comentario.contenido" id="comentario_texto" class="form-control altura"
                                     rows="4"></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary mt-4 mb-4">Guardar Comentario</button>
@@ -24,7 +24,7 @@
                     </div>
                 </form>
             </div>
-            <div class="col-4 mb-3">
+            <div class="col-md-12 col-lg-4 mt-5">
                 <div class="cardBorderIMG">
                     <div class="contenidoCard">
                         <div class="cardImageDIV position-relative">
@@ -96,3 +96,8 @@ function saveComent() {
         });
 }
 </script>
+<style>
+.altura{
+    height: 170px;
+}
+</style>

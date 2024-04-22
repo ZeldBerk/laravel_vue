@@ -1,7 +1,6 @@
-- Arreglar comentarios
-- Añadir rating de primevue a comentarios
+------------ Obligatorio ------------
 - Editar botones azules y demas
-- Categorias des de la home
+- Filtro categorias des de la home
 - Filtro reseñas
 - Colores formularios(inputs y demas)
 - Diseño plan semanal(repasar)
@@ -9,10 +8,7 @@
 - Gestion recetas segun usuario (admin o no admin)
 - ESTUDIAR EL YUP DEL UPDATE y el promise (IMPORTANTE)
 - Boton eleiminar ingredientes + eliminar ingredientes al eliminar receta
-- Solucnionar borede text Editor component
-
-
-
-
-
+- Mirar responsive de las cartas de las recetas, sobresale todo
+- Crear admin de ingredientes
+------------ Opcional ------------
 - Forgot Password (Requisito Opcional).
