@@ -28,7 +28,7 @@ const ListaCompra = () => import('../views/listaCompra/index.vue');
 const ComentListAdmin = () => import('../views/admin/comentarios/Index.vue');
 const ComentCreate = () => import('../views/comentarios/Create.vue');
 const comentAdminUpdate = () => import('../views/admin/comentarios/Update.vue');
-
+const IngredientesAdminList = () => import('../views/admin/ingredientes/Index.vue');
 
 function requireLogin(to, from, next) {
     let isLogin = false;
@@ -230,6 +230,19 @@ export default [
                         component: comentAdminUpdate,
                         meta: { breadCrumb: 'Actualizar comentarios' }
                     }
+                ]
+            },
+            {
+                name: 'ingredientesAdmin',
+                path: 'ingredientesAdmin',
+                meta: { breadCrumb: 'Ingredientes' },
+                children: [
+                    {
+                        name: 'ingredientesAdmin.index',
+                        path: '',
+                        component: IngredientesAdminList,
+                        meta: { breadCrumb: 'Listado ingredientes' }
+                    },
                 ]
             },
             {
