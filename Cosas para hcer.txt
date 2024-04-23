@@ -1,11 +1,12 @@
 ------------ Obligatorio ------------
 - Editar botones azules y demas
-- Filtro reseñas
+- Filtro comentarios
 - Colores formularios(inputs y demas)
 - Diseño plan semanal(repasar)
-- Mejorar alertas
 - Gestion recetas segun usuario (admin o no admin)
+- Diseño comentarios
 - ESTUDIAR EL YUP DEL UPDATE y el promise (IMPORTANTE)
 - Boton eleiminar ingredientes + eliminar ingredientes al eliminar receta
 ------------ Opcional ------------
 - Forgot Password (Requisito Opcional).
+- Mejorar alertas
