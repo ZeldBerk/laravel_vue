@@ -62,7 +62,7 @@ const route = useRoute();
 
 const home = ref({
     icon: 'pi pi-home',
-    route: '/admin'
+    route: '/user'
 });
 
 const crumbs = computed(() => {
