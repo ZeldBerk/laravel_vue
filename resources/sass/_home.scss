@@ -3,11 +3,11 @@
     max-width: 1440px;
 }
 
-.BGHome{
+.BGHome {
     background-color: #FFFFFF !important;
 }
 
-.filtroContenedor{
+.filtroContenedor {
     filter: brightness(60%);
 }
 
@@ -40,22 +40,50 @@
     text-align: center;
 }
 
-.colorLetra{
+.colorLetra {
     color: white;
     font-size: 64px;
     font-family: GreatVibes;
 }
 
+@media screen and (max-width: 1200px) {
+    .colorLetra {
+        color: white;
+        font-size: 40px;
+        font-family: GreatVibes;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .colorLetra {
+        display: none;
+    }
+}
+
+//Hacemos que la clase desaparezca al hacer responsive
+@media screen and (max-width: 900px) {
+    .colorLetra {
+        color: white;
+        font-size: 30px;
+        font-family: GreatVibes;
+    }
+
+    .BotonCarrouselContainer {
+        display: none;
+    }
+}
+
 .BotonCarrouselContainer {
     position: absolute;
-    bottom: 10px; /* Ajusta según sea necesario */
+    bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 2; /* Ajusta según sea necesario */
+    z-index: 2;
 }
 
 .BotonCarrousel {
-    width: 212px; /* Ajusta el ancho para dispositivos más pequeños */
+    width: 212px;
+    /* Ajusta el ancho para dispositivos más pequeños */
     height: 45px;
     border-radius: 10px;
     background-color: #F59E0B;
@@ -77,11 +105,13 @@
 
 @media (max-width: 768px) {
     .BotonCarrousel {
-        width: 150px; 
-        font-size: 16px; 
-        position: relative; 
-        left: 50%; /* Coloca el botón en la mitad del carrusel */
-        transform: translateX(-50%); /* Centra el botón horizontalmente */
+        width: 150px;
+        font-size: 16px;
+        position: relative;
+        left: 50%;
+        /* Coloca el botón en la mitad del carrusel */
+        transform: translateX(-50%);
+        /* Centra el botón horizontalmente */
     }
 
     .BotonCarrousel:hover {
@@ -89,9 +119,12 @@
     }
 
     .BotonCarrouselContainer {
-        width: 100%; /* Ajusta al 100% en dispositivos más pequeños */
-        bottom: 10px; /* Ajusta según sea necesario */
+        width: 100%;
+        /* Ajusta al 100% en dispositivos más pequeños */
+        bottom: 10px;
+        /* Ajusta según sea necesario */
     }
+
     .button-wrapper {
         margin-bottom: 20px;
     }
@@ -105,7 +138,7 @@
     margin-bottom: 80px;
 }
 
-.TamañoCuadradoPulsable{
+.TamañoCuadradoPulsable {
     width: 480px;
 }
 
@@ -153,7 +186,8 @@
 }
 
 .button-wrapper:hover .button img {
-    filter: brightness(80%); /* Reducir el brillo al 80% cuando se pasa el ratón por encima */
+    filter: brightness(80%);
+    /* Reducir el brillo al 80% cuando se pasa el ratón por encima */
 }
 
 .containerLetras {
@@ -186,7 +220,7 @@
     background-color: #F9F9F9;
 }
 
-.alinearRecetas{
+.alinearRecetas {
     justify-content: center;
     margin-top: 60px;
 }
@@ -206,7 +240,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    transition: height 0.5s ease; 
+    transition: height 0.5s ease;
     transform-origin: bottom;
 }
 
@@ -242,7 +276,7 @@
     margin-right: 3px;
 }
 
-.tituloReceta{
+.tituloReceta {
     margin: auto;
     font-size: 24px;
     font-weight: bold;
@@ -252,6 +286,6 @@
     text-overflow: ellipsis;
 }
 
-.marginCorazon{
+.marginCorazon {
     margin-left: 16px;
 }
