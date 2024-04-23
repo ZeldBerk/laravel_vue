@@ -7,7 +7,6 @@
 - Gestion recetas segun usuario (admin o no admin)
 - ESTUDIAR EL YUP DEL UPDATE y el promise (IMPORTANTE)
 - Boton eleiminar ingredientes + eliminar ingredientes al eliminar receta
-- Mirar responsive de las cartas de las recetas, sobresale todo
 - Crear admin de ingredientes
 ------------ Opcional ------------
 - Forgot Password (Requisito Opcional).

@@ -11,16 +11,16 @@
                     </form>
                 </div>
                 <div class="col-md-6 text-right">
-                    <router-link :to="{ name: 'recetas.create' }" class="btn btn-primary">Añadir receta</router-link>
+                    <router-link :to="{ name: 'recetas.create' }" class="btn colorBoton">Añadir receta</router-link>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-md-4 mb-3" v-for="receta in recetas" :key="receta.id">
+                <div class="col-lg-4 col-md-12 mb-3" v-for="receta in recetas" :key="receta.id">
                     <div class="cursor_pointer cardBorderIMG" @click.stop="detallesReceta(receta.id)">
                         <div class="contenidoCard">
                             <div class="cardImageDIV position-relative">
-                                <div class="position-absolute top-0 end-0 pr-2 pt-2">
+                                <div class="position-absolute top-0 end-0 pr-2 pt-2 mr-2">
                                     <div class="mi-con-like" @click.stop="anadirFavoritos(receta.id)">
                                         <input class="mi-like" type="checkbox" title="like"
                                             :checked="isFavorito(receta.id)">
@@ -81,10 +81,10 @@
 
                                 </div>
                                 <p class="texto ml-2">{{ receta.descripcion_corta }}</p>
-
                             </div>
+                            
                         </div>
-
+                        <div class="oval"></div>
                     </div>
                 </div>
             </div>
