@@ -74,7 +74,7 @@ const deleteComent = (id, index) => {
                         comentList.value.splice(index, 1);
                         swal({
                             icon: 'success',
-                            title: 'Comentario eliminada correctamente'
+                            title: 'Comentario eliminado correctamente'
                         });
                     })
                     .catch(error => {
