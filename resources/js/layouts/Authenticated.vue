@@ -1,12 +1,16 @@
 <template>
     <div class="layout-wrapper layout-static-inactive">
+
         <AppTopbar></AppTopbar>
-        
+
         <div class="layout-main-container ">
-            <Breadcrumb :home="home" :model="crumbs" class="mb-2">
+
+            <div class="contenedorGeneral">
+
+                <Breadcrumb :home="home" :model="crumbs" class="mb-2">
                     <template #item="{ item, props }">
                         <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
-                            <a :href="href" v-bind="props.action" class="btn btn-link"   @click="navigate">
+                            <a :href="href" v-bind="props.action" class="btn btn-link" @click="navigate">
                                 <span :class="[item.icon, 'text-color']" />
                                 <span class="text-primary font-semibold">{{ item.label }}</span>
                             </a>
@@ -16,14 +20,16 @@
                         </a>
                     </template>
                 </Breadcrumb>
-            <div class="layout-main">
-                
+                <div class="layout-main">
 
-                <Suspense>
-                <router-view></router-view>
-                </Suspense>
+
+                    <Suspense>
+                        <router-view></router-view>
+                    </Suspense>
+                </div>
             </div>
-            
+
+
         </div>
         <!--app-config></app-config-->
         <div class="layout-mask"></div>
@@ -67,25 +73,25 @@ const home = ref({
 
 const crumbs = computed(() => {
     let pathArray = route.path.split("/")
-      pathArray.shift()
+    pathArray.shift()
 
-      let breadcrumbs = pathArray.reduce((breadcrumbArray, path, idx) => {
-       
+    let breadcrumbs = pathArray.reduce((breadcrumbArray, path, idx) => {
+
         breadcrumbArray.push({
             route: breadcrumbArray[idx - 1]
-            ? "" + breadcrumbArray[idx - 1].route + "/" + path
-            : "/" + path,
-          label: route.matched[idx]?.meta.breadCrumb || path,
-          disabled: idx + 1 === pathArray.length || route.matched[idx]?.meta.linked===false,
+                ? "" + breadcrumbArray[idx - 1].route + "/" + path
+                : "/" + path,
+            label: route.matched[idx]?.meta.breadCrumb || path,
+            disabled: idx + 1 === pathArray.length || route.matched[idx]?.meta.linked === false,
         });
 
         return breadcrumbArray;
-      }, [])
-      return breadcrumbs;
-    });
+    }, [])
+    return breadcrumbs;
+});
 
 function selected(crumb) {
-     //Console.log(crumb);
+    //Console.log(crumb);
 }
 
 const { layoutConfig, layoutState, isSidebarActive } = useLayout();
@@ -142,7 +148,7 @@ const isOutsideClicked = (event) => {
 
 <style lang="scss" scoped>
 .p-breadcrumb .p-breadcrumb-list {
-    margin: 0 !important; 
+    margin: 0 !important;
     padding: 0;
     list-style-type: none;
     display: flex;
@@ -151,7 +157,7 @@ const isOutsideClicked = (event) => {
 }
 
 ol {
-    margin: 0 !important; 
+    margin: 0 !important;
     padding: 0;
     list-style-type: none;
     display: flex;

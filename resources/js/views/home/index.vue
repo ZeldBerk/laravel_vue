@@ -61,7 +61,7 @@
             <div class="row justify-content-center marginCuadradoPulsables">
                 <div class="col-md-4 TamañoCuadradoPulsable">
                     <div class="button-wrapper">
-                        <router-link :to="{name: 'recetas.index'}" class="button" @click="StorageID('1')">
+                        <router-link :to="{ name: 'recetas.index' }" class="button" @click="StorageID('1')">
                             <img src="../../../images/sopa-de-pasta.jpg" alt="Botón 1">
                         </router-link>
                         <div class="button-text">
@@ -72,7 +72,7 @@
                 </div>
                 <div class="col-md-4 TamañoCuadradoPulsable">
                     <div class="button-wrapper">
-                        <router-link :to="{name: 'recetas.index'}" class="button" @click="StorageID('2')">
+                        <router-link :to="{ name: 'recetas.index' }" class="button" @click="StorageID('2')">
                             <img src="../../../images/Pollo.jpg" alt="Botón 2">
                         </router-link>
                         <div class="button-text">
@@ -83,7 +83,7 @@
                 </div>
                 <div class="col-md-4 TamañoCuadradoPulsable">
                     <div class="button-wrapper">
-                        <router-link :to="{name: 'recetas.index'}" class="button" @click="StorageID('3')">
+                        <router-link :to="{ name: 'recetas.index' }" class="button" @click="StorageID('3')">
                             <img src="../../../images/dolci_freddi_maggio.jpg" alt="Botón 3">
                         </router-link>
                         <div class="button-text">
@@ -182,7 +182,7 @@ async function obtenerUltimasRecetas() {
         });
 }
 
-function StorageID(categoria_id){
+function StorageID(categoria_id) {
     localStorage.setItem('categoria_id', categoria_id);
 }
 
@@ -192,12 +192,7 @@ function anadirFavoritos(receta_id) {
     let responseStatus;
 
     if (data) {
-        try {
-            userId = JSON.parse(data).auth.user.id;
-            console.log("ID del usuario:", userId);
-        } catch (error) {
-            console.error("Error al analizar los datos del localStorage:", error);
-        }
+        userId = JSON.parse(data).auth.user.id;
     } else {
         console.log("No hay usuario autenticado en el localStorage");
     }

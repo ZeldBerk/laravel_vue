@@ -42,7 +42,7 @@
 
 .colorLetra {
     color: white;
-    font-size: 64px;
+    font-size: 74px;
     font-family: GreatVibes;
 }
 
@@ -85,17 +85,19 @@
     width: 212px;
     /* Ajusta el ancho para dispositivos más pequeños */
     height: 45px;
-    border-radius: 10px;
-    background-color: #F59E0B;
-    border: none;
+    background-color: #ffffff00;
+    border: 2px solid white;
     color: white;
     font-size: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 80px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 
 .BotonCarrousel:hover {
-    background-color: #b4760a;
+    background-color: white;
+    color: black;
+    
 }
 
 .carousel-control-prev,
@@ -186,8 +188,9 @@
 }
 
 .button-wrapper:hover .button img {
-    filter: brightness(80%);
+    filter: brightness(90%);
     /* Reducir el brillo al 80% cuando se pasa el ratón por encima */
+    border: 4px solid #422329;
 }
 
 .containerLetras {
@@ -212,6 +215,7 @@
 
 .TercerTexto {
     font-size: 16px;
+    line-height: 2; 
 }
 
 .containerRecetasAbuelaBG {

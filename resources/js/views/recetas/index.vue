@@ -1,6 +1,6 @@
 <template>
     <div class="colorFondo">
-        <div id="recetas" class="container ">
+        <div id="recetas" class="contenedorGeneral mt-4">
             <h1>Recetas</h1>
 
             <div class="row mb-3">

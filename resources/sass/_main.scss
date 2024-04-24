@@ -1,189 +1,200 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.contenedorGeneral{
+  width: 1440px;
+  margin: auto;
+  margin-top: 0px !important;
 }
 
 html {
-    height: 100%;
-    font-size: $scale;
+  height: 100%;
+  font-size: $scale;
 }
 
-.colorFondo{
+.colorFondo {
   background-color: #F9F9F9;
 }
 
 body {
-    font-family: var(--font-family);
-    color: var(--text-color);
-    background-color: var(--surface-ground);
-    margin: 0;
-    padding: 0;
-    min-height: 100%;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-family);
+  color: var(--text-color);
+  background-color: var(--surface-ground);
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .layout-wrapper {
-    min-height: 100vh;
+  min-height: 100vh;
 }
 
-.colorBoton{
-  background-color: #F59E0B;
+.colorBoton {
+  background-color: #422329;
   color: white;
+  border-radius: 0px;
+  width: 150px;
+  margin: auto;
 }
 
-.colorBoton:hover{
-background-color: #d78c0a;
-color: white;
+.colorBoton:hover {
+  background-color: #d78c0a;
+  color: white;
 }
 
 
 //Boton del corazon 
 .con-like {
-    --red: rgb(255, 50, 50);
-    position: relative;
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-  }
-  
-  .con-like .like {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+  --red: rgb(255, 50, 50);
+  position: relative;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+}
+
+.con-like .like {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 20;
+  cursor: pointer;
+}
+
+.con-like .checkmark {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.con-like .outline,
+.con-like .filled {
+  fill: var(--red);
+  position: absolute;
+}
+
+.con-like .filled {
+  animation: kfr-filled 0.5s;
+  display: none;
+}
+
+.con-like .celebrate {
+  position: absolute;
+  animation: kfr-celebrate 0.5s;
+  animation-fill-mode: forwards;
+  display: none;
+}
+
+.con-like .poly {
+  stroke: var(--red);
+  fill: var(--red);
+}
+
+.con-like .like:checked~.checkmark .filled {
+  display: block
+}
+
+.con-like .like:checked~.checkmark .celebrate {
+  display: block
+}
+
+@keyframes kfr-filled {
+  0% {
     opacity: 0;
-    z-index: 20;
-    cursor: pointer;
-  }
-  
-  .con-like .checkmark {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .con-like .outline,
-  .con-like .filled {
-    fill: var(--red);
-    position: absolute;
-  }
-  
-  .con-like .filled {
-    animation: kfr-filled 0.5s;
-    display: none;
-  }
-  
-  .con-like .celebrate {
-    position: absolute;
-    animation: kfr-celebrate 0.5s;
-    animation-fill-mode: forwards;
-    display: none;
-  }
-  
-  .con-like .poly {
-    stroke: var(--red);
-    fill: var(--red);
-  }
-  
-  .con-like .like:checked ~ .checkmark .filled {
-    display: block
-  }
-  
-  .con-like .like:checked ~ .checkmark .celebrate {
-    display: block
-  }
-  
-  @keyframes kfr-filled {
-    0% {
-      opacity: 0;
-      transform: scale(0);
-    }
-  
-    50% {
-      opacity: 1;
-      transform: scale(1.2);
-    }
-  }
-  
-  @keyframes kfr-celebrate {
-    0% {
-      transform: scale(0);
-    }
-  
-    50% {
-      opacity: 0.8;
-    }
-  
-    100% {
-      transform: scale(1.2);
-      opacity: 0;
-      display: none;
-    }
+    transform: scale(0);
   }
 
-  //Diseño boton de añadir al plan semanal
-  .icon-link {
-    display: inline-block;
-    padding: 5px;
-    transition: background-color 0.3s, color 0.3s;
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes kfr-celebrate {
+  0% {
+    transform: scale(0);
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+    display: none;
+  }
+}
+
+//Diseño boton de añadir al plan semanal
+.icon-link {
+  display: inline-block;
+  padding: 5px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .circle {
-    stroke: #DDCAD0; 
-    stroke-width: 1.5;
+  stroke: #DDCAD0;
+  stroke-width: 1.5;
 }
 
 .cross {
-    stroke: #DDCAD0; 
-    stroke-width: 1.5;
-    stroke-linecap: round;
+  stroke: #DDCAD0;
+  stroke-width: 1.5;
+  stroke-linecap: round;
 }
 
 
 .icon-link:hover .circle {
-    stroke: #F59E0B; 
+  stroke: #F59E0B;
 }
 
 .icon-link:hover .cross {
-    stroke: #F59E0B; 
+  stroke: #F59E0B;
 }
 
 
-  //Diseño tabla plan semanal
-  table{
-    text-align: center;
-  }
-  tr{
+//Diseño tabla plan semanal
+table {
+  text-align: center;
+}
+
+tr {
   border-bottom: 1px solid black;
 }
-.separador{
+
+.separador {
   border-right: 1px solid black;
 }
-.espacio{
+
+.espacio {
   max-width: 10px;
 }
 
-.nombreDias{
+.nombreDias {
   width: 80px;
 }
 
 .icon-container:hover svg {
   cursor: pointer;
-  fill: red;
-  stroke: red;
+  fill: #F59E0B;
+  stroke: #F59E0B;
 }
 
-.icon-eye:hover svg{
+.icon-eye:hover svg {
   cursor: pointer;
-  stroke: #FFC107;
+  stroke: #F59E0B;
 }
 
-.icon-add:hover{
+.icon-add:hover {
   cursor: pointer;
 }
-  
