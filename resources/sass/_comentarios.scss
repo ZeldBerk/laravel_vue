@@ -5,3 +5,24 @@
     border: 3px solid #422329c9;
     border-radius: 0;
 }
+
+// Estrellas para el filtro de los comentarios
+.estrella-label {
+    cursor: pointer;
+}
+
+.estrella-checkbox + svg{
+    height: 18px;
+    width: 18px;
+}
+
+.estrella-checkbox:checked + svg {
+    color: #f7be16; /* Cambiar el color cuando está seleccionado */
+    fill: #f7be16;
+}
+
+/* Estilos para las estrellas */
+.mx-1 {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
