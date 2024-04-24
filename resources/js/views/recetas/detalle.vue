@@ -100,7 +100,10 @@ function formatCantidad(cantidad) {
 </script>
 
 <style>
-.ck {
+.ck.ck-editor__main>.ck-editor__editable:not(.ck-focused){
+    border: 0 !important;
+}
+.ck-rounded-corners .ck.ck-editor__top .ck-sticky-panel .ck-toolbar, .ck.ck-editor__top .ck-sticky-panel .ck-toolbar.ck-rounded-corners.ck-rounded-corners .ck.ck-editor__top .ck-sticky-panel .ck-toolbar, .ck.ck-editor__top .ck-sticky-panel .ck-toolbar.ck-rounded-corners{
     border: 0 !important;
 }
 </style>
