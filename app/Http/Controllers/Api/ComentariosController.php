@@ -74,10 +74,11 @@ class ComentariosController extends Controller
     public function show($receta_id){
 
         $comentarios = comentarios::where('receta_id', $receta_id)
-        ->join('users','users.id', '=', 'comentarios.user_id')
-        ->select('comentarios.*', 'users.name')
-        ->get();
-
+            ->join('users', 'users.id', '=', 'comentarios.user_id')
+            ->select('comentarios.*', 'users.name')
+            ->orderBy('comentarios.puntuacion', 'desc')
+            ->get();
+    
         return $comentarios;
     }
 

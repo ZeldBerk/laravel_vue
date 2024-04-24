@@ -1,0 +1,7 @@
+// Borde de los comentarios
+.comentarioCard {
+    position: relative;
+    /* Añadir posición relativa para que la posición absoluta sea relativa a este contenedor */
+    border: 3px solid #422329c9;
+    border-radius: 0;
+}
