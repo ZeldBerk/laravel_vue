@@ -3,7 +3,7 @@
 }
 
 .contenedorGeneral{
-  width: 1440px;
+  max-width: 1440px;
   margin: auto;
   margin-top: 0px !important;
 }
@@ -162,38 +162,10 @@ a {
 }
 
 
-//Diseño tabla plan semanal
-table {
-  text-align: center;
+//Clase panel de control 
+
+.borderCardPanel{
+  border: 3px solid #422329;
+  border-radius: 0 !important;
 }
 
-tr {
-  border-bottom: 1px solid black;
-}
-
-.separador {
-  border-right: 1px solid black;
-}
-
-.espacio {
-  max-width: 10px;
-}
-
-.nombreDias {
-  width: 80px;
-}
-
-.icon-container:hover svg {
-  cursor: pointer;
-  fill: #F59E0B;
-  stroke: #F59E0B;
-}
-
-.icon-eye:hover svg {
-  cursor: pointer;
-  stroke: #F59E0B;
-}
-
-.icon-add:hover {
-  cursor: pointer;
-}

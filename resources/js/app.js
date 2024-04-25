@@ -119,7 +119,7 @@ import 'vue-select/dist/vue-select.css';
 import "primeflex/primeflex.css";
 //import '../css/theme.css';
 //import "primevue/resources/themes/lara-light-teal/theme.css";
-import "primevue/resources/themes/aura-light-amber/theme.css";
+import "primevue/resources/themes/aura-light-noir/theme.css";
 import "primeicons/primeicons.css";
 
 const app = createApp({
