@@ -16,12 +16,10 @@
     width: 18px;
 }
 
-.estrella-checkbox:checked + svg {
-    color: #f7be16; /* Cambiar el color cuando está seleccionado */
+.estrella-checkbox:checked + svg path {
     fill: #f7be16;
 }
 
-/* Estilos para las estrellas */
 .mx-1 {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
