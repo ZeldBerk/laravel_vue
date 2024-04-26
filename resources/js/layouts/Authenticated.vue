@@ -5,7 +5,7 @@
 
         <div class="layout-main-container ">
 
-            <div class="contenedorGeneral">
+            <div class="contenedorAdmins">
 
                 <Breadcrumb :home="home" :model="crumbs" class="mb-2">
                     <template #item="{ item, props }">
@@ -20,14 +20,15 @@
                         </a>
                     </template>
                 </Breadcrumb>
-                <div class="layout-main">
-
-
-                    <Suspense>
-                        <router-view></router-view>
-                    </Suspense>
-                </div>
             </div>
+            <div class="layout-main">
+
+
+                <Suspense>
+                    <router-view></router-view>
+                </Suspense>
+            </div>
+
 
 
         </div>

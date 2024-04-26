@@ -1,40 +1,43 @@
 <template>
-    <div class="grid">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between pb-2 mb-2">
-                        <h5 class="card-title">Todos los ingredeientes</h5>
-                        <div>
-                            <button class="btn btn-success" @click="addIngrediente">Añadir ingrediente</button>
+    <div class="contenedorAdmins">
+        <div class="grid">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between pb-2 mb-2">
+                            <h5 class="card-title">Todos los ingredeientes</h5>
+                            <div>
+                                <button class="btn btn-success" @click="addIngrediente">Añadir ingrediente</button>
+                            </div>
                         </div>
-                    </div>
 
-                    <table class="table table-hover table-sm">
-                        <thead class="bg-dark text-light">
-                            <tr>
-                                <th width="50" class="text-center">#</th>
-                                <th>Nombre</th>
-                                <th class="text-center" width="200">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(ingrediente, index) in ingredientList">
-                                <td class="text-center">{{ ingrediente.id }}</td>
-                                <td>{{ ingrediente.nombre }}</td>
-                                <td class="text-center">
-                                    <button class="btn btn-warning"
-                                        @click="editIngrediente(ingrediente.id, ingrediente.nombre, index)">Edit</button>
-                                    <button class="btn btn-danger"
-                                        @click="deleteIngrediente(ingrediente.id, index)">Delete</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        <table class="table table-hover table-sm">
+                            <thead class="bg-dark text-light">
+                                <tr>
+                                    <th width="50" class="text-center">#</th>
+                                    <th>Nombre</th>
+                                    <th class="text-center" width="200">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(ingrediente, index) in ingredientList">
+                                    <td class="text-center">{{ ingrediente.id }}</td>
+                                    <td>{{ ingrediente.nombre }}</td>
+                                    <td class="text-center">
+                                        <button class="btn btn-warning"
+                                            @click="editIngrediente(ingrediente.id, ingrediente.nombre, index)">Edit</button>
+                                        <button class="btn btn-danger"
+                                            @click="deleteIngrediente(ingrediente.id, index)">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 </template>
 
 <script setup>

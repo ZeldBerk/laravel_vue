@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="mx-4">Plan Semanal</h1>
-    <div class="container">
+    <div class="contenedorGeneral">
       <div class="row">
         <div v-for="(dia, index) in diasSemana" :key="index" class="col-12 mb-4">
           <div class="card">
