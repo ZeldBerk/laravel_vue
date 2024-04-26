@@ -1,4 +1,4 @@
-<template>
+*<template>
     <div class="layout-wrapper layout-static-inactive">
 
         <AppTopbar></AppTopbar>
