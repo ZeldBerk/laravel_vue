@@ -8,7 +8,9 @@
                             <h2>{{ receta.nombre }}</h2>
                             <h3>{{ receta.descripcion_corta }}</h3>
                         </div>
-                        <div class="col-12 d-flex justify-content-center mb-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-6 d-flex mb-4">
                             <img :src="receta?.media[0]?.original_url" alt="" style="max-width: 100%; height: auto;" />
                         </div>
                     </div>
@@ -22,22 +24,8 @@
                         <div class="col-2 d-flex align-items-center">
                             <p>Creada: {{ formatedate(receta.created_at) }}</p>
                         </div>
-                        <div class="col-5 d-flex align-items-center justify-content-end" @click.stop="anadirPlanSemanal(receta.id)">
-                            <a class="icon-link">
-                                <svg width="35px" height="35px" viewBox="-2.4 -2.4 28.80 28.80" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg" stroke="#F59E0B">
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                    </g>
-                                    <g id="SVGRepo_iconCarrier">
-                                        <circle cx="12" cy="12" r="10" class="circle"></circle>
-                                        <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15"
-                                            class="cross">
-                                        </path>
-                                    </g>
-                                </svg>
-                            </a>
+                        <div class="col-5 d-flex align-items-center justify-content-end">
+                            <button type="submit" class="btn colorBoton" @click.stop="anadirPlanSemanal(receta.id)">Añadir a plan semanal</button>
                         </div>
                         <div class="col-2 d-flex align-items-center justify-content-end">
                             <router-link :to="{ name: 'comentarios.index', params: { id: receta.id } }"
