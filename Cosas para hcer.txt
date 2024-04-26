@@ -1,7 +1,6 @@
 ------------ Obligatorio ------------
 - Editar botones azules y demas
 - Colores formularios(inputs y demas)
-- Diseño plan semanal(repasar)
 - Gestion recetas segun usuario (admin o no admin)
 - ESTUDIAR EL YUP DEL UPDATE y el promise (IMPORTANTE)
 - Boton eleiminar ingredientes + eliminar ingredientes al eliminar receta
