@@ -1,42 +1,46 @@
 <template>
     <div class="container mt-4">
-        <div class="row">
-            <div class="col-12">
+        <div class="row d-flex justify-content-center">
+            <div class="col-12 padding">
                 <div class="card comentarioCard">
                     <div class="row">
-                        <div class="col-12 text-center">
-                            <h2>{{ receta.nombre }}</h2>
-                            <h3>{{ receta.descripcion_corta }}</h3>
+                        <div class="col-5">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h2>{{ receta.nombre }}</h2>
+                                    <h4>{{ receta.descripcion_corta }}</h4>
+                                </div>
+                                <div class="col-12 d-flex align-items-center">
+                                    <p>Tiempio preparación: {{ receta.tiempo_preparacion }}</p>
+                                </div>
+                                <div class="col-12 d-flex align-items-center">
+                                    <p>Raciones: {{ receta.raciones }}</p>
+                                </div>
+                                <div class="col-12 d-flex align-items-center">
+                                    <p>Creada: {{ formatedate(receta.created_at) }}</p>
+                                </div>
+                                <div class="col-6 d-flex align-items-center">
+                                    <button type="submit" class="btn colorBoton"
+                                        @click.stop="anadirPlanSemanal(receta.id)">Añadir a plan semanal</button>
+                                </div>
+                                <div class="col-6 d-flex align-items-center">
+                                    <router-link :to="{ name: 'comentarios.index', params: { id: receta.id } }"
+                                        class="btn colorBoton">Comentarios</router-link>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6 d-flex mb-4">
+                        <div class="col-7 d-flex justify-content-center">
                             <img :src="receta?.media[0]?.original_url" alt="" style="max-width: 100%; height: auto;" />
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-2 d-flex align-items-center">
-                            <p>Tiempio preparación: {{ receta.tiempo_preparacion }}</p>
-                        </div>
-                        <div class="col-1 d-flex align-items-center">
-                            <p>Raciones: {{ receta.raciones }}</p>
-                        </div>
-                        <div class="col-2 d-flex align-items-center">
-                            <p>Creada: {{ formatedate(receta.created_at) }}</p>
-                        </div>
-                        <div class="col-5 d-flex align-items-center justify-content-end">
-                            <button type="submit" class="btn colorBoton" @click.stop="anadirPlanSemanal(receta.id)">Añadir a plan semanal</button>
-                        </div>
-                        <div class="col-2 d-flex align-items-center justify-content-end">
-                            <router-link :to="{ name: 'comentarios.index', params: { id: receta.id } }"
-                                class="btn colorBoton">Comentarios</router-link>
-                        </div>
                     </div>
                     <h4>Ingredientes:</h4>
                     <div class="row">
                         <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" v-for="ingrediente in ingredientes">
                             <div v-if="ingrediente.cantidad">
-                                <p>- {{ formatCantidad(ingrediente.cantidad) }} {{ ingrediente.unidad }} de {{ ingrediente.nombre }}</p>
+                                <p>- {{ formatCantidad(ingrediente.cantidad) }} {{ ingrediente.unidad }} de {{
+                                    ingrediente.nombre }}</p>
                             </div>
                             <div v-else>
                                 <p>- {{ ingrediente.nombre }}</p>
@@ -90,7 +94,7 @@
                 </div>
             </div>
         </div>-->
-    </div> 
+    </div>
 </template>
 
 <script setup>
@@ -247,31 +251,32 @@ function anadirPlanSemanal(receta_id) {
 <style scoped>
 /* Estilos boton añadi a plan semanal */
 .icon-link {
-  display: inline-block;
-  padding: 5px;
-  transition: background-color 0.3s, color 0.3s;
+    display: inline-block;
+    padding: 5px;
+    transition: background-color 0.3s, color 0.3s;
 }
-.icon-link:hover{
+
+.icon-link:hover {
     cursor: pointer;
 }
 
 .circle {
-  stroke: #422329;
-  stroke-width: 1.5;
+    stroke: #422329;
+    stroke-width: 1.5;
 }
 
 .cross {
-  stroke: #422329;
-  stroke-width: 1.5;
-  stroke-linecap: round;
+    stroke: #422329;
+    stroke-width: 1.5;
+    stroke-linecap: round;
 }
 
 
 .icon-link:hover .circle {
-  stroke: #F59E0B;
+    stroke: #F59E0B;
 }
 
 .icon-link:hover .cross {
-  stroke: #F59E0B;
+    stroke: #F59E0B;
 }
 </style>
