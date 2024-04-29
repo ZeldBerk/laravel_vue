@@ -3,7 +3,6 @@
 - Colores formularios(inputs y demas)
 - Gestion recetas segun usuario (admin o no admin)
 - ESTUDIAR EL YUP DEL UPDATE y el promise (IMPORTANTE)
-- Boton eleiminar ingredientes + eliminar ingredientes al eliminar receta
 - Revisar por 3ª vez borde del text editor component
 ------------ Opcional ------------
 - Forgot Password (Requisito Opcional).
