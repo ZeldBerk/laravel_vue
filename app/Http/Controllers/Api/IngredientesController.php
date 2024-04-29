@@ -98,4 +98,14 @@ class IngredientesController extends Controller
 
         return response()->json(['success' => true, 'data' => $ingrediente_receta]);
     }
+
+    // Elimina un ingrediente de una receta
+    public function deleteIngreReceta($id){
+
+        $ingrediente_receta = ingredientes_recetas::find($id);
+
+        $ingrediente_receta->delete();
+
+        return response()->json(['success' => true, 'data' => 'Ingrediente eliminado de la receta correctamente']);
+    }
 }
