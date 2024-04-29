@@ -54,6 +54,12 @@ a {
   color: white;
 }
 
+//Color shadow-box
+.form-control:focus {
+  box-shadow: 0 0 10px #422329; 
+  border-color: #422329;
+}
+
 
 //Boton del corazon 
 .con-like {
