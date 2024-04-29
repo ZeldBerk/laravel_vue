@@ -47,6 +47,9 @@
                                 <!-- Redireccionara a la pagina de plan semanal -->
                                 <li><router-link to="/user/planSemanal" class="dropdown-item">Plan Semanal</router-link>
                                 </li>
+                                <!-- Reedireccion a la lista de la compra -->
+                                <li><router-link to="/user/ListaCompra" class="dropdown-item">Lista de la
+                                        Compra</router-link></li>
                                 <!-- Redireccionara a la pagina de Favoritos del usuario -->
                                 <li><router-link to="/user/favoritos" class="dropdown-item">Favoritos</router-link></li>
                                 <li>
