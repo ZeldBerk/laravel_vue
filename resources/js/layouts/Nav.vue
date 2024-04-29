@@ -20,7 +20,8 @@
 
                 <ul class="navbar-nav mt-2 mt-lg-0 ms-auto">
                     <li class="nav-item d-flex align-items-center">
-                        <router-link :to="{ name: 'recetas.index' }" class="nav-link textoHeader"><span>Recetario</span></router-link>
+                        <router-link :to="{ name: 'recetas.index' }"
+                            class="nav-link textoHeader"><span>Recetario</span></router-link>
                     </li>
                     <template v-if="!user?.name">
                         <li class="nav-item">
@@ -60,8 +61,12 @@
                             <!-- Redireccionara a la pagina de plan semanal -->
                             <li><router-link to="/user/planSemanal" class="dropdown-item">Plan Semanal</router-link>
                             </li>
+                            <!-- Reedireccion a la lista de la compra -->
+                            <li><router-link to="/user/ListaCompra" class="dropdown-item">Lista de la
+                                    Compra</router-link></li>
                             <!-- Redireccionara a la pagina de Favoritos del usuario -->
                             <li><router-link to="/user/favoritos" class="dropdown-item">Favoritos</router-link></li>
+
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
