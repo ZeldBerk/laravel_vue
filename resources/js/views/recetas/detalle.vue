@@ -4,7 +4,7 @@
             <div class="col-12 padding">
                 <div class="card comentarioCard">
                     <div class="row">
-                        <div class="col-5">
+                        <div class="col-md-12 col-lg-5">
                             <div class="row">
                                 <div class="col-12">
                                     <h2>{{ receta.nombre }}</h2>
@@ -19,17 +19,17 @@
                                 <div class="col-12 d-flex align-items-center">
                                     <p>Creada: {{ formatedate(receta.created_at) }}</p>
                                 </div>
-                                <div class="col-6 d-flex align-items-center">
+                                <div class="col-md-6 col-lg-12 col-xl-6 d-flex align-items-center mb-2">
                                     <button type="submit" class="btn colorBoton"
                                         @click.stop="anadirPlanSemanal(receta.id)">Añadir a plan semanal</button>
                                 </div>
-                                <div class="col-6 d-flex align-items-center">
+                                <div class="col-md-6 col-lg-12 col-xl-6 d-flex align-items-center mb-2">
                                     <router-link :to="{ name: 'comentarios.index', params: { id: receta.id } }"
                                         class="btn colorBoton">Comentarios</router-link>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-7 d-flex justify-content-center">
+                        <div class="col-md-12 col-lg-7 d-flex justify-content-center">
                             <img :src="receta?.media[0]?.original_url" alt="" style="max-width: 100%; height: auto;" />
                         </div>
                     </div>
