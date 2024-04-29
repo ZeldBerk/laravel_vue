@@ -7,7 +7,7 @@
                         <div class="d-flex justify-content-between pb-2 mb-2">
                             <h5 class="card-title">Todas las tareas</h5>
                             <div>
-                                <router-link :to="{ name: 'recetasAdmin.create' }" class="btn btn-success">Nueva
+                                <router-link :to="{ name: 'recetasAdmin.create' }" class="btn colorBoton">Nueva
                                     Receta</router-link>
                             </div>
                         </div>
@@ -99,3 +99,11 @@ const deleteReceta = (id, index) => {
 }
 
 </script>
+<style>
+.btn-warning{
+    border-radius: 0;
+}
+.btn-danger{
+    border-radius: 0;
+}
+</style>

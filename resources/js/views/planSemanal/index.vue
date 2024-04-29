@@ -15,7 +15,8 @@
                       {{ receta.receta.nombre }}
                       <span class="icon-eye" @click.stop="detallesReceta(receta.receta_id)">
                         <!-- Icono de ojo dentro de un círculo -->
-                        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
                           <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                           <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                           <g id="SVGRepo_iconCarrier">
@@ -29,8 +30,8 @@
                         </svg>
                       </span>
                       <span class="delete-icon" @click.stop="deleteRecetadelPlan(receta.id)">
-                        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                          stroke="#000000">
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none"
+                          xmlns="http://www.w3.org/2000/svg" stroke="#000000">
                           <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                           <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                           <g id="SVGRepo_iconCarrier">
@@ -51,7 +52,8 @@
                       {{ receta.receta.nombre }}
                       <span class="icon-eye" @click.stop="detallesReceta(receta.receta_id)">
                         <!-- Icono de ojo dentro de un círculo -->
-                        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
                           <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                           <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                           <g id="SVGRepo_iconCarrier">
@@ -65,8 +67,8 @@
                         </svg>
                       </span>
                       <span class="delete-icon" @click.stop="deleteRecetadelPlan(receta.id)">
-                        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                          stroke="#000000">
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none"
+                          xmlns="http://www.w3.org/2000/svg" stroke="#000000">
                           <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                           <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                           <g id="SVGRepo_iconCarrier">

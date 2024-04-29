@@ -7,7 +7,7 @@
                         <div class="d-flex justify-content-between pb-2 mb-2">
                             <h5 class="card-title">Todos los ingredeientes</h5>
                             <div>
-                                <button class="btn btn-success" @click="addIngrediente">Añadir ingrediente</button>
+                                <button class="btn colorBoton" @click="addIngrediente">Añadir ingrediente</button>
                             </div>
                         </div>
 
@@ -24,7 +24,7 @@
                                     <td class="text-center">{{ ingrediente.id }}</td>
                                     <td>{{ ingrediente.nombre }}</td>
                                     <td class="text-center">
-                                        <button class="btn btn-warning"
+                                        <button class="btn btn-warning mr-1"
                                             @click="editIngrediente(ingrediente.id, ingrediente.nombre, index)">Edit</button>
                                         <button class="btn btn-danger"
                                             @click="deleteIngrediente(ingrediente.id, index)">Delete</button>

@@ -67,7 +67,7 @@
                                 <label for="receta_descripcion" class="form-label">Pasos de la receta</label>
                                 <TextEditorComponent v-model="receta.descripcion" />
                             </div>
-                            <button type="submit" class="btn btn-primary mt-4 mb-4">Actualizar receta</button>
+                            <button type="submit" class="btn colorBoton mt-4 mb-4">Actualizar receta</button>
                         </div>
                     </div>
                 </div>
