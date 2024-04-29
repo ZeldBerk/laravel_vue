@@ -261,35 +261,3 @@ function anadirPlanSemanal(receta_id) {
     }
 }
 </script>
-<style scoped>
-/* Estilos boton añadi a plan semanal */
-.icon-link {
-    display: inline-block;
-    padding: 5px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.icon-link:hover {
-    cursor: pointer;
-}
-
-.circle {
-    stroke: #422329;
-    stroke-width: 1.5;
-}
-
-.cross {
-    stroke: #422329;
-    stroke-width: 1.5;
-    stroke-linecap: round;
-}
-
-
-.icon-link:hover .circle {
-    stroke: #F59E0B;
-}
-
-.icon-link:hover .cross {
-    stroke: #F59E0B;
-}
-</style>

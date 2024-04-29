@@ -4,7 +4,7 @@
 - Gestion recetas segun usuario (admin o no admin)
 - ESTUDIAR EL YUP DEL UPDATE y el promise (IMPORTANTE)
 - Boton eleiminar ingredientes + eliminar ingredientes al eliminar receta
-- Editar TODOS los tamaños del diseño
+- Revisar por 3ª vez borde del text editor component
 ------------ Opcional ------------
 - Forgot Password (Requisito Opcional).
 - Mejorar alertas
@@ -15,5 +15,3 @@
 
 
 Los Hover de todos los botones en color marron clarito (entre el naranja y el marron)
-Las cards de los comentarios en borde recto y color marron
-Panel de Control con bordes igual que las recetas
