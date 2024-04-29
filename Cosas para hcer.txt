@@ -1,5 +1,4 @@
 ------------ Obligatorio ------------
-- Editar botones azules y demas
 - Gestion recetas segun usuario (admin o no admin)
 - ESTUDIAR EL YUP DEL UPDATE y el promise (IMPORTANTE)
 - Revisar por 3ª vez borde del text editor component
