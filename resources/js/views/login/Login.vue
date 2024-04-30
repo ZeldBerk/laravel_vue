@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row justify-content-center py-4">
                 <div class="col-md-6">
-                    <div class="card border-0 shadow-sm">
+                    <div class="card comentarioCard shadow-sm">
                         <div class="card-body">
                             <form @submit.prevent="submitLogin">
                                 <div class="">
@@ -38,22 +38,21 @@
                                         <input class="form-check-input" type="checkbox" name="remember"
                                             v-model="loginForm.remember" id="flexCheckIndeterminate">
                                         <label class="form-check-label" for="flexCheckIndeterminate">
-                                            {{ $t('remember_me') }}
+                                            <span>Recuerdame</span>
                                         </label>
                                     </div>
 
                                     <!-- Buttons -->
-                                    <div class="flex items-center justify-end mt-4">
-                                        <button class="btn btn-primary" :class="{ 'opacity-25': processing }"
+                                    <div class="flex items-center justify-end mt-4 mb-4">
+                                        <button class="btn colorBoton" :class="{ 'opacity-25': processing }"
                                             :disabled="processing">
-                                            {{ $t('login') }}
+                                            <span>Iniciar Session</span>
                                         </button>
                                     </div>
                                 </div>
-                                <router-link :to="{ name: 'auth.forgot-password' }">{{
-                                    $t('forgot_password')}}</router-link>
+                                <router-link :to="{ name: 'auth.forgot-password' }"><span class="colorMarron">Has olvidado tu contraseña?</span></router-link>
                                 <router-link class="nav-link" to="/register">
-                                    <p>¿No tienes cuenta? <span class="colorBlue">Crea una nueva ahora</span></p>
+                                    <p>¿No tienes cuenta? <span class="colorMarron">Crea una nueva ahora</span></p>
                                 </router-link>
                             </form>
                         </div>
