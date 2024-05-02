@@ -1,14 +1,18 @@
+//ARCHIVO DE DISEÑO GENERAL DE LA WEB
+
 * {
   box-sizing: border-box;
 }
 
-.contenedorGeneral{
+
+//Contenedores
+.contenedorGeneral {
   max-width: 1440px;
   margin: auto;
   margin-top: 0px !important;
 }
 
-.contenedorAdmins{
+.contenedorAdmins {
   width: 100%;
   margin: auto;
   margin-top: 0px !important;
@@ -42,6 +46,8 @@ a {
   min-height: 100vh;
 }
 
+//Color de los botones de todas las paginas de la web
+
 .colorBoton {
   background-color: #422329;
   color: white;
@@ -54,97 +60,13 @@ a {
   color: white;
 }
 
-//Color shadow-box
+
+//Color shadow-box de los filtros e inputs
 .form-control:focus {
-  box-shadow: 0 0 10px #422329; 
+  box-shadow: 0 0 10px #422329;
   border-color: #422329;
 }
 
-
-//Boton del corazon 
-.con-like {
-  --red: rgb(255, 50, 50);
-  position: relative;
-  display: inline-block;
-  width: 25px;
-  height: 25px;
-}
-
-.con-like .like {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  z-index: 20;
-  cursor: pointer;
-}
-
-.con-like .checkmark {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.con-like .outline,
-.con-like .filled {
-  fill: var(--red);
-  position: absolute;
-}
-
-.con-like .filled {
-  animation: kfr-filled 0.5s;
-  display: none;
-}
-
-.con-like .celebrate {
-  position: absolute;
-  animation: kfr-celebrate 0.5s;
-  animation-fill-mode: forwards;
-  display: none;
-}
-
-.con-like .poly {
-  stroke: var(--red);
-  fill: var(--red);
-}
-
-.con-like .like:checked~.checkmark .filled {
-  display: block
-}
-
-.con-like .like:checked~.checkmark .celebrate {
-  display: block
-}
-
-@keyframes kfr-filled {
-  0% {
-    opacity: 0;
-    transform: scale(0);
-  }
-
-  50% {
-    opacity: 1;
-    transform: scale(1.2);
-  }
-}
-
-@keyframes kfr-celebrate {
-  0% {
-    transform: scale(0);
-  }
-
-  50% {
-    opacity: 0.8;
-  }
-
-  100% {
-    transform: scale(1.2);
-    opacity: 0;
-    display: none;
-  }
-}
 
 //Diseño boton de añadir al plan semanal
 .icon-link {
@@ -176,7 +98,7 @@ a {
 
 //Clase panel de control 
 
-.borderCardPanel{
+.borderCardPanel {
   border: 3px solid #422329;
   border-radius: 0 !important;
 }

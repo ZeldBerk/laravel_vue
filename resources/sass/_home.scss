@@ -1,12 +1,18 @@
+//ARCHIVO DISEÑO PAGINA HOME
+
 .contenedorHOME {
     margin: auto;
     max-width: 1440px;
 }
 
+//Fondo de la pagina principal
 .BGHome {
     background-color: #FFFFFF !important;
 }
 
+/*SECCION 1 Carrousel*/
+
+//Filtro del carrousel para oscurecer las imagenes
 .filtroContenedor {
     filter: brightness(60%);
 }
@@ -83,7 +89,6 @@
 
 .BotonCarrousel {
     width: 212px;
-    /* Ajusta el ancho para dispositivos más pequeños */
     height: 45px;
     background-color: #ffffff00;
     border: 2px solid white;
@@ -97,7 +102,7 @@
 .BotonCarrousel:hover {
     background-color: white;
     color: black;
-    
+
 }
 
 .carousel-control-prev,
@@ -111,9 +116,7 @@
         font-size: 16px;
         position: relative;
         left: 50%;
-        /* Coloca el botón en la mitad del carrusel */
         transform: translateX(-50%);
-        /* Centra el botón horizontalmente */
     }
 
     .BotonCarrousel:hover {
@@ -122,9 +125,7 @@
 
     .BotonCarrouselContainer {
         width: 100%;
-        /* Ajusta al 100% en dispositivos más pequeños */
         bottom: 10px;
-        /* Ajusta según sea necesario */
     }
 
     .button-wrapper {
@@ -133,12 +134,15 @@
 }
 
 
-
-
 .marginsDelCarrousel {
     margin-top: 55px;
     margin-bottom: 80px;
 }
+
+
+/*SECCION 2 Cuadrados pulsables para categorias*/
+
+
 
 .TamañoCuadradoPulsable {
     width: 480px;
@@ -189,9 +193,10 @@
 
 .button-wrapper:hover .button img {
     filter: brightness(90%);
-    /* Reducir el brillo al 80% cuando se pasa el ratón por encima */
     border: 4px solid #422329;
 }
+
+/*SECCION 3 Texto*/
 
 .containerLetras {
     width: 100%;
@@ -215,8 +220,10 @@
 
 .TercerTexto {
     font-size: 16px;
-    line-height: 2; 
+    line-height: 2;
 }
+
+/*SECCION 4 Recetas*/
 
 .containerRecetasAbuelaBG {
     margin-top: 30px;
@@ -290,6 +297,92 @@
     text-overflow: ellipsis;
 }
 
+//Margin para el corazon de las recetas de la HOME
 .marginCorazon {
     margin-left: 16px;
+}
+
+//Boton del corazon 
+.con-like {
+  --red: rgb(255, 50, 50);
+  position: relative;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+}
+
+.con-like .like {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 20;
+  cursor: pointer;
+}
+
+.con-like .checkmark {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.con-like .outline,
+.con-like .filled {
+  fill: var(--red);
+  position: absolute;
+}
+
+.con-like .filled {
+  animation: kfr-filled 0.5s;
+  display: none;
+}
+
+.con-like .celebrate {
+  position: absolute;
+  animation: kfr-celebrate 0.5s;
+  animation-fill-mode: forwards;
+  display: none;
+}
+
+.con-like .poly {
+  stroke: var(--red);
+  fill: var(--red);
+}
+
+.con-like .like:checked~.checkmark .filled {
+  display: block
+}
+
+.con-like .like:checked~.checkmark .celebrate {
+  display: block
+}
+
+@keyframes kfr-filled {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes kfr-celebrate {
+  0% {
+    transform: scale(0);
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+    display: none;
+  }
 }

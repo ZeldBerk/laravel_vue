@@ -1,3 +1,5 @@
+//ARCHIVO DISEÑO DEL FOOTER
+
 .layout-footer {
     transition: margin-left $transitionDuration;
     display: flex;
@@ -9,11 +11,11 @@
 
 }
 
-.iconoFooter{
+.iconoFooter {
     width: 50px;
     height: 50px;
 }
 
-.iconoFooterHover:hover{
+.iconoFooterHover:hover {
     fill: #F59E0B;
 }

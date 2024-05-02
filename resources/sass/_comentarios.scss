@@ -1,7 +1,8 @@
+//ARCHIVO PARA DISEÑO DE COMENTARIOS 
+
 // Borde de los comentarios
 .comentarioCard {
     position: relative;
-    /* Añadir posición relativa para que la posición absoluta sea relativa a este contenedor */
     border: 3px solid #422329c9 !important;
     border-radius: 0 !important;
 }
@@ -11,12 +12,12 @@
     cursor: pointer;
 }
 
-.estrella-checkbox + svg{
+.estrella-checkbox+svg {
     height: 18px;
     width: 18px;
 }
 
-.estrella-checkbox:checked + svg path {
+.estrella-checkbox:checked+svg path {
     fill: #f7be16;
 }
 
@@ -24,6 +25,7 @@
     margin-left: 0.5rem;
     margin-right: 0.5rem;
 }
-.p-rating .p-rating-item.p-rating-item-active .p-rating-icon{
+
+.p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
     color: #f7be16;
 }

@@ -1,73 +1,62 @@
+//ARCHIVO DISEÑO PARA EL PLAN SEMANAL
+
 /* Estilos para la tarjeta de cada día */
 .card {
     border: 2px solid #422329;
-    /* Borde de color */
     border-radius: 10px;
-    /* Bordes redondeados */
     margin-bottom: 20px;
-    /* Espacio entre las tarjetas */
 }
 
 .card-header {
     background-color: #DDCAD0;
-    /* Color de fondo del encabezado */
     color: black;
-    /* Color del texto del encabezado */
     font-weight: bold;
-    /* Texto en negrita */
     text-align: center;
-    /* Alineación del texto al centro */
     padding: 10px;
-    /* Espaciado interno */
 }
 
 .card-body {
     padding: 10px;
-    /* Espaciado interno */
 }
 
 /* Estilos para los círculos de los iconos */
 .icon-container {
-    // border: 3px solid #422329;
     border-radius: 50%;
     width: 40px;
-    /* Ancho del contenedor del icono */
     height: 40px;
-    /* Altura del contenedor del icono */
     display: flex;
-    /* Mostrar en línea */
     align-items: center;
-    /* Alinear verticalmente al centro */
     justify-content: center;
-    /* Alinear horizontalmente al centro */
 }
 
-.nombreReceta{
+.nombreReceta {
     font-size: 16px;
 }
 
-.nombreDia{
+.nombreDia {
     font-size: 30px;
 }
 
-.nombreMomento{
+.nombreMomento {
     font-size: 22px;
 }
 
-.icon-eye{
+//Icono OJO para ver los detalles de la receta desde el plan semanal
+
+.icon-eye {
     stroke: #422329;
 }
 
-.icon-eye:hover{
+.icon-eye:hover {
     stroke: #d78c0a;
     cursor: pointer;
 }
 
-.delete-icon{
+.delete-icon {
     stroke: #422329;
 }
 
-.delete-icon:hover{
+.delete-icon:hover {
     stroke: #d78c0a;
     cursor: pointer;
 }

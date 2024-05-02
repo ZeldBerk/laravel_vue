@@ -1,3 +1,5 @@
+//ARCHIVO DISEÑO PARA LAS RECETAS (recetario, detalles y update de recetas)
+
 //Borde de las Cards
 .cardBorderIMG {
   height: 440px;
@@ -8,11 +10,9 @@
 
 .contenidoCard {
   position: relative;
-  /* Añadir posición relativa para que la posición absoluta sea relativa a este contenedor */
   max-width: 365px;
   height: 393px;
   overflow: hidden;
-  /* Oculta el desbordamiento de las imágenes */
   border: 4px solid #422329;
   z-index: 1;
   background-color: white;
@@ -24,9 +24,9 @@
   height: 240px;
 }
 
+//Sombra de las cards en el recetario
 .oval {
   position: absolute;
-  /* Ajustar la posición absoluta */
   width: 400px;
   height: 60px;
   -moz-border-radius: 50%;
@@ -43,7 +43,6 @@
   background-position: center;
 
 }
-
 
 .cuerpoCarta {
   margin-top: 5px;
@@ -81,8 +80,8 @@
   width: 80% !important;
 }
 
-//Codigo diseño boton like
 
+//Codigo diseño boton like para el recetario
 .mi-con-like {
   --mi-red: rgb(255, 50, 50);
   --mi-default-background: #DDCAD0;
