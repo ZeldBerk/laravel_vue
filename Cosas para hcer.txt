@@ -1,7 +1,7 @@
 ------------ Obligatorio ------------
-- Gestion recetas segun usuario (admin o no admin)
 - ESTUDIAR EL YUP DEL UPDATE y el promise (IMPORTANTE)
 - Revisar por 3ª vez borde del text editor component
+- Filtro de estrellitas en admin comentarios
 ------------ Opcional ------------
 - Forgot Password (Requisito Opcional).
 - Mejorar alertas

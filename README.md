@@ -1,31 +1,16 @@
-# Características
+# Projecte de Laravel i Vue
+### Edgar Nos i Pau Salamanca
 
-Ejemplo proyecto Laravel 10 + vue3 PAra DAW
+## Requesitos Maquina Local
+- Xampp (Apache i MySQL)
+- Composser
+- NodeJs
 
-- ✅ Laravel 10
-- ✅ Vue 3
-- ✅ VueRouter + Vuex
-- ✅ Vue i18n Multi Idioma
-- ✅ Iniciar sesión
-- ✅ Restablecimiento de contraseña
-- ✅ Login
-- ✅ Panel de administración
-- ✅ Gestión de perfiles
-- ✅ Gestión de usuarios
-- ✅ Gestión de roles
-- ✅ Gestión de permisos
-- ✅ Cambio de contraseña
-- ✅ Verificación de correo electrónico
-- ✅ Gestión de Posts
-- ✅ Blog de Frontend
-- ✅ Boostrap 5
-
-
-## Como usar
+## Como Desplegar
 ### Clonar Repositorio 
 
 ```bash
-git clone ....
+git clone https://github.com/ZeldBerk/laravel_vue
 ```
 
 ### Instalar vía Composer
@@ -55,6 +40,12 @@ php artisan migrate
 php artisan db:seed
 ```
 
+### Crear el stortage Link
+
+```bash
+php artisan storage:link
+```
+
 ### Instalar las dependencias de Node
 
 ```bash
@@ -65,5 +56,5 @@ npm run dev
 ### Lanzar a producción
 
 ```bash
-npm run build or yarn build
+php artisan serve
 ```
