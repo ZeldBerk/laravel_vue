@@ -77,15 +77,15 @@ onMounted(() => {
     cargarRecetas();
 });
 
+//Mirara el input con ID filtro para que cada vez que se actualice este input se ejecute la funcion con la palabra recogida para hacer un filtrado
 watch(filtro, (newValue, oldValue) => {
     cargarRecetas(newValue);
 })
 
+//Funcion de flecha para cargar las recetas
 const cargarRecetas = (filtro = '') => {
 
     let url = `/api/recetas/RU/${user_id}`;
-
-
 
     if (filtro) {
         url += `?filtro=${filtro}`;
@@ -100,6 +100,8 @@ const cargarRecetas = (filtro = '') => {
         });
 }
 
+
+// Funcion de flecha para eliminar recetas
 const deleteReceta = (id, index) => {
 
     swal({
