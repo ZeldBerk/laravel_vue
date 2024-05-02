@@ -4,34 +4,49 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between pb-2 mb-2">
-                            <h5 class="card-title">Todos los ingredeientes</h5>
-                            <div>
+                        <div class="row mb-4">
+                            <div class="col-sm-12 col-md-4">
+                                <h5 class="card-title">Ingredientes</h5>
+                            </div>
+                            <div
+                                class="col-sm-12 col-md-4 d-flex align-items-center justify-content-center justify-content-md-start mt-2">
+                                <form action="#" class="w-100">
+                                    <div class="d-flex">
+                                        <label for="filtro" class="mr-2 d-flex align-items-center">Filtrar:</label>
+                                        <input type="text" id="filtro" name="filtro" class="form-control"
+                                            v-model="filtro">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-sm-12 col-md-4 d-flex align-items-center justify-content-right justify-content-md-end mt-2">
                                 <button class="btn colorBoton" @click="addIngrediente">Añadir ingrediente</button>
                             </div>
                         </div>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-hover table-sm">
+                                <thead class="bg-dark text-light">
+                                    <tr>
+                                        <th width="50" class="text-center">#</th>
+                                        <th>Nombre</th>
+                                        <th class="text-center" width="200">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(ingrediente, index) in ingredientList">
+                                        <td class="text-center">{{ ingrediente.id }}</td>
+                                        <td>{{ ingrediente.nombre }}</td>
+                                        <td class="text-center">
+                                            <button class="btn btn-warning mr-1"
+                                                @click="editIngrediente(ingrediente.id, ingrediente.nombre, index)">Edit</button>
+                                            <button class="btn btn-danger"
+                                                @click="deleteIngrediente(ingrediente.id, index)">Delete</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-                        <table class="table table-hover table-sm">
-                            <thead class="bg-dark text-light">
-                                <tr>
-                                    <th width="50" class="text-center">#</th>
-                                    <th>Nombre</th>
-                                    <th class="text-center" width="200">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(ingrediente, index) in ingredientList">
-                                    <td class="text-center">{{ ingrediente.id }}</td>
-                                    <td>{{ ingrediente.nombre }}</td>
-                                    <td class="text-center">
-                                        <button class="btn btn-warning mr-1"
-                                            @click="editIngrediente(ingrediente.id, ingrediente.nombre, index)">Edit</button>
-                                        <button class="btn btn-danger"
-                                            @click="deleteIngrediente(ingrediente.id, index)">Delete</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>
@@ -41,20 +56,35 @@
 </template>
 
 <script setup>
-import { ref, onMounted, inject } from "vue";
+import { ref, onMounted, inject, watch } from "vue";
 
 const swal = inject('$swal');
 const ingredientList = ref([]);
 const ingredeinte = ref({}); // Añadir ingredeinte
 const ingredeinteUpdate = ref({}); // Actualizar ingrediente
+const filtro = ref('');
 
 // Obtener todo los comentraios de la receta
 onMounted(() => {
-    axios.get('/api/ingredientes')
+    cargarIngredientes();
+});
+
+watch(filtro, (newValue, oldValue) => {
+    cargarIngredientes(newValue);
+});
+
+function cargarIngredientes(filtro = ''){
+    let url = `/api/ingredientes`;
+
+    if(filtro){
+        url += `?filtro=${filtro}`;
+    }
+
+    axios.get(url)
         .then(response => {
             ingredientList.value = response.data;
         });
-});
+}
 
 function addIngrediente() {
     swal({

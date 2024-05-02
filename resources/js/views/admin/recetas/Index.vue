@@ -4,66 +4,92 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between pb-2 mb-2">
-                            <h5 class="card-title">Todas las tareas</h5>
-                            <div>
+                        <div class="row mb-4">
+                            <div class="col-sm-12 col-md-4">
+                                <h5 class="card-title mt-2">Todas las tareas</h5>
+                            </div>
+                            
+                            <div
+                                class="col-sm-12 col-md-4 d-flex align-items-center justify-content-right justify-content-md-end mt-2">
                                 <router-link :to="{ name: 'recetasAdmin.create' }" class="btn colorBoton">Nueva
                                     Receta</router-link>
                             </div>
                         </div>
 
-                        <table class="table table-hover table-sm">
-                            <thead class="bg-dark text-light">
-                                <tr>
-                                    <th width="50" class="text-center">#</th>
-                                    <th>Nombre</th>
-                                    <th>Raciones</th>
-                                    <th>Tiempo de preparación</th>
-                                    <th>Categoria</th>
-                                    <th class="text-center" width="200">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(receta, index) in recetas">
-                                    <td class="text-center">{{ receta.id }}</td>
-                                    <td>{{ receta.nombre }}</td>
-                                    <td>{{ receta.raciones }}</td>
-                                    <td>{{ receta.tiempo_preparacion }}</td>
-                                    <th>{{ receta.categoria_id }}</th>
-                                    <td class="text-center">
-                                        <router-link :to="{ name: 'recetasAdmin.update', params: { id: receta.id } }"
-                                            class="btn btn-warning mr-1">Edit</router-link>
-                                        <button class="btn btn-danger"
-                                            @click="deleteReceta(receta.id, index)">Delete</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table table-hover table-sm">
+                                <thead class="bg-dark text-light">
+                                    <tr>
+                                        <th class="text-center">#</th>
+                                        <th>Nombre</th>
+                                        <th>Raciones</th>
+                                        <th>Tiempo de preparación</th>
+                                        <th>Categoria</th>
+                                        <th class="text-center" width="200">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(receta, index) in recetas" :key="receta.id">
+                                        <td class="text-center">{{ receta.id }}</td>
+                                        <td>{{ receta.nombre }}</td>
+                                        <td>{{ receta.raciones }}</td>
+                                        <td>{{ receta.tiempo_preparacion }}</td>
+                                        <td>{{ receta.categoria_id }}</td>
+                                        <td class="text-center">
+                                            <router-link
+                                                :to="{ name: 'recetasAdmin.update', params: { id: receta.id } }"
+                                                class="btn btn-warning mr-1">Edit</router-link>
+                                            <button class="btn btn-danger"
+                                                @click="deleteReceta(receta.id, index)">Delete</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
-
 </template>
 
 <script setup>
-import { ref, onMounted, inject } from "vue";
+import { ref, onMounted, inject, watch } from "vue";
 
 const recetas = ref();
 const swal = inject('$swal');
+const filtro = ref('');
 
 // Obtener id de usuario
 const data = localStorage.getItem("vuex");
 const user_id = JSON.parse(data).auth.user.id;
 
 onMounted(() => {
-    axios.get('/api/recetas/RU/' + user_id)
+    cargarRecetas();
+});
+
+watch(filtro, (newValue, oldValue) => {
+    cargarRecetas(newValue);
+})
+
+const cargarRecetas = (filtro = '') => {
+
+    let url = `/api/recetas/RU/${user_id}`;
+
+
+
+    if (filtro) {
+        url += `?filtro=${filtro}`;
+    }
+
+    axios.get(url)
         .then(response => {
             recetas.value = response.data;
         })
-});
+        .catch(error => {
+            console.error(error);
+        });
+}
 
 const deleteReceta = (id, index) => {
 
@@ -98,12 +124,16 @@ const deleteReceta = (id, index) => {
         })
 }
 
+
+
+
 </script>
 <style>
-.btn-warning{
+.btn-warning {
     border-radius: 0;
 }
-.btn-danger{
+
+.btn-danger {
     border-radius: 0;
 }
 </style>

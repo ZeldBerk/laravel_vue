@@ -10,11 +10,21 @@ use App\Models\ingredientes_recetas;
 class IngredientesController extends Controller
 {
     // Extrae todos los ingrdientes de la tabla ingredientes
-    public function index(){
+    public function index(Request $request){
 
-        $ingredientes = ingrediente::all()->toArray();
+        $filtro = $request->input('filtro');
+    
+        $query = ingrediente::query(); // Obtener una instancia del constructor de consultas
+    
+        if($filtro){
+            $query->where('nombre', 'like', '%' . $filtro .'%');
+        }
+    
+        $ingredientes = $query->get(); // Obtener los resultados después de aplicar el filtro
+    
         return $ingredientes;
     }
+    
 
     // Añade un registro
     public function store(Request $request){

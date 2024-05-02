@@ -5,36 +5,35 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\recetas;
+use Spatie\Permission\Traits\HasRoles;
+use App\Models\User;
 
 class RecetasController extends Controller
 {
+    use HasRoles;
 
     public function index(Request $request)
-{
-    $filtro = $request->input('filtro');
-    $id_categoria = $request->input('categoria');
+    {
+        $filtro = $request->input('filtro');
+        $id_categoria = $request->input('categoria');
 
-    $query = recetas::with('media');
+        $query = recetas::with('media');
 
-    // Aplicar filtro si se proporciona
-    if ($filtro) {
-        $query->where('nombre', 'like', '%' . $filtro . '%');
+        // Aplicar filtro si se proporciona
+        if ($filtro) {
+            $query->where('nombre', 'like', '%' . $filtro . '%');
+        }
+
+        // Aplicar filtro por categoría si se proporciona
+        if ($id_categoria) {
+            $query->where('categoria_id', $id_categoria);
+        }
+
+        $recetas = $query->get();
+
+        return $recetas;
     }
 
-    // Aplicar filtro por categoría si se proporciona
-    if ($id_categoria) {
-        $query->where('categoria_id', $id_categoria);
-    }
-
-    $recetas = $query->get();
-
-    return $recetas;
-}
-
-    
-    public function detalleRecetas(){
-        
-    }
 
 
     public function ultimasRecetas()
@@ -119,11 +118,31 @@ class RecetasController extends Controller
     }
 
     // Devuelve las recetas asociadas a un id de usuario
-    public function showRU($user_id)
-    {
 
-        $recetas = recetas::where('user_id', $user_id)->with('media')->get();
+    public function showRU(Request $request, $user_id)
+{
+    $filtro = $request->input('filtro');
 
-        return $recetas;
+    $user = User::findOrFail($user_id);
+    $roles = $user->roles; // Obtener los roles como una propiedad, asumiendo que está definido en el modelo User
+
+    // Verificar si el usuario tiene el rol de administrador y si se deben mostrar todas las recetas
+    if ($roles->contains('name', 'admin')) {
+        // Mostrar todas las recetas
+        $query = recetas::with('media');
+    } else {
+        // Mostrar solo las recetas del usuario
+        $query = recetas::where('user_id', $user_id)->with('media');
     }
+
+    // Aplicar filtro si se proporciona
+    if ($filtro) {
+        $query->where('nombre', 'like', '%' . $filtro . '%');
+    }
+
+    $recetas = $query->get();
+
+    return $recetas;
+}
+
 }
