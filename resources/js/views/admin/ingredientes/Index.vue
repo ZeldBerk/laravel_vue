@@ -18,11 +18,12 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="col-sm-12 col-md-4 d-flex align-items-center justify-content-right justify-content-md-end mt-2">
+                            <div
+                                class="col-sm-12 col-md-4 d-flex align-items-center justify-content-right justify-content-md-end mt-2">
                                 <button class="btn colorBoton" @click="addIngrediente">Añadir ingrediente</button>
                             </div>
                         </div>
-                        
+
                         <div class="table-responsive">
                             <table class="table table-hover table-sm">
                                 <thead class="bg-dark text-light">
@@ -60,23 +61,26 @@ import { ref, onMounted, inject, watch } from "vue";
 
 const swal = inject('$swal');
 const ingredientList = ref([]);
-const ingredeinte = ref({}); // Añadir ingredeinte
-const ingredeinteUpdate = ref({}); // Actualizar ingrediente
+const ingredeinte = ref({});
+const ingredeinteUpdate = ref({});
 const filtro = ref('');
 
-// Obtener todo los comentraios de la receta
+// Al montar la pagina ejecutar el function 
 onMounted(() => {
     cargarIngredientes();
 });
 
+//Mirara el input con ID filtro para que cada vez que se actualice este input se ejecute la funcion con la palabra recogida para hacer un filtrado
 watch(filtro, (newValue, oldValue) => {
     cargarIngredientes(newValue);
 });
 
-function cargarIngredientes(filtro = ''){
+
+// Obtener todo los comentraios de la receta
+function cargarIngredientes(filtro = '') {
     let url = `/api/ingredientes`;
 
-    if(filtro){
+    if (filtro) {
         url += `?filtro=${filtro}`;
     }
 
@@ -86,6 +90,7 @@ function cargarIngredientes(filtro = ''){
         });
 }
 
+//Funcion para añadir nuevos ingredientes
 function addIngrediente() {
     swal({
         title: 'Añadir Ingrediente',
@@ -138,6 +143,7 @@ function addIngrediente() {
     });
 }
 
+//Funcion para editar Ingredientes ya creados
 function editIngrediente(id, nombreActual, index) {
     swal({
         title: 'Editar Ingrediente',
@@ -188,6 +194,7 @@ function editIngrediente(id, nombreActual, index) {
     });
 }
 
+//Eliminar Ingrediente
 const deleteIngrediente = (id, index) => {
 
     swal({

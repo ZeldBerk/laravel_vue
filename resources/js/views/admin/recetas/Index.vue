@@ -8,7 +8,16 @@
                             <div class="col-sm-12 col-md-4">
                                 <h5 class="card-title mt-2">Todas las tareas</h5>
                             </div>
-                            
+                            <div
+                                class="col-sm-12 col-md-4 d-flex align-items-center justify-content-center justify-content-md-start mt-2">
+                                <form action="#" class="w-100">
+                                    <div class="d-flex">
+                                        <label for="filtro" class="mr-2 d-flex align-items-center">Filtrar:</label>
+                                        <input type="text" id="filtro" name="filtro" class="form-control"
+                                            v-model="filtro">
+                                    </div>
+                                </form>
+                            </div>
                             <div
                                 class="col-sm-12 col-md-4 d-flex align-items-center justify-content-right justify-content-md-end mt-2">
                                 <router-link :to="{ name: 'recetasAdmin.create' }" class="btn colorBoton">Nueva
@@ -68,15 +77,15 @@ onMounted(() => {
     cargarRecetas();
 });
 
+//Mirara el input con ID filtro para que cada vez que se actualice este input se ejecute la funcion con la palabra recogida para hacer un filtrado
 watch(filtro, (newValue, oldValue) => {
     cargarRecetas(newValue);
 })
 
+//Funcion de flecha para cargar las recetas
 const cargarRecetas = (filtro = '') => {
 
     let url = `/api/recetas/RU/${user_id}`;
-
-
 
     if (filtro) {
         url += `?filtro=${filtro}`;
@@ -91,6 +100,8 @@ const cargarRecetas = (filtro = '') => {
         });
 }
 
+
+// Funcion de flecha para eliminar recetas
 const deleteReceta = (id, index) => {
 
     swal({

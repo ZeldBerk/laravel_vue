@@ -10,31 +10,33 @@ use App\Models\ingredientes_recetas;
 class IngredientesController extends Controller
 {
     // Extrae todos los ingrdientes de la tabla ingredientes
-    public function index(Request $request){
+    public function index(Request $request)
+    {
 
         $filtro = $request->input('filtro');
-    
-        $query = ingrediente::query(); // Obtener una instancia del constructor de consultas
-    
-        if($filtro){
-            $query->where('nombre', 'like', '%' . $filtro .'%');
+
+        $query = ingrediente::query(); 
+
+        if ($filtro) {
+            $query->where('nombre', 'like', '%' . $filtro . '%');
         }
-    
-        $ingredientes = $query->get(); // Obtener los resultados después de aplicar el filtro
-    
+
+        $ingredientes = $query->get(); 
+
         return $ingredientes;
     }
-    
+
 
     // Añade un registro
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
-        // Validar campos obligatorios
+       
         $request->validate([
             'nombre' => 'required'
         ]);
 
-        // Guardamos la request en ingred y creamos el ingrediente
+        
         $ingred = $request->all();
         $ingrediente = ingrediente::create($ingred);
 
@@ -42,7 +44,8 @@ class IngredientesController extends Controller
     }
 
     // Actualizar ingredientes
-    public function update($id, Request $request){
+    public function update($id, Request $request)
+    {
 
         $ingrediente = ingrediente::find($id);
 
@@ -57,8 +60,9 @@ class IngredientesController extends Controller
     }
 
     // Elimina el ingredeiente por id
-    public function destroy($id){
-        
+    public function destroy($id)
+    {
+
         $ingrediente = ingrediente::find($id);
 
         $ingrediente->delete();
@@ -68,9 +72,10 @@ class IngredientesController extends Controller
 
 
     // Recibe un ingrediente con el id de receta al que va asignado y generea el registro
-    public function storeInReceta(Request $request){
-        
-        // Validar campos obligatorios
+    public function storeInReceta(Request $request)
+    {
+
+
         $request->validate([
             'receta_id' => 'required',
             'ingrediente_id' => 'required',
@@ -83,18 +88,20 @@ class IngredientesController extends Controller
     }
 
     // Obtiene todos los ingredientes de una receta
-    public function show($id){
+    public function show($id)
+    {
 
         $ingredientes = ingredientes_recetas::where('receta_id', $id)
-        ->join('ingredientes', 'ingredientes.id', '=', 'ingredientes_recetas.ingrediente_id')
-        ->select('ingredientes_recetas.*', 'ingredientes.nombre')
-        ->get();
+            ->join('ingredientes', 'ingredientes.id', '=', 'ingredientes_recetas.ingrediente_id')
+            ->select('ingredientes_recetas.*', 'ingredientes.nombre')
+            ->get();
 
         return $ingredientes;
     }
 
     // Actualizar los ingredientes de la receta 
-    public function updateIngReceta($id, Request $request){
+    public function updateIngReceta($id, Request $request)
+    {
 
         $ingrediente_receta = ingredientes_recetas::find($id);
 
@@ -110,7 +117,8 @@ class IngredientesController extends Controller
     }
 
     // Elimina un ingrediente de una receta
-    public function deleteIngreReceta($id){
+    public function deleteIngreReceta($id)
+    {
 
         $ingrediente_receta = ingredientes_recetas::find($id);
 

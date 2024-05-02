@@ -12,6 +12,7 @@ class RecetasController extends Controller
 {
     use HasRoles;
 
+    //Obtener todas las recetas y filtrarlas 
     public function index(Request $request)
     {
         $filtro = $request->input('filtro');
@@ -35,7 +36,7 @@ class RecetasController extends Controller
     }
 
 
-
+    //Ultimas recetas añadidas para la home
     public function ultimasRecetas()
     {
         $recetas = recetas::with('media')->orderBy('created_at', 'desc')->take(4)->get();
@@ -43,10 +44,10 @@ class RecetasController extends Controller
         return $recetas;
     }
 
+
     // Añade una receta a la BBDD
     public function store(Request $request)
     {
-        // Validar campos obligatorios
 
         $request->validate([
             'nombre' => 'required',
@@ -68,14 +69,13 @@ class RecetasController extends Controller
         return response()->json(['success' => true, 'data' => $receta, 'id' => $receta->id]);
     }
 
+
     // Actualiza una receta
     public function update($id, Request $request)
     {
 
-        // Obtener receta a actualizar
         $receta = recetas::find($id);
 
-        // Validar campos obligatorios
         $request->validate([
             'nombre' => 'required',
             'descripcion_corta' => 'required',
@@ -97,6 +97,7 @@ class RecetasController extends Controller
         return response()->json(['success' => true, 'data' => $receta]);
     }
 
+
     // Elimina la receta mediante id
     public function destroy($id)
     {
@@ -108,6 +109,8 @@ class RecetasController extends Controller
         return response()->json(['success' => true, 'data' => 'Receta eliminada correctamanete']);
     }
 
+
+
     // Devuelve una receta mediante id
     public function show($id)
     {
@@ -117,32 +120,31 @@ class RecetasController extends Controller
         return $receta;
     }
 
+
     // Devuelve las recetas asociadas a un id de usuario
-
     public function showRU(Request $request, $user_id)
-{
-    $filtro = $request->input('filtro');
+    {
+        $filtro = $request->input('filtro');
 
-    $user = User::findOrFail($user_id);
-    $roles = $user->roles; // Obtener los roles como una propiedad, asumiendo que está definido en el modelo User
+        $user = User::findOrFail($user_id);
+        $roles = $user->roles;
 
-    // Verificar si el usuario tiene el rol de administrador y si se deben mostrar todas las recetas
-    if ($roles->contains('name', 'admin')) {
-        // Mostrar todas las recetas
-        $query = recetas::with('media');
-    } else {
-        // Mostrar solo las recetas del usuario
-        $query = recetas::where('user_id', $user_id)->with('media');
+        // Verificar si el usuario tiene el rol de administrador y si se deben mostrar todas las recetas
+        if ($roles->contains('name', 'admin')) {
+
+            $query = recetas::with('media');
+        } else {
+
+            $query = recetas::where('user_id', $user_id)->with('media');
+        }
+
+        // Aplicar filtro si se proporciona
+        if ($filtro) {
+            $query->where('nombre', 'like', '%' . $filtro . '%');
+        }
+
+        $recetas = $query->get();
+
+        return $recetas;
     }
-
-    // Aplicar filtro si se proporciona
-    if ($filtro) {
-        $query->where('nombre', 'like', '%' . $filtro . '%');
-    }
-
-    $recetas = $query->get();
-
-    return $recetas;
-}
-
 }

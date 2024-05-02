@@ -9,13 +9,13 @@ use Illuminate\Http\Request;
 
 class listaCompraController extends Controller
 {
+    //Obtener la lista de la compra del usuario de las recetas guardadas
     public function listaCompra(int $userId, string $formato)
     {
         $recetasSemanales = PlanSemanal::where('user_id', $userId)->get();
 
         $listaCompra = [];
 
-        // Definir el orden de los días de la semana
         $ordenDias = [
             'Lunes' => 1,
             'Martes' => 2,
@@ -29,14 +29,13 @@ class listaCompraController extends Controller
         foreach ($recetasSemanales as $receta) {
             // Verificar si el formato es diario o semanal
             if ($formato === 'semana') {
-                // Si es semanal, no necesitamos el día de la semana
                 $diaSemana = null;
             } else {
-                // Si es diario, extraemos el día de la semana y lo ordenamos
+
                 $diaSemana = $receta->dia_semana;
             }
 
-            // Extraer el ID de receta
+
             $recetaId = $receta->receta_id;
 
             // Buscar los ingredientes correspondientes a la receta en la base de datos

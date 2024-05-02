@@ -109,6 +109,7 @@ function chargeCategorias() {
             categorias.value = response.data;
         });
 }
+
 onMounted(() => {
     chargeCategorias();
     chargeIngredientes();
@@ -183,7 +184,6 @@ function ingrediente_selection(id_selection) {
             // Si el ingrediente no ha sido seleccionado previamente, agregarlo a la lista
             ingredientesSeleccionados.value.push(nuevoIngrediente);
         } else {
-            // Si el ingrediente ya ha sido seleccionado, no hacer nada
             // Si el ingrediente ya ha sido seleccionado, mostrar una alerta
             swal({
                 icon: 'warning',
@@ -292,7 +292,7 @@ function ingrediente_selection(id_selection) {
 function deleteIngredienteRecetas_nuevos(id) {
     // Encontrar el índice del ingrediente en el array
     const index = ingredientesSeleccionados.value.findIndex(ingrediente => ingrediente.id === id);
-    
+
     // Si se encuentra el ingrediente en el array, eliminarlo
     if (index !== -1) {
         ingredientesSeleccionados.value.splice(index, 1); // Elimina el elemento en el índice "index"
@@ -368,7 +368,7 @@ function addReceta() {
         .catch(error => {
             // Cerrar la alerta de carga
             swal.close();
-            
+
             swal({
                 icon: 'error',
                 title: 'No se ha añadido la receta'
