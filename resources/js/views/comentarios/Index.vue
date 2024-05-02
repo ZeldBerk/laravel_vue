@@ -2,7 +2,6 @@
     <div id="recetas" class="container mt-4 mb-4">
         <h1>Comentarios</h1>
         <div class="row mb-4">
-            <!-- ... tu código existente ... -->
             <div class="col-6">
                 <p>Filtro de los comentarios:</p>
                 <div class="col-md-6 d-flex justify-content-start">
@@ -12,7 +11,6 @@
                             <input type="checkbox" :id="'estrella-' + estrella" :value="estrella"
                                 :checked="filtroPuntuacion[estrella]" @change="toggleEstrella(estrella)"
                                 class="estrella-checkbox" hidden>
-                            <!-- marca -->
                             <svg v-if="!filtroPuntuacion[estrella]" viewBox="0 0 14 14" fill="none"
                                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                                 data-pc-section="officon">
