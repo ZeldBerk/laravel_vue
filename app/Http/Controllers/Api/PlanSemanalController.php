@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 
 class PlanSemanalController extends Controller
 {
-    public function index($user_id){
+    //Obtener el plan semanal del usuario 
+    public function index($user_id)
+    {
         $plan = PlanSemanal::with('receta')
             ->where('user_id', $user_id)
             ->get();
@@ -19,8 +21,9 @@ class PlanSemanalController extends Controller
 
 
 
-
-    public function store(Request $request){
+    //Guardar recetas en el plan semanal 
+    public function store(Request $request)
+    {
 
         $request->validate([
             'user_id' => 'required',
@@ -58,20 +61,19 @@ class PlanSemanalController extends Controller
     }
 
 
-
-    public function destroy(Request $request, $id){
+    //Elimnar receta del plan semanal
+    public function destroy(Request $request, $id)
+    {
         $idUser = $request->user()->id;
 
         $receta = PlanSemanal::where('id', $id);
 
-        if(!$receta){
+        if (!$receta) {
             return response()->json(['success' => false, 'error' => 'No se encontro ninguna receta en el plan']);
         }
 
         $receta->delete();
 
         return response()->json(['success' => true, 'data' => 'Receta eliminada del Plan Semanal']);
-
-        
     }
 }

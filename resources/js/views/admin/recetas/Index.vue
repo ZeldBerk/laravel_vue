@@ -8,7 +8,16 @@
                             <div class="col-sm-12 col-md-4">
                                 <h5 class="card-title mt-2">Todas las tareas</h5>
                             </div>
-                            
+                            <div
+                                class="col-sm-12 col-md-4 d-flex align-items-center justify-content-center justify-content-md-start mt-2">
+                                <form action="#" class="w-100">
+                                    <div class="d-flex">
+                                        <label for="filtro" class="mr-2 d-flex align-items-center">Filtrar:</label>
+                                        <input type="text" id="filtro" name="filtro" class="form-control"
+                                            v-model="filtro">
+                                    </div>
+                                </form>
+                            </div>
                             <div
                                 class="col-sm-12 col-md-4 d-flex align-items-center justify-content-right justify-content-md-end mt-2">
                                 <router-link :to="{ name: 'recetasAdmin.create' }" class="btn colorBoton">Nueva
