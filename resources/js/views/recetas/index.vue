@@ -17,8 +17,8 @@
 
             <div class="row">
                 <div class="col-lg-4 col-md-12 mb-3" v-for="receta in recetas" :key="receta.id">
-                    <div class="cursor_pointer cardBorderIMG" @click.stop="detallesReceta(receta.id)">
-                        <div class="contenidoCard">
+                    <div class="cardBorderIMG" @click.stop="detallesReceta(receta.id)">
+                        <div class="contenidoCard cursor_pointer">
                             <div class="cardImageDIV position-relative">
                                 <div class="position-absolute top-0 end-0 pr-2 pt-2 mr-2">
                                     <div class="mi-con-like" @click.stop="anadirFavoritos(receta.id)">
@@ -334,10 +334,6 @@ function anadirPlanSemanal(receta_id) {
 
 
 <style scoped>
-/* Añade estilo al cursor al pasar por encima de la carta */
-.cursor_pointer {
-    cursor: pointer;
-}
 
 /* Estilo personalizado para el botón de añadir al plan semanal */
 .position-absolute {

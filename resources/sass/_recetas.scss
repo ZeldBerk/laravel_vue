@@ -24,6 +24,12 @@
   height: 240px;
 }
 
+/* Añade estilo al cursor al pasar por encima de la carta */
+.cursor_pointer {
+  cursor: pointer;
+}
+
+
 //Sombra de las cards en el recetario
 .oval {
   position: absolute;
@@ -35,6 +41,11 @@
   background: #D7C8CD;
   margin-top: 385px;
 }
+
+// .contenidoCard:hover .cardBorderIMG .oval {
+//   transform: translateY(-5px); /* Mover hacia arriba */
+//   transition: transform 0.3s ease; /* Agregar una transición suave */
+// }
 
 .cardImage {
   width: 100%;
