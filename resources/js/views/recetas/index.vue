@@ -347,4 +347,10 @@ function anadirPlanSemanal(receta_id) {
 .end-0 {
     right: 0;
 }
+
+/* Estilo para el efecto de zoom */
+.cardBorderIMG:hover .contenidoCard {
+    transform: scale(1.1); 
+    transition: transform 0.3s ease; 
+}
 </style>

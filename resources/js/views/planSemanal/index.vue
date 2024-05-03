@@ -4,7 +4,7 @@
     <div class="contenedorGeneral">
       <div class="row">
         <div v-for="(dia, index) in diasSemana" :key="index" class="col-12 mb-4">
-          <div class="card">
+          <div class="card comentarioCard">
             <div class="card-header nombreDia">{{ dia }}</div>
             <div class="card-body">
               <div class="row">
