@@ -139,12 +139,3 @@ const deleteReceta = (id, index) => {
 
 
 </script>
-<style>
-.btn-warning {
-    border-radius: 0;
-}
-
-.btn-danger {
-    border-radius: 0;
-}
-</style>
