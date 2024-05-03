@@ -222,5 +222,224 @@ class IngredientesRecetas extends Seeder
       ]);
     }
 
+    $ingredientes5 = [
+      [
+        'ingrediente_id' => 18,
+        'cantidad' => 300,
+        'unidad' => 'g'
+      ],
+      [
+        'ingrediente_id' => 20,
+        'cantidad' => 100,
+        'unidad' => 'g'
+      ],
+      [
+        'ingrediente_id' => 8,
+        'cantidad' => 300,
+        'unidad' => 'ml'
+      ],
+      [
+        'ingrediente_id' => 7,
+        'cantidad' => null,
+        'unidad' => null
+      ],
+      [
+        'ingrediente_id' => 4,
+        'cantidad' => 4,
+        'unidad' => 'unidades'
+      ],
+    ];
+
+    foreach ($ingredientes5 as $ing5) {
+      ingredientes_recetas::create([
+
+        'receta_id' => 5,
+        'ingrediente_id' => $ing5['ingrediente_id'],
+        'cantidad' => $ing5['cantidad'],
+        'unidad' => $ing5['unidad']
+      ]);
+    }
+
+    $ingredientes6 = [
+      [
+        'ingrediente_id' => 20,
+        'cantidad' => 300,
+        'unidad' => 'g'
+      ],
+      [
+        'ingrediente_id' => 25,
+        'cantidad' => 0.5,
+        'unidad' => 'unidades'
+      ],
+      [
+        'ingrediente_id' => 8,
+        'cantidad' => 200,
+        'unidad' => 'ml'
+      ],
+      [
+        'ingrediente_id' => 26,
+        'cantidad' => 7,
+        'unidad' => 'g'
+      ],
+      [
+        'ingrediente_id' => 27,
+        'cantidad' => 250,
+        'unidad' => 'g'
+      ],
+      [
+        'ingrediente_id' => 2,
+        'cantidad' => 300,
+        'unidad' => 'g'
+      ],
+      [
+        'ingrediente_id' => 28,
+        'cantidad' => 120,
+        'unidad' => 'ml'
+      ],
+      [
+        'ingrediente_id' => 4,
+        'cantidad' => 1,
+        'unidad' => 'unidades'
+      ],
+    ];
+
+    foreach ($ingredientes6 as $ing6) {
+      ingredientes_recetas::create([
+
+        'receta_id' => 6,
+        'ingrediente_id' => $ing6['ingrediente_id'],
+        'cantidad' => $ing6['cantidad'],
+        'unidad' => $ing6['unidad']
+      ]);
+    }
+
+    $ingredientes7 = [
+      [
+        'ingrediente_id' => 29,
+        'cantidad' => 2,
+        'unidad' => 'unidades'
+      ],
+      [
+        'ingrediente_id' => 7,
+        'cantidad' => null,
+        'unidad' => null
+      ],
+      [
+        'ingrediente_id' => 19,
+        'cantidad' => null,
+        'unidad' => null
+      ],
+      [
+        'ingrediente_id' => 8,
+        'cantidad' => 30,
+        'unidad' => 'ml'
+      ],
+      [
+        'ingrediente_id' => 20,
+        'cantidad' => 1,
+        'unidad' => 'unidades'
+      ],
+      [
+        'ingrediente_id' => 21,
+        'cantidad' => 2,
+        'unidad' => 'unidades'
+      ],
+      [
+        'ingrediente_id' => 30,
+        'cantidad' => 2,
+        'unidad' => 'unidades'
+      ],
+      [
+        'ingrediente_id' => 31,
+        'cantidad' => 200,
+        'unidad' => 'g'
+      ],
+      [
+        'ingrediente_id' => 32,
+        'cantidad' => 200,
+        'unidad' => 'g'
+      ],
+      [
+        'ingrediente_id' => 33,
+        'cantidad' => 2,
+        'unidad' => 'unidades'
+      ],
+      [
+        'ingrediente_id' => 23,
+        'cantidad' => 100,
+        'unidad' => 'ml'
+      ],
+      [
+        'ingrediente_id' => 10,
+        'cantidad' => 50,
+        'unidad' => 'g'
+      ],
+      [
+        'ingrediente_id' => 5,
+        'cantidad' => 500,
+        'unidad' => 'ml'
+      ],
+      [
+        'ingrediente_id' => 34,
+        'cantidad' => 50,
+        'unidad' => 'g'
+      ],
+      [
+        'ingrediente_id' => 35,
+        'cantidad' => 1,
+        'unidad' => 'unidades'
+      ],
+    ];
+
+    foreach ($ingredientes7 as $ing7) {
+      ingredientes_recetas::create([
+
+        'receta_id' => 7,
+        'ingrediente_id' => $ing7['ingrediente_id'],
+        'cantidad' => $ing7['cantidad'],
+        'unidad' => $ing7['unidad']
+      ]);
+    }
+
+    $ingredientes8 = [
+      [
+        'ingrediente_id' => 36,
+        'cantidad' => 30,
+        'unidad' => 'g'
+      ],
+      [
+        'ingrediente_id' => 37,
+        'cantidad' => 2,
+        'unidad' => 'unidades'
+      ],
+      [
+        'ingrediente_id' => 38,
+        'cantidad' => 25,
+        'unidad' => 'g'
+      ],
+      [
+        'ingrediente_id' => 39,
+        'cantidad' => 100,
+        'unidad' => 'g'
+      ],[
+        'ingrediente_id' => 7,
+        'cantidad' => null,
+        'unidad' => null
+      ],[
+        'ingrediente_id' => 19,
+        'cantidad' => null,
+        'unidad' => null
+      ],
+    ];
+
+    foreach ($ingredientes8 as $ing8) {
+      ingredientes_recetas::create([
+
+        'receta_id' => 8,
+        'ingrediente_id' => $ing8['ingrediente_id'],
+        'cantidad' => $ing8['cantidad'],
+        'unidad' => $ing8['unidad']
+      ]);
+    }
   }
 }

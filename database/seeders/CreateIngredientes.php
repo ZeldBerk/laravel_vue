@@ -41,7 +41,22 @@ class CreateIngredientes extends Seeder
             'Diente de ajo',
             'Pollo',
             'Vino blanco',
-            'Rama de Romero'
+            'Rama de Romero',
+            'Pimiento Rojo',
+            'Pimenton Dulce',
+            'Atún en lata',
+            'Agua',
+            'Berenjena',
+            'Zanahoria',
+            'Carne picada de Cerdo',
+            'Carne picada de Ternera',
+            'Tomates',
+            'Queso rallado',
+            'Manojo de Perejil',
+            'Guanciale',
+            'Yemas de huevo',
+            'Queso Pecorino rallado',
+            'Pasta'
         ];
         
         foreach ($ingredientes as $ingrediente){
