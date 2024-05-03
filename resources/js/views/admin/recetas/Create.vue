@@ -6,7 +6,7 @@
         <form @submit.prevent="addReceta">
             <div class="row my-5">
                 <div class="col-md-8">
-                    <div class="card border-0 shadow-sm">
+                    <div class="card comentarioCard shadow-sm">
                         <div class="card-body">
                             <!-- Nombre receta -->
                             <div class="mb-3">
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card border-0 shadow-sm">
+                    <div class="card comentarioCard shadow-sm">
                         <div class="card-body">
                             <!-- Raciones receta -->
                             <div class="mb-3">

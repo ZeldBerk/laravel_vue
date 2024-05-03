@@ -6,7 +6,7 @@
         <form @submit.prevent="saveComent">
             <div class="row my-5">
                 <div class="col-md-8">
-                    <div class="card border-0 shadow-sm">
+                    <div class="card comentarioCard shadow-sm">
                         <div class="card-body">
                             <!-- Valoración -->
                             <div class="mb-3">
