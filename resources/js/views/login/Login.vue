@@ -9,7 +9,7 @@
                                 <div class="">
                                     <!-- Email -->
                                     <div class="mb-3">
-                                        <label for="email" class="form-label">{{ $t('email') }}</label>
+                                        <label for="email" class="form-label">{{ $t('Email') }}</label>
                                         <input v-model="loginForm.email" id="email" type="email" class="form-control"
                                             required autofocus autocomplete="username">
                                         <!-- Validation Errors -->
@@ -22,7 +22,7 @@
                                     <!-- Password -->
                                     <div class="mb-4">
                                         <label for="password" class="form-label">
-                                            {{ $t('password') }}
+                                            {{ $t('Password') }}
                                         </label>
                                         <input v-model="loginForm.password" id="password" type="password"
                                             class="form-control" required autocomplete="current-password">
