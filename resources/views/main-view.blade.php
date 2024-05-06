@@ -14,8 +14,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Laravel Vue 3 Stater</title>
-
+    <title>El Club de la Olla</title>
+    <link rel="icon"  href="imagesSeeder/favicon.svg">
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
