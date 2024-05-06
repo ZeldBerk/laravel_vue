@@ -14,7 +14,7 @@
         <div v-if="listaCompra && formato === 'semana'">
             <div class="lista-semana">
                 <div v-for="(ingredientes, dia) in listaCompra" :key="dia" class="tarjeta-dia col-lg-3 col-md-6 col-sm-12">
-                    <h3>{{ dia }}</h3>
+                    <h3>Semanal</h3>
                     <div class="lista-ingredientes row">
                         <div class="col-lg-3 col-md-2" v-for="ingrediente in ingredientes" :key="ingrediente.nombre">
                             <ul class="ingrediente">
@@ -34,7 +34,7 @@
         <div class="lista">
             <div v-if="listaCompra && formato === 'dia'">
                 <div class="row">
-                    <div v-for="(ingredientes, dia) in listaCompra" :key="dia" class="col-md-12 col-lg-6">
+                    <div v-for="(ingredientes, dia) in listaCompra" :key="dia" class="tarjeta-dia col-md-12 col-lg-6 margin2">
                         <div class="lista-dia-columna">
                             <h3>{{ dia }}</h3>
                             <div class="lista-ingredientes">
@@ -131,8 +131,13 @@ function cargarListaCompra() {
     margin-bottom: 20px;
     padding: 20px;
     background-color: #fff;
-    border-radius: 10px;
+    border-radius: 0px;
+    border: 3px solid #422329c9;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.margin2{
+    margin: 2px;
 }
 
 .lista-dia h3 {
