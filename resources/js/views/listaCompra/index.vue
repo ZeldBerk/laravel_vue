@@ -8,50 +8,65 @@
                 <option value="semana">Semana</option>
                 <option value="dia">Día</option>
             </select>
-            
-        </div>
 
-        <div v-if="listaCompra && formato === 'semana'">
-            <div class="lista-semana">
-                <div v-for="(ingredientes, dia) in listaCompra" :key="dia" class="tarjeta-dia col-lg-3 col-md-6 col-sm-12">
-                    <h3>Semanal</h3>
-                    <div class="lista-ingredientes row">
-                        <div class="col-lg-3 col-md-2" v-for="ingrediente in ingredientes" :key="ingrediente.nombre">
-                            <ul class="ingrediente">
-                                <li v-if="ingrediente.cantidad !== null && ingrediente.unidad !== null" class="nombre">
-                                    {{ ingrediente.cantidad }} {{ ingrediente.unidad }} de {{ ingrediente.nombre }}
-                                </li>
-                                <li v-else class="nombre">
-                                    {{ ingrediente.nombre }}
-                                </li>
-                            </ul>
+        </div>
+        <div v-if="listaCompra && listaCompra.length > 0">
+            <div v-if="listaCompra && formato === 'semana'">
+                <div class="lista-semana">
+                    <div v-for="(ingredientes, dia) in listaCompra" :key="dia"
+                        class="tarjeta-dia col-lg-3 col-md-6 col-sm-12">
+                        <h3>Semanal</h3>
+                        <div class="lista-ingredientes row">
+                            <div class="col-lg-3 col-md-2" v-for="ingrediente in ingredientes"
+                                :key="ingrediente.nombre">
+                                <ul class="ingrediente">
+                                    <li v-if="ingrediente.cantidad !== null && ingrediente.unidad !== null"
+                                        class="nombre">
+                                        {{ ingrediente.cantidad }} {{ ingrediente.unidad }} de {{ ingrediente.nombre }}
+                                    </li>
+                                    <li v-else class="nombre">
+                                        {{ ingrediente.nombre }}
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="lista">
-            <div v-if="listaCompra && formato === 'dia'">
-                <div class="row">
-                    <div v-for="(ingredientes, dia) in listaCompra" :key="dia" class="tarjeta-dia col-md-12 col-lg-6 margin2">
-                        <div class="lista-dia-columna">
-                            <h3>{{ dia }}</h3>
-                            <div class="lista-ingredientes">
-                                <div v-for="ingrediente in ingredientes" :key="ingrediente.nombre">
-                                    <ul class="ingrediente">
-                                        <li v-if="ingrediente.cantidad !== null && ingrediente.unidad !== null" class="nombre">
-                                            {{ ingrediente.cantidad }} {{ ingrediente.unidad }} de {{ ingrediente.nombre }}
-                                        </li>
-                                        <li v-else class="nombre">
-                                            {{ ingrediente.nombre }}
-                                        </li>
-                                    </ul>
+            <div class="lista">
+                <div v-if="listaCompra && formato === 'dia'">
+                    <div class="row">
+                        <div v-for="(ingredientes, dia) in listaCompra" :key="dia"
+                            class="tarjeta-dia col-md-12 col-lg-6 margin2">
+                            <div class="lista-dia-columna">
+                                <h3>{{ dia }}</h3>
+                                <div class="lista-ingredientes">
+                                    <div v-for="ingrediente in ingredientes" :key="ingrediente.nombre">
+                                        <ul class="ingrediente">
+                                            <li v-if="ingrediente.cantidad !== null && ingrediente.unidad !== null"
+                                                class="nombre">
+                                                {{ ingrediente.cantidad }} {{ ingrediente.unidad }} de {{
+                                                ingrediente.nombre }}
+                                            </li>
+                                            <li v-else class="nombre">
+                                                {{ ingrediente.nombre }}
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div v-else class="col-12">
+            <div class="noComentarios d-flex align-items-center justify-content-center flex-column">
+                <h5>No hay nada en la lista de la compra</h5>
+                <p>Añade recetas al plan semanal para tener lista de la compra</p>
+                <router-link :to="{ name: 'recetas.index' }"
+                    class="btn colorBoton">Añadir recetas</router-link>
             </div>
         </div>
     </div>
@@ -76,6 +91,7 @@ function cargarListaCompra() {
         .get(`/api/listaCompra/${userId}/${formato.value}`)
         .then((response) => {
             listaCompra.value = response.data;
+            console.log(listaCompra)
         });
 }
 </script>
@@ -136,7 +152,7 @@ function cargarListaCompra() {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.margin2{
+.margin2 {
     margin: 2px;
 }
 
@@ -170,13 +186,15 @@ function cargarListaCompra() {
 /* Media queries para diseño responsive */
 @media (max-width: 992px) {
     .tarjeta-dia {
-        max-width: calc(50% - 20px); /* 50% para 2 columnas en pantallas medianas */
+        max-width: calc(50% - 20px);
+        /* 50% para 2 columnas en pantallas medianas */
     }
 }
 
 @media (max-width: 576px) {
     .tarjeta-dia {
-        max-width: 100%; /* Mostrar en una sola columna en pantallas pequeñas */
+        max-width: 100%;
+        /* Mostrar en una sola columna en pantallas pequeñas */
     }
 }
 </style>
