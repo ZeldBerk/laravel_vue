@@ -19,7 +19,7 @@
                                 <textarea v-model="comentario.contenido" id="comentario_texto" class="form-control altura"
                                     rows="4"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary mt-4 mb-4">Guardar Comentario</button>
+                            <button type="submit" class="btn colorBoton mt-4 mb-4">Guardar Comentario</button>
                         </div>
                     </div>
                 </form>
