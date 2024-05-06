@@ -32,31 +32,29 @@
                     class="btn colorBoton">Dejar Comentario</router-link>
             </div>
         </div>
-        <div class="row">
-            <div v-if="comentariosFiltrados.length > 0">
-                <div class="col-md-6 col-lg-4 mb-3" v-for="comentario in comentariosFiltrados" :key="comentario.id">
-                    <div class="card comentarioCard">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <h5 class="card-title">{{ comentario.name }}</h5>
-                                </div>
-                                <div class="col-6 d-flex justify-content-end">
-                                    <Rating v-model="comentario.puntuacion" readonly :cancel="false" />
-                                </div>
+        <div v-if="comentariosFiltrados.length > 0" class="row">
+            <div class="col-md-6 col-lg-4 mb-3" v-for="comentario in comentariosFiltrados" :key="comentario.id">
+                <div class="card comentarioCard">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 class="card-title">{{ comentario.name }}</h5>
                             </div>
-                            <p class="card-text">{{ comentario.contenido }}</p>
+                            <div class="col-6 d-flex justify-content-end">
+                                <Rating v-model="comentario.puntuacion" readonly :cancel="false" />
+                            </div>
                         </div>
+                        <p class="card-text">{{ comentario.contenido }}</p>
                     </div>
                 </div>
             </div>
-            <div v-else class="col-12">
-                <div class="noComentarios d-flex align-items-center justify-content-center flex-column">
-                    <h5>No hay comentarios para esta receta</h5>
-                    <p>Deja un comentario</p>
-                    <router-link :to="{ name: 'comentarios.create', params: { id: receta_id } }"
-                        class="btn colorBoton">Dejar Comentario</router-link>
-                </div>
+        </div>
+        <div v-else class="col-12">
+            <div class="noComentarios d-flex align-items-center justify-content-center flex-column">
+                <h5>No hay comentarios para esta receta</h5>
+                <p>Deja un comentario</p>
+                <router-link :to="{ name: 'comentarios.create', params: { id: receta_id } }"
+                    class="btn colorBoton">Dejar Comentario</router-link>
             </div>
         </div>
     </div>
