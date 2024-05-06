@@ -1,7 +1,6 @@
 ------------ Obligatorio ------------
 - ESTUDIAR EL YUP DEL UPDATE y el promise (IMPORTANTE)
 - Revisar por 3ª vez borde del text editor component
-- Añadir borde a lista de la compra
 ------------ Opcional ------------
 - Forgot Password (Requisito Opcional).
 - Mejorar alertas
