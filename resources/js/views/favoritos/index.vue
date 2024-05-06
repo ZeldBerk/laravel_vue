@@ -15,7 +15,7 @@
                 <h5 class="col-10 tituloCard">{{ favorito.nombre }}</h5>
 
                 <div class="con-like">
-                  <input class="like" type="checkbox" title="like" checked @click="eliminarFavoritos(favorito.id)">
+                  <input class="like" type="checkbox" title="like" checked @click.stop="eliminarFavoritos(favorito.id)">
                   <div class="checkmark">
                     <svg xmlns="http://www.w3.org/2000/svg" class="outline" viewBox="0 0 24 24">
                       <path
