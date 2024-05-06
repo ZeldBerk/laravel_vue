@@ -48,8 +48,6 @@
                                             </svg>
                                         </div>
                                     </div>
-
-
                                 </div>
                                 <div class="cardImage"
                                     :style="{ 'background-image': `url(${receta.media[0]?.original_url})` }">
@@ -82,7 +80,7 @@
                                 </div>
                                 <p class="texto ml-2">{{ receta.descripcion_corta }}</p>
                             </div>
-                            
+
                         </div>
                         <div class="oval"></div>
                     </div>
@@ -334,7 +332,6 @@ function anadirPlanSemanal(receta_id) {
 
 
 <style scoped>
-
 /* Estilo personalizado para el botón de añadir al plan semanal */
 .position-absolute {
     position: absolute;
@@ -350,7 +347,7 @@ function anadirPlanSemanal(receta_id) {
 
 /* Estilo para el efecto de zoom */
 .cardBorderIMG:hover .contenidoCard {
-    transform: scale(1.1); 
-    transition: transform 0.3s ease; 
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
 }
 </style>
