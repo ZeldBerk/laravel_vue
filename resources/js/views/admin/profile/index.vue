@@ -1,5 +1,5 @@
 <template>
-    <div class="card border-0">
+    <div class="card comentarioCard">
         <div class="card-header bg-transparent">
             <h5 class="float-start">Perfil</h5>
         </div>
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <button :disabled="isLoading" class="btn btn-primary">
+                    <button :disabled="isLoading" class="btn colorBoton">
                         <div v-show="isLoading" class=""></div>
                         <span v-if="isLoading">Procesando...</span>
                         <span v-else>Actualizar</span>

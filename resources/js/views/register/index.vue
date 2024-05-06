@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row justify-content-center my-5">
             <div class="col-md-6">
-                <div class="card border-0 shadow-sm">
+                <div class="card comentarioCard">
                     <div class="card-header bg-transparent">{{ $t('register') }}</div>
                     <div class="card-body">
                         <form @submit.prevent="submitRegister">
@@ -56,7 +56,7 @@
 
                                 <!-- Buttons -->
                                 <div class="flex items-center justify-end mt-4">
-                                    <button class="btn btn-primary" :class="{ 'opacity-25': processing }" :disabled="processing">
+                                    <button class="btn colorBoton" :class="{ 'opacity-25': processing }" :disabled="processing">
                                         {{ $t('register') }}
                                     </button>
                                 </div>
