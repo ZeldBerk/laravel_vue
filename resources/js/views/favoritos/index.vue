@@ -40,11 +40,27 @@
                         <div class="cuerpoCarta">
                             <div class="row ml-2 align-items-center">
                                 <h5 class="col-10 tituloCard">{{ favorito.nombre }}</h5>
+                                <div class="col-2 mb-4" @click.stop="anadirPlanSemanal(favorito.id)">
+                                    <a class="icon-link">
+                                        <svg width="35px" height="35px" viewBox="-2.4 -2.4 28.80 28.80" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg" stroke="#F59E0B">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                            </g>
+                                            <g id="SVGRepo_iconCarrier">
+                                                <circle cx="12" cy="12" r="10" class="circle"></circle>
+                                                <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15" class="cross">
+                                                </path>
+                                            </g>
+                                        </svg>
+                                    </a>
+                                </div>
                             </div>
                             <p class="texto ml-2">{{ favorito.descripcion }}</p>
                         </div>
                     </div>
-
+                    <div class="oval"></div>
                 </div>
             </div>
         </div>
@@ -55,10 +71,11 @@
 
 <script setup>
 import axios from "axios";
-import { ref, onBeforeMount } from "vue";
+import { ref, onBeforeMount, inject } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
+const swal = inject('$swal');
 
 // Obtener id de usuario
 const data = localStorage.getItem("vuex");
@@ -97,4 +114,121 @@ function eliminarFavoritos(receta_id) {
 function detallesReceta(id) {
     router.push({ name: 'recetas.detalle', params: { id } });
 }
+
+function anadirPlanSemanal(receta_id) {
+    const data = localStorage.getItem("vuex");
+    let userId = null;
+
+    if (data) {
+        try {
+            userId = JSON.parse(data).auth.user.id;
+            console.log("ID del usuario:", userId);
+        } catch (error) {
+            console.error("Error al analizar los datos del localStorage:", error);
+        }
+    } else {
+        console.log("No hay usuario autenticado en el localStorage");
+    }
+
+
+    if (userId) {
+        swal({
+            title: "Añadir receta al plan semanal",
+            html: `
+            <label for="dia_semana">Día de la semana:</label>
+            <select id="dia_semana" class="swal2-select" required>
+                <option value="">Seleccionar día</option>
+                <option value="Lunes">Lunes</option>
+                <option value="Martes">Martes</option>
+                <option value="Miércoles">Miércoles</option>
+                <option value="Jueves">Jueves</option>
+                <option value="Viernes">Viernes</option>
+                <option value="Sábado">Sábado</option>
+                <option value="Domingo">Domingo</option>
+            </select>
+            <label for="momento_dia">Momento del día:</label>
+            <select id="momento_dia" class="swal2-select" required>
+                <option value="">Seleccionar momento</option>
+                <option value="Almuerzo">Almuerzo</option>
+                <option value="Cena">Cena</option>
+            </select>
+        `,
+            focusConfirm: false,
+            preConfirm: () => {
+                const dia_semana = swal.getPopup().querySelector('#dia_semana').value;
+                const momento_dia = swal.getPopup().querySelector('#momento_dia').value;
+
+
+                if (!dia_semana || !momento_dia) {
+                    swal.showValidationMessage(`Por favor, seleccione el día de la semana y el momento del día.`);
+                } else {
+                    // Realizar la llamada al endpoint con los datos
+                    axios.post('/api/planSemanal/', {
+                        user_id: userId,
+                        receta_id,
+                        dia_semana,
+                        momento_dia
+                    })
+                        .then(response => {
+                            if (response.data.success) {
+                                swal.fire({
+                                    title: 'Receta añadida al plan semanal',
+                                    icon: 'success'
+                                });
+                            } else {
+                                swal.fire({
+                                    title: 'Error al añadir receta',
+                                    text: response.data.message, // Puedes mostrar el mensaje de error proporcionado por el servidor
+                                    icon: 'warning'
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error al añadir receta al plan semanal:", error);
+                            swal.fire({
+                                title: 'Error',
+                                text: 'Ocurrió un error al añadir la receta al plan semanal',
+                                icon: 'error'
+                            });
+                        });
+                }
+            }
+        });
+    } else {
+
+        swal({
+            title: "Es necesario iniciar session antes de realizar esta accion",
+            icon: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Iniciar Session"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/login';
+                return;
+            };
+        });
+    }
+}
 </script>
+<style scoped>
+/* Estilo personalizado para el botón de añadir al plan semanal */
+.position-absolute {
+    position: absolute;
+}
+
+.top-0 {
+    top: 0;
+}
+
+.end-0 {
+    right: 0;
+}
+
+/* Estilo para el efecto de zoom */
+.cardBorderIMG:hover .contenidoCard {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+</style>
