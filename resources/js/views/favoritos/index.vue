@@ -3,7 +3,8 @@
         <h1>Mis recetas Favoritas</h1>
 
         <div class="row">
-            <div class="col-md-12 col-lg-4 mb-3" v-for="favorito in favoritos" :key="favorito.id">
+            <div v-if="favoritos && favoritos.length > 0">
+                <div class="col-md-12 col-lg-4 mb-3" v-for="favorito in favoritos" :key="favorito.id">
                 <div class="cursor_pointer cardBorderIMG" @click.stop="detallesReceta(favorito.id)">
                     <div class="contenidoCard cursor_pointer">
                         <div class="cardImageDIV -relative">
@@ -62,6 +63,15 @@
                     </div>
                     <div class="oval"></div>
                 </div>
+                </div>
+            </div>
+            <div v-else>
+                <div class="noComentarios d-flex align-items-center justify-content-center flex-column">
+                <h5>No tienes ningun favorito</h5>
+                <p>Añade las recetas que mas te gusten</p>
+                <router-link :to="{ name: 'recetas.index'}"
+                    class="btn colorBoton">Recetario</router-link>
+            </div>
             </div>
         </div>
 
