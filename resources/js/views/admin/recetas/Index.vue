@@ -47,9 +47,9 @@
                                         <td class="text-center">
                                             <router-link
                                                 :to="{ name: 'recetasAdmin.update', params: { id: receta.id } }"
-                                                class="btn btn-warning mr-1">Edit</router-link>
+                                                class="btn btn-warning mr-1">Editar</router-link>
                                             <button class="btn btn-danger"
-                                                @click="deleteReceta(receta.id, index)">Delete</button>
+                                                @click="deleteReceta(receta.id, index)">Eliminar</button>
                                         </td>
                                     </tr>
                                 </tbody>

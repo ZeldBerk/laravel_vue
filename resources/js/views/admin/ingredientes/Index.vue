@@ -39,9 +39,9 @@
                                         <td>{{ ingrediente.nombre }}</td>
                                         <td class="text-center">
                                             <button class="btn btn-warning mr-1"
-                                                @click="editIngrediente(ingrediente.id, ingrediente.nombre, index)">Edit</button>
+                                                @click="editIngrediente(ingrediente.id, ingrediente.nombre, index)">Editar</button>
                                             <button class="btn btn-danger"
-                                                @click="deleteIngrediente(ingrediente.id, index)">Delete</button>
+                                                @click="deleteIngrediente(ingrediente.id, index)">Eliminar</button>
                                         </td>
                                     </tr>
                                 </tbody>

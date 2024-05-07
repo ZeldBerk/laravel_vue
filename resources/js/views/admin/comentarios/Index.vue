@@ -52,9 +52,9 @@
                                     <td>{{ comentario.puntuacion }}</td>
                                     <td class="text-center">
                                         <router-link :to="{ name: 'comentAdmin.update', params: { id: comentario.id } }"
-                                            class="btn btn-warning mr-1">Edit</router-link>
+                                            class="btn btn-warning mr-1">Editar</router-link>
                                         <button class="btn btn-danger"
-                                            @click="deleteComent(comentario.id, index)">Delete</button>
+                                            @click="deleteComent(comentario.id, index)">Eliminar</button>
                                     </td>
                                 </tr>
                             </tbody>
