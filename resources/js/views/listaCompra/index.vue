@@ -10,7 +10,7 @@
             </select>
 
         </div>
-        <div v-if="listaCompra && listaCompra.length > 0">
+        <div v-if="listaCompra.length != 0">
             <div v-if="listaCompra && formato === 'semana'">
                 <div class="lista-semana">
                     <div v-for="(ingredientes, dia) in listaCompra" :key="dia"
@@ -80,18 +80,17 @@ const data = localStorage.getItem("vuex");
 const userId = JSON.parse(data).auth.user.id;
 
 const formato = ref('semana');
-const listaCompra = ref(null);
+const listaCompra = ref({});
 
 onMounted(() => {
     cargarListaCompra();
 });
 
 function cargarListaCompra() {
-    axios
-        .get(`/api/listaCompra/${userId}/${formato.value}`)
+    axios.get(`/api/listaCompra/${userId}/${formato.value}`)
         .then((response) => {
             listaCompra.value = response.data;
-            console.log(listaCompra)
+            console.log(listaCompra.value)
         });
 }
 </script>
