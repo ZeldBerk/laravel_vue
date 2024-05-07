@@ -31,17 +31,14 @@
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Contraseña</label>
-                    <input type="password" v-model="profile.password" class="form-control" id="password">
-                    <div class="text-danger mt-1">
-                        {{ 'Rellena esta campo para actualizar tu contraseña' }}
-                    </div>
+                    <input type="password" v-model="profile.password" class="form-control" id="password" placeholder="Rellena esta campo para actualizar tu contraseña">
                     <div class="text-danger mt-1">
                         <div v-for="message in validationErrors?.password">
                             {{ message }}
                         </div>
                     </div>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 mt-4">
                     <button :disabled="isLoading" class="btn colorBoton">
                         <div v-show="isLoading" class=""></div>
                         <span v-if="isLoading">Procesando...</span>

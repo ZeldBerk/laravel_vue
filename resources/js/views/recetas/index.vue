@@ -73,14 +73,10 @@
                                                 </g>
                                             </svg>
                                         </a>
-
                                     </div>
-
-
                                 </div>
                                 <p class="texto ml-2">{{ receta.descripcion_corta }}</p>
                             </div>
-
                         </div>
                         <div class="oval"></div>
                     </div>
