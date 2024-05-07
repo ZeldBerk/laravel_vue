@@ -405,15 +405,4 @@ function limitarLongitud() {
 .nombreIng {
     margin-bottom: 0px;
 }
-
-.colorBoton2 {
-    background-color: #422329;
-    color: white;
-    border-radius: 0px;
-    margin-right: 4px;
-}
-.colorBoton2:hover {
-  background-color: #d78c0a;
-  color: white;
-}
 </style>

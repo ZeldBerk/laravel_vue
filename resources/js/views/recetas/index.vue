@@ -173,12 +173,20 @@ function anadirFavoritos(receta_id) {
     } else {
 
         swal({
-            title: "Es necesario iniciar session antes de realizar esta accion",
+            title: "Es necesario iniciar sessión antes de realizar esta accion",
             icon: "info",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Iniciar Session"
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Iniciar Sessión',
+            didOpen: () => {
+                // Aplicar clases de Bootstrap a los botones de la alerta
+                const confirmButton = document.querySelector('.swal2-confirm');
+                const cancelButton = document.querySelector('.swal2-cancel');
+                confirmButton.classList.add('btn', 'colorBoton2');
+                cancelButton.classList.add('btn', 'btn-danger');
+                confirmButton.classList.remove('swal2-styled');
+                cancelButton.classList.remove('swal2-styled');
+            }
         }).then((result) => {
             if (result.isConfirmed) {
                 window.location.href = '/login';
@@ -289,7 +297,7 @@ function anadirPlanSemanal(receta_id) {
                             } else {
                                 swal.fire({
                                     title: 'Error al añadir receta',
-                                    text: response.data.message, // Puedes mostrar el mensaje de error proporcionado por el servidor
+                                    text: response.data.message,
                                     icon: 'warning'
                                 });
                             }
@@ -308,12 +316,20 @@ function anadirPlanSemanal(receta_id) {
     } else {
 
         swal({
-            title: "Es necesario iniciar session antes de realizar esta accion",
+            title: "Es necesario iniciar sessión antes de realizar esta accion",
             icon: "info",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Iniciar Session"
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Iniciar Sessión',
+            didOpen: () => {
+                // Aplicar clases de Bootstrap a los botones de la alerta
+                const confirmButton = document.querySelector('.swal2-confirm');
+                const cancelButton = document.querySelector('.swal2-cancel');
+                confirmButton.classList.add('btn', 'colorBoton2');
+                cancelButton.classList.add('btn', 'btn-danger');
+                confirmButton.classList.remove('swal2-styled');
+                cancelButton.classList.remove('swal2-styled');
+            }
         }).then((result) => {
             if (result.isConfirmed) {
                 window.location.href = '/login';

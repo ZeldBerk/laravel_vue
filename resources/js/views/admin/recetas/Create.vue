@@ -141,7 +141,7 @@ function ingrediente_selection(id_selection) {
                 // Aplicar clases de Bootstrap a los botones de la alerta
                 const confirmButton = document.querySelector('.swal2-confirm');
                 const cancelButton = document.querySelector('.swal2-cancel');
-                confirmButton.classList.add('btn', 'btn-success');
+                confirmButton.classList.add('btn', 'colorBoton2');
                 cancelButton.classList.add('btn', 'btn-danger');
                 confirmButton.classList.remove('swal2-styled');
                 cancelButton.classList.remove('swal2-styled');

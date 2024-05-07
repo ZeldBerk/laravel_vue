@@ -1,6 +1,7 @@
 ------------ Obligatorio ------------
 - ESTUDIAR EL YUP DEL UPDATE y el promise (IMPORTANTE)
 - Revisar por 3ª vez borde del text editor component
+- Si no hay favorito mostrar mensaje
 ------------ Opcional ------------
 - Forgot Password (Requisito Opcional).
 - Mejorar alertas

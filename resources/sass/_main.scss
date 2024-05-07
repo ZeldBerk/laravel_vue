@@ -68,6 +68,17 @@ a {
   border-radius: 0;
 }
 
+// Boton para las alertas
+.colorBoton2 {
+  background-color: #422329;
+  color: white;
+  border-radius: 0px;
+  margin-right: 4px;
+}
+.colorBoton2:hover {
+background-color: #d78c0a;
+color: white;
+}
 
 //Color shadow-box de los filtros e inputs
 .form-control:focus {
