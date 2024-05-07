@@ -90,4 +90,31 @@ class ComentariosController extends Controller
 
         return $comentario;
     }
+
+    // Devuelve los comentarios asociados a un id de usuario
+    public function showCA($user_id){
+
+        $user = User::findOrFail($user_id);
+        $roles = $user->roles;
+
+        // Verificar si el usuario es admin o es user
+        if ($roles->contains('name', 'admin')) {
+
+            $query = comentarios::join('users', 'users.id', '=', 'comentarios.user_id')
+            ->join('recetas', 'recetas.id', '=', 'comentarios.receta_id')
+            ->select('comentarios.*', 'users.name', 'recetas.nombre');
+
+        } else {
+
+            $query = comentarios::join('users', 'users.id', '=', 'comentarios.user_id')
+            ->join('recetas', 'recetas.id', '=', 'comentarios.receta_id')
+            ->select('comentarios.*', 'users.name', 'recetas.nombre')
+            ->where('comentarios.user_id', $user_id);
+
+        }
+
+        $comentarios = $query->get();
+
+        return $comentarios;
+    }
 }

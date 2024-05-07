@@ -72,6 +72,10 @@ import { ref, onMounted, inject, computed } from "vue";
 const swal = inject('$swal');
 const comentList = ref([]);
 
+// Obtener id de usuario
+const data = localStorage.getItem("vuex");
+const user_id = JSON.parse(data).auth.user.id;
+
 // Filtro de puntuación
 const filtroPuntuacion = ref({
     1: false,
@@ -86,7 +90,7 @@ const estrellas = [1, 2, 3, 4, 5];
 
 // Obtener todo los comentraios de la receta
 onMounted(() => {
-    axios.get('/api/comentarios')
+    axios.get('/api/comentario/admin/' + user_id)
         .then(response => {
             comentList.value = response.data;
         });
