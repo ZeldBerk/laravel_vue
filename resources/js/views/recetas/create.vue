@@ -140,7 +140,7 @@ function ingrediente_selection(id_selection) {
                 // Aplicar clases de Bootstrap a los botones de la alerta
                 const confirmButton = document.querySelector('.swal2-confirm');
                 const cancelButton = document.querySelector('.swal2-cancel');
-                confirmButton.classList.add('btn', 'btn-success');
+                confirmButton.classList.add('btn', 'colorBoton2');
                 cancelButton.classList.add('btn', 'btn-danger');
                 confirmButton.classList.remove('swal2-styled');
                 cancelButton.classList.remove('swal2-styled');
@@ -291,7 +291,7 @@ function ingrediente_selection(id_selection) {
 function deleteIngredienteRecetas_nuevos(id) {
     // Encontrar el índice del ingrediente en el array
     const index = ingredientesSeleccionados.value.findIndex(ingrediente => ingrediente.id === id);
-    
+
     // Si se encuentra el ingrediente en el array, eliminarlo
     if (index !== -1) {
         ingredientesSeleccionados.value.splice(index, 1); // Elimina el elemento en el índice "index"
@@ -302,77 +302,77 @@ function deleteIngredienteRecetas_nuevos(id) {
 // Añade la receta y muestra una alerta en función de la respuesta de la API
 function addReceta() {
 
-swal({
-    title: 'Procesando...',
-    text: 'Por favor, espera un momento.',
-    allowOutsideClick: false,
-    allowEscapeKey: false,
-    showConfirmButton: false,
-    showCancelButton: false,
-    showCloseButton: false,
-    onBeforeOpen: () => {
-        swal.showLoading();
-    }
-});
-
-let r = receta.value;
-let serializedReceta = new FormData()
-for (let item in r) {
-    if (r.hasOwnProperty(item)) {
-        serializedReceta.append(item, r[item])
-    }
-}
-
-axios.post('/api/recetas', serializedReceta, {
-    headers: {
-        "content-type": "multipart/form-data"
-    }
-})
-    .then(response => {
-        // Acceder al ID de la receta recién creada
-        const receta_id = response.data.id;
-        let ingredientPromises = [];
-
-        ingredientesSeleccionados.value.forEach(ingrediente => {
-            const ingrediente_receta = ref({});
-
-            ingrediente_receta.value.receta_id = receta_id;
-            ingrediente_receta.value.ingrediente_id = ingrediente.id;
-            ingrediente_receta.value.cantidad = ingrediente.cantidad;
-            ingrediente_receta.value.unidad = ingrediente.unidad;
-
-            console.log(ingrediente_receta);
-            ingredientPromises.push(
-                axios.post('/api/ingredientes/receta/', ingrediente_receta.value)
-            );
-        });
-
-        // Esperar a que todas las promesas se resuelvan
-        return Promise.all(ingredientPromises);
-    })
-    .then(() => {
-        // Cerrar la alerta de carga
-        swal.close();
-
-        // Mostrar la alerta de éxito
-        swal({
-            icon: 'success',
-            title: 'Receta añadida correctamente'
-        })
-            .then(() => {
-                // Redireccionar a la página después de cerrar la alerta
-                router.push({ name: 'recetas.index' });
-            });
-    })
-    .catch(error => {
-        // Cerrar la alerta de carga
-        swal.close();
-        
-        swal({
-            icon: 'error',
-            title: 'No se ha añadido la receta'
-        });
+    swal({
+        title: 'Procesando...',
+        text: 'Por favor, espera un momento.',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        showCancelButton: false,
+        showCloseButton: false,
+        onBeforeOpen: () => {
+            swal.showLoading();
+        }
     });
+
+    let r = receta.value;
+    let serializedReceta = new FormData()
+    for (let item in r) {
+        if (r.hasOwnProperty(item)) {
+            serializedReceta.append(item, r[item])
+        }
+    }
+
+    axios.post('/api/recetas', serializedReceta, {
+        headers: {
+            "content-type": "multipart/form-data"
+        }
+    })
+        .then(response => {
+            // Acceder al ID de la receta recién creada
+            const receta_id = response.data.id;
+            let ingredientPromises = [];
+
+            ingredientesSeleccionados.value.forEach(ingrediente => {
+                const ingrediente_receta = ref({});
+
+                ingrediente_receta.value.receta_id = receta_id;
+                ingrediente_receta.value.ingrediente_id = ingrediente.id;
+                ingrediente_receta.value.cantidad = ingrediente.cantidad;
+                ingrediente_receta.value.unidad = ingrediente.unidad;
+
+                console.log(ingrediente_receta);
+                ingredientPromises.push(
+                    axios.post('/api/ingredientes/receta/', ingrediente_receta.value)
+                );
+            });
+
+            // Esperar a que todas las promesas se resuelvan
+            return Promise.all(ingredientPromises);
+        })
+        .then(() => {
+            // Cerrar la alerta de carga
+            swal.close();
+
+            // Mostrar la alerta de éxito
+            swal({
+                icon: 'success',
+                title: 'Receta añadida correctamente'
+            })
+                .then(() => {
+                    // Redireccionar a la página después de cerrar la alerta
+                    router.push({ name: 'recetas.index' });
+                });
+        })
+        .catch(error => {
+            // Cerrar la alerta de carga
+            swal.close();
+
+            swal({
+                icon: 'error',
+                title: 'No se ha añadido la receta'
+            });
+        });
 }
 
 // Método para limitar la longitud del texto
@@ -404,5 +404,16 @@ function limitarLongitud() {
 
 .nombreIng {
     margin-bottom: 0px;
+}
+
+.colorBoton2 {
+    background-color: #422329;
+    color: white;
+    border-radius: 0px;
+    margin-right: 4px;
+}
+.colorBoton2:hover {
+  background-color: #d78c0a;
+  color: white;
 }
 </style>
