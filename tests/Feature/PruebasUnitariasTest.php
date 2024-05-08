@@ -41,15 +41,19 @@ class PruebasUnitariasTest extends TestCase
         // Verificar que la solicitud falle debido a datos incorrectos (código de estado 422)
         $response->assertStatus(422);
 
-        // Verificar que el ingrediente no se haya añadido a la base de datos
-        $this->assertDatabaseMissing('ingredientes', $datos);
+        // Obtener el mensaje de error devuelto por la API
+        $mensajeError = $response->json();
+
+        // Comparar el mensaje de error devuelto con el mensaje esperado
+        $this->assertSame('The nombre field is required.', $mensajeError['message']);
     }
+
 
 
     // Prueba unitaria para agregar un comentario correctamente
     public function test_new_comment_ok()
     {
-        // Datos válidos para un nuevo comentario
+
         $datos = [
             'user_id' => 1,
             'receta_id' => 1,
@@ -71,10 +75,10 @@ class PruebasUnitariasTest extends TestCase
     // Prueba unitaria para intentar agregar un comentario con datos faltantes
     public function test_new_comment_ko()
     {
-        // Datos incompletos para un nuevo comentario
+
         $datos = [
             'receta_id' => 1,
-            'contenido' => 'Este comentario tiene datos faltantes',
+            'contenido' => null,
             'puntuacion' => 4
         ];
 
@@ -84,8 +88,11 @@ class PruebasUnitariasTest extends TestCase
         // Verificar que la solicitud falle debido a datos faltantes (código de estado 422)
         $response->assertStatus(422);
 
-        // Verificar que el comentario no se haya agregado a la base de datos
-        $this->assertDatabaseMissing('comentarios', $datos);
+        // Obtener el mensaje de error devuelto por la API
+        $mensajeError = $response->json();
+
+        // Comparar el mensaje de error devuelto con el mensaje esperado
+        $this->assertSame('The user id field is required. (and 1 more error)', $mensajeError['message']);
     }
 
 
@@ -138,7 +145,10 @@ class PruebasUnitariasTest extends TestCase
         // Verificar que la solicitud falle debido a datos incompletos (código de estado 422)
         $response->assertStatus(422);
 
-        // Verificar que la receta no se haya añadido a la base de datos
-        $this->assertDatabaseMissing('recetas', ['nombre' => 'Nueva receta KO']);
+        // Obtener el mensaje de error devuelto por la API
+        $mensajeError = $response->json();
+
+        // Comparar el mensaje de error devuelto con el mensaje esperado
+        $this->assertSame('The descripcion corta field is required. (and 5 more errors)', $mensajeError['message']);
     }
 }
