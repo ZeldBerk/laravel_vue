@@ -1,14 +1,12 @@
 <template>
     <div class="lista-compra">
         <h2>Lista de la compra</h2>
-
         <div class="formato-selector">
             <label for="formato">Formato:</label>
             <select id="formato" v-model="formato" @change="cargarListaCompra">
                 <option value="semana">Semana</option>
                 <option value="dia">Día</option>
             </select>
-
         </div>
         <div v-if="listaCompra.length != 0">
             <div v-if="listaCompra && formato === 'semana'">
@@ -33,7 +31,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="lista">
                 <div v-if="listaCompra && formato === 'dia'">
                     <div class="row">
@@ -86,6 +83,7 @@ onMounted(() => {
     cargarListaCompra();
 });
 
+// Obtener ingredientes de la lista de la compra
 function cargarListaCompra() {
     axios.get(`/api/listaCompra/${userId}/${formato.value}`)
         .then((response) => {

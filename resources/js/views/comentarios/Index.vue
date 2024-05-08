@@ -64,7 +64,7 @@
 import axios from "axios";
 import { ref, onMounted, computed } from "vue";
 import { useRoute } from "vue-router";
-import Rating from 'primevue/rating'; // Importa el componente Rating de PrimeVue
+import Rating from 'primevue/rating'; 
 
 const comentarioSH = ref([]);
 const route = useRoute();
@@ -92,7 +92,7 @@ onMounted(() => {
         });
 });
 
-// Computed property para filtrar los comentarios basados en el filtro de estrellas
+// Funcion de flecha para filtrar los comentarios basados en el filtro de estrellas
 const comentariosFiltrados = computed(() => {
     const puntuacionesSeleccionadas = Object.keys(filtroPuntuacion.value).filter(key => filtroPuntuacion.value[key]);
 
@@ -103,7 +103,7 @@ const comentariosFiltrados = computed(() => {
     return comentarioSH.value.filter(comentario => puntuacionesSeleccionadas.includes(comentario.puntuacion.toString()));
 });
 
-// Método para cambiar el estado de una estrella
+// Funcion para cambiar el estado de una estrella
 const toggleEstrella = (estrella) => {
     filtroPuntuacion.value[estrella] = !filtroPuntuacion.value[estrella];
 };

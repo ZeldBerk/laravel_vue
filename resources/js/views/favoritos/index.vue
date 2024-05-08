@@ -1,82 +1,81 @@
 <template>
     <div id="favoritos" class="container">
         <h1>Mis recetas Favoritas</h1>
-
         <div class="row">
             <div v-if="favoritos && favoritos.length > 0">
                 <div class="col-md-12 col-lg-4 mb-3" v-for="favorito in favoritos" :key="favorito.id">
-                <div class="cursor_pointer cardBorderIMG" @click.stop="detallesReceta(favorito.id)">
-                    <div class="contenidoCard cursor_pointer">
-                        <div class="cardImageDIV -relative">
-                            <div class="position-absolute top-0 end-0 pr-2 pt-2 mr-2">
-                                <div class="mi-con-like" @click.stop="eliminarFavoritos(favorito.id)">
-                                    <input class="mi-like" checked type="checkbox" title="like">
-                                    <div class="mi-checkmark">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="mi-outline" viewBox="0 0 24 24">
-                                            <path
-                                                d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
-                                            </path>
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="mi-filled" viewBox="0 0 24 24">
-                                            <path
-                                                d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
-                                            </path>
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100"
-                                            class="mi-celebrate">
-                                            <polygon class="mi-poly" points="10,10 20,20"></polygon>
-                                            <polygon class="mi-poly" points="10,50 20,50"></polygon>
-                                            <polygon class="mi-poly" points="20,80 30,70"></polygon>
-                                            <polygon class="mi-poly" points="90,10 80,20"></polygon>
-                                            <polygon class="mi-poly" points="90,50 80,50"></polygon>
-                                            <polygon class="mi-poly" points="80,80 70,70"></polygon>
-                                        </svg>
+                    <div class="cursor_pointer cardBorderIMG" @click.stop="detallesReceta(favorito.id)">
+                        <div class="contenidoCard cursor_pointer">
+                            <div class="cardImageDIV -relative">
+                                <div class="position-absolute top-0 end-0 pr-2 pt-2 mr-2">
+                                    <div class="mi-con-like" @click.stop="eliminarFavoritos(favorito.id)">
+                                        <input class="mi-like" checked type="checkbox" title="like">
+                                        <div class="mi-checkmark">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mi-outline"
+                                                viewBox="0 0 24 24">
+                                                <path
+                                                    d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                                                </path>
+                                            </svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mi-filled"
+                                                viewBox="0 0 24 24">
+                                                <path
+                                                    d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                                                </path>
+                                            </svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100"
+                                                class="mi-celebrate">
+                                                <polygon class="mi-poly" points="10,10 20,20"></polygon>
+                                                <polygon class="mi-poly" points="10,50 20,50"></polygon>
+                                                <polygon class="mi-poly" points="20,80 30,70"></polygon>
+                                                <polygon class="mi-poly" points="90,10 80,20"></polygon>
+                                                <polygon class="mi-poly" points="90,50 80,50"></polygon>
+                                                <polygon class="mi-poly" points="80,80 70,70"></polygon>
+                                            </svg>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="cardImage"
-                                :style="{ 'background-image': `url(${favorito.media[0]?.original_url})` }">
-                            </div>
-                        </div>
-                        <div class="cuerpoCarta">
-                            <div class="row ml-2 align-items-center">
-                                <h5 class="col-10 tituloCard">{{ favorito.nombre }}</h5>
-                                <div class="col-2 mb-4" @click.stop="anadirPlanSemanal(favorito.id)">
-                                    <a class="icon-link">
-                                        <svg width="35px" height="35px" viewBox="-2.4 -2.4 28.80 28.80" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg" stroke="#F59E0B">
-                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                            </g>
-                                            <g id="SVGRepo_iconCarrier">
-                                                <circle cx="12" cy="12" r="10" class="circle"></circle>
-                                                <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15" class="cross">
-                                                </path>
-                                            </g>
-                                        </svg>
-                                    </a>
+                                <div class="cardImage"
+                                    :style="{ 'background-image': `url(${favorito.media[0]?.original_url})` }">
                                 </div>
                             </div>
-                            <p class="texto ml-2">{{ favorito.descripcion }}</p>
+                            <div class="cuerpoCarta">
+                                <div class="row ml-2 align-items-center">
+                                    <h5 class="col-10 tituloCard">{{ favorito.nombre }}</h5>
+                                    <div class="col-2 mb-4" @click.stop="anadirPlanSemanal(favorito.id)">
+                                        <a class="icon-link">
+                                            <svg width="35px" height="35px" viewBox="-2.4 -2.4 28.80 28.80" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" stroke="#F59E0B">
+                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                </g>
+                                                <g id="SVGRepo_iconCarrier">
+                                                    <circle cx="12" cy="12" r="10" class="circle"></circle>
+                                                    <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15"
+                                                        class="cross">
+                                                    </path>
+                                                </g>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                                <p class="texto ml-2">{{ favorito.descripcion }}</p>
+                            </div>
                         </div>
+                        <div class="oval"></div>
                     </div>
-                    <div class="oval"></div>
-                </div>
                 </div>
             </div>
             <div v-else>
                 <div class="noComentarios d-flex align-items-center justify-content-center flex-column">
-                <h5>No tienes ningun favorito</h5>
-                <p>Añade las recetas que mas te gusten</p>
-                <router-link :to="{ name: 'recetas.index'}"
-                    class="btn colorBoton">Recetario</router-link>
-            </div>
+                    <h5>No tienes ningun favorito</h5>
+                    <p>Añade las recetas que mas te gusten</p>
+                    <router-link :to="{ name: 'recetas.index' }" class="btn colorBoton">Recetario</router-link>
+                </div>
             </div>
         </div>
-
     </div>
-
 </template>
 
 <script setup>
@@ -91,9 +90,9 @@ const swal = inject('$swal');
 const data = localStorage.getItem("vuex");
 let userId = JSON.parse(data).auth.user.id;
 
-
 const favoritos = ref({});
 
+// Obtener los favoritos del usuario
 onBeforeMount(() => {
 
     axios.get('/api/favoritos/' + userId)
@@ -103,6 +102,7 @@ onBeforeMount(() => {
         })
 });
 
+// Elimina el favorito al deseleccionar el corazon
 function eliminarFavoritos(receta_id) {
     if (!userId) {
         console.error("No user ID found for removing favorites");
@@ -121,10 +121,12 @@ function eliminarFavoritos(receta_id) {
         });
 }
 
+// Redireccion a la pagina de detalles de la receta
 function detallesReceta(id) {
     router.push({ name: 'recetas.detalle', params: { id } });
 }
 
+// Pregunta el dia de la semana y el momento del dia para añadir la receta al plan semanal
 function anadirPlanSemanal(receta_id) {
     const data = localStorage.getItem("vuex");
     let userId = null;
@@ -139,7 +141,6 @@ function anadirPlanSemanal(receta_id) {
     } else {
         console.log("No hay usuario autenticado en el localStorage");
     }
-
 
     if (userId) {
         swal({

@@ -16,8 +16,8 @@
                             <!-- Texto del Comentario -->
                             <div class="mb-3">
                                 <label for="comentario_texto" class="form-label">Texto del Comentario</label>
-                                <textarea v-model="comentario.contenido" id="comentario_texto" class="form-control altura"
-                                    rows="4"></textarea>
+                                <textarea v-model="comentario.contenido" id="comentario_texto"
+                                    class="form-control altura" rows="4"></textarea>
                             </div>
                             <button type="submit" class="btn colorBoton mt-4 mb-4">Guardar Comentario</button>
                         </div>
@@ -49,7 +49,7 @@
 import { ref, onBeforeMount, inject } from "vue";
 import { useRoute } from "vue-router";
 import { useRouter } from 'vue-router';
-import Rating from 'primevue/rating'; // Importa el componente Rating de PrimeVue
+import Rating from 'primevue/rating';
 import axios from "axios";
 
 const comentario = ref({});
@@ -70,18 +70,17 @@ onBeforeMount(() => {
         })
 });
 
-
 // Guarda el comentario 
 function saveComent() {
     comentario.value.user_id = user_id;
     comentario.value.receta_id = route.params.id;
 
-    // Insert del ingredeiente
+    // Insert del comentario
     axios.post('/api/comentarios/', comentario.value)
         .then(response => {
             swal({
                 icon: 'success',
-                title: 'Ingrediente añadido correctamente'
+                title: 'Comentario añadido correctamente'
             })
                 .then(() => {
                     // Redireccionar a la página después de cerrar la alerta
@@ -91,13 +90,14 @@ function saveComent() {
         .catch(error => {
             swal({
                 icon: 'error',
-                title: 'No se ha añadido el ingrediente'
+                title: 'No se ha añadido el comentario'
             });
         });
 }
 </script>
+
 <style>
-.altura{
+.altura {
     height: 170px;
 }
 </style>

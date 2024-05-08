@@ -141,6 +141,7 @@ const receta = ref({});
 const ingredientes = ref({});
 const swal = inject('$swal');
 
+// Obtener las recetas y los ingredientes antes de cargar la pagina
 onBeforeMount(() => {
     axios.get('/api/recetas/' + route.params.id)
         .then(response => {
@@ -184,6 +185,7 @@ function formatCantidad(cantidad) {
     }
 }
 
+// Pregunta el dia de la semana y el momento del dia para añadir la receta al plan semanal
 function anadirPlanSemanal(receta_id) {
     const data = localStorage.getItem("vuex");
     let userId = null;

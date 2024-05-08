@@ -198,11 +198,11 @@ function ingrediente_selection(id_selection) {
         // Encontrar el ingrediente seleccionado en la lista de ingredientes
         const selectedIngredient = ingredientes.value.find(ingrediente => ingrediente.id === id_selection);
 
-        // Crear un contenedor flex para el nombre y los inputs de cantidad y unidad de medida
+        // Crear un contenedor flex
         const flexContainer = document.createElement('div');
-        flexContainer.setAttribute('class', 'col-6 d-flex align-items-center'); // Alinea los elementos verticalmente
+        flexContainer.setAttribute('class', 'col-6 d-flex align-items-center');
 
-        // Insertar el nombre del ingrediente en el contenedor flex
+        // Insertar el nombre del ingrediente en el contenedor
         const nombreElement = document.createElement('p');
         nombreElement.textContent = selectedIngredient.nombre;
         flexContainer.appendChild(nombreElement);
@@ -212,14 +212,14 @@ function ingrediente_selection(id_selection) {
         const cantidadInput = document.createElement('input');
         cantidadInput.setAttribute('type', 'number');
         cantidadInput.setAttribute('min', '1');
-        cantidadInput.setAttribute('class', 'form-control ml-2'); // Margen izquierdo para separar del nombre
+        cantidadInput.setAttribute('class', 'form-control ml-2');
         cantidadInput.setAttribute('placeholder', 'Cantidad');
         cantidadInput.addEventListener('input', event => {
             nuevoIngrediente.cantidad = event.target.value;
         });
 
         const unidadSelect = document.createElement('select');
-        unidadSelect.setAttribute('class', 'form-select ml-2'); // Margen izquierdo para separar del input de cantidad
+        unidadSelect.setAttribute('class', 'form-select ml-2'); 
         // Opción predeterminada para simular un placeholder
         const defaultOption = document.createElement('option');
         defaultOption.text = 'Unidad medida';
@@ -287,15 +287,14 @@ function ingrediente_selection(id_selection) {
     }
 }
 
-// Definir la función para eliminar un ingrediente del array
+// Eliminar un ingrediente del array
 function deleteIngredienteRecetas_nuevos(id) {
     // Encontrar el índice del ingrediente en el array
     const index = ingredientesSeleccionados.value.findIndex(ingrediente => ingrediente.id === id);
 
     // Si se encuentra el ingrediente en el array, eliminarlo
     if (index !== -1) {
-        ingredientesSeleccionados.value.splice(index, 1); // Elimina el elemento en el índice "index"
-        // Aquí puedes agregar cualquier otra lógica que necesites después de eliminar el ingrediente
+        ingredientesSeleccionados.value.splice(index, 1); // Elimina el elemento del array
     }
 }
 

@@ -1,7 +1,6 @@
 <template>
     <div class="BGHome">
         <div id="carouselExampleIndicators" class="carousel slide marginsDelCarrousel mt-0" data-bs-ride="carousel">
-
             <div class="carousel-inner ">
                 <div class="filtroContenedor">
                     <div class="carousel-item active" data-bs-interval="10000">
@@ -20,12 +19,10 @@
                         <img src="../../../images/carruselopcional2.png" class="d-block w-100" alt="...">
                     </div>
                 </div>
-
                 <div class="carousel-caption fixed-caption">
                     <span class="colorLetra">¡Bienvenido al Club de la Olla!</span>
                 </div>
             </div>
-
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
                 data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -41,7 +38,6 @@
                     <span class="mt-2">Recetario</span>
                 </RouterLink>
             </div>
-
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
                     aria-current="true" aria-label="Slide 1"></button>
@@ -55,9 +51,7 @@
                     aria-label="Slide 5"></button>
             </div>
         </div>
-
         <div class="contenedorHOME">
-
             <div class="row justify-content-center marginCuadradoPulsables">
                 <div class="col-md-4 TamañoCuadradoPulsable">
                     <div class="button-wrapper">
@@ -93,7 +87,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="row justify-content-center mb-4">
                 <div class="col-md-10">
                     <div class="containerLetras">
@@ -149,12 +142,8 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-
-
-
 </template>
 
 <script setup>
@@ -172,6 +161,7 @@ onMounted(() => {
     buscarFavoritos();
 });
 
+// Obtener las ultimas cuatro recetas
 async function obtenerUltimasRecetas() {
     await axios.get('/api/ultimasRecetas')
         .then(response => {
@@ -182,10 +172,12 @@ async function obtenerUltimasRecetas() {
         });
 }
 
+// Guardar id de categora en el local storage
 function StorageID(categoria_id) {
     localStorage.setItem('categoria_id', categoria_id);
 }
 
+// Funcion para añadir a favoritos las recetas de la home
 function anadirFavoritos(receta_id) {
     const data = localStorage.getItem("vuex");
     let userId = null;
@@ -233,11 +225,12 @@ function anadirFavoritos(receta_id) {
 
 }
 
+// Redireccion a la pagina de detalles de la receta
 function detallesReceta(id) {
     router.push({ name: 'recetas.detalle', params: { id } });
 }
 
-
+// Recoje los favoritos del usuario 
 async function buscarFavoritos() {
     const data = localStorage.getItem("vuex");
     let userId = null;
@@ -266,13 +259,9 @@ async function buscarFavoritos() {
         })
 }
 
+// Devuelve True o False si la receta esta en favoritos del usuario 
 function isFavorito(recetaId) {
 
     return favoritosArray.value.some(fav => fav === recetaId);
 }
-
-
-
 </script>
-
-<style scoped></style>

@@ -23,7 +23,6 @@
                                 <button class="btn colorBoton" @click="addIngrediente">Añadir ingrediente</button>
                             </div>
                         </div>
-
                         <div class="table-responsive">
                             <table class="table table-hover table-sm">
                                 <thead class="bg-dark text-light">
@@ -47,13 +46,11 @@
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </template>
 
 <script setup>
@@ -65,16 +62,16 @@ const ingredeinte = ref({});
 const ingredeinteUpdate = ref({});
 const filtro = ref('');
 
-// Al montar la pagina ejecutar el function 
+// Al montar la pagina ejecuta la funcion
 onMounted(() => {
     cargarIngredientes();
 });
 
-//Mirara el input con ID filtro para que cada vez que se actualice este input se ejecute la funcion con la palabra recogida para hacer un filtrado
+// Mirara el input con ID filtro para que cada vez que se actualice este input
+// ejecute la funcion con la palabra recogida para hacer un filtrado
 watch(filtro, (newValue, oldValue) => {
     cargarIngredientes(newValue);
 });
-
 
 // Obtener todo los comentraios de la receta
 function cargarIngredientes(filtro = '') {

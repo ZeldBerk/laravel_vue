@@ -24,7 +24,6 @@
                                     Receta</router-link>
                             </div>
                         </div>
-
                         <div class="table-responsive">
                             <table class="table table-hover table-sm">
                                 <thead class="bg-dark text-light">
@@ -77,7 +76,8 @@ onMounted(() => {
     cargarRecetas();
 });
 
-//Mirara el input con ID filtro para que cada vez que se actualice este input se ejecute la funcion con la palabra recogida para hacer un filtrado
+// Mirara el input con ID filtro para que cada vez que se actualice este input 
+// ejecute la funcion con la palabra recogida para hacer un filtrado
 watch(filtro, (newValue, oldValue) => {
     cargarRecetas(newValue);
 })
@@ -99,7 +99,6 @@ const cargarRecetas = (filtro = '') => {
             console.error(error);
         });
 }
-
 
 // Funcion de flecha para eliminar recetas
 const deleteReceta = (id, index) => {
@@ -134,8 +133,4 @@ const deleteReceta = (id, index) => {
             }
         })
 }
-
-
-
-
 </script>

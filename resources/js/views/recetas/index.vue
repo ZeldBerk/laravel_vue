@@ -2,7 +2,6 @@
     <div class="colorFondo">
         <div id="recetas" class="contenedorGeneral mt-4">
             <h1>Recetas</h1>
-
             <div class="row mb-3">
                 <div class="col-md-8">
                     <div class="row">
@@ -66,7 +65,6 @@
                             <div class="cuerpoCarta">
                                 <div class="row ml-2 align-items-center">
                                     <h5 class="col-10 tituloCard">{{ receta.nombre }}</h5>
-
                                     <div class="col-2 mb-4" @click.stop="anadirPlanSemanal(receta.id)">
                                         <a class="icon-link">
                                             <svg width="35px" height="35px" viewBox="-2.4 -2.4 28.80 28.80" fill="none"
@@ -109,6 +107,7 @@ const filtro = ref('');
 const categoriaSeleccionada = ref(null);
 const categorias = ref([]);
 
+// Obtener las categorias
 onMounted(() => {
     obtenerRecetas();
     buscarFavoritos();
@@ -118,19 +117,23 @@ onMounted(() => {
         });
 });
 
+// añadir un elemento a las categorias para poder quitar el filtro
 const categoriasConTodas = computed(() => {
     const todasLasCategorias = [{ id: null, nombre: "Todas las categorías" }, ...categorias.value];
     return todasLasCategorias;
 });
 
+// wathc para ejecutar el filtro cuando se busque alguna receta
 watch(filtro, (newValue, oldValue) => {
     obtenerRecetas(newValue);
 })
 
+// watch para ejecutar filtro de categorias al cambiar el valor del dropdawn 
 watch(categoriaSeleccionada, (newValue, oldValue) => {
     obtenerRecetas(filtro.value, newValue);
 });
 
+// Obteiene o todas las recetas o segun el filtro o la categoria que se este aplicando
 async function obtenerRecetas(filtro = '', categoriaSeleccionada = null) {
     try {
         let url = '/api/recetas';
@@ -141,7 +144,7 @@ async function obtenerRecetas(filtro = '', categoriaSeleccionada = null) {
         } else if (filtro) {
             url += `?filtro=${filtro}`;
         } else if (categoriaSeleccionada !== null && categoriaSeleccionada !== undefined) {
-            url += `?categoria=${categoriaSeleccionada}`; // Ahora se comprueba que no sea null ni undefined
+            url += `?categoria=${categoriaSeleccionada}`;
         }
 
         const response = await axios.get(url);
@@ -154,13 +157,12 @@ async function obtenerRecetas(filtro = '', categoriaSeleccionada = null) {
     }
 }
 
-
-
-
+// Funcion que redirije a la pagina detalles 
 function detallesReceta(id) {
     router.push({ name: 'recetas.detalle', params: { id } });
 }
 
+// Añade a favoritos del usuario la receta
 function anadirFavoritos(receta_id) {
     const data = localStorage.getItem("vuex");
     let userId = null;
@@ -169,7 +171,6 @@ function anadirFavoritos(receta_id) {
     if (data) {
         try {
             userId = JSON.parse(data).auth.user.id;
-            console.log("ID del usuario:", userId);
         } catch (error) {
             console.error("Error al analizar los datos del localStorage:", error);
         }
@@ -183,7 +184,6 @@ function anadirFavoritos(receta_id) {
             receta_id,
         })
             .then(response => {
-                console.log(response.data);
                 responseStatus = response.data.success;
 
                 if (!responseStatus) {
@@ -221,9 +221,7 @@ function anadirFavoritos(receta_id) {
 
 }
 
-
-
-
+// Funcion que busca los favoritos del usuario para dejarlos señalados
 async function buscarFavoritos() {
     const data = localStorage.getItem("vuex");
     let userId = null;
@@ -231,7 +229,6 @@ async function buscarFavoritos() {
     if (data) {
         try {
             userId = JSON.parse(data).auth.user.id;
-            console.log("ID del usuario:", userId);
         } catch (error) {
             console.error("Error al analizar los datos del localStorage:", error);
         }
@@ -252,11 +249,13 @@ async function buscarFavoritos() {
         })
 }
 
+// Pone el corazon en cheked si la receta esta en el array de favoritos
 function isFavorito(recetaId) {
 
     return favoritosArray.value.some(fav => fav === recetaId);
 }
 
+// Pregunta el dia de la semana y el momento del dia para añadir la receta al plan semanal
 function anadirPlanSemanal(receta_id) {
     const data = localStorage.getItem("vuex");
     let userId = null;
@@ -264,14 +263,12 @@ function anadirPlanSemanal(receta_id) {
     if (data) {
         try {
             userId = JSON.parse(data).auth.user.id;
-            console.log("ID del usuario:", userId);
         } catch (error) {
             console.error("Error al analizar los datos del localStorage:", error);
         }
     } else {
         console.log("No hay usuario autenticado en el localStorage");
     }
-
 
     if (userId) {
         swal({
@@ -361,10 +358,7 @@ function anadirPlanSemanal(receta_id) {
         });
     }
 }
-
 </script>
-
-
 
 <style scoped>
 /* Estilo personalizado para el botón de añadir al plan semanal */
