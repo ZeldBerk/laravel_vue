@@ -4,17 +4,27 @@
             <h1>Recetas</h1>
 
             <div class="row mb-3">
-                <div class="col-md-6">
-                    <form action="#">
-                        <label for="filtro">Filtrar:</label>
-                        <input type="text" id="filtro" name="filtro" class="form-control" v-model="filtro">
-                    </form>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-8">
+                            <form action="#">
+                                <div class="d-flex align-items-center">
+                                    <label for="filtro" class="mr-2">Filtrar:</label>
+                                    <input type="text" id="filtro" name="filtro" class="form-control mr-4"
+                                        v-model="filtro">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-4">
+                            <Dropdown v-model="categoriaSeleccionada" :options="categoriasConTodas" optionValue="id"
+                                optionLabel="nombre" placeholder="Todas las categorías" class="w-100"></Dropdown>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6 text-right">
+                <div class="col-md-4 text-right">
                     <router-link :to="{ name: 'recetas.create' }" class="btn colorBoton">Añadir receta</router-link>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-lg-4 col-md-12 mb-3" v-for="receta in recetas" :key="receta.id">
                     <div class="cardBorderIMG" @click.stop="detallesReceta(receta.id)">
@@ -84,12 +94,11 @@
             </div>
         </div>
     </div>
-
 </template>
 
 <script setup>
 import axios from "axios";
-import { ref, onMounted, inject, watch } from "vue";
+import { ref, onMounted, inject, watch, computed } from "vue";
 import { useRouter } from "vue-router";
 
 const swal = inject('$swal');
@@ -97,27 +106,42 @@ const favoritosArray = ref([]);
 const recetas = ref([]);
 const router = useRouter();
 const filtro = ref('');
+const categoriaSeleccionada = ref(null);
+const categorias = ref([]);
 
 onMounted(() => {
     obtenerRecetas();
     buscarFavoritos();
+    axios.get('/api/categorias')
+        .then(response => {
+            categorias.value = response.data;
+        });
+});
+
+const categoriasConTodas = computed(() => {
+    const todasLasCategorias = [{ id: null, nombre: "Todas las categorías" }, ...categorias.value];
+    return todasLasCategorias;
 });
 
 watch(filtro, (newValue, oldValue) => {
     obtenerRecetas(newValue);
 })
 
-async function obtenerRecetas(filtro = '') {
+watch(categoriaSeleccionada, (newValue, oldValue) => {
+    obtenerRecetas(filtro.value, newValue);
+});
+
+async function obtenerRecetas(filtro = '', categoriaSeleccionada = null) {
     try {
         let url = '/api/recetas';
         const categoriaId = localStorage.getItem('categoria_id');
-        console.log(categoriaId);
 
-        // Si hay una categoría almacenada, incluir su ID en la URL
         if (categoriaId) {
             url += `?categoria=${categoriaId}`;
         } else if (filtro) {
             url += `?filtro=${filtro}`;
+        } else if (categoriaSeleccionada !== null && categoriaSeleccionada !== undefined) {
+            url += `?categoria=${categoriaSeleccionada}`; // Ahora se comprueba que no sea null ni undefined
         }
 
         const response = await axios.get(url);
@@ -129,7 +153,6 @@ async function obtenerRecetas(filtro = '') {
         console.error("Error al obtener recetas:", error);
     }
 }
-
 
 
 
