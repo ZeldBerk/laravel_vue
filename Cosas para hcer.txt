@@ -3,3 +3,7 @@
 - Revisar por 3ª vez borde del text editor component
 ------------ Opcional ------------
 - Forgot Password (Requisito Opcional).
+
+
+----------- Documentacion --------------
+- Diagrama de clases controlladores con modelos
