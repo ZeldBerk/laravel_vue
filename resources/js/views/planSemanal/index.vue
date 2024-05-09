@@ -12,7 +12,7 @@
                                 <ul v-if="filtrarRecetas(dia, 'Almuerzo').length > 0">
                                     <li v-for="receta in filtrarRecetas(dia, 'Almuerzo')" :key="receta.id"
                                         class="receta">
-                                        {{ receta.receta.nombre }}
+                                        {{ receta.nombre }}
                                         <span class="icon-eye" @click.stop="detallesReceta(receta.receta_id)">
                                             <!-- Icono de ojo dentro de un círculo -->
                                             <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none"
@@ -133,7 +133,6 @@ function obtenerPlanSemanal() {
     if (data) {
         try {
             userId = JSON.parse(data).auth.user.id;
-            console.log("ID del usuario:", userId);
         } catch (error) {
             console.error("Error al analizar los datos del localStorage:", error);
         }
@@ -145,6 +144,7 @@ function obtenerPlanSemanal() {
         axios.get(`/api/planSemanal/${userId}`)
             .then((response) => {
                 planSemanal.value = response.data;
+                console.log(planSemanal.value);
             })
             .catch((error) => {
                 console.error("Error: ", error);

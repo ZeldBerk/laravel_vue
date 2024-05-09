@@ -54,4 +54,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(recetas::class, 'favoritos', 'user_id', 'receta_id')->withTimestamps();
     }
+
+    public function planSemanal()
+    {
+        return $this->belongsToMany(recetas::class, 'plan_semanals', 'user_id', 'receta_id')->withTimestamps();
+    }
 }

@@ -43,4 +43,9 @@ class recetas extends Model implements HasMedia
     {
         return $this->belongsToMany(User::class, 'favoritos', 'receta_id', 'user_id')->withTimestamps();
     }
+
+    public function planSemanal()
+    {
+        return $this->belongsToMany(User::class, 'plan_semanals', 'receta_id', 'user_id')->withTimestamps();
+    }
 }
