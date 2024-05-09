@@ -15,11 +15,11 @@ class Favoritos extends Model
 
     ];
 
-    public function receta(){
-        return $this->belongsTo(recetas::class);
-    }
+    // public function receta(){
+    //     return $this->belongsTo(recetas::class);
+    // }
 
-    public function user(){
-        return $this->belongsTo(User::class);
-    }
+    // public function user(){
+    //     return $this->belongsTo(User::class);
+    // }
 }

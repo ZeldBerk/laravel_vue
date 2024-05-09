@@ -38,4 +38,9 @@ class recetas extends Model implements HasMedia
                 ->height(env('IMAGE_HEIGHT', 300));
         }
     }
+
+    public function favoritos()
+    {
+        return $this->belongsToMany(User::class, 'favoritos', 'receta_id', 'user_id')->withTimestamps();
+    }
 }

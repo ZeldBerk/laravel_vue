@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Favoritos;
 use App\Models\recetas;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class FavoritosController extends Controller
 {
@@ -27,29 +28,18 @@ class FavoritosController extends Controller
   }
 
 //Guardar receta en favoritos
-  public function store(Request $request)
-  {
-
+public function store(Request $request)
+{
     $request->validate([
-      'user_id' => 'required',
-      'receta_id' => 'required',
+        'user_id' => 'required',
+        'receta_id' => 'required',
     ]);
 
-
-    $existeFavorito = Favoritos::where('user_id', $request->user_id)
-      ->where('receta_id', $request->receta_id)
-      ->exists();
-
-    if ($existeFavorito) {
-      return response()->json(['success' => false, 'message' => 'La receta ya está en tus favoritos.']);
-    }
-
-
-    $favorito = $request->all();
-    $fav = Favoritos::create($favorito);
+    $user = User::find($request->user_id);
+    $user->favoritas()->syncWithoutDetaching([$request->receta_id]);
 
     return response()->json(['success' => true, 'data' => 'La receta se ha añadido correctamente a Favoritos']);
-  }
+}
 
 
   // Eliminar receta de Favoritos 
