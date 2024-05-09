@@ -4,7 +4,6 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\planSemanal;
-use App\Models\recetas;
 use Illuminate\Http\Request;
 
 class PlanSemanalController extends Controller

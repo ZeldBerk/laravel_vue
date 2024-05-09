@@ -4,6 +4,3 @@
 ------------ Opcional ------------
 - Forgot Password (Requisito Opcional).
 
-
------------ Documentacion --------------
-- Diagrama de clases controlladores con modelos
