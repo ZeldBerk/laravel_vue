@@ -1,8 +1,8 @@
 <template>
     <div id="favoritos" class="container">
         <h1>Mis recetas Favoritas</h1>
-        <div class="row">
-            <div v-if="favoritos && favoritos.length > 0">
+        
+            <div v-if="favoritos && favoritos.length > 0" class="row">
                 <div class="col-md-12 col-lg-4 mb-3" v-for="favorito in favoritos" :key="favorito.id">
                     <div class="cursor_pointer cardBorderIMG" @click.stop="detallesReceta(favorito.id)">
                         <div class="contenidoCard cursor_pointer">
@@ -74,7 +74,7 @@
                     <router-link :to="{ name: 'recetas.index' }" class="btn colorBoton">Recetario</router-link>
                 </div>
             </div>
-        </div>
+        
     </div>
 </template>
 
