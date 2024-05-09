@@ -5,16 +5,6 @@ import axios from 'axios';
 const AuthenticatedLayout = () => import('../layouts/Authenticated.vue')
 const AuthenticatedUser = () => ('../layouts/Usuarios.vue')
 const GuestLayout = () => import('../layouts/Guest.vue');
-
-const PostsIndex = () => import('../views/admin/posts/Index.vue');
-const PostsCreate = () => import('../views/admin/posts/Create.vue');
-const PostsEdit = () => import('../views/admin/posts/Edit.vue');
-const ExercisesIndex = () => import('../views/admin/exercises/Index.vue');
-const ExercisesCreate = () => import('../views/admin/exercises/Create.vue');
-const ExercisesEdit = () => import('../views/admin/exercises/Edit.vue');
-const TasksList = () => import('../views/admin/tasks/index.vue');
-const TasksCreate = () => import('../views/admin/tasks/create.vue');
-const TasksUpdate = () => import('../views/admin/tasks/update.vue');
 const RecetasList = () => import('../views/recetas/index.vue');
 const RecetasCreate = () => import('../views/recetas/create.vue');
 const RecetasDetalle = () => import('../views/recetas/detalle.vue');
@@ -276,86 +266,6 @@ export default [
         beforeEnter: rolAdmin,
         meta: { breadCrumb: 'Panel de Control' },
         children: [
-
-            {
-                name: 'posts.index',
-                path: 'posts',
-                component: PostsIndex,
-                meta: { breadCrumb: 'Posts' }
-            },
-            {
-                name: 'posts.create',
-                path: 'posts/create',
-                component: PostsCreate,
-                meta: { breadCrumb: 'Add new post' }
-            },
-            {
-                name: 'posts.edit',
-                path: 'posts/edit/:id',
-                component: PostsEdit,
-                meta: { breadCrumb: 'Edit post' }
-            },
-            {
-                name: 'tasks',
-                path: 'tasks',
-                meta: { breadCrumb: 'Tareas' },
-                children: [
-                    {
-                        name: 'tasks.index',
-                        path: '',
-                        component: TasksList,
-                        meta: { breadCrumb: 'Listado tareas' }
-                    },
-                    {
-                        name: 'tasks.create',
-                        path: 'create',
-                        component: TasksCreate,
-                        meta: { breadCrumb: 'Crear tareas' }
-                    },
-                    {
-                        name: 'tasks.update',
-                        path: 'update/:id',
-                        component: TasksUpdate,
-                        meta: { breadCrumb: 'Actualizar tareas' }
-                    }
-                ]
-            },
-
-            {
-                name: 'exercises',
-                path: 'exercises',
-                meta: { breadCrumb: 'Exercises' },
-                children: [
-                    {
-                        name: 'exercises.index',
-                        path: '',
-                        component: ExercisesIndex,
-                        meta: { breadCrumb: 'View' }
-                    },
-                    {
-                        name: 'exercises.create',
-                        path: 'create',
-                        component: ExercisesCreate,
-                        meta: {
-                            breadCrumb: 'Add new exercise',
-                            linked: false,
-                        }
-                    },
-                    {
-                        name: 'exercises.edit',
-                        path: 'edit/:id',
-                        component: ExercisesEdit,
-                        meta: {
-                            breadCrumb: 'Edit exercise',
-                            linked: false,
-                        }
-                    }
-                ]
-            },
-            // {
-            //     path: '/user'
-            // },
-
             {
                 name: 'categories',
                 path: 'categories',

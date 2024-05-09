@@ -1,8 +1,6 @@
 ------------ Obligatorio ------------
 - ESTUDIAR EL YUP DEL UPDATE y el promise (IMPORTANTE)
 - Revisar por 3ª vez borde del text editor component
-
-- REVISAR SYNC, ATTACH, UNATTACH, BELONGTOMANY !IMPORTAMTE
 ------------ Opcional ------------
 - Forgot Password (Requisito Opcional).
 

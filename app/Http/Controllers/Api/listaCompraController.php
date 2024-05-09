@@ -6,16 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Models\ingredientes_recetas;
 use App\Models\planSemanal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class listaCompraController extends Controller
 {
     //Obtener la lista de la compra del usuario de las recetas guardadas
     public function listaCompra(int $userId, string $formato)
     {
-        $recetasSemanales = PlanSemanal::where('user_id', $userId)->get();
+        $recetasSemanales = DB::table('plan_semanals')
+            ->where('user_id', $userId)
+            ->get();
 
         $listaCompra = [];
-
         $ordenDias = [
             'Lunes' => 1,
             'Martes' => 2,
@@ -31,16 +33,15 @@ class listaCompraController extends Controller
             if ($formato === 'semana') {
                 $diaSemana = null;
             } else {
-
                 $diaSemana = $receta->dia_semana;
             }
-
 
             $recetaId = $receta->receta_id;
 
             // Buscar los ingredientes correspondientes a la receta en la base de datos
-            $ingredientesReceta = ingredientes_recetas::where('receta_id', $recetaId)
+            $ingredientesReceta = DB::table('ingredientes_recetas')
                 ->join('ingredientes', 'ingredientes_recetas.ingrediente_id', '=', 'ingredientes.id')
+                ->where('ingredientes_recetas.receta_id', $recetaId)
                 ->select('ingredientes.nombre', 'ingredientes_recetas.cantidad', 'ingredientes_recetas.unidad')
                 ->get();
 
@@ -63,7 +64,6 @@ class listaCompraController extends Controller
                 return $ordenDias[$a] - $ordenDias[$b];
             });
         }
-
 
         // Convertir unidades si es necesario
         foreach ($listaCompra as &$diaCompra) {
