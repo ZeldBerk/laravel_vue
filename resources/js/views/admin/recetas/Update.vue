@@ -430,6 +430,7 @@ function saveReceta() {
                         ingredientPromises.push(
                             axios.put('/api/ingredientes/receta/update/' + ingrediente.id, ingrediente)
                         );
+                        console.log(ingrediente.id);
                     });
 
                     // Comprobar si hay ingredientes nuevos añadidos y guardarlos
