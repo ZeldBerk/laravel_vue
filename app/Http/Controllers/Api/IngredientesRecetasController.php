@@ -55,7 +55,7 @@ class IngredientesRecetasController extends Controller
     // Agrega un ingrediente a la receta
     public function updateIngReceta($ingrediente_receta_id, Request $request)
     {
-        // Validar los datos de la solicitud
+
         $request->validate([
             'cantidad' => 'required',
             'unidad' => 'required',
@@ -77,7 +77,7 @@ class IngredientesRecetasController extends Controller
             ->update([
                 'cantidad' => $request->cantidad,
                 'unidad' => $request->unidad,
-                'updated_at' => now(), // Actualizar la marca de tiempo de actualización
+                'updated_at' => now(), 
             ]);
 
         return response()->json(['success' => true, 'data' => 'Ingrediente actualizado correctamente en la receta']);
@@ -87,7 +87,7 @@ class IngredientesRecetasController extends Controller
     // Elimina un ingrediente de una receta
     public function deleteIngreReceta($ingrediente_receta_id)
     {
-        // Buscar la relación ingrediente_receta en la tabla intermedia
+
         $ingrediente_receta = DB::table('ingredientes_recetas')
             ->where('id', $ingrediente_receta_id)
             ->first();
