@@ -12,4 +12,10 @@ class ingrediente extends Model
     protected $fillable = [
         'nombre'
     ];
+
+    public function recetas()
+    {
+        return $this->belongsToMany(recetas::class, 'ingredientes_recetas', 'ingrediente_id', 'receta_id')
+            ->withPivot('cantidad', 'unidad');
+    }
 }

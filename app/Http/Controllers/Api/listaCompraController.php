@@ -4,7 +4,6 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\ingredientes_recetas;
-use App\Models\planSemanal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

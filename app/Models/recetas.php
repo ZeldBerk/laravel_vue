@@ -48,4 +48,10 @@ class recetas extends Model implements HasMedia
     {
         return $this->belongsToMany(User::class, 'plan_semanals', 'receta_id', 'user_id')->withTimestamps();
     }
+
+    public function ingredientes()
+    {
+        return $this->belongsToMany(ingrediente::class, 'ingredientes_recetas', 'receta_id', 'ingrediente_id')
+            ->withPivot('cantidad', 'unidad');
+    }
 }
