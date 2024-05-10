@@ -31,33 +31,37 @@
                                 </div>
                             </div>
                         </div>
-                        <table class="table table-hover table-sm">
-                            <thead class="bg-dark text-light">
-                                <tr>
-                                    <th width="50" class="text-center">#</th>
-                                    <th>Usuario</th>
-                                    <th>Receta</th>
-                                    <th>Comentario</th>
-                                    <th>Valoración</th>
-                                    <th class="text-center" width="200">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(comentario, index) in comentariosFiltrados">
-                                    <td class="text-center">{{ comentario.id }}</td>
-                                    <td>{{ comentario.name }}</td>
-                                    <td>{{ comentario.nombre }}</td>
-                                    <td>{{ comentario.contenido }}</td>
-                                    <td>{{ comentario.puntuacion }}</td>
-                                    <td class="text-center">
-                                        <router-link :to="{ name: 'comentAdmin.update', params: { id: comentario.id } }"
-                                            class="btn btn-warning mr-1">Editar</router-link>
-                                        <button class="btn btn-danger"
-                                            @click="deleteComent(comentario.id, index)">Eliminar</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+
+                            <table class="table table-hover table-sm">
+                                <thead class="bg-dark text-light">
+                                    <tr>
+                                        <th width="50" class="text-center">#</th>
+                                        <th>Usuario</th>
+                                        <th>Receta</th>
+                                        <th>Comentario</th>
+                                        <th>Valoración</th>
+                                        <th class="text-center" width="200">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(comentario, index) in comentariosFiltrados">
+                                        <td class="text-center">{{ comentario.id }}</td>
+                                        <td>{{ comentario.name }}</td>
+                                        <td>{{ comentario.nombre }}</td>
+                                        <td>{{ comentario.contenido }}</td>
+                                        <td>{{ comentario.puntuacion }}</td>
+                                        <td class="text-center">
+                                            <router-link
+                                                :to="{ name: 'comentAdmin.update', params: { id: comentario.id } }"
+                                                class="btn btn-warning mr-1">Editar</router-link>
+                                            <button class="btn btn-danger"
+                                                @click="deleteComent(comentario.id, index)">Eliminar</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -4,6 +4,6 @@
 ------------ Opcional ------------
 - Forgot Password (Requisito Opcional).
 
-- Plan semanal falta captura i responsive 
-- Favoritos
-- Datos usuario
+- Revisar diagrama de clases
+- Revisar header responsive en admin
+- Disenyo cosas del admin
