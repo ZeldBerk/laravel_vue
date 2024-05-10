@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\ingredientes_recetas;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class IngredientesRecetas extends Seeder
 {
@@ -62,12 +63,14 @@ class IngredientesRecetas extends Seeder
     ];
 
     foreach ($ingredientes1 as $ing1) {
-      ingredientes_recetas::create([
+      DB::table('ingredientes_recetas')->insert([
 
         'receta_id' => 1,
         'ingrediente_id' => $ing1['ingrediente_id'],
         'cantidad' => $ing1['cantidad'],
-        'unidad' => $ing1['unidad']
+        'unidad' => $ing1['unidad'],
+        'created_at' => now(),
+        'updated_at' => now(),
       ]);
     }
 
@@ -100,12 +103,14 @@ class IngredientesRecetas extends Seeder
     ];
 
     foreach ($ingredientes2 as $ing2) {
-      ingredientes_recetas::create([
+      DB::table('ingredientes_recetas')->insert([
 
         'receta_id' => 2,
         'ingrediente_id' => $ing2['ingrediente_id'],
         'cantidad' => $ing2['cantidad'],
-        'unidad' => $ing2['unidad']
+        'unidad' => $ing2['unidad'],
+        'created_at' => now(),
+        'updated_at' => now(),
       ]);
     }
 
@@ -160,12 +165,14 @@ class IngredientesRecetas extends Seeder
     ];
 
     foreach ($ingredientes3 as $ing3) {
-      ingredientes_recetas::create([
+      DB::table('ingredientes_recetas')->insert([
 
         'receta_id' => 3,
         'ingrediente_id' => $ing3['ingrediente_id'],
         'cantidad' => $ing3['cantidad'],
-        'unidad' => $ing3['unidad']
+        'unidad' => $ing3['unidad'],
+        'created_at' => now(),
+        'updated_at' => now(),
       ]);
     }
 
@@ -213,12 +220,14 @@ class IngredientesRecetas extends Seeder
     ];
 
     foreach ($ingredientes4 as $ing4) {
-      ingredientes_recetas::create([
+      DB::table('ingredientes_recetas')->insert([
 
         'receta_id' => 4,
         'ingrediente_id' => $ing4['ingrediente_id'],
         'cantidad' => $ing4['cantidad'],
-        'unidad' => $ing4['unidad']
+        'unidad' => $ing4['unidad'],
+        'created_at' => now(),
+        'updated_at' => now(),
       ]);
     }
 
@@ -251,12 +260,14 @@ class IngredientesRecetas extends Seeder
     ];
 
     foreach ($ingredientes5 as $ing5) {
-      ingredientes_recetas::create([
+      DB::table('ingredientes_recetas')->insert([
 
         'receta_id' => 5,
         'ingrediente_id' => $ing5['ingrediente_id'],
         'cantidad' => $ing5['cantidad'],
-        'unidad' => $ing5['unidad']
+        'unidad' => $ing5['unidad'],
+        'created_at' => now(),
+        'updated_at' => now(),
       ]);
     }
 
@@ -304,12 +315,14 @@ class IngredientesRecetas extends Seeder
     ];
 
     foreach ($ingredientes6 as $ing6) {
-      ingredientes_recetas::create([
+      DB::table('ingredientes_recetas')->insert([
 
         'receta_id' => 6,
         'ingrediente_id' => $ing6['ingrediente_id'],
         'cantidad' => $ing6['cantidad'],
-        'unidad' => $ing6['unidad']
+        'unidad' => $ing6['unidad'],
+        'created_at' => now(),
+        'updated_at' => now(),
       ]);
     }
 
@@ -392,12 +405,14 @@ class IngredientesRecetas extends Seeder
     ];
 
     foreach ($ingredientes7 as $ing7) {
-      ingredientes_recetas::create([
+      DB::table('ingredientes_recetas')->insert([
 
         'receta_id' => 7,
         'ingrediente_id' => $ing7['ingrediente_id'],
         'cantidad' => $ing7['cantidad'],
-        'unidad' => $ing7['unidad']
+        'unidad' => $ing7['unidad'],
+        'created_at' => now(),
+        'updated_at' => now(),
       ]);
     }
 
@@ -421,11 +436,11 @@ class IngredientesRecetas extends Seeder
         'ingrediente_id' => 39,
         'cantidad' => 100,
         'unidad' => 'g'
-      ],[
+      ], [
         'ingrediente_id' => 7,
         'cantidad' => null,
         'unidad' => null
-      ],[
+      ], [
         'ingrediente_id' => 19,
         'cantidad' => null,
         'unidad' => null
@@ -433,12 +448,13 @@ class IngredientesRecetas extends Seeder
     ];
 
     foreach ($ingredientes8 as $ing8) {
-      ingredientes_recetas::create([
-
+      DB::table('ingredientes_recetas')->insert([
         'receta_id' => 8,
         'ingrediente_id' => $ing8['ingrediente_id'],
         'cantidad' => $ing8['cantidad'],
-        'unidad' => $ing8['unidad']
+        'unidad' => $ing8['unidad'],
+        'created_at' => now(),
+        'updated_at' => now(),
       ]);
     }
   }
