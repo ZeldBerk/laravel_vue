@@ -54,7 +54,7 @@
                                 <h5 class="text-center">Cena</h5>
                                 <ul v-if="filtrarRecetas(dia, 'Cena').length > 0">
                                     <li v-for="receta in filtrarRecetas(dia, 'Cena')" :key="receta.id" class="receta">
-                                        {{ receta.receta.nombre }}
+                                        {{ receta.nombre }}
                                         <span class="icon-eye" @click.stop="detallesReceta(receta.receta_id)">
                                             <!-- Icono de ojo dentro de un círculo -->
                                             <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none"
