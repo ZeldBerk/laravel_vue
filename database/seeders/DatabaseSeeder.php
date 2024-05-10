@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CreateRecetas::class);
         $this->call(CreateIngredientes::class);
         $this->call(IngredientesRecetas::class);
+        $this->call(ComentariosRecetas::class);
         
 
 //        $this->call(RoleSeeder::class);

@@ -30,6 +30,30 @@ class CreateAdminUserSeeder extends Seeder
             'password' => bcrypt('12345678')
         ]);
 
+        $user3 = User::create([
+            'name' => 'Paula',
+            'email' => 'Paula2000@demo.com',
+            'password' => bcrypt('12345678')
+        ]);
+
+        $user4 = User::create([
+            'name' => 'Marc',
+            'email' => 'Marc2006@demo.com',
+            'password' => bcrypt('12345678')
+        ]);
+
+        $user5 = User::create([
+            'name' => 'Nerea',
+            'email' => 'Nerea2003@demo.com',
+            'password' => bcrypt('12345678')
+        ]);
+
+        $user6 = User::create([
+            'name' => 'Rodrigo',
+            'email' => 'Rodri1999@demo.com',
+            'password' => bcrypt('12345678')
+        ]);
+
 
         $role = Role::create(['name' => 'admin']);
         $role2 = Role::create(['name' => 'user']);
@@ -53,5 +77,9 @@ class CreateAdminUserSeeder extends Seeder
 
         $user->assignRole([$role->id]);
         $user2->assignRole([$role2->id]);
+        $user3->assignRole([$role2->id]);
+        $user4->assignRole([$role2->id]);
+        $user5->assignRole([$role2->id]);
+        $user6->assignRole([$role2->id]);
     }
 }

@@ -1,12 +1,12 @@
 <template>
     <div id="recetas" class="container">
-        <div class="d-flex justify-content-between pb-2 mb-2">
+        <div class="d-flex justify-content-between pb-2 mb-2 mt-4">
             <h5 class="card-title">Añade una nueva receta</h5>
         </div>
         <form @submit.prevent="addReceta">
             <div class="row my-5">
                 <div class="col-md-8">
-                    <div class="card comentarioCard shadow-sm">
+                    <div class="card comentarioCard shadow-sm mb-4">
                         <div class="card-body">
                             <!-- Nombre receta -->
                             <div class="mb-3">

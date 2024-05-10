@@ -4,3 +4,6 @@
 ------------ Opcional ------------
 - Forgot Password (Requisito Opcional).
 
+- Plan semanal falta captura i responsive 
+- Favoritos
+- Datos usuario
