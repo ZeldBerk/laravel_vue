@@ -4,6 +4,5 @@
 ------------ Opcional ------------
 - Forgot Password (Requisito Opcional).
 
-- Revisar diagrama de clases
 - Revisar header responsive en admin
-- Disenyo cosas del admin
+- Agrupar rf 
