@@ -1,8 +1,0 @@
------------- Obligatorio ------------
-- ESTUDIAR EL YUP DEL UPDATE y el promise (IMPORTANTE)
-- Revisar por 3ª vez borde del text editor component
------------- Opcional ------------
-- Forgot Password (Requisito Opcional).
-
-- Revisar header responsive en admin
-- Agrupar rf 
